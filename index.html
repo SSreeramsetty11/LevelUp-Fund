@@ -4,14 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <meta
-    name="description"
-    content="The LevelUp Fund helps students cover professional technology certification exam fees."
-  />
 
-  <title>The LevelUp Fund — Your next credential starts here</title>
+  <title>The LevelUp Fund</title>
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
@@ -20,46 +15,29 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: [
-              "Inter",
-              "ui-sans-serif",
-              "system-ui",
-              "-apple-system",
-              "BlinkMacSystemFont",
-              "Segoe UI",
-              "sans-serif"
-            ]
-          },
-          boxShadow: {
-            soft: "0 20px 60px -25px rgba(15, 23, 42, 0.2)"
+            sans: ["Inter", "system-ui", "sans-serif"]
           }
         }
       }
     };
 
-    // Apply a saved theme before the page renders.
     try {
       const savedTheme = localStorage.getItem("levelup-theme");
 
       if (
         savedTheme === "dark" ||
-        (
-          !savedTheme &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        )
+        (!savedTheme &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
       ) {
         document.documentElement.classList.add("dark");
       }
     } catch (error) {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.classList.add("dark");
-      }
+      // The page still works if theme storage is unavailable.
     }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
@@ -67,23 +45,7 @@
 
   <style>
     body {
-      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-    }
-
-    .grid-pattern {
-      background-image:
-        linear-gradient(
-          to right,
-          rgba(148, 163, 184, 0.12) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          to bottom,
-          rgba(148, 163, 184, 0.12) 1px,
-          transparent 1px
-        );
-      background-size: 40px 40px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      font-family: Inter, system-ui, sans-serif;
     }
 
     .field:focus {
@@ -96,44 +58,49 @@
     }
 
     dialog::backdrop {
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(4px);
+    }
+
+    .sponsor-track {
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    .sponsor-card {
+      scroll-snap-align: start;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto !important;
+      }
+
+      .sponsor-track {
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
 
 <body class="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+
   <a
     href="#main"
-    class="sr-only fixed left-4 top-4 z-50 rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white focus:not-sr-only"
+    class="sr-only fixed left-4 top-4 z-50 rounded-lg bg-blue-600 px-4 py-2 text-white focus:not-sr-only"
   >
     Skip to content
   </a>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90">
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
     <nav
-      class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
+      class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8"
       aria-label="Main navigation"
     >
-      <a
-        href="#"
-        class="flex items-center gap-2.5 font-bold tracking-tight"
-        aria-label="The LevelUp Fund home"
-      >
-        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-white">
-          <svg
-            aria-hidden="true"
-            class="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M12 19V5M5 12l7-7 7 7" />
-          </svg>
+      <a href="#" class="flex items-center gap-2 font-bold tracking-tight">
+        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 text-lg text-white">
+          ↑
         </span>
 
         <span>
@@ -141,57 +108,33 @@
         </span>
       </a>
 
-      <div class="flex items-center gap-3 sm:gap-6">
+      <div class="flex items-center gap-3 sm:gap-5">
         <a
           href="#how-it-works"
-          class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 sm:inline"
+          class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 md:inline"
         >
           How it works
         </a>
 
         <a
-          href="#rules"
-          class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 md:inline"
+          href="#sponsors"
+          class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 sm:inline"
         >
-          The details
+          Sponsors
         </a>
 
         <button
           id="theme-toggle"
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="rounded-xl border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
           aria-label="Switch color theme"
         >
-          <svg
-            class="h-5 w-5 dark:hidden"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
-          </svg>
-
-          <svg
-            class="hidden h-5 w-5 dark:block"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-          >
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-          </svg>
+          ◐
         </button>
 
         <a
           href="#apply"
-          class="rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+          class="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
         >
           Apply now
         </a>
@@ -200,146 +143,80 @@
   </header>
 
   <main id="main">
+
     <!-- Hero -->
     <section class="relative overflow-hidden">
-      <div class="grid-pattern pointer-events-none absolute inset-0"></div>
+      <div class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl dark:bg-blue-700/20"></div>
 
-      <div class="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl dark:bg-blue-700/15"></div>
-
-      <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-6 pb-20 pt-20 lg:grid-cols-2 lg:gap-20 lg:px-8 lg:pb-28 lg:pt-28">
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
         <div>
-          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 dark:border-blue-900 dark:bg-blue-950/60 dark:text-blue-300">
-            <span class="h-2 w-2 rounded-full bg-blue-500"></span>
+          <p class="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
             Built for students with big goals
-          </div>
+          </p>
 
-          <h1 class="max-w-2xl text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
+          <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
             Level Up Your Tech Career<span class="text-blue-600 dark:text-blue-400">—Zero Exam Fees.</span>
           </h1>
 
           <p class="mt-6 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-            Your skills deserve a credential. The LevelUp Fund helps students
-            cover certification exam fees for CompTIA, AWS, Microsoft, and
-            more through a nonprofit grant.
+            The LevelUp Fund helps students cover professional technology
+            certification exam fees, including CompTIA, AWS, Microsoft, and
+            other exams, through a nonprofit grant.
           </p>
 
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="#apply"
-              class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              class="rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-bold text-white hover:bg-blue-700"
             >
-              Apply for a Grant <span aria-hidden="true">→</span>
+              Apply for a Grant →
             </a>
 
             <a
               href="#how-it-works"
-              class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+              class="rounded-xl border border-slate-300 px-6 py-4 text-center text-sm font-bold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900"
             >
               Learn How It Works
             </a>
           </div>
-
-          <p class="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <svg
-              class="h-4 w-4 text-emerald-600"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
-              <path d="m9 12 2 2 4-4" />
-            </svg>
-
-            Exam fees paid directly to the provider
-          </p>
         </div>
 
-        <div class="relative mx-auto w-full max-w-lg">
-          <div class="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-blue-500/15 to-indigo-500/5 blur-2xl"></div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-xl shadow-slate-200/40 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
+          <div class="flex items-center gap-4">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600 dark:bg-blue-950">
+              ✓
+            </span>
 
-          <div class="relative rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-700 dark:bg-slate-900 sm:p-8">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400">
-                  <svg
-                    class="h-6 w-6"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="4" y="3" width="16" height="18" rx="2" />
-                    <path d="M8 8h8M8 12h8M8 16h4" />
-                  </svg>
-                </div>
-
-                <div>
-                  <p class="font-bold">Your next credential</p>
-                  <p class="text-sm text-slate-500 dark:text-slate-400">
-                    One step closer to your goals
-                  </p>
-                </div>
-              </div>
-
-              <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400">
-                Supported
-              </span>
-            </div>
-
-            <div class="my-7 h-px bg-slate-100 dark:bg-slate-800"></div>
-
-            <p class="text-xs font-semibold uppercase tracking-widest text-slate-400">
-              Certification paths
-            </p>
-
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">CompTIA</span>
-              <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">AWS</span>
-              <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">Microsoft</span>
-              <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">And more</span>
-            </div>
-
-            <div class="mt-7 rounded-2xl bg-blue-50 p-4 dark:bg-blue-950/50">
-              <div class="flex gap-3">
-                <div class="mt-0.5 text-blue-600 dark:text-blue-400">
-                  <svg
-                    class="h-5 w-5"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="m8.5 12 2.5 2.5 4.5-5" />
-                  </svg>
-                </div>
-
-                <div>
-                  <p class="text-sm font-semibold text-blue-900 dark:text-blue-200">
-                    You bring the preparation.
-                  </p>
-
-                  <p class="mt-1 text-sm leading-6 text-blue-800/80 dark:text-blue-300/80">
-                    We help remove the exam fee barrier.
-                  </p>
-                </div>
-              </div>
+            <div>
+              <p class="font-bold">Your next credential</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">
+                One step closer to your goals
+              </p>
             </div>
           </div>
 
-          <p class="mt-4 text-center text-xs text-slate-500 dark:text-slate-400">
-            Certification names are trademarks of their respective owners.
+          <div class="my-6 h-px bg-slate-100 dark:bg-slate-800"></div>
+
+          <p class="text-xs font-bold uppercase tracking-widest text-slate-500">
+            Certification paths
           </p>
+
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">CompTIA</span>
+            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">AWS</span>
+            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">Microsoft</span>
+            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">And more</span>
+          </div>
+
+          <div class="mt-6 rounded-2xl bg-blue-50 p-5 dark:bg-blue-950/50">
+            <p class="font-semibold text-blue-900 dark:text-blue-200">
+              You bring the ambition.
+            </p>
+
+            <p class="mt-1 text-sm leading-6 text-blue-800 dark:text-blue-300">
+              We'll follow up with the next steps, including a practice test.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -347,154 +224,170 @@
     <!-- How it works -->
     <section
       id="how-it-works"
-      class="scroll-mt-24 border-y border-slate-100 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/50 sm:py-24"
+      class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/50"
     >
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="max-w-2xl">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
+          A clear path forward
+        </p>
+
+        <h2 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          Four steps to exam day.
+        </h2>
+
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+            <span class="text-sm font-bold text-blue-600">01</span>
+            <h3 class="mt-4 text-lg font-bold">Apply &amp; verify</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              Tell us about yourself and the certification exam you want to take.
+              We'll follow up about identity and testing-profile verification.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+            <span class="text-sm font-bold text-blue-600">02</span>
+            <h3 class="mt-4 text-lg font-bold">Take a practice test</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              We'll contact you with practice-test instructions and review your
+              score. The readiness benchmark is typically 70–80%, depending
+              on the exam.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+            <span class="text-sm font-bold text-blue-600">03</span>
+            <h3 class="mt-4 text-lg font-bold">Arrange your exam</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              If approved, we'll contact you to arrange your exam using an
+              exam voucher. No cash is transferred to applicants.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+            <span class="text-sm font-bold text-blue-600">04</span>
+            <h3 class="mt-4 text-lg font-bold">Report &amp; pay it forward</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              Share your official score report after the exam. An alumni
+              pledge to help future students is optional.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Rules -->
+    <section id="rules" class="scroll-mt-24 py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-2">
+        <div>
           <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-            A clear path forward
+            Clear expectations
           </p>
 
           <h2 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Four steps to exam day.
+            Trust is part of the process.
           </h2>
 
           <p class="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-300">
-            A straightforward process designed to support prepared students
-            and keep every grant accountable.
+            These guidelines help us support students and make each grant count.
           </p>
         </div>
 
-        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600 dark:bg-blue-950 dark:text-blue-400">01</span>
-
-            <h3 class="mt-6 text-lg font-bold">Apply &amp; verify</h3>
-
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Tell us about your exam and verify your identity and testing
-              profile.
+        <div class="space-y-4">
+          <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
+            <h3 class="font-bold">No cash transfers</h3>
+            <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              Applicants do not receive cash. Approved exam support is arranged
+              through the fund.
             </p>
           </article>
 
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600 dark:bg-blue-950 dark:text-blue-400">02</span>
-
-            <h3 class="mt-6 text-lg font-bold">Show you're ready</h3>
-
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Share a practice test score. The readiness benchmark is
-              typically 70–80%, depending on the exam.
+          <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
+            <h3 class="font-bold">48-hour notice</h3>
+            <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              If your schedule changes, tell us at least 48 hours in advance.
+              Your testing provider may have additional rules.
             </p>
           </article>
 
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600 dark:bg-blue-950 dark:text-blue-400">03</span>
-
-            <h3 class="mt-6 text-lg font-bold">Book securely</h3>
-
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              If approved, receive a direct voucher or join a live
-              co-booking session. No cash changes hands.
-            </p>
-          </article>
-
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600 dark:bg-blue-950 dark:text-blue-400">04</span>
-
-            <h3 class="mt-6 text-lg font-bold">Report &amp; pay it forward</h3>
-
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Share your official score report after the exam. If you'd like,
-              make an optional alumni pledge to help future students.
+          <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
+            <h3 class="font-bold">Conditional grant agreement</h3>
+            <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-400">
+              If awarded a grant, you agree to give 48-hour notice for schedule
+              changes and provide your official score report within 14 days
+              after your exam, regardless of the result.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Transparency and rules -->
-    <section id="rules" class="scroll-mt-24 py-20 sm:py-24">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+    <!-- Sponsors -->
+    <section
+      id="sponsors"
+      class="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/50"
+    >
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              The fine print, made simple
+              Our supporters
             </p>
 
-            <h2 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-              Trust is part of the process.
+            <h2 class="mt-3 text-3xl font-bold tracking-tight">
+              Made possible together.
             </h2>
 
-            <p class="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-300">
-              Clear expectations protect applicants and help the fund support
-              more students.
+            <p class="mt-3 text-slate-600 dark:text-slate-400">
+              Meet the sponsors supporting the next generation of tech talent.
             </p>
           </div>
 
-          <div class="grid gap-4">
-            <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
-              <h3 class="flex items-center gap-3 font-bold">
-                <span
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
-                  aria-hidden="true"
-                >✓</span>
+          <div class="flex gap-2">
+            <button
+              id="sponsors-prev"
+              type="button"
+              aria-label="Show previous sponsors"
+              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
+            >
+              ←
+            </button>
 
-                Zero cash transfers
-              </h3>
-
-              <p class="mt-3 pl-12 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                Grant funds go directly toward an exam voucher or booking with
-                the provider. We don't send cash to applicants.
-              </p>
-            </article>
-
-            <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
-              <h3 class="flex items-center gap-3 font-bold">
-                <span
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-400"
-                  aria-hidden="true"
-                >↻</span>
-
-                Need to reschedule?
-              </h3>
-
-              <p class="mt-3 pl-12 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                Give at least 48 hours' notice for schedule changes, and
-                follow your testing provider's own cancellation and
-                rescheduling rules.
-              </p>
-            </article>
-
-            <article class="rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
-              <h3 class="flex items-center gap-3 font-bold">
-                <span
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-400"
-                  aria-hidden="true"
-                >♡</span>
-
-                A grant with shared commitments
-              </h3>
-
-              <p class="mt-3 pl-12 text-sm leading-7 text-slate-600 dark:text-slate-400">
-                If you're awarded a grant, you agree to give 48 hours' notice
-                for schedule changes and submit your official score report
-                within 14 days of your exam. Passing is the goal, but your
-                report is requested regardless of the result. An alumni
-                pledge is always optional.
-              </p>
-            </article>
+            <button
+              id="sponsors-next"
+              type="button"
+              aria-label="Show next sponsors"
+              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
+            >
+              →
+            </button>
           </div>
         </div>
+
+        <div
+          id="sponsor-track"
+          class="sponsor-track mt-8 flex gap-4 overflow-x-auto pb-4"
+          aria-label="Sponsors"
+        ></div>
+
+        <p
+          id="sponsor-empty"
+          class="mt-6 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400"
+        >
+          Sponsor logos added in the demo admin dashboard will appear here
+          in this browser.
+        </p>
       </div>
     </section>
 
     <!-- Application -->
     <section
       id="apply"
-      class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/50 sm:py-24"
+      class="scroll-mt-24 py-20"
     >
-      <div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
             Ready when you are
@@ -505,325 +398,212 @@
           </h2>
 
           <p class="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-300">
-            Tell us a little about yourself and the certification you're
-            working toward.
+            Tell us about yourself and the exam you're interested in.
+            We'll follow up with practice-test instructions.
           </p>
 
-          <div class="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/40">
-            <p class="font-semibold text-blue-900 dark:text-blue-200">
-              Before you start
-            </p>
-
-            <p class="mt-2 text-sm leading-6 text-blue-800 dark:text-blue-300">
-              Have your candidate ID, practice score, photo ID, and practice
-              test screenshot ready.
-            </p>
-          </div>
-
-          <p class="mt-6 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
             Questions?
+
+            <!-- Replace with your real support email. -->
             <a
               href="mailto:support@example.com"
-              class="font-semibold text-blue-600 underline underline-offset-4 dark:text-blue-400"
+              class="font-semibold text-blue-600 underline dark:text-blue-400"
             >
-              Get in touch
-            </a>.
+              Get in touch.
+            </a>
           </p>
         </div>
 
         <form
           id="grant-form"
-          class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-700 dark:bg-slate-900 sm:p-8"
+          class="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/30 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none sm:p-8"
           novalidate
         >
-          <div class="mb-6 flex flex-wrap items-start justify-between gap-3">
+          <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h3 class="text-xl font-bold">Grant application</h3>
-
-              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                All fields are required.
-              </p>
+              <p class="mt-1 text-sm text-slate-500">All fields are required.</p>
             </div>
 
-            <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-              Demo form
+            <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+              Demo only
             </span>
           </div>
 
-          <div class="mb-6 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
-            <p class="font-semibold">Use sample information only.</p>
-
-            <p class="mt-1">
-              This demo stores application details in this browser, where
-              anyone with access to the browser can see them. Files are not
-              saved or sent. Do not enter real personal information or upload
-              real identity documents.
-            </p>
+          <div class="mt-5 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
+            Use made-up information only. This demo stores entries in this
+            browser and does not send them to the fund. The admin login is
+            not secure.
           </div>
 
           <div
             id="form-error"
-            class="mb-5 hidden rounded-xl bg-red-50 p-4 text-sm text-red-700 dark:bg-red-950/50 dark:text-red-300"
             role="alert"
+            class="mt-5 hidden rounded-xl bg-red-50 p-4 text-sm text-red-700 dark:bg-red-950 dark:text-red-300"
           ></div>
 
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div class="sm:col-span-2">
+          <div class="mt-6 space-y-5">
+            <div>
               <label for="full-name" class="mb-2 block text-sm font-semibold">
                 Full legal name
               </label>
 
               <input
                 id="full-name"
-                name="fullName"
                 type="text"
-                autocomplete="name"
-                required
                 maxlength="120"
+                required
                 placeholder="Sample name"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
               <p id="full-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
-            <div class="sm:col-span-2">
+            <div>
               <label for="email" class="mb-2 block text-sm font-semibold">
                 Email address
               </label>
 
               <input
                 id="email"
-                name="email"
                 type="email"
-                autocomplete="email"
-                required
                 maxlength="254"
-                placeholder="you@example.com"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                required
+                placeholder="sample@example.com"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
               <p id="email-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
-            <div class="sm:col-span-2">
+            <div>
               <label for="candidate-id" class="mb-2 block text-sm font-semibold">
                 Candidate ID
                 <span class="font-normal text-slate-500">
-                  (Pearson VUE / vendor)
+                  (Pearson VUE or other testing profile)
                 </span>
               </label>
 
               <input
                 id="candidate-id"
-                name="candidateId"
                 type="text"
-                required
                 maxlength="100"
-                placeholder="Sample testing profile ID"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                required
+                placeholder="Sample candidate ID"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
               <p id="candidate-id-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div>
-              <label for="exam" class="mb-2 block text-sm font-semibold">
-                Exam choice
-              </label>
-
-              <select
-                id="exam"
-                name="exam"
-                required
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-              >
-                <option value="">Select an exam</option>
-                <option>CompTIA A+</option>
-                <option>CompTIA Network+</option>
-                <option>CompTIA Security+</option>
-                <option>AWS Certified Cloud Practitioner</option>
-                <option>AWS Certified Solutions Architect – Associate</option>
-                <option>Microsoft Azure Fundamentals (AZ-900)</option>
-                <option>Microsoft 365 Fundamentals (MS-900)</option>
-                <option>Other</option>
-              </select>
-
-              <p id="exam-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="score" class="mb-2 block text-sm font-semibold">
-                Practice test score (%)
+              <label for="exam-name" class="mb-2 block text-sm font-semibold">
+                Which certification exam would you like to take?
               </label>
 
               <input
-                id="score"
-                name="score"
-                type="number"
-                min="0"
-                max="100"
-                step="any"
-                required
-                placeholder="e.g. 85"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-              />
-
-              <p id="score-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div id="other-exam-wrapper" class="hidden sm:col-span-2">
-              <label for="other-exam" class="mb-2 block text-sm font-semibold">
-                Exam name
-              </label>
-
-              <input
-                id="other-exam"
-                name="otherExam"
+                id="exam-name"
                 type="text"
-                maxlength="150"
-                placeholder="Enter your certification exam"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                maxlength="160"
+                required
+                placeholder="For example, CompTIA Security+"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
-              <p id="other-exam-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+              <p id="exam-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div>
-              <label for="photo-id" class="mb-2 block text-sm font-semibold">
-                Photo ID placeholder
+              <label for="student-info" class="mb-2 block text-sm font-semibold">
+                Tell us about your student status and goals
               </label>
 
-              <input
-                id="photo-id"
-                name="photoId"
-                type="file"
-                accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
+              <textarea
+                id="student-info"
+                rows="4"
+                maxlength="1500"
                 required
-                class="field block w-full rounded-xl border border-slate-300 bg-white p-2 text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-slate-700 hover:file:bg-slate-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400 dark:file:bg-slate-800 dark:file:text-slate-200"
-              />
+                placeholder="Share a little about what you're studying and your goals."
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              ></textarea>
 
-              <p class="mt-1.5 text-xs text-slate-500">
-                Sample JPG, PNG, or PDF; up to 5 MB.
-              </p>
-
-              <p id="photo-id-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+              <p id="student-info-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
-            <div>
-              <label for="practice-file" class="mb-2 block text-sm font-semibold">
-                Practice screenshot placeholder
-              </label>
+            <div class="border-t border-slate-200 pt-5 dark:border-slate-700">
+              <div class="flex items-start gap-3">
+                <input
+                  id="agreement"
+                  type="checkbox"
+                  required
+                  class="mt-1 h-4 w-4 shrink-0 accent-blue-600"
+                />
 
-              <input
-                id="practice-file"
-                name="practiceFile"
-                type="file"
-                accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
-                required
-                class="field block w-full rounded-xl border border-slate-300 bg-white p-2 text-sm text-slate-500 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-slate-700 hover:file:bg-slate-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400 dark:file:bg-slate-800 dark:file:text-slate-200"
-              />
+                <label for="agreement" class="text-sm leading-6 text-slate-700 dark:text-slate-300">
+                  I agree to the Conditional Grant Agreement: I must give
+                  48-hour notice for schedule changes and submit my official
+                  score report within 14 days after my exam.
+                </label>
+              </div>
 
-              <p class="mt-1.5 text-xs text-slate-500">
-                Sample JPG, PNG, or PDF; up to 5 MB.
-              </p>
-
-              <p id="practice-file-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+              <p id="agreement-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
-          </div>
-
-          <div class="mt-7 border-t border-slate-100 pt-6 dark:border-slate-800">
-            <div class="flex items-start gap-3">
-              <input
-                id="agreement"
-                name="agreement"
-                type="checkbox"
-                required
-                class="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 accent-blue-600"
-              />
-
-              <label
-                for="agreement"
-                class="text-sm leading-6 text-slate-700 dark:text-slate-300"
-              >
-                I agree to the Conditional Grant Agreement (must give 48-hour
-                notice for schedule changes and submit official score report
-                within 14 days).
-              </label>
-            </div>
-
-            <p id="agreement-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
           </div>
 
           <button
             type="submit"
-            class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-4 text-sm font-bold text-white hover:bg-blue-700"
           >
-            Submit demo application <span aria-hidden="true">→</span>
+            Submit demo application →
           </button>
 
-          <p class="mt-4 text-center text-xs leading-5 text-slate-500 dark:text-slate-400">
-            Demo entries stay in this browser. No application or files are
-            sent to the fund.
+          <p class="mt-3 text-center text-xs leading-5 text-slate-500">
+            No application is sent to the fund in this demo.
           </p>
         </form>
       </div>
     </section>
+
   </main>
 
   <!-- Footer -->
   <footer class="border-t border-slate-200 py-10 dark:border-slate-800">
-    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-6 lg:flex-row lg:items-end lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-5 sm:px-8 lg:flex-row">
       <div>
-        <a href="#" class="font-bold tracking-tight">
+        <p class="font-bold">
           The LevelUp Fund<span class="text-blue-600">.</span>
-        </a>
+        </p>
 
         <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
           Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-600 dark:text-slate-400">
-        <!-- Replace this placeholder URL with your real repository URL. -->
-        <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-blue-600"
-        >
+      <div class="flex flex-wrap gap-5 text-sm font-medium text-slate-600 dark:text-slate-400">
+        <!-- Replace with your repository URL. -->
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
           GitHub
         </a>
 
-        <a
-          href="https://hcb.hackclub.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-blue-600"
-        >
+        <a href="https://hcb.hackclub.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
           Hack Club Bank
         </a>
 
-        <!-- Replace this placeholder email with your real support email. -->
-        <a
-          href="mailto:support@example.com"
-          class="hover:text-blue-600"
-        >
+        <!-- Replace with your real support email. -->
+        <a href="mailto:support@example.com" class="hover:text-blue-600">
           Contact support
         </a>
 
-        <button
-          id="open-admin"
-          type="button"
-          class="hover:text-blue-600"
-        >
+        <button id="open-admin" type="button" class="hover:text-blue-600">
           Admin login
         </button>
       </div>
     </div>
 
-    <div class="mx-auto mt-8 max-w-7xl px-6 text-xs text-slate-400 lg:px-8">
-      © <span id="year"></span> The LevelUp Fund. All rights reserved.
+    <div class="mx-auto mt-8 max-w-7xl px-5 text-xs text-slate-400 sm:px-8">
+      © <span id="year"></span> The LevelUp Fund.
     </div>
   </footer>
 
@@ -831,41 +611,25 @@
   <dialog
     id="success-dialog"
     aria-labelledby="success-title"
-    aria-describedby="success-description"
-    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 shadow-2xl dark:bg-slate-900 dark:text-white"
+    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 dark:bg-slate-900 dark:text-white"
   >
     <div class="p-8 text-center">
-      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
-        <svg
-          class="h-7 w-7"
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m5 12 4 4L19 6" />
-        </svg>
+      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-600 dark:bg-emerald-950">
+        ✓
       </div>
 
       <h2 id="success-title" class="mt-5 text-2xl font-bold">
         Demo application saved
       </h2>
 
-      <p
-        id="success-description"
-        class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-      >
-        The sample entry was saved in this browser for the demo admin panel.
-        No application or files were sent to the fund.
+      <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        The sample entry is stored in this browser. It was not sent to the fund.
       </p>
 
       <button
         id="close-success"
         type="button"
-        class="mt-7 w-full rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+        class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
       >
         Got it
       </button>
@@ -876,13 +640,12 @@
   <dialog
     id="admin-login-dialog"
     aria-labelledby="admin-login-title"
-    aria-describedby="admin-login-description"
-    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 shadow-2xl dark:bg-slate-900 dark:text-white"
+    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 dark:bg-slate-900 dark:text-white"
   >
     <form id="admin-login-form" class="p-8">
       <div class="flex items-start justify-between gap-4">
         <div>
-          <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-600">
             Admin area
           </p>
 
@@ -892,49 +655,42 @@
         </div>
 
         <button
-          id="close-admin-login"
+          id="close-login"
           type="button"
           aria-label="Close admin login"
-          class="rounded-lg px-2 py-1 text-2xl leading-none text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+          class="rounded-lg px-2 text-2xl text-slate-500"
         >
-          &times;
+          ×
         </button>
       </div>
 
-      <p
-        id="admin-login-description"
-        class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300"
-      >
-        This login is for demonstration only and does not secure data. It can
-        only show sample applications saved in this browser.
+      <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+        Demo only. This password does not protect real data.
       </p>
 
-      <label
-        for="admin-password"
-        class="mb-2 mt-6 block text-sm font-semibold"
-      >
-        Demo password
+      <label for="admin-password" class="mb-2 mt-5 block text-sm font-semibold">
+        Password
       </label>
 
       <input
         id="admin-password"
         type="password"
-        autocomplete="off"
         required
-        class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+        autocomplete="off"
+        class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950"
       />
 
       <p
-        id="admin-login-error"
-        class="mt-2 hidden text-sm text-red-600 dark:text-red-400"
+        id="login-error"
         role="alert"
+        class="mt-2 hidden text-sm text-red-600 dark:text-red-400"
       ></p>
 
       <button
         type="submit"
-        class="mt-5 w-full rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+        class="mt-5 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
       >
-        Open demo dashboard
+        Open dashboard
       </button>
     </form>
   </dialog>
@@ -942,138 +698,228 @@
   <!-- Admin dashboard -->
   <dialog
     id="admin-dashboard"
-    aria-labelledby="admin-dashboard-title"
-    class="m-auto max-h-[90vh] w-[calc(100%-2rem)] max-w-4xl overflow-y-auto rounded-3xl bg-white p-0 text-slate-900 shadow-2xl dark:bg-slate-900 dark:text-white"
+    aria-labelledby="dashboard-title"
+    class="m-auto max-h-[92vh] w-[calc(100%-1.5rem)] max-w-6xl overflow-y-auto rounded-3xl bg-slate-50 p-0 text-slate-900 dark:bg-slate-950 dark:text-white"
   >
-    <div class="p-6 sm:p-8">
+    <div class="p-5 sm:p-8">
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
             Demo admin area
           </p>
 
-          <h2 id="admin-dashboard-title" class="mt-2 text-2xl font-bold">
-            Application review
+          <h2 id="dashboard-title" class="mt-2 text-3xl font-bold">
+            Dashboard
           </h2>
 
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-            Showing sample applications stored in this browser only.
-            Uploaded files are not available.
+          <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
+            Applications and sponsors are stored only in this browser.
+            Decision emails must be sent manually.
           </p>
         </div>
 
         <button
           id="admin-logout"
           type="button"
-          class="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800"
+          class="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-900"
         >
           Log out
         </button>
       </div>
 
-      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-y border-slate-200 py-4 dark:border-slate-700">
-        <p
-          id="application-count"
-          class="text-sm font-semibold text-slate-600 dark:text-slate-300"
-          aria-live="polite"
-        ></p>
+      <!-- Dashboard counts -->
+      <div class="mt-7 grid gap-3 sm:grid-cols-3">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Applications</p>
+          <p id="total-count" class="mt-2 text-3xl font-bold">0</p>
+        </div>
 
-        <button
-          id="clear-applications"
-          type="button"
-          class="rounded-lg px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40 dark:text-red-400 dark:hover:bg-red-950/50"
-        >
-          Delete all demo entries
-        </button>
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Awaiting review</p>
+          <p id="pending-count" class="mt-2 text-3xl font-bold">0</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Sponsors</p>
+          <p id="sponsor-count" class="mt-2 text-3xl font-bold">0</p>
+        </div>
       </div>
 
-      <div id="application-list" class="mt-6 space-y-4"></div>
+      <!-- Applications -->
+      <section class="mt-10" aria-labelledby="applications-heading">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 id="applications-heading" class="text-xl font-bold">
+              Applications
+            </h3>
+
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Review entries, save a practice score, and prepare an email.
+            </p>
+          </div>
+
+          <label class="text-sm font-semibold">
+            Filter:
+            <select
+              id="status-filter"
+              class="ml-2 rounded-lg border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
+            >
+              <option value="All">All</option>
+              <option value="Pending">Pending</option>
+              <option value="Practice test sent">Practice test sent</option>
+              <option value="In review">In review</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="application-list" class="mt-5 space-y-4"></div>
+      </section>
+
+      <!-- Sponsor management -->
+      <section class="mt-12" aria-labelledby="sponsor-manager-heading">
+        <h3 id="sponsor-manager-heading" class="text-xl font-bold">
+          Manage sponsors
+        </h3>
+
+        <p class="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Add a sponsor name and logo. Changes appear only in this browser.
+        </p>
+
+        <form
+          id="sponsor-form"
+          class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2"
+        >
+          <div>
+            <label for="sponsor-name" class="mb-2 block text-sm font-semibold">
+              Sponsor name
+            </label>
+
+            <input
+              id="sponsor-name"
+              type="text"
+              required
+              maxlength="100"
+              placeholder="Company name"
+              class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+            />
+          </div>
+
+          <div>
+            <label for="sponsor-url" class="mb-2 block text-sm font-semibold">
+              Website URL <span class="font-normal text-slate-500">(optional)</span>
+            </label>
+
+            <input
+              id="sponsor-url"
+              type="url"
+              maxlength="500"
+              placeholder="https://example.com"
+              class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+            />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="sponsor-logo" class="mb-2 block text-sm font-semibold">
+              Company logo
+            </label>
+
+            <input
+              id="sponsor-logo"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              required
+              class="block w-full rounded-xl border border-slate-300 p-2 text-sm dark:border-slate-700 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:font-semibold dark:file:bg-slate-800 dark:file:text-white"
+            />
+
+            <p class="mt-2 text-xs text-slate-500">
+              PNG, JPG, or WebP. Maximum size: 500 KB.
+            </p>
+          </div>
+
+          <p
+            id="sponsor-error"
+            role="alert"
+            class="hidden text-sm text-red-600 dark:text-red-400 sm:col-span-2"
+          ></p>
+
+          <div class="sm:col-span-2">
+            <button
+              type="submit"
+              class="rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-700"
+            >
+              Add sponsor
+            </button>
+          </div>
+        </form>
+
+        <div id="sponsor-admin-list" class="mt-5 space-y-3"></div>
+      </section>
     </div>
   </dialog>
 
   <script>
     /*
-      DEMO ONLY
-
-      This password is visible to anyone who can inspect the page.
-      Changing it does not make this login secure.
-
-      Real admin authentication and application storage must be handled
-      by a secure server, not by JavaScript in the browser.
+      DEMO ONLY:
+      This password is visible in the page source. It is not secure.
+      A real admin login must be handled by a secure backend.
     */
-    const DEMO_ADMIN_PASSWORD = "levelup-demo";
-    const STORAGE_KEY = "levelup-demo-applications-v1";
-    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+    const DEMO_PASSWORD = "levelup-demo";
 
-    const themeToggle = document.getElementById("theme-toggle");
+    // A new key is used because this application form has changed.
+    const APPLICATIONS_KEY = "levelup-applications-v2";
+    const SPONSORS_KEY = "levelup-sponsors-v1";
+    const MAX_LOGO_SIZE = 500 * 1024;
+
     const grantForm = document.getElementById("grant-form");
     const formError = document.getElementById("form-error");
-    const exam = document.getElementById("exam");
-    const otherExam = document.getElementById("other-exam");
-    const otherExamWrapper = document.getElementById("other-exam-wrapper");
-
     const successDialog = document.getElementById("success-dialog");
-    const closeSuccess = document.getElementById("close-success");
 
-    const openAdmin = document.getElementById("open-admin");
-    const adminLoginDialog = document.getElementById("admin-login-dialog");
-    const adminLoginForm = document.getElementById("admin-login-form");
+    const loginDialog = document.getElementById("admin-login-dialog");
+    const loginForm = document.getElementById("admin-login-form");
+    const loginError = document.getElementById("login-error");
     const adminPassword = document.getElementById("admin-password");
-    const adminLoginError = document.getElementById("admin-login-error");
-    const closeAdminLogin = document.getElementById("close-admin-login");
 
-    const adminDashboard = document.getElementById("admin-dashboard");
-    const adminLogout = document.getElementById("admin-logout");
+    const dashboard = document.getElementById("admin-dashboard");
     const applicationList = document.getElementById("application-list");
-    const applicationCount = document.getElementById("application-count");
-    const clearApplicationsButton = document.getElementById("clear-applications");
+    const statusFilter = document.getElementById("status-filter");
+
+    const sponsorForm = document.getElementById("sponsor-form");
+    const sponsorTrack = document.getElementById("sponsor-track");
+    const sponsorEmpty = document.getElementById("sponsor-empty");
+    const sponsorAdminList = document.getElementById("sponsor-admin-list");
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    /* Theme */
-    function updateThemeLabel() {
-      const isDark = document.documentElement.classList.contains("dark");
+    function makeId() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
 
-      themeToggle.setAttribute(
-        "aria-label",
-        isDark ? "Switch to light theme" : "Switch to dark theme"
-      );
+      return Date.now() + "-" + Math.random().toString(36).slice(2);
     }
 
-    updateThemeLabel();
+    function readList(key) {
+      const raw = localStorage.getItem(key);
 
-    themeToggle.addEventListener("click", () => {
-      const isDark = document.documentElement.classList.toggle("dark");
+      if (!raw) return [];
 
-      try {
-        localStorage.setItem(
-          "levelup-theme",
-          isDark ? "dark" : "light"
-        );
-      } catch (error) {
-        // The theme still works until this page is closed.
+      const data = JSON.parse(raw);
+
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid saved data.");
       }
 
-      updateThemeLabel();
-    });
+      return data;
+    }
 
-    /* Application form */
-    exam.addEventListener("change", () => {
-      const showOther = exam.value === "Other";
+    function writeList(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
 
-      otherExamWrapper.classList.toggle("hidden", !showOther);
-      otherExam.required = showOther;
-
-      if (!showOther) {
-        otherExam.value = "";
-        clearError(otherExam);
-      }
-    });
-
-    function showError(field, message) {
-      const error = document.getElementById(`${field.id}-error`);
-
-      if (!error) return;
+    function showFieldError(field, message) {
+      const error = document.getElementById(field.id + "-error");
 
       field.setAttribute("aria-invalid", "true");
       field.setAttribute("aria-describedby", error.id);
@@ -1082,8 +928,8 @@
       error.classList.remove("hidden");
     }
 
-    function clearError(field) {
-      const error = document.getElementById(`${field.id}-error`);
+    function clearFieldError(field) {
+      const error = document.getElementById(field.id + "-error");
 
       if (!error) return;
 
@@ -1094,62 +940,58 @@
       error.classList.add("hidden");
     }
 
-    grantForm.querySelectorAll("input, select").forEach((field) => {
-      field.addEventListener("input", () => clearError(field));
-      field.addEventListener("change", () => clearError(field));
+    grantForm.querySelectorAll("input, textarea").forEach((field) => {
+      field.addEventListener("input", () => clearFieldError(field));
+      field.addEventListener("change", () => clearFieldError(field));
     });
 
-    function validFile(file) {
-      if (!file) return false;
+    /* Theme */
+    const themeToggle = document.getElementById("theme-toggle");
 
-      const allowedExtensions = /\.(jpe?g|png|pdf)$/i;
-      const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "application/pdf"
-      ];
+    function updateThemeLabel() {
+      const dark = document.documentElement.classList.contains("dark");
 
-      return (
-        allowedExtensions.test(file.name) &&
-        (!file.type || allowedTypes.includes(file.type)) &&
-        file.size <= MAX_FILE_SIZE
+      themeToggle.setAttribute(
+        "aria-label",
+        dark ? "Switch to light theme" : "Switch to dark theme"
       );
     }
 
-    function readApplications() {
-      const raw = localStorage.getItem(STORAGE_KEY);
+    updateThemeLabel();
 
-      if (!raw) return [];
+    themeToggle.addEventListener("click", () => {
+      const dark = document.documentElement.classList.toggle("dark");
 
-      const parsed = JSON.parse(raw);
-
-      if (!Array.isArray(parsed)) {
-        throw new Error("Invalid application data.");
+      try {
+        localStorage.setItem("levelup-theme", dark ? "dark" : "light");
+      } catch (error) {
+        // Theme still changes for the current page.
       }
 
-      return parsed;
-    }
+      updateThemeLabel();
+    });
 
-    function writeApplications(applications) {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(applications)
-      );
-    }
-
+    /* Application submission */
     grantForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
       formError.classList.add("hidden");
       formError.textContent = "";
 
-      grantForm.querySelectorAll("input, select").forEach(clearError);
+      grantForm.querySelectorAll("input, textarea").forEach(clearFieldError);
+
+      const fullName = document.getElementById("full-name");
+      const email = document.getElementById("email");
+      const candidateId = document.getElementById("candidate-id");
+      const examName = document.getElementById("exam-name");
+      const studentInfo = document.getElementById("student-info");
+      const agreement = document.getElementById("agreement");
 
       let firstInvalid = null;
 
-      function requireField(field, condition, message) {
-        if (!condition) {
-          showError(field, message);
+      function check(field, valid, message) {
+        if (!valid) {
+          showFieldError(field, message);
 
           if (!firstInvalid) {
             firstInvalid = field;
@@ -1157,194 +999,171 @@
         }
       }
 
-      const fullName = document.getElementById("full-name");
-      const email = document.getElementById("email");
-      const candidateId = document.getElementById("candidate-id");
-      const score = document.getElementById("score");
-      const photoId = document.getElementById("photo-id");
-      const practiceFile = document.getElementById("practice-file");
-      const agreement = document.getElementById("agreement");
-
-      requireField(
-        fullName,
-        fullName.value.trim().length > 0,
-        "Please enter a name."
-      );
-
-      requireField(
+      check(fullName, fullName.value.trim() !== "", "Enter a name.");
+      check(
         email,
         email.value.trim() !== "" && email.validity.valid,
-        "Please enter a valid email address."
+        "Enter a valid email address."
       );
-
-      requireField(
-        candidateId,
-        candidateId.value.trim().length > 0,
-        "Please enter a candidate ID."
-      );
-
-      requireField(
-        exam,
-        exam.value !== "",
-        "Please select an exam."
-      );
-
-      if (exam.value === "Other") {
-        requireField(
-          otherExam,
-          otherExam.value.trim().length > 0,
-          "Please enter your exam name."
-        );
-      }
-
-      const numericScore = Number(score.value);
-
-      requireField(
-        score,
-        score.value !== "" &&
-          Number.isFinite(numericScore) &&
-          numericScore >= 0 &&
-          numericScore <= 100,
-        "Enter a score between 0 and 100."
-      );
-
-      requireField(
-        photoId,
-        validFile(photoId.files[0]),
-        "Choose a sample JPG, PNG, or PDF no larger than 5 MB."
-      );
-
-      requireField(
-        practiceFile,
-        validFile(practiceFile.files[0]),
-        "Choose a sample JPG, PNG, or PDF no larger than 5 MB."
-      );
-
-      requireField(
-        agreement,
-        agreement.checked,
-        "Please agree to the Conditional Grant Agreement."
-      );
+      check(candidateId, candidateId.value.trim() !== "", "Enter a candidate ID.");
+      check(examName, examName.value.trim() !== "", "Enter the exam name.");
+      check(studentInfo, studentInfo.value.trim() !== "", "Tell us about your goals.");
+      check(agreement, agreement.checked, "Please agree to the grant terms.");
 
       if (firstInvalid) {
-        formError.textContent =
-          "Please review the highlighted fields and try again.";
-
+        formError.textContent = "Please check the highlighted fields.";
         formError.classList.remove("hidden");
         firstInvalid.focus();
         return;
       }
 
-      /*
-        Only sample text fields are saved. The uploaded files and their
-        filenames are not stored or transmitted.
-      */
       const application = {
-        id: (
-          window.crypto && crypto.randomUUID
-            ? crypto.randomUUID()
-            : `${Date.now()}-${Math.random().toString(36).slice(2)}`
-        ),
-        fullName: fullName.value.trim(),
+        id: makeId(),
+        name: fullName.value.trim(),
         email: email.value.trim(),
         candidateId: candidateId.value.trim(),
-        exam: exam.value === "Other"
-          ? otherExam.value.trim()
-          : exam.value,
-        score: numericScore,
+        exam: examName.value.trim(),
+        studentInfo: studentInfo.value.trim(),
+        practiceScore: "",
+        notes: "",
         status: "Pending",
         submittedAt: new Date().toISOString()
       };
 
       try {
-        const applications = readApplications();
+        const applications = readList(APPLICATIONS_KEY);
         applications.unshift(application);
-        writeApplications(applications);
+        writeList(APPLICATIONS_KEY, applications);
       } catch (error) {
         formError.textContent =
-          "The demo entry could not be saved in this browser. " +
-          "Check that browser storage is available and try again.";
+          "Could not save this demo entry. Browser storage may be unavailable.";
 
         formError.classList.remove("hidden");
         return;
       }
 
       grantForm.reset();
-      otherExamWrapper.classList.add("hidden");
-      otherExam.required = false;
-
       successDialog.showModal();
-      closeSuccess.focus();
+      document.getElementById("close-success").focus();
     });
 
-    closeSuccess.addEventListener("click", () => {
+    document.getElementById("close-success").addEventListener("click", () => {
       successDialog.close();
     });
 
     /* Admin login */
-    function resetLoginForm() {
-      adminLoginForm.reset();
-      adminLoginError.textContent = "";
-      adminLoginError.classList.add("hidden");
-      adminPassword.removeAttribute("aria-invalid");
-    }
-
-    openAdmin.addEventListener("click", () => {
-      resetLoginForm();
-      adminLoginDialog.showModal();
+    document.getElementById("open-admin").addEventListener("click", () => {
+      loginForm.reset();
+      loginError.classList.add("hidden");
+      loginError.textContent = "";
+      loginDialog.showModal();
       adminPassword.focus();
     });
 
-    closeAdminLogin.addEventListener("click", () => {
-      adminLoginDialog.close();
+    document.getElementById("close-login").addEventListener("click", () => {
+      loginDialog.close();
     });
 
-    adminPassword.addEventListener("input", () => {
-      adminLoginError.textContent = "";
-      adminLoginError.classList.add("hidden");
-      adminPassword.removeAttribute("aria-invalid");
-    });
-
-    adminLoginForm.addEventListener("submit", (event) => {
+    loginForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (adminPassword.value !== DEMO_ADMIN_PASSWORD) {
-        adminLoginError.textContent = "Incorrect demo password.";
-        adminLoginError.classList.remove("hidden");
-        adminPassword.setAttribute("aria-invalid", "true");
+      if (adminPassword.value !== DEMO_PASSWORD) {
+        loginError.textContent = "Incorrect demo password.";
+        loginError.classList.remove("hidden");
         adminPassword.focus();
         return;
       }
 
-      resetLoginForm();
-      adminLoginDialog.close();
+      loginForm.reset();
+      loginDialog.close();
 
-      renderApplications();
-      adminDashboard.showModal();
-      adminLogout.focus();
+      renderDashboard();
+      dashboard.showModal();
+      document.getElementById("admin-logout").focus();
     });
 
-    adminLogout.addEventListener("click", () => {
-      adminDashboard.close();
+    document.getElementById("admin-logout").addEventListener("click", () => {
+      dashboard.close();
     });
 
-    /* Admin dashboard */
-    function makeDetail(label, value) {
-      const wrapper = document.createElement("div");
+    statusFilter.addEventListener("change", renderApplications);
 
-      const term = document.createElement("dt");
-      term.className =
-        "text-xs font-semibold uppercase tracking-wide " +
-        "text-slate-500 dark:text-slate-400";
-      term.textContent = label;
+    /* Helpers for safe display of text entered by a user */
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
 
-      const description = document.createElement("dd");
-      description.className =
-        "mt-1 break-words text-sm text-slate-800 dark:text-slate-200";
-      description.textContent = String(value ?? "—");
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = String(text);
 
-      wrapper.append(term, description);
+      return element;
+    }
+
+    function detail(label, value) {
+      const wrapper = createElement("div");
+
+      const heading = createElement(
+        "dt",
+        "text-xs font-bold uppercase tracking-wide text-slate-500",
+        label
+      );
+
+      const content = createElement(
+        "dd",
+        "mt-1 break-words text-sm text-slate-800 dark:text-slate-200",
+        value || "—"
+      );
+
+      wrapper.append(heading, content);
       return wrapper;
+    }
+
+    function updateApplication(id, updates) {
+      const applications = readList(APPLICATIONS_KEY);
+      const application = applications.find((item) => item.id === id);
+
+      if (!application) {
+        throw new Error("Application not found.");
+      }
+
+      Object.assign(application, updates);
+      writeList(APPLICATIONS_KEY, applications);
+    }
+
+    function emailLink(application, type) {
+      let subject = "";
+      let body = "";
+
+      if (type === "practice") {
+        subject = "Your LevelUp Fund practice test";
+        body =
+          `Hi ${application.name},\n\n` +
+          `Thank you for applying to The LevelUp Fund for ${application.exam}.\n\n` +
+          "Here are the next steps for your practice test:\n\n" +
+          "[Add practice-test instructions or link here]\n\n" +
+          "Please reply with your results when complete.\n\n" +
+          "Best,\nThe LevelUp Fund";
+      } else if (type === "approved") {
+        subject = "Your LevelUp Fund application";
+        body =
+          `Hi ${application.name},\n\n` +
+          `We're pleased to let you know that your application for ${application.exam} has been approved.\n\n` +
+          "We'll follow up with the next steps for arranging your exam.\n\n" +
+          "Best,\nThe LevelUp Fund";
+      } else {
+        subject = "Your LevelUp Fund application";
+        body =
+          `Hi ${application.name},\n\n` +
+          "Thank you for applying to The LevelUp Fund. " +
+          "After reviewing your application, we're unable to offer a grant at this time.\n\n" +
+          "We appreciate your interest and wish you the best with your certification goals.\n\n" +
+          "Best,\nThe LevelUp Fund";
+      }
+
+      return (
+        "mailto:" + encodeURIComponent(application.email) +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body)
+      );
     }
 
     function renderApplications() {
@@ -1353,190 +1172,516 @@
       let applications;
 
       try {
-        applications = readApplications();
+        applications = readList(APPLICATIONS_KEY);
       } catch (error) {
-        applicationCount.textContent = "Unable to load demo entries.";
-        clearApplicationsButton.disabled = true;
-
-        const message = document.createElement("p");
-        message.className = "text-sm text-red-600 dark:text-red-400";
-        message.textContent =
-          "Browser storage is unavailable or the saved data is invalid.";
-
-        applicationList.append(message);
+        applicationList.append(
+          createElement("p", "text-sm text-red-600", "Could not load applications.")
+        );
         return;
       }
 
-      const count = applications.length;
+      document.getElementById("total-count").textContent = applications.length;
 
-      applicationCount.textContent =
-        `${count} demo application${count === 1 ? "" : "s"}`;
+      document.getElementById("pending-count").textContent =
+        applications.filter((item) => item.status === "Pending").length;
 
-      clearApplicationsButton.disabled = count === 0;
+      const selected = statusFilter.value;
 
-      if (count === 0) {
-        const emptyState = document.createElement("div");
+      const visible = selected === "All"
+        ? applications
+        : applications.filter((item) => item.status === selected);
 
-        emptyState.className =
-          "rounded-2xl border border-dashed border-slate-300 p-8 " +
-          "text-center text-sm text-slate-500 " +
-          "dark:border-slate-700 dark:text-slate-400";
-
-        emptyState.textContent =
-          "No demo applications yet. Submit a sample application to see it here.";
-
-        applicationList.append(emptyState);
+      if (visible.length === 0) {
+        applicationList.append(
+          createElement(
+            "p",
+            "rounded-2xl border border-dashed border-slate-300 p-6 text-sm text-slate-500 dark:border-slate-700",
+            "No applications match this view."
+          )
+        );
         return;
       }
 
-      applications.forEach((application) => {
-        const card = document.createElement("article");
-
-        card.className =
-          "rounded-2xl border border-slate-200 p-5 " +
-          "dark:border-slate-700";
-
-        const cardHeader = document.createElement("div");
-
-        cardHeader.className =
-          "flex flex-wrap items-start justify-between gap-3";
-
-        const title = document.createElement("h3");
-        title.className = "break-words text-lg font-bold";
-        title.textContent = application.fullName || "Unnamed applicant";
-
-        const date = document.createElement("p");
-        date.className = "text-xs text-slate-500 dark:text-slate-400";
-
-        const parsedDate = new Date(application.submittedAt);
-
-        date.textContent = Number.isNaN(parsedDate.getTime())
-          ? "Date unavailable"
-          : `Submitted ${parsedDate.toLocaleString()}`;
-
-        cardHeader.append(title, date);
-
-        const details = document.createElement("dl");
-        details.className = "mt-5 grid gap-4 sm:grid-cols-2";
-
-        details.append(
-          makeDetail("Email", application.email),
-          makeDetail("Candidate ID", application.candidateId),
-          makeDetail("Exam", application.exam),
-          makeDetail("Practice score", `${application.score}%`),
-          makeDetail("Files", "Not saved in this demo"),
-          makeDetail("Agreement", "Accepted in demo")
+      visible.forEach((application) => {
+        const card = createElement(
+          "article",
+          "rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900"
         );
 
-        const actions = document.createElement("div");
+        const header = createElement(
+          "div",
+          "flex flex-wrap items-start justify-between gap-3"
+        );
 
-        actions.className =
-          "mt-5 flex flex-wrap items-end justify-between gap-4 " +
-          "border-t border-slate-100 pt-4 dark:border-slate-800";
+        const name = createElement(
+          "h4",
+          "break-words text-lg font-bold",
+          application.name
+        );
 
-        const statusWrapper = document.createElement("div");
-        const statusId = `status-${application.id}`;
+        const submitted = new Date(application.submittedAt);
 
-        const statusLabel = document.createElement("label");
-        statusLabel.className = "mb-1 block text-xs font-semibold";
+        const date = createElement(
+          "p",
+          "text-xs text-slate-500",
+          Number.isNaN(submitted.getTime())
+            ? "Date unavailable"
+            : "Submitted " + submitted.toLocaleString()
+        );
+
+        header.append(name, date);
+
+        const details = createElement(
+          "dl",
+          "mt-5 grid gap-4 sm:grid-cols-2"
+        );
+
+        details.append(
+          detail("Email", application.email),
+          detail("Candidate ID", application.candidateId),
+          detail("Exam", application.exam),
+          detail("Student status and goals", application.studentInfo)
+        );
+
+        const editArea = createElement(
+          "div",
+          "mt-5 grid gap-4 border-t border-slate-200 pt-5 dark:border-slate-800 sm:grid-cols-2"
+        );
+
+        const statusWrapper = createElement("div");
+        const statusLabel = createElement(
+          "label",
+          "mb-2 block text-sm font-semibold",
+          "Status"
+        );
+
+        const statusSelect = createElement(
+          "select",
+          "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
+        );
+
+        const statusId = "status-" + application.id;
         statusLabel.htmlFor = statusId;
-        statusLabel.textContent = "Review status";
-
-        const statusSelect = document.createElement("select");
         statusSelect.id = statusId;
-        statusSelect.className =
-          "field rounded-lg border border-slate-300 bg-white " +
-          "px-3 py-2 text-sm dark:border-slate-700 " +
-          "dark:bg-slate-950";
 
-        ["Pending", "In review", "Approved", "Declined"].forEach((status) => {
-          const option = document.createElement("option");
+        [
+          "Pending",
+          "Practice test sent",
+          "In review",
+          "Approved",
+          "Rejected"
+        ].forEach((status) => {
+          const option = createElement("option", "", status);
           option.value = status;
-          option.textContent = status;
           statusSelect.append(option);
         });
 
         statusSelect.value = application.status || "Pending";
+        statusWrapper.append(statusLabel, statusSelect);
 
-        statusSelect.addEventListener("change", () => {
+        const scoreWrapper = createElement("div");
+        const scoreLabel = createElement(
+          "label",
+          "mb-2 block text-sm font-semibold",
+          "Practice score (%)"
+        );
+
+        const scoreInput = createElement(
+          "input",
+          "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
+        );
+
+        const scoreId = "score-" + application.id;
+        scoreLabel.htmlFor = scoreId;
+        scoreInput.id = scoreId;
+        scoreInput.type = "number";
+        scoreInput.min = "0";
+        scoreInput.max = "100";
+        scoreInput.step = "any";
+        scoreInput.placeholder = "Optional";
+        scoreInput.value = application.practiceScore ?? "";
+
+        scoreWrapper.append(scoreLabel, scoreInput);
+
+        const notesWrapper = createElement("div", "sm:col-span-2");
+        const notesLabel = createElement(
+          "label",
+          "mb-2 block text-sm font-semibold",
+          "Admin notes"
+        );
+
+        const notesInput = createElement(
+          "textarea",
+          "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
+        );
+
+        const notesId = "notes-" + application.id;
+        notesLabel.htmlFor = notesId;
+        notesInput.id = notesId;
+        notesInput.rows = 3;
+        notesInput.maxLength = 2000;
+        notesInput.value = application.notes || "";
+
+        notesWrapper.append(notesLabel, notesInput);
+
+        const saveButton = createElement(
+          "button",
+          "rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900",
+          "Save review"
+        );
+
+        saveButton.type = "button";
+
+        saveButton.addEventListener("click", () => {
+          const scoreValue = scoreInput.value.trim();
+
+          if (
+            scoreValue !== "" &&
+            (
+              !Number.isFinite(Number(scoreValue)) ||
+              Number(scoreValue) < 0 ||
+              Number(scoreValue) > 100
+            )
+          ) {
+            window.alert("Enter a practice score between 0 and 100.");
+            scoreInput.focus();
+            return;
+          }
+
           try {
-            const latest = readApplications();
-            const match = latest.find((item) => item.id === application.id);
+            updateApplication(application.id, {
+              status: statusSelect.value,
+              practiceScore: scoreValue,
+              notes: notesInput.value.trim()
+            });
 
-            if (!match) {
-              renderApplications();
-              return;
-            }
-
-            match.status = statusSelect.value;
-            writeApplications(latest);
-          } catch (error) {
-            window.alert("Could not save the demo review status.");
             renderApplications();
+          } catch (error) {
+            window.alert("Could not save this review.");
           }
         });
 
-        statusWrapper.append(statusLabel, statusSelect);
+        const actions = createElement(
+          "div",
+          "mt-5 flex flex-wrap gap-2 border-t border-slate-200 pt-5 dark:border-slate-800"
+        );
 
-        const deleteButton = document.createElement("button");
+        const practiceEmail = createElement(
+          "a",
+          "rounded-xl border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800",
+          "Prepare practice-test email"
+        );
+
+        practiceEmail.href = emailLink(application, "practice");
+
+        const approvedEmail = createElement(
+          "a",
+          "rounded-xl border border-emerald-300 px-3 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950",
+          "Prepare approval email"
+        );
+
+        approvedEmail.href = emailLink(application, "approved");
+
+        const rejectedEmail = createElement(
+          "a",
+          "rounded-xl border border-amber-300 px-3 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-50 dark:border-amber-800 dark:text-amber-400 dark:hover:bg-amber-950",
+          "Prepare rejection email"
+        );
+
+        rejectedEmail.href = emailLink(application, "rejected");
+
+        const deleteButton = createElement(
+          "button",
+          "rounded-xl px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950",
+          "Delete"
+        );
+
         deleteButton.type = "button";
 
-        deleteButton.className =
-          "rounded-lg px-3 py-2 text-sm font-semibold text-red-600 " +
-          "hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/50";
-
-        deleteButton.textContent = "Delete entry";
-
         deleteButton.addEventListener("click", () => {
-          const confirmed = window.confirm(
-            "Delete this demo application from this browser?"
-          );
-
-          if (!confirmed) return;
+          if (!window.confirm("Delete this demo application?")) return;
 
           try {
-            const latest = readApplications();
+            const current = readList(APPLICATIONS_KEY);
 
-            writeApplications(
-              latest.filter((item) => item.id !== application.id)
+            writeList(
+              APPLICATIONS_KEY,
+              current.filter((item) => item.id !== application.id)
             );
 
             renderApplications();
           } catch (error) {
-            window.alert("Could not delete the demo application.");
+            window.alert("Could not delete this application.");
           }
         });
 
-        actions.append(statusWrapper, deleteButton);
-        card.append(cardHeader, details, actions);
+        editArea.append(
+          statusWrapper,
+          scoreWrapper,
+          notesWrapper,
+          saveButton
+        );
+
+        actions.append(
+          practiceEmail,
+          approvedEmail,
+          rejectedEmail,
+          deleteButton
+        );
+
+        card.append(header, details, editArea, actions);
         applicationList.append(card);
       });
     }
 
-    clearApplicationsButton.addEventListener("click", () => {
-      const confirmed = window.confirm(
-        "Delete all demo applications stored in this browser?"
-      );
-
-      if (!confirmed) return;
+    /* Sponsor management */
+    function safeSponsorUrl(value) {
+      if (!value) return "";
 
       try {
-        writeApplications([]);
-        renderApplications();
+        const url = new URL(value);
+
+        if (url.protocol !== "https:" && url.protocol !== "http:") {
+          return null;
+        }
+
+        return url.href;
       } catch (error) {
-        window.alert("Could not delete the demo applications.");
+        return null;
+      }
+    }
+
+    function readFileAsDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Could not read image."));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    sponsorForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const error = document.getElementById("sponsor-error");
+      error.classList.add("hidden");
+      error.textContent = "";
+
+      const nameInput = document.getElementById("sponsor-name");
+      const urlInput = document.getElementById("sponsor-url");
+      const logoInput = document.getElementById("sponsor-logo");
+
+      const name = nameInput.value.trim();
+      const url = safeSponsorUrl(urlInput.value.trim());
+      const file = logoInput.files[0];
+
+      if (!name) {
+        error.textContent = "Enter a sponsor name.";
+        error.classList.remove("hidden");
+        return;
+      }
+
+      if (url === null) {
+        error.textContent = "Enter a valid website URL starting with https://.";
+        error.classList.remove("hidden");
+        return;
+      }
+
+      if (
+        !file ||
+        !["image/png", "image/jpeg", "image/webp"].includes(file.type) ||
+        file.size > MAX_LOGO_SIZE
+      ) {
+        error.textContent =
+          "Choose a PNG, JPG, or WebP image no larger than 500 KB.";
+
+        error.classList.remove("hidden");
+        return;
+      }
+
+      try {
+        const image = await readFileAsDataUrl(file);
+        const sponsors = readList(SPONSORS_KEY);
+
+        sponsors.push({
+          id: makeId(),
+          name,
+          url,
+          image
+        });
+
+        writeList(SPONSORS_KEY, sponsors);
+
+        sponsorForm.reset();
+        renderSponsors();
+        renderSponsorAdmin();
+      } catch (problem) {
+        error.textContent =
+          "Could not save the sponsor. Browser storage may be full or unavailable.";
+
+        error.classList.remove("hidden");
       }
     });
 
-    /*
-      Refresh the dashboard if another tab changes the demo data.
-      This only works for tabs using the same browser storage origin.
-    */
+    function renderSponsors() {
+      sponsorTrack.replaceChildren();
+
+      let sponsors;
+
+      try {
+        sponsors = readList(SPONSORS_KEY);
+      } catch (error) {
+        sponsorEmpty.textContent = "Sponsor information could not be loaded.";
+        sponsorEmpty.classList.remove("hidden");
+        return;
+      }
+
+      sponsorEmpty.classList.toggle("hidden", sponsors.length > 0);
+
+      sponsors.forEach((sponsor) => {
+        const card = createElement(
+          "div",
+          "sponsor-card flex min-h-40 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-5 text-center dark:border-slate-700 dark:bg-slate-900"
+        );
+
+        const image = document.createElement("img");
+        image.src = sponsor.image;
+        image.alt = sponsor.name + " logo";
+        image.className = "h-20 w-full object-contain";
+
+        const name = createElement(
+          "span",
+          "mt-3 text-sm font-semibold",
+          sponsor.name
+        );
+
+        const url = safeSponsorUrl(sponsor.url || "");
+
+        if (url) {
+          const link = document.createElement("a");
+          link.href = url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.className = "flex w-full flex-col items-center";
+          link.append(image, name);
+          card.append(link);
+        } else {
+          card.append(image, name);
+        }
+
+        sponsorTrack.append(card);
+      });
+    }
+
+    function renderSponsorAdmin() {
+      sponsorAdminList.replaceChildren();
+
+      let sponsors;
+
+      try {
+        sponsors = readList(SPONSORS_KEY);
+      } catch (error) {
+        sponsorAdminList.append(
+          createElement("p", "text-sm text-red-600", "Could not load sponsors.")
+        );
+        return;
+      }
+
+      document.getElementById("sponsor-count").textContent = sponsors.length;
+
+      if (sponsors.length === 0) {
+        sponsorAdminList.append(
+          createElement(
+            "p",
+            "text-sm text-slate-500",
+            "No sponsors added yet."
+          )
+        );
+
+        return;
+      }
+
+      sponsors.forEach((sponsor) => {
+        const row = createElement(
+          "div",
+          "flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900"
+        );
+
+        const left = createElement("div", "flex min-w-0 items-center gap-4");
+
+        const image = document.createElement("img");
+        image.src = sponsor.image;
+        image.alt = "";
+        image.className = "h-12 w-16 rounded bg-white object-contain";
+
+        const name = createElement(
+          "span",
+          "break-words text-sm font-semibold",
+          sponsor.name
+        );
+
+        left.append(image, name);
+
+        const remove = createElement(
+          "button",
+          "shrink-0 rounded-lg px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950",
+          "Remove"
+        );
+
+        remove.type = "button";
+
+        remove.addEventListener("click", () => {
+          if (!window.confirm("Remove this sponsor from the demo?")) return;
+
+          try {
+            const current = readList(SPONSORS_KEY);
+
+            writeList(
+              SPONSORS_KEY,
+              current.filter((item) => item.id !== sponsor.id)
+            );
+
+            renderSponsors();
+            renderSponsorAdmin();
+          } catch (error) {
+            window.alert("Could not remove this sponsor.");
+          }
+        });
+
+        row.append(left, remove);
+        sponsorAdminList.append(row);
+      });
+    }
+
+    document.getElementById("sponsors-prev").addEventListener("click", () => {
+      sponsorTrack.scrollBy({ left: -260, behavior: "smooth" });
+    });
+
+    document.getElementById("sponsors-next").addEventListener("click", () => {
+      sponsorTrack.scrollBy({ left: 260, behavior: "smooth" });
+    });
+
+    function renderDashboard() {
+      renderApplications();
+      renderSponsorAdmin();
+    }
+
     window.addEventListener("storage", (event) => {
-      if (event.key === STORAGE_KEY && adminDashboard.open) {
+      if (event.key === SPONSORS_KEY) {
+        renderSponsors();
+
+        if (dashboard.open) {
+          renderSponsorAdmin();
+        }
+      }
+
+      if (event.key === APPLICATIONS_KEY && dashboard.open) {
         renderApplications();
       }
     });
+
+    renderSponsors();
   </script>
 </body>
 </html>
