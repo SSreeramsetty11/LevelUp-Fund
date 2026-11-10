@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="dark" />
 
   <title>The LevelUp Fund</title>
 
@@ -21,19 +21,6 @@
       }
     };
 
-    try {
-      const savedTheme = localStorage.getItem("levelup-theme");
-
-      if (
-        savedTheme === "dark" ||
-        (!savedTheme &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      }
-    } catch (error) {
-      // The page still works if theme storage is unavailable.
-    }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -152,14 +139,6 @@
           Sponsors
         </a>
 
-        <button
-          id="theme-toggle"
-          type="button"
-          class="rounded-xl border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
-          aria-label="Switch color theme"
-        >
-          ◐
-        </button>
 
         <button id="mobile-menu-open" type="button" class="rounded-full border border-white/50 px-4 py-2 text-sm md:hidden" aria-haspopup="dialog">Menu</button>
         <a
@@ -898,32 +877,6 @@
     document.getElementById("mobile-menu-close").addEventListener("click", () => mobileMenu.close());
     mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => mobileMenu.close()));
     mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
-
-    /* Theme */
-    const themeToggle = document.getElementById("theme-toggle");
-
-    function updateThemeLabel() {
-      const dark = document.documentElement.classList.contains("dark");
-
-      themeToggle.setAttribute(
-        "aria-label",
-        dark ? "Switch to light theme" : "Switch to dark theme"
-      );
-    }
-
-    updateThemeLabel();
-
-    themeToggle.addEventListener("click", () => {
-      const dark = document.documentElement.classList.toggle("dark");
-
-      try {
-        localStorage.setItem("levelup-theme", dark ? "dark" : "light");
-      } catch (error) {
-        // Theme still changes for the current page.
-      }
-
-      updateThemeLabel();
-    });
 
     /* Application submission */
     grantForm.addEventListener("submit", (event) => {
