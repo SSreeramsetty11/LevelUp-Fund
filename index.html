@@ -26,74 +26,44 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
-    body {
-      font-family: Inter, system-ui, sans-serif;
-    }
-
-    .field:focus {
-      outline: 2px solid #3b82f6;
-      outline-offset: 2px;
-    }
-
-    .field[aria-invalid="true"] {
-      border-color: #ef4444;
-    }
-
-    dialog::backdrop {
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(4px);
-    }
-
-    .sponsor-track {
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-    }
-
-    .sponsor-card {
-      scroll-snap-align: start;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto !important;
-      }
-
-      .sponsor-track {
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
-
-  <style>
-    :root{--navy:#0b2043;--blue:#2563c9;--lime:#c2e029;--paper:#f4f4f2;--line:#e3e6ea}
-    html{scroll-padding-top:6rem} body{font-family:Onest,system-ui,sans-serif;background:white}
-    :focus-visible{outline:3px solid #5790e6;outline-offset:4px}
-    .site-header{background:var(--navy);border:0;color:white;position:relative}
-    .site-header nav{max-width:none;padding:1.35rem clamp(1.3rem,4vw,4.5rem)} .site-header a{color:white} .site-header a.nav-apply{color:#0b2043}
-    .hero{background:var(--navy);color:white;position:relative;overflow:hidden;min-height:min(760px,88vh);padding:clamp(4rem,8vw,8rem) clamp(1.3rem,5vw,5.5rem) 3rem}
-    .hero:before{content:"";position:absolute;width:45rem;height:45rem;right:-12rem;top:-17rem;border:1px solid #ffffff21;border-radius:50%;box-shadow:0 0 0 5rem #ffffff08,0 0 0 10rem #ffffff06}
-    .hero-top{position:relative;z-index:1}.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
-    .hero h1{max-width:14ch;font-size:clamp(3.15rem,8.8vw,9rem);line-height:.91;letter-spacing:-.075em;text-transform:uppercase;font-weight:800}
-    .hero h1 span{color:#a5c6ff}.hero-bottom{position:relative;display:grid;gap:2.5rem;margin-top:clamp(3rem,7vw,7rem);align-items:end}
-    .hero-copy{max-width:29rem;font-size:1.05rem;line-height:1.7;color:#d7e2f3}.pill{display:inline-flex;align-items:center;justify-content:center;gap:1rem;border-radius:999px;padding:1rem 1.4rem;font-size:.85rem;font-weight:700;transition:transform .2s ease,background .2s ease}.pill:hover{transform:translateY(-2px)}.pill-light{background:#fff;color:#0b2043}.pill-line{border:1px solid #ffffff80;color:white}
-    .hero-card{position:relative;justify-self:end;width:min(100%,24rem);padding:1.6rem;background:#e5edfa;color:#0b2043;border-radius:1.25rem;transform:rotate(3deg);box-shadow:0 20px 50px #0003}.hero-card .card-art{height:5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #0b204333}.hero-card strong{font-size:2.4rem;letter-spacing:-.07em}.hero-card .dot{width:2rem;height:2rem;border-radius:50%;background:var(--lime)}
-    @media(min-width:768px){.hero-bottom{grid-template-columns:1fr 1fr}} @media(max-width:767px){.hero{min-height:auto}.hero-card{transform:rotate(1deg);justify-self:stretch}.hero h1{font-size:clamp(3rem,12vw,5rem)}}
-    .editorial{padding:clamp(5rem,9vw,9rem) clamp(1rem,4vw,4rem);overflow:hidden}.editorial-inner{max-width:80rem;margin:auto}.editorial h2,.process h2,.faq h2{font-size:clamp(2.7rem,6vw,6rem);line-height:.98;letter-spacing:-.06em;font-weight:800}.editorial .ghost{color:#dce0e6;text-transform:uppercase;font-size:clamp(3rem,10vw,10rem);line-height:.9;letter-spacing:-.075em;font-weight:800;white-space:nowrap}.editorial-copy{display:grid;gap:2rem;margin-top:3rem}.editorial-copy p{max-width:35rem;font-size:1.15rem;line-height:1.7;color:#596474}.editorial-tag{border-left:3px solid var(--blue);padding-left:1.25rem;font-size:.9rem;font-weight:600;line-height:1.7}
-    @media(min-width:768px){.editorial-copy{grid-template-columns:2fr 1fr;align-items:end}}
-    .process{background:#f4f4f2;padding:clamp(4rem,7vw,7rem) clamp(1rem,4vw,4rem)}.process-inner{max-width:80rem;margin:auto}.process-layout{display:grid;gap:3rem}.process-list{border-top:1px solid #ccd0d5}.process-row{display:grid;grid-template-columns:3rem 1fr;gap:1rem;padding:1.5rem 0;border-bottom:1px solid #ccd0d5}.process-row span{color:#2563c9;font-size:.8rem;font-weight:700}.process-row h3{font-size:1.2rem;font-weight:700;letter-spacing:-.03em}.process-row p{margin-top:.6rem;max-width:30rem;color:#5f6875;line-height:1.65;font-size:.92rem}@media(min-width:900px){.process-layout{grid-template-columns:1fr 1fr;gap:5rem}}
-    .dark .process{background:#172237}.dark .process-row p{color:#c1cad9}.dark .process-row{border-color:#516077}.dark .process-list{border-color:#516077}.dark .editorial-copy p{color:#c1cad9}.dark .editorial .ghost{color:#394963}
-    #rules{background:var(--navy);color:white} #rules h2{font-size:clamp(2.7rem,5vw,5rem);line-height:1;letter-spacing:-.06em} #rules p:not([class*=uppercase]){color:#d2ddec} #rules article{border:0;border-bottom:1px solid #ffffff30;border-radius:0;padding-left:0;padding-right:0} #rules .text-blue-600{color:#a5c6ff}
-    #apply h2{font-size:clamp(2.7rem,5vw,5rem);line-height:1;letter-spacing:-.06em} #apply form{border-radius:1.5rem;box-shadow:none} #apply button[type=submit]{border-radius:999px}
-    #sponsors{border:0;background:#f4f4f2} .dark #sponsors{background:#172237}
-    .faq{padding:clamp(4rem,7vw,7rem) clamp(1rem,4vw,4rem)}.faq-inner{max-width:80rem;margin:auto;display:grid;gap:3rem}.faq details{border-bottom:1px solid #d8dce2;padding:1.4rem 0}.faq summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:'+';font-size:1.5rem;line-height:1}.faq details[open] summary:after{content:'−'}.faq details p{max-width:38rem;color:#647080;line-height:1.7;margin-top:1rem}.dark .faq details p{color:#c1cad9}@media(min-width:900px){.faq-inner{grid-template-columns:1fr 1fr;gap:5rem}}
-    footer .footer-cta{font-size:clamp(2.6rem,6vw,6rem);line-height:.95;letter-spacing:-.06em;font-weight:800;color:white;max-width:12ch}
-    .mobile-menu{max-width:none;max-height:none;width:100%;height:100%;padding:2rem;background:var(--navy);color:white}.mobile-menu::backdrop{background:#0b2043}.mobile-menu a{display:block;font-size:clamp(2rem,9vw,4rem);font-weight:700;letter-spacing:-.05em;margin:1.3rem 0}
-    @media(prefers-reduced-motion:no-preference){.hero h1{animation:rise .8s both}@keyframes rise{from{opacity:0;transform:translateY(1.4rem)}to{opacity:1;transform:translateY(0)}}}
+    :root { color-scheme: dark; --page: #0b0c10; --surface: #15171f; --surface-soft: #1c2030; --text: #f7f7fa; --muted: #c4c5d0; --accent: #aebcff; --line: #343742; }
+    html { scroll-padding-top: 6rem; }
+    body { font-family: Inter, system-ui, sans-serif; background: var(--page); color: var(--text); }
+    :focus-visible, .field:focus { outline: 3px solid #aebcff; outline-offset: 3px; }
+    .field[aria-invalid="true"] { border-color: #f87171; }
+    dialog::backdrop { background: rgba(0,0,0,.72); }
+    .site-header { background: #0b0c10; color: white; border-bottom: 1px solid #ffffff12; }
+    .site-header nav { max-width: 78rem; margin: 0 auto; padding: 1.1rem 1.5rem; }
+    .site-header a { color: #e7e7ee; }
+    .site-header a.nav-apply { background: white; color: #111; border-radius: .65rem; }
+    .eyebrow { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #bfc9ff; }
+    .hero { text-align: center; padding: clamp(5rem,10vw,9rem) 1.5rem clamp(5rem,9vw,8rem); background: linear-gradient(180deg,#0b0c10 0%,#171d35 100%); }
+    .hero h1 { max-width: 15ch; margin: 1.25rem auto 0; font-size: clamp(2.75rem,6.5vw,5.75rem); font-weight: 800; letter-spacing: -.055em; line-height: 1.05; }
+    .hero h1 span { color: #b9c6ff; }
+    .hero-copy { max-width: 41rem; margin: 1.5rem auto 0; color: #d6d7e0; font-size: clamp(1rem,1.6vw,1.15rem); line-height: 1.7; }
+    .hero-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:.75rem; margin-top:1.75rem; }
+    .pill { display:inline-flex; min-height:3rem; align-items:center; justify-content:center; gap:.6rem; border-radius:.65rem; padding:.8rem 1.3rem; font-size:.9rem; font-weight:600; transition:transform .2s,background .2s; }
+    .pill:hover { transform:translateY(-2px); } .pill-light { background:#fff; color:#111; } .pill-line { border:1px solid #777b8a; color:#fff; }
+    .editorial { padding:clamp(4.5rem,8vw,7rem) 1.5rem; text-align:center; background:#11131b; }
+    .editorial-inner { max-width:58rem; margin:auto; } .editorial h2, .process h2, .faq h2, #rules h2, #apply h2 { font-size:clamp(2.25rem,4.6vw,4rem); font-weight:800; letter-spacing:-.045em; line-height:1.1; }
+    .editorial-copy { display:grid; gap:1.5rem; justify-items:center; } .editorial-copy p { max-width:44rem; margin-left:auto; margin-right:auto; color:var(--muted); line-height:1.7; font-size:1.05rem; }
+    .editorial-tag { max-width:32rem; color:#d2d8ff; font-size:.95rem; line-height:1.7; }
+    .process { padding:clamp(4.5rem,8vw,7rem) 1.5rem; background:#171c2d; } .process-inner { max-width:76rem; margin:auto; } .process-layout > div:first-child { text-align:center; } .process-layout > div:first-child p { margin-left:auto; margin-right:auto; }
+    .process-list { display:grid; grid-template-columns:repeat(1,minmax(0,1fr)); gap:1rem; margin-top:3rem; }
+    .process-row { padding:1.75rem; border-radius:1rem; background:#202332; box-shadow:0 10px 25px #0002; } .process-row span { display:inline-block; color:#bdcaff; font-size:.8rem; font-weight:700; } .process-row h3 { margin-top:1rem; font-size:1.13rem; font-weight:700; } .process-row p { color:var(--muted); line-height:1.7; margin-top:.7rem; font-size:.9rem; }
+    @media(min-width:640px){.process-list{grid-template-columns:repeat(2,minmax(0,1fr))}} @media(min-width:1024px){.process-list{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    #rules { background:#101218; } #rules article { background:var(--surface); border:1px solid var(--line); border-radius:1rem; }
+    #apply { background:#171c2d; } #apply form { background:#111319; border-color:#363946; box-shadow:0 12px 30px #0002; } #apply button[type=submit] { border-radius:.65rem; }
+    #sponsors { background:#171c2d; border:0; } .sponsor-track { scroll-snap-type:x mandatory; scrollbar-width:thin; } .sponsor-card { scroll-snap-align:start; }
+    .faq { padding:clamp(4.5rem,8vw,7rem) 1.5rem; background:#101218; } .faq-inner { max-width:70rem; margin:auto; display:grid; gap:2.5rem; } .faq details { border-bottom:1px solid var(--line); padding:1.25rem 0; } .faq summary { list-style:none; display:flex; justify-content:space-between; gap:1rem; cursor:pointer; font-weight:600; } .faq summary::-webkit-details-marker { display:none; } .faq summary:after { content:'+'; font-size:1.4rem; } .faq details[open] summary:after { content:'−'; } .faq details p { margin-top:.75rem; color:var(--muted); line-height:1.7; } @media(min-width:900px){.faq-inner{grid-template-columns:1fr 1.3fr;gap:5rem}}
+    footer { background:#000 !important; } footer .footer-cta { max-width:18ch; font-size:clamp(2.25rem,4.5vw,4rem); font-weight:800; line-height:1.1; letter-spacing:-.045em; color:white; }
+    .mobile-menu { max-width:none; max-height:none; width:100%; height:100%; padding:2rem; background:#0b0c10; color:white; } .mobile-menu::backdrop { background:#0b0c10; } .mobile-menu a { display:block; font-size:clamp(1.5rem,6vw,2.5rem); font-weight:700; margin:1.4rem 0; }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto !important; } *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } .sponsor-track { scroll-behavior:auto !important; } }
   </style>
 </head>
 
@@ -159,15 +129,13 @@
 
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-top"><p class="eyebrow mb-8 text-blue-200">For the skills you're building &nbsp; / &nbsp; The LevelUp Fund</p>
-        <h1 id="hero-title">Your next<br>step <span>starts</span><br>here.</h1>
-      </div>
-      <div class="hero-bottom">
-        <div><p class="hero-copy">Certification exams can open doors. We help students take the next step by covering eligible exam fees.</p><div class="mt-7 flex flex-wrap gap-3"><a class="pill pill-light" href="#apply">Apply for a grant <span aria-hidden="true">↗</span></a><a class="pill pill-line" href="#how-it-works">How it works <span aria-hidden="true">↓</span></a></div><p class="mt-6 text-xs text-blue-200">Demo website · No applications are submitted.</p></div>
-        <div class="hero-card" aria-label="Certification paths include CompTIA, AWS, and Microsoft"><div class="card-art"><strong>LEVEL<br>UP<span style="color:#2563c9">.</span></strong><span class="dot" aria-hidden="true"></span></div><p class="eyebrow mt-5" style="color:#416389">The opportunity</p><p class="mt-2 text-xl font-bold leading-tight">Big goals.<br>One exam at a time.</p><p class="mt-4 text-sm leading-6" style="color:#49607d">CompTIA &nbsp; / &nbsp; AWS &nbsp; / &nbsp; Microsoft &amp; more</p></div>
-      </div>
+      <p class="eyebrow">For the skills you're building / The LevelUp Fund</p>
+      <h1 id="hero-title">Your next step <span>starts here.</span></h1>
+      <p class="hero-copy">Certification exams can open doors. We help students take the next step by covering eligible exam fees.</p>
+      <div class="hero-actions"><a class="pill pill-light" href="#apply">Apply for a grant <span aria-hidden="true">↗</span></a><a class="pill pill-line" href="#how-it-works">How it works <span aria-hidden="true">↓</span></a></div>
+      <p class="mt-6 text-xs text-slate-400">Demo website · No applications are submitted.</p>
     </section>
-    <section class="editorial" aria-label="Our mission"><div class="editorial-inner"><p class="eyebrow text-blue-700 dark:text-blue-400">A little support goes a long way</p><div class="mt-8" aria-hidden="true"><div class="ghost">BIG AMBITION.</div><div class="ghost">REAL ACCESS.</div></div><div class="editorial-copy"><div><h2>Skills deserve<br>a chance.</h2><p class="mt-6">A certification can make what you know visible. The LevelUp Fund is built around a simple idea: the exam fee shouldn't be the thing standing in your way.</p></div><div class="editorial-tag">A student-driven microfund for all types of certifications to help people grow their career.</div></div></div></section>
+    <section class="editorial" aria-label="Our mission"><div class="editorial-inner"><p class="eyebrow">A little support goes a long way</p><div class="editorial-copy mt-5"><div><h2>Skills deserve a chance.</h2><p class="mt-5">A certification can make what you know visible. The LevelUp Fund is built around a simple idea: the exam fee shouldn't be the thing standing in your way.</p></div><div class="editorial-tag">A student-driven microfund for all types of certifications to help people grow their career.</div></div></div></section>
 
     <!-- How it works -->
     <section id="how-it-works" class="process scroll-mt-24"><div class="process-inner process-layout"><div><p class="eyebrow text-blue-700 dark:text-blue-400">The path forward</p><h2 class="mt-5">From ambition<br>to exam day.</h2><p class="mt-6 max-w-md text-base leading-7 text-slate-600 dark:text-slate-300">A clear process to help prepared students take their next step.</p></div><div class="process-list">
@@ -654,7 +622,7 @@
             </h3>
 
             <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Review entries, save a practice score, and prepare an email.
+              Review entries, including past approved and rejected applications saved in this browser. You can also save a practice score and prepare an email.
             </p>
           </div>
 
@@ -664,7 +632,8 @@
               id="status-filter"
               class="ml-2 rounded-lg border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"
             >
-              <option value="All">All</option>
+              <option value="All">All applications</option>
+              <option value="Decided">Past decisions (approved and rejected)</option>
               <option value="Pending">Pending</option>
               <option value="Practice test sent">Practice test sent</option>
               <option value="In review">In review</option>
@@ -1113,7 +1082,9 @@
 
       const visible = selected === "All"
         ? applications
-        : applications.filter((item) => item.status === selected);
+        : selected === "Decided"
+          ? applications.filter((item) => item.status === "Approved" || item.status === "Rejected")
+          : applications.filter((item) => item.status === selected);
 
       if (visible.length === 0) {
         applicationList.append(
