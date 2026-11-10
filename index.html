@@ -1250,6 +1250,33 @@
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
 
+        // Manual free-tool workflow: nothing is sent to Sapling by this site.
+        // Only the essay is copied, and only after the reviewer chooses to copy it.
+        const detector = createElement("div", "mt-5 rounded-xl bg-slate-50 p-4 dark:bg-slate-800");
+        const detectorTitle = createElement("p", "text-sm font-semibold", "Optional AI-writing check");
+        const detectorInfo = createElement("p", "mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300", "Sapling's free web tool accepts up to 2,000 characters per check. Results can be wrong and must not be used as the sole basis for a decision. Obtain appropriate permission before sharing an essay with another service.");
+        const detectorActions = createElement("div", "mt-3 flex flex-wrap items-center gap-3");
+        const copyEssay = createElement("button", "rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold dark:border-slate-600", "Copy essay");
+        copyEssay.type = "button";
+        const detectorStatus = createElement("p", "mt-2 text-xs text-slate-600 dark:text-slate-300", "");
+        detectorStatus.setAttribute("role", "status");
+        copyEssay.addEventListener("click", async () => {
+          const essay = application.essay || application.studentInfo || "";
+          if (!essay) { detectorStatus.textContent = "There is no essay to copy."; return; }
+          try {
+            await navigator.clipboard.writeText(essay);
+            detectorStatus.textContent = "Essay copied. Open Sapling and paste it there. No text has been sent automatically.";
+          } catch {
+            detectorStatus.textContent = "Could not copy automatically. Select and copy the essay above instead.";
+          }
+        });
+        const detectorLink = createElement("a", "text-xs font-semibold text-blue-700 underline dark:text-blue-400", "Open Sapling detector ↗");
+        detectorLink.href = "https://sapling.ai/ai-content-detector";
+        detectorLink.target = "_blank";
+        detectorLink.rel = "noopener noreferrer";
+        detectorActions.append(copyEssay, detectorLink);
+        detector.append(detectorTitle, detectorInfo, detectorActions, detectorStatus);
+
         const editArea = createElement(
           "div",
           "mt-5 grid gap-4 border-t border-slate-200 pt-5 dark:border-slate-800 sm:grid-cols-2"
@@ -1436,7 +1463,7 @@
           deleteButton
         );
 
-        card.append(header, details, editArea, actions);
+        card.append(header, details, detector, editArea, actions);
         applicationList.append(card);
       });
     }
