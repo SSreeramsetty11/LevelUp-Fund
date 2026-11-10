@@ -326,7 +326,7 @@
 
             <div>
               <label for="candidate-id" class="mb-2 block text-sm font-semibold">
-                Who administers or provides the exam?
+                Who administers this certification?
               </label>
 
               <input
@@ -343,7 +343,7 @@
 
             <div>
               <label for="exam-name" class="mb-2 block text-sm font-semibold">
-                Which certification exam would you like to take?
+                Which certification are you planning to take?
               </label>
 
               <input
@@ -356,6 +356,22 @@
               />
 
               <p id="exam-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
+              <label for="certification-url" class="mb-2 block text-sm font-semibold">
+                Certification website URL
+              </label>
+
+              <input
+                id="certification-url"
+                type="url"
+                required
+                placeholder="https://example.com/certification"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              />
+
+              <p id="certification-url-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div>
@@ -879,6 +895,7 @@
       const email = document.getElementById("email");
       const candidateId = document.getElementById("candidate-id");
       const examName = document.getElementById("exam-name");
+      const certificationUrl = document.getElementById("certification-url");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
       const amount = document.getElementById("grant-amount");
@@ -901,8 +918,19 @@
         email.value.trim() !== "" && email.validity.valid,
         "Enter a valid email address."
       );
-      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the exam.");
-      check(examName, examName.value.trim() !== "", "Enter the exam name.");
+      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the certification.");
+      check(examName, examName.value.trim() !== "", "Enter the certification name.");
+      const urlValue = certificationUrl.value.trim();
+      let validCertificationUrl = false;
+      try {
+        const parsedUrl = new URL(urlValue);
+        validCertificationUrl = /^https?:\/\//i.test(urlValue) &&
+          (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") &&
+          !!parsedUrl.hostname && certificationUrl.validity.valid;
+      } catch (error) {
+        // Missing or malformed URLs are handled by the inline message below.
+      }
+      check(certificationUrl, validCertificationUrl, "Enter a valid certification website URL starting with http:// or https://.");
       check(studentInfo, countEssayWords(studentInfo.value) > 0 && countEssayWords(studentInfo.value) < 500, "Enter an essay of fewer than 500 words.");
       check(amount, amount.value !== "" && amount.validity.valid && Number.isFinite(Number(amount.value)) && Number(amount.value) > 0, "Enter a valid amount greater than zero, with up to two decimal places.");
       check(agreement, agreement.checked, "Please agree to the grant terms.");
@@ -920,6 +948,7 @@
         email: email.value.trim(),
         examProvider: candidateId.value.trim(),
         exam: examName.value.trim(),
+        certificationUrl: urlValue,
         essay: studentInfo.value.trim(),
         requestedAmount: Number(amount.value),
         practiceScore: "",
@@ -1139,6 +1168,7 @@
           detail("Email", application.email),
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
+          detail("Certification website URL", application.certificationUrl || "Not provided"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
