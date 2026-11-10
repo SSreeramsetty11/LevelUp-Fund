@@ -133,7 +133,7 @@
       <h1 id="hero-title">Your next step <span>starts here.</span></h1>
       <p class="hero-copy">Certification exams can open doors. We help students take the next step by covering eligible exam fees.</p>
       <div class="hero-actions"><a class="pill pill-light" href="#apply">Apply for a grant <span aria-hidden="true">↗</span></a><a class="pill pill-line" href="#how-it-works">How it works <span aria-hidden="true">↓</span></a></div>
-      <p class="mt-6 text-xs text-slate-400">Demo website · No applications are submitted.</p>
+      <p class="mt-6 text-xs text-slate-400">Test mode · Submit sample information only.</p>
     </section>
     <section class="editorial" aria-label="Our mission"><div class="editorial-inner"><p class="eyebrow">A little support goes a long way</p><div class="editorial-copy mt-5"><div><h2>Skills deserve a chance.</h2><p class="mt-5">A certification can make what you know visible. The LevelUp Fund is built around a simple idea: the exam fee shouldn't be the thing standing in your way.</p></div><div class="editorial-tag">A student-driven microfund for all types of certifications to help people grow their career.</div></div></div></section>
 
@@ -241,9 +241,7 @@
           </div>
 
           <div class="mt-5 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
-            Use made-up information only. This demo stores entries in this
-            browser and does not send them to the fund. The admin login is
-            not secure.
+            Test mode: use made-up information only. Submissions are sent to the shared database for testing.
           </div>
 
           <div
@@ -386,11 +384,11 @@
             type="submit"
             class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-4 text-sm font-bold text-white hover:bg-blue-700"
           >
-            Submit demo application →
+            Submit test application →
           </button>
 
           <p class="mt-3 text-center text-xs leading-5 text-slate-500">
-            No application is sent to the fund in this demo.
+            Test submissions are stored in the shared database.
           </p>
         </form>
       </div>
@@ -399,10 +397,10 @@
     <!-- Frequently asked questions -->
     <section id="faq" class="faq scroll-mt-24"><div class="faq-inner"><div><p class="eyebrow text-blue-700 dark:text-blue-400">The details</p><h2 class="mt-5">Good questions.<br>Clear answers.</h2></div><div class="border-t border-slate-300 dark:border-slate-700">
       <details><summary>What does the fund help cover?</summary><p>The fund is intended to cover eligible professional IT and technology certification exam fees. Applications are subject to review and available funding.</p></details>
-      <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently a demo and does not submit applications.</p></details>
+      <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently in test mode; use sample information only.</p></details>
       <details><summary>What if I need to change my exam date?</summary><p>Give at least 48 hours' notice and follow any additional requirements from your testing provider.</p></details>
       <details><summary>Do I need to pass the exam to report my score?</summary><p>No. Under the displayed grant agreement, an official score report is requested within 14 days regardless of the result.</p></details>
-      <details><summary>Is the website accepting real applications?</summary><p>No. The application and admin dashboard are demonstrations stored in your browser. Please use sample information only.</p></details>
+      <details><summary>Is the website accepting real applications?</summary><p>No. The application and admin dashboard are in test mode. Sample submissions are stored in the shared database.</p></details>
     </div></div></section>
 
     <!-- Sponsors -->
@@ -457,8 +455,7 @@
           id="sponsor-empty"
           class="mt-6 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400"
         >
-          Sponsor logos added in the demo admin dashboard will appear here
-          in this browser.
+          Sponsors will appear here when they are added.
         </p>
       </div>
     </section>
@@ -487,11 +484,11 @@
       </div>
 
       <h2 id="success-title" class="mt-5 text-2xl font-bold">
-        Demo application saved
+        Test application submitted
       </h2>
 
       <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        The sample entry is stored in this browser. It was not sent to the fund.
+        The sample entry was submitted to the shared database.
       </p>
 
       <button
@@ -518,7 +515,7 @@
           </p>
 
           <h2 id="admin-login-title" class="mt-2 text-2xl font-bold">
-            Demo admin login
+            Admin login
           </h2>
         </div>
 
@@ -533,9 +530,11 @@
       </div>
 
       <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        Demo only. This password does not protect real data.
+        Sign in using your individual administrator account.
       </p>
 
+      <label for="admin-email" class="mb-2 mt-5 block text-sm font-semibold">Email address</label>
+      <input id="admin-email" type="email" autocomplete="username" required class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950" />
       <label for="admin-password" class="mb-2 mt-5 block text-sm font-semibold">
         Password
       </label>
@@ -544,7 +543,7 @@
         id="admin-password"
         type="password"
         required
-        autocomplete="off"
+        autocomplete="current-password"
         class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950"
       />
 
@@ -573,7 +572,7 @@
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-            Demo admin area
+            Admin area
           </p>
 
           <h2 id="dashboard-title" class="mt-2 text-3xl font-bold">
@@ -581,8 +580,7 @@
           </h2>
 
           <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Applications and sponsors are stored only in this browser.
-            Decision emails must be sent manually.
+            Applications and site content are shared across authorized administrators. Decision emails must be sent manually.
           </p>
         </div>
 
@@ -622,7 +620,7 @@
             </h3>
 
             <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Review entries, including past approved and rejected applications saved in this browser. You can also save a practice score and prepare an email.
+              Review entries, including past approved and rejected applications. You can also save a practice score and prepare an email.
             </p>
           </div>
 
@@ -648,7 +646,7 @@
 
       <section class="mt-12" aria-labelledby="team-heading">
         <h3 id="team-heading" class="text-xl font-bold">Manage the team</h3>
-        <p class="mt-2 text-sm text-slate-500">Demo only: profiles and headshots are saved in this browser and are not visible to other visitors.</p>
+        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors.</p>
         <form id="team-form" class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2">
           <input id="team-id" type="hidden">
           <label class="text-sm font-semibold">Name<input id="team-name" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
@@ -668,7 +666,7 @@
         </h3>
 
         <p class="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
-          Add a sponsor name and logo. Changes appear only in this browser.
+          Add a sponsor name and logo. Changes appear for all visitors.
         </p>
 
         <form
@@ -743,17 +741,12 @@
     </div>
   </dialog>
 
-  <script>
-    /*
-      DEMO ONLY:
-      This password is visible in the page source. It is not secure.
-      A real admin login must be handled by a secure backend.
-    */
-    const DEMO_PASSWORD = "levelup-demo";
-
-    // A new key is used because this application form has changed.
-    const APPLICATIONS_KEY = "levelup-applications-v2";
-    const SPONSORS_KEY = "levelup-sponsors-v1";
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createSharedAdmin } from "./src/shared-admin.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
+    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    const backend = createSharedAdmin(client);
     const MAX_LOGO_SIZE = 500 * 1024;
 
     const grantForm = document.getElementById("grant-form");
@@ -782,24 +775,6 @@
       }
 
       return Date.now() + "-" + Math.random().toString(36).slice(2);
-    }
-
-    function readList(key) {
-      const raw = localStorage.getItem(key);
-
-      if (!raw) return [];
-
-      const data = JSON.parse(raw);
-
-      if (!Array.isArray(data)) {
-        throw new Error("Invalid saved data.");
-      }
-
-      return data;
-    }
-
-    function writeList(key, data) {
-      localStorage.setItem(key, JSON.stringify(data));
     }
 
     function showFieldError(field, message) {
@@ -848,7 +823,7 @@
     mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
 
     /* Application submission */
-    grantForm.addEventListener("submit", (event) => {
+    grantForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       formError.classList.add("hidden");
@@ -922,16 +897,17 @@
         submittedAt: new Date().toISOString()
       };
 
+      const submitButton = grantForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
       try {
-        const applications = readList(APPLICATIONS_KEY);
-        applications.unshift(application);
-        writeList(APPLICATIONS_KEY, applications);
+        application.agreement = agreement.checked;
+        await backend.submitApplication(application);
       } catch (error) {
-        formError.textContent =
-          "Could not save this demo entry. Browser storage may be unavailable.";
-
+        formError.textContent = "Your application could not be submitted. Please try again later.";
         formError.classList.remove("hidden");
         return;
+      } finally {
+        submitButton.disabled = false;
       }
 
       grantForm.reset();
@@ -950,34 +926,40 @@
       loginError.classList.add("hidden");
       loginError.textContent = "";
       loginDialog.showModal();
-      adminPassword.focus();
+      document.getElementById("admin-email").focus();
     });
 
     document.getElementById("close-login").addEventListener("click", () => {
       loginDialog.close();
     });
 
-    loginForm.addEventListener("submit", (event) => {
+    loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-
-      if (adminPassword.value !== DEMO_PASSWORD) {
-        loginError.textContent = "Incorrect demo password.";
+      loginError.classList.add("hidden");
+      const submitButton = loginForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      try {
+        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value);
+        loginForm.reset();
+        loginDialog.close();
+        dashboard.showModal();
+        await renderDashboard();
+        document.getElementById("admin-logout").focus();
+      } catch (error) {
+        loginError.textContent = "Unable to sign in. Check your details and contact an administrator if needed.";
         loginError.classList.remove("hidden");
-        adminPassword.focus();
-        return;
-      }
-
-      loginForm.reset();
-      loginDialog.close();
-
-      renderDashboard();
-      dashboard.showModal();
-      document.getElementById("admin-logout").focus();
+      } finally { submitButton.disabled = false; }
     });
 
-    document.getElementById("admin-logout").addEventListener("click", () => {
-      dashboard.close();
-    });
+    async function closeAdminSession() {
+      // Remove private application data from the DOM even if sign-out fails.
+      applicationList.replaceChildren();
+      document.getElementById("total-count").textContent = "0";
+      document.getElementById("pending-count").textContent = "0";
+      try { await backend.signOut(); } catch (error) { console.error("Sign out failed", error); }
+    }
+    document.getElementById("admin-logout").addEventListener("click", () => dashboard.close());
+    dashboard.addEventListener("close", closeAdminSession);
 
     statusFilter.addEventListener("change", renderApplications);
 
@@ -1008,18 +990,6 @@
 
       wrapper.append(heading, content);
       return wrapper;
-    }
-
-    function updateApplication(id, updates) {
-      const applications = readList(APPLICATIONS_KEY);
-      const application = applications.find((item) => item.id === id);
-
-      if (!application) {
-        throw new Error("Application not found.");
-      }
-
-      Object.assign(application, updates);
-      writeList(APPLICATIONS_KEY, applications);
     }
 
     function emailLink(application, type) {
@@ -1059,13 +1029,13 @@
       );
     }
 
-    function renderApplications() {
+    async function renderApplications() {
       applicationList.replaceChildren();
 
       let applications;
 
       try {
-        applications = readList(APPLICATIONS_KEY);
+        applications = await backend.listApplications();
       } catch (error) {
         applicationList.append(
           createElement("p", "text-sm text-red-600", "Could not load applications.")
@@ -1073,8 +1043,8 @@
         return;
       }
 
+      if (!dashboard.open) return;
       document.getElementById("total-count").textContent = applications.length;
-
       document.getElementById("pending-count").textContent =
         applications.filter((item) => item.status === "Pending").length;
 
@@ -1256,7 +1226,7 @@
 
         saveButton.type = "button";
 
-        saveButton.addEventListener("click", () => {
+        saveButton.addEventListener("click", async () => {
           const scoreValue = scoreInput.value.trim();
 
           if (
@@ -1273,13 +1243,13 @@
           }
 
           try {
-            updateApplication(application.id, {
+            await backend.updateReview(application.id, {
               status: statusSelect.value,
               practiceScore: scoreValue,
               notes: notesInput.value.trim()
             });
 
-            renderApplications();
+            await renderApplications();
           } catch (error) {
             window.alert("Could not save this review.");
           }
@@ -1322,21 +1292,10 @@
 
         deleteButton.type = "button";
 
-        deleteButton.addEventListener("click", () => {
-          if (!window.confirm("Delete this demo application?")) return;
-
-          try {
-            const current = readList(APPLICATIONS_KEY);
-
-            writeList(
-              APPLICATIONS_KEY,
-              current.filter((item) => item.id !== application.id)
-            );
-
-            renderApplications();
-          } catch (error) {
-            window.alert("Could not delete this application.");
-          }
+        deleteButton.addEventListener("click", async () => {
+          if (!window.confirm("Delete this application?")) return;
+          try { await backend.deleteApplication(application.id); await renderApplications(); }
+          catch (error) { window.alert("Could not delete this application."); }
         });
 
         editArea.append(
@@ -1371,8 +1330,7 @@
       sponsorTrack.scrollTo({left: sponsorTrack.scrollLeft >= max - 2 ? 0 : Math.min(max, sponsorTrack.scrollLeft + 240), behavior: "smooth"});
     }, 4000);
 
-    // Team profiles are a local demonstration, like the existing sponsor editor.
-    const TEAM_KEY = "levelup-team-v1";
+    // Shared team profiles.
     const teamForm = document.getElementById("team-form");
     const teamList = document.getElementById("team-admin-list");
     const teamError = document.getElementById("team-error");
@@ -1387,16 +1345,16 @@
       if (!name || !role || !bio) { teamError.textContent = "Please fill in the name, role, and bio."; return; }
       if (file && (!["image/png", "image/jpeg", "image/webp"].includes(file.type) || file.size > 500 * 1024)) { teamError.textContent = "Use a PNG, JPG, or WebP image under 500 KB."; return; }
       try {
-        const team = readList(TEAM_KEY);
+        const team = await backend.listTeam();
         const previous = team.find(member => member.id === id);
-        const member = { id: id || makeId(), name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
-        const updated = previous ? team.map(item => item.id === id ? member : item) : [...team, member];
-        writeList(TEAM_KEY, updated); teamForm.reset(); document.getElementById("team-id").value = ""; renderTeamAdmin();
-      } catch (error) { teamError.textContent = "Could not save this profile. Browser storage may be full."; }
+        const member = { id: id || undefined, name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
+        await backend.saveTeamMember(member);
+        teamForm.reset(); document.getElementById("team-id").value = ""; await renderTeamAdmin();
+      } catch (error) { teamError.textContent = "Could not save this profile."; }
     });
-    function renderTeamAdmin() {
+    async function renderTeamAdmin() {
       teamList.replaceChildren();
-      let team; try { team = readList(TEAM_KEY); } catch { teamList.textContent = "Could not load team profiles."; return; }
+      let team; try { team = await backend.listTeam(); } catch { teamList.textContent = "Could not load team profiles."; return; }
       if (!team.length) { teamList.textContent = "No team members added yet."; return; }
       team.forEach(member => {
         const row = document.createElement("div"); row.className = "flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-3 dark:border-slate-700";
@@ -1405,7 +1363,7 @@
         const edit = document.createElement("button"); edit.type = "button"; edit.className = "text-blue-600 font-semibold"; edit.textContent = "Edit";
         edit.addEventListener("click", () => { document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
         const remove = document.createElement("button"); remove.type = "button"; remove.className = "text-red-600 font-semibold"; remove.textContent = "Remove";
-        remove.addEventListener("click", () => { if (!confirm("Remove this team member from this browser?")) return; try { writeList(TEAM_KEY, readList(TEAM_KEY).filter(item => item.id !== member.id)); renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
+        remove.addEventListener("click", async () => { if (!confirm("Remove this team member?")) return; try { await backend.deleteTeamMember(member.id); await renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
         buttons.append(edit, remove); row.append(label, buttons); teamList.append(row);
       });
     }
@@ -1478,16 +1436,7 @@
 
       try {
         const image = await readFileAsDataUrl(file);
-        const sponsors = readList(SPONSORS_KEY);
-
-        sponsors.push({
-          id: makeId(),
-          name,
-          url,
-          image
-        });
-
-        writeList(SPONSORS_KEY, sponsors);
+        await backend.saveSponsor({ name, url, image });
 
         sponsorForm.reset();
         renderSponsors();
@@ -1500,13 +1449,13 @@
       }
     });
 
-    function renderSponsors() {
+    async function renderSponsors() {
       sponsorTrack.replaceChildren();
 
       let sponsors;
 
       try {
-        sponsors = readList(SPONSORS_KEY);
+        sponsors = await backend.listSponsors();
       } catch (error) {
         sponsorEmpty.textContent = "Sponsor information could not be loaded.";
         sponsorEmpty.classList.remove("hidden");
@@ -1550,13 +1499,13 @@
       });
     }
 
-    function renderSponsorAdmin() {
+    async function renderSponsorAdmin() {
       sponsorAdminList.replaceChildren();
 
       let sponsors;
 
       try {
-        sponsors = readList(SPONSORS_KEY);
+        sponsors = await backend.listSponsors();
       } catch (error) {
         sponsorAdminList.append(
           createElement("p", "text-sm text-red-600", "Could not load sponsors.")
@@ -1607,22 +1556,10 @@
 
         remove.type = "button";
 
-        remove.addEventListener("click", () => {
-          if (!window.confirm("Remove this sponsor from the demo?")) return;
-
-          try {
-            const current = readList(SPONSORS_KEY);
-
-            writeList(
-              SPONSORS_KEY,
-              current.filter((item) => item.id !== sponsor.id)
-            );
-
-            renderSponsors();
-            renderSponsorAdmin();
-          } catch (error) {
-            window.alert("Could not remove this sponsor.");
-          }
+        remove.addEventListener("click", async () => {
+          if (!window.confirm("Remove this sponsor?")) return;
+          try { await backend.deleteSponsor(sponsor.id); await Promise.all([renderSponsors(), renderSponsorAdmin()]); }
+          catch (error) { window.alert("Could not remove this sponsor."); }
         });
 
         row.append(left, remove);
@@ -1638,25 +1575,9 @@
       sponsorTrack.scrollBy({ left: 260, behavior: "smooth" });
     });
 
-    function renderDashboard() {
-      renderApplications();
-      renderSponsorAdmin();
-      renderTeamAdmin();
+    async function renderDashboard() {
+      await Promise.all([renderApplications(), renderSponsorAdmin(), renderTeamAdmin()]);
     }
-    
-    window.addEventListener("storage", (event) => {
-      if (event.key === SPONSORS_KEY) {
-        renderSponsors();
-
-        if (dashboard.open) {
-          renderSponsorAdmin();
-        }
-      }
-
-      if (event.key === APPLICATIONS_KEY && dashboard.open) {
-        renderApplications();
-      }
-    });
 
     renderSponsors();
   </script>

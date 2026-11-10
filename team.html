@@ -17,12 +17,16 @@
     <div class="mt-16 border-t border-slate-700 pt-10"><div id="team-list" class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="text-slate-400">Team profiles are coming soon.</p></div>
   </main>
   <footer class="bg-[#0b0c10] px-6 py-12 text-slate-300"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="font-bold text-white">The LevelUp Fund<span class="text-blue-400">.</span></p><p class="mt-3 max-w-sm text-sm leading-6 text-slate-400">Helping students pursue technology certifications by reducing the cost of exam fees.</p></div><div class="flex flex-wrap gap-6 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
-  <script>
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createSharedAdmin } from "./src/shared-admin.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
+    const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
     const list = document.getElementById('team-list');
     const empty = document.getElementById('team-empty');
-    function renderTeam() {
+    async function renderTeam() {
       list.replaceChildren(); let team;
-      try { team = JSON.parse(localStorage.getItem('levelup-team-v1') || '[]'); if (!Array.isArray(team)) throw Error(); }
+      try { team = await backend.listTeam(); }
       catch { empty.textContent = 'Team profiles could not be loaded.'; empty.hidden = false; return; }
       empty.hidden = team.length > 0;
       team.forEach(member => {
@@ -36,7 +40,6 @@
         article.append(photo, name, role, bio); list.append(article);
       });
     }
-    window.addEventListener('storage', event => { if (event.key === 'levelup-team-v1') renderTeam(); });
     renderTeam();
   </script>
 </body>
