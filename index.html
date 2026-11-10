@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
@@ -81,6 +81,34 @@
       }
     }
   </style>
+
+  <style>
+    :root{--navy:#0b2043;--blue:#2563c9;--lime:#c2e029;--paper:#f4f4f2;--line:#e3e6ea}
+    html{scroll-padding-top:6rem} body{font-family:Onest,system-ui,sans-serif;background:white}
+    :focus-visible{outline:3px solid #5790e6;outline-offset:4px}
+    .site-header{background:var(--navy);border:0;color:white;position:relative}
+    .site-header nav{max-width:none;padding:1.35rem clamp(1.3rem,4vw,4.5rem)} .site-header a{color:white}
+    .site-header #theme-toggle{border-color:#70809b;color:white}
+    .hero{background:var(--navy);color:white;position:relative;overflow:hidden;min-height:min(760px,88vh);padding:clamp(4rem,8vw,8rem) clamp(1.3rem,5vw,5.5rem) 3rem}
+    .hero:before{content:"";position:absolute;width:45rem;height:45rem;right:-12rem;top:-17rem;border:1px solid #ffffff21;border-radius:50%;box-shadow:0 0 0 5rem #ffffff08,0 0 0 10rem #ffffff06}
+    .hero-top{position:relative;z-index:1}.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+    .hero h1{max-width:14ch;font-size:clamp(3.15rem,8.8vw,9rem);line-height:.91;letter-spacing:-.075em;text-transform:uppercase;font-weight:800}
+    .hero h1 span{color:#a5c6ff}.hero-bottom{position:relative;display:grid;gap:2.5rem;margin-top:clamp(3rem,7vw,7rem);align-items:end}
+    .hero-copy{max-width:29rem;font-size:1.05rem;line-height:1.7;color:#d7e2f3}.pill{display:inline-flex;align-items:center;justify-content:center;gap:1rem;border-radius:999px;padding:1rem 1.4rem;font-size:.85rem;font-weight:700;transition:transform .2s ease,background .2s ease}.pill:hover{transform:translateY(-2px)}.pill-light{background:#fff;color:#0b2043}.pill-line{border:1px solid #ffffff80;color:white}
+    .hero-card{position:relative;justify-self:end;width:min(100%,24rem);padding:1.6rem;background:#e5edfa;color:#0b2043;border-radius:1.25rem;transform:rotate(3deg);box-shadow:0 20px 50px #0003}.hero-card .card-art{height:5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #0b204333}.hero-card strong{font-size:2.4rem;letter-spacing:-.07em}.hero-card .dot{width:2rem;height:2rem;border-radius:50%;background:var(--lime)}
+    @media(min-width:768px){.hero-bottom{grid-template-columns:1fr 1fr}} @media(max-width:767px){.hero{min-height:auto}.hero-card{transform:rotate(1deg);justify-self:stretch}.hero h1{font-size:clamp(3rem,12vw,5rem)}}
+    .editorial{padding:clamp(5rem,9vw,9rem) clamp(1rem,4vw,4rem);overflow:hidden}.editorial-inner{max-width:80rem;margin:auto}.editorial h2,.process h2,.faq h2{font-size:clamp(2.7rem,6vw,6rem);line-height:.98;letter-spacing:-.06em;font-weight:800}.editorial .ghost{color:#dce0e6;text-transform:uppercase;font-size:clamp(3rem,10vw,10rem);line-height:.9;letter-spacing:-.075em;font-weight:800;white-space:nowrap}.editorial-copy{display:grid;gap:2rem;margin-top:3rem}.editorial-copy p{max-width:35rem;font-size:1.15rem;line-height:1.7;color:#596474}.editorial-tag{border-left:3px solid var(--blue);padding-left:1.25rem;font-size:.9rem;font-weight:600;line-height:1.7}
+    @media(min-width:768px){.editorial-copy{grid-template-columns:2fr 1fr;align-items:end}}
+    .process{background:#f4f4f2;padding:clamp(4rem,7vw,7rem) clamp(1rem,4vw,4rem)}.process-inner{max-width:80rem;margin:auto}.process-layout{display:grid;gap:3rem}.process-list{border-top:1px solid #ccd0d5}.process-row{display:grid;grid-template-columns:3rem 1fr;gap:1rem;padding:1.5rem 0;border-bottom:1px solid #ccd0d5}.process-row span{color:#2563c9;font-size:.8rem;font-weight:700}.process-row h3{font-size:1.2rem;font-weight:700;letter-spacing:-.03em}.process-row p{margin-top:.6rem;max-width:30rem;color:#5f6875;line-height:1.65;font-size:.92rem}@media(min-width:900px){.process-layout{grid-template-columns:1fr 1fr;gap:5rem}}
+    .dark .process{background:#172237}.dark .process-row p{color:#c1cad9}.dark .process-row{border-color:#516077}.dark .process-list{border-color:#516077}.dark .editorial-copy p{color:#c1cad9}.dark .editorial .ghost{color:#394963}
+    #rules{background:var(--navy);color:white} #rules h2{font-size:clamp(2.7rem,5vw,5rem);line-height:1;letter-spacing:-.06em} #rules p:not([class*=uppercase]){color:#d2ddec} #rules article{border:0;border-bottom:1px solid #ffffff30;border-radius:0;padding-left:0;padding-right:0} #rules .text-blue-600{color:#a5c6ff}
+    #apply h2{font-size:clamp(2.7rem,5vw,5rem);line-height:1;letter-spacing:-.06em} #apply form{border-radius:1.5rem;box-shadow:none} #apply button[type=submit]{border-radius:999px}
+    #sponsors{border:0;background:#f4f4f2} .dark #sponsors{background:#172237}
+    .faq{padding:clamp(4rem,7vw,7rem) clamp(1rem,4vw,4rem)}.faq-inner{max-width:80rem;margin:auto;display:grid;gap:3rem}.faq details{border-bottom:1px solid #d8dce2;padding:1.4rem 0}.faq summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:'+';font-size:1.5rem;line-height:1}.faq details[open] summary:after{content:'−'}.faq details p{max-width:38rem;color:#647080;line-height:1.7;margin-top:1rem}.dark .faq details p{color:#c1cad9}@media(min-width:900px){.faq-inner{grid-template-columns:1fr 1fr;gap:5rem}}
+    footer .footer-cta{font-size:clamp(2.6rem,6vw,6rem);line-height:.95;letter-spacing:-.06em;font-weight:800;color:white;max-width:12ch}
+    .mobile-menu{max-width:none;max-height:none;width:100%;height:100%;padding:2rem;background:var(--navy);color:white}.mobile-menu::backdrop{background:#0b2043}.mobile-menu a{display:block;font-size:clamp(2rem,9vw,4rem);font-weight:700;letter-spacing:-.05em;margin:1.3rem 0}
+    @media(prefers-reduced-motion:no-preference){.hero h1{animation:rise .8s both}@keyframes rise{from{opacity:0;transform:translateY(1.4rem)}to{opacity:1;transform:translateY(0)}}}
+  </style>
 </head>
 
 <body class="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
@@ -93,7 +121,7 @@
   </a>
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
+  <header class="site-header z-40">
     <nav
       class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8"
       aria-label="Main navigation"
@@ -116,6 +144,8 @@
           How it works
         </a>
 
+        <a href="team.html" class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 sm:inline">Our team</a>
+
         <a
           href="#sponsors"
           class="hidden text-sm font-medium text-slate-600 hover:text-blue-600 dark:text-slate-300 sm:inline"
@@ -132,151 +162,42 @@
           ◐
         </button>
 
+        <button id="mobile-menu-open" type="button" class="rounded-full border border-white/50 px-4 py-2 text-sm md:hidden" aria-haspopup="dialog">Menu</button>
         <a
           href="#apply"
-          class="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
+          class="hidden rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-slate-200 sm:inline-flex"
         >
           Apply now
         </a>
       </div>
     </nav>
+    <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title">
+      <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><button id="mobile-menu-close" type="button" class="rounded-full border border-white/50 px-4 py-2">Close</button></div>
+      <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#apply">Apply ↗</a></nav>
+    </dialog>
   </header>
 
   <main id="main">
 
     <!-- Hero -->
-    <section class="relative overflow-hidden">
-      <div class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200/40 blur-3xl dark:bg-blue-700/20"></div>
-
-      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
-        <div>
-          <p class="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
-            Built for students with big goals
-          </p>
-
-          <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-            Level Up Your Tech Career<span class="text-blue-600 dark:text-blue-400">—Zero Exam Fees.</span>
-          </h1>
-
-          <p class="mt-6 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-            The LevelUp Fund helps students cover professional technology
-            certification exam fees, including CompTIA, AWS, Microsoft, and
-            other exams, through a nonprofit grant.
-          </p>
-
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#apply"
-              class="rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-bold text-white hover:bg-blue-700"
-            >
-              Apply for a Grant →
-            </a>
-
-            <a
-              href="#how-it-works"
-              class="rounded-xl border border-slate-300 px-6 py-4 text-center text-sm font-bold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-900"
-            >
-              Learn How It Works
-            </a>
-          </div>
-        </div>
-
-        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-xl shadow-slate-200/40 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none">
-          <div class="flex items-center gap-4">
-            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl text-blue-600 dark:bg-blue-950">
-              ✓
-            </span>
-
-            <div>
-              <p class="font-bold">Your next credential</p>
-              <p class="text-sm text-slate-500 dark:text-slate-400">
-                One step closer to your goals
-              </p>
-            </div>
-          </div>
-
-          <div class="my-6 h-px bg-slate-100 dark:bg-slate-800"></div>
-
-          <p class="text-xs font-bold uppercase tracking-widest text-slate-500">
-            Certification paths
-          </p>
-
-          <div class="mt-4 flex flex-wrap gap-2">
-            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">CompTIA</span>
-            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">AWS</span>
-            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">Microsoft</span>
-            <span class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold dark:bg-slate-800">And more</span>
-          </div>
-
-          <div class="mt-6 rounded-2xl bg-blue-50 p-5 dark:bg-blue-950/50">
-            <p class="font-semibold text-blue-900 dark:text-blue-200">
-              You bring the ambition.
-            </p>
-
-            <p class="mt-1 text-sm leading-6 text-blue-800 dark:text-blue-300">
-              We'll follow up with the next steps, including a practice test.
-            </p>
-          </div>
-        </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-top"><p class="eyebrow mb-8 text-blue-200">For the skills you're building &nbsp; / &nbsp; The LevelUp Fund</p>
+        <h1 id="hero-title">Your next<br>step <span>starts</span><br>here.</h1>
+      </div>
+      <div class="hero-bottom">
+        <div><p class="hero-copy">Certification exams can open doors. We help students take the next step by covering eligible tech exam fees.</p><div class="mt-7 flex flex-wrap gap-3"><a class="pill pill-light" href="#apply">Apply for a grant <span aria-hidden="true">↗</span></a><a class="pill pill-line" href="#how-it-works">How it works <span aria-hidden="true">↓</span></a></div><p class="mt-6 text-xs text-blue-200">Demo website · No applications are submitted.</p></div>
+        <div class="hero-card" aria-label="Certification paths include CompTIA, AWS, and Microsoft"><div class="card-art"><strong>LEVEL<br>UP<span style="color:#2563c9">.</span></strong><span class="dot" aria-hidden="true"></span></div><p class="eyebrow mt-5" style="color:#416389">The opportunity</p><p class="mt-2 text-xl font-bold leading-tight">Big goals.<br>One exam at a time.</p><p class="mt-4 text-sm leading-6" style="color:#49607d">CompTIA &nbsp; / &nbsp; AWS &nbsp; / &nbsp; Microsoft &amp; more</p></div>
       </div>
     </section>
+    <section class="editorial" aria-label="Our mission"><div class="editorial-inner"><p class="eyebrow text-blue-700 dark:text-blue-400">A little support goes a long way</p><div class="mt-8" aria-hidden="true"><div class="ghost">BIG AMBITION.</div><div class="ghost">REAL ACCESS.</div></div><div class="editorial-copy"><div><h2>Skills deserve<br>a chance.</h2><p class="mt-6">A certification can make what you know visible. The LevelUp Fund is built around a simple idea: the exam fee shouldn't be the thing standing in your way.</p></div><div class="editorial-tag">A student-focused microfund<br>for professional IT and technology certification exams.</div></div></div></section>
 
     <!-- How it works -->
-    <section
-      id="how-it-works"
-      class="scroll-mt-24 bg-slate-50 py-20 dark:bg-slate-900/50"
-    >
-      <div class="mx-auto max-w-7xl px-5 sm:px-8">
-        <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-          A clear path forward
-        </p>
-
-        <h2 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-          Four steps to exam day.
-        </h2>
-
-        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="text-sm font-bold text-blue-600">01</span>
-            <h3 class="mt-4 text-lg font-bold">Apply &amp; verify</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Tell us about yourself and the certification exam you want to take.
-              We'll follow up about identity and testing-profile verification.
-            </p>
-          </article>
-
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="text-sm font-bold text-blue-600">02</span>
-            <h3 class="mt-4 text-lg font-bold">Take a practice test</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              We'll contact you with practice-test instructions and review your
-              score. The readiness benchmark is typically 70–80%, depending
-              on the exam.
-            </p>
-          </article>
-
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="text-sm font-bold text-blue-600">03</span>
-            <h3 class="mt-4 text-lg font-bold">Arrange your exam</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              If approved, we'll contact you to arrange your exam using an
-              exam voucher. No cash is transferred to applicants.
-            </p>
-          </article>
-
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
-            <span class="text-sm font-bold text-blue-600">04</span>
-            <h3 class="mt-4 text-lg font-bold">Report &amp; pay it forward</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Share your official score report after the exam. An alumni
-              pledge to help future students is optional.
-            </p>
-          </article>
-
-        </div>
-      </div>
-    </section>
+    <section id="how-it-works" class="process scroll-mt-24"><div class="process-inner process-layout"><div><p class="eyebrow text-blue-700 dark:text-blue-400">The path forward</p><h2 class="mt-5">From ambition<br>to exam day.</h2><p class="mt-6 max-w-md text-base leading-7 text-slate-600 dark:text-slate-300">A clear process to help prepared students take their next step.</p></div><div class="process-list">
+      <article class="process-row"><span>01</span><div><h3>Apply &amp; verify</h3><p>Tell us about your exam and goals. We'll follow up about identity and testing-profile verification.</p></div></article>
+      <article class="process-row"><span>02</span><div><h3>Take a practice test</h3><p>We'll send practice-test instructions and review your score. The benchmark is typically 70–80%, depending on the exam.</p></div></article>
+      <article class="process-row"><span>03</span><div><h3>Arrange your exam</h3><p>If approved, we'll contact you to arrange your exam using an exam voucher. No cash is transferred to applicants.</p></div></article>
+      <article class="process-row"><span>04</span><div><h3>Report &amp; pay it forward</h3><p>Share your official score report after the exam. An alumni pledge to help future students is optional.</p></div></article>
+    </div></div></section>
 
     <!-- Rules -->
     <section id="rules" class="scroll-mt-24 py-20">
@@ -321,64 +242,6 @@
             </p>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- Sponsors -->
-    <section
-      id="sponsors"
-      class="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/50"
-    >
-      <div class="mx-auto max-w-7xl px-5 sm:px-8">
-        <div class="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              Our supporters
-            </p>
-
-            <h2 class="mt-3 text-3xl font-bold tracking-tight">
-              Made possible together.
-            </h2>
-
-            <p class="mt-3 text-slate-600 dark:text-slate-400">
-              Meet the sponsors supporting the next generation of tech talent.
-            </p>
-          </div>
-
-          <div class="flex gap-2">
-            <button
-              id="sponsors-prev"
-              type="button"
-              aria-label="Show previous sponsors"
-              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
-            >
-              ←
-            </button>
-
-            <button
-              id="sponsors-next"
-              type="button"
-              aria-label="Show next sponsors"
-              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="sponsor-track"
-          class="sponsor-track mt-8 flex gap-4 overflow-x-auto pb-4"
-          aria-label="Sponsors"
-        ></div>
-
-        <p
-          id="sponsor-empty"
-          class="mt-6 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400"
-        >
-          Sponsor logos added in the demo admin dashboard will appear here
-          in this browser.
-        </p>
       </div>
     </section>
 
@@ -480,10 +343,7 @@
 
             <div>
               <label for="candidate-id" class="mb-2 block text-sm font-semibold">
-                Candidate ID
-                <span class="font-normal text-slate-500">
-                  (Pearson VUE or other testing profile)
-                </span>
+                Who administers or provides the exam?
               </label>
 
               <input
@@ -491,7 +351,7 @@
                 type="text"
                 maxlength="100"
                 required
-                placeholder="Sample candidate ID"
+                placeholder="For example, College Board"
                 class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
@@ -517,19 +377,26 @@
 
             <div>
               <label for="student-info" class="mb-2 block text-sm font-semibold">
-                Tell us about your student status and goals
+                Why should you receive this grant? (fewer than 500 words)
               </label>
 
               <textarea
                 id="student-info"
-                rows="4"
-                maxlength="1500"
+                rows="6"
+                maxlength="10000"
                 required
-                placeholder="Share a little about what you're studying and your goals."
+                placeholder="Tell us how this grant would help you and why this exam matters to you."
                 class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               ></textarea>
 
+              <p id="essay-count" class="mt-2 text-xs text-slate-500" aria-live="polite">0 / 499 words</p>
               <p id="student-info-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
+              <label for="grant-amount" class="mb-2 block text-sm font-semibold">How much funding do you need? (USD)</label>
+              <input id="grant-amount" type="number" min="0.01" step="0.01" required placeholder="For example, 250.00" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+              <p id="grant-amount-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div class="border-t border-slate-200 pt-5 dark:border-slate-700">
@@ -566,45 +433,83 @@
       </div>
     </section>
 
+    <!-- Frequently asked questions -->
+    <section id="faq" class="faq scroll-mt-24"><div class="faq-inner"><div><p class="eyebrow text-blue-700 dark:text-blue-400">The details</p><h2 class="mt-5">Good questions.<br>Clear answers.</h2></div><div class="border-t border-slate-300 dark:border-slate-700">
+      <details><summary>What does the fund help cover?</summary><p>The fund is intended to cover eligible professional IT and technology certification exam fees. Applications are subject to review and available funding.</p></details>
+      <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently a demo and does not submit applications.</p></details>
+      <details><summary>What if I need to change my exam date?</summary><p>Give at least 48 hours' notice and follow any additional requirements from your testing provider.</p></details>
+      <details><summary>Do I need to pass the exam to report my score?</summary><p>No. Under the displayed grant agreement, an official score report is requested within 14 days regardless of the result.</p></details>
+      <details><summary>Is the website accepting real applications?</summary><p>No. The application and admin dashboard are demonstrations stored in your browser. Please use sample information only.</p></details>
+    </div></div></section>
+
+    <!-- Sponsors -->
+    <section
+      id="sponsors"
+      class="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/50"
+    >
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
+              Our supporters
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold tracking-tight">
+              Made possible together.
+            </h2>
+
+            <p class="mt-3 text-slate-600 dark:text-slate-400">
+              Meet the sponsors supporting the next generation of tech talent.
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <button
+              id="sponsors-prev"
+              type="button"
+              aria-label="Show previous sponsors"
+              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
+            >
+              ←
+            </button>
+
+            <button
+              id="sponsors-next"
+              type="button"
+              aria-label="Show next sponsors"
+              class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-white dark:border-slate-700 dark:hover:bg-slate-800"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="sponsor-track"
+          class="sponsor-track mt-8 flex gap-4 overflow-x-auto pb-4"
+          aria-label="Sponsors"
+        ></div>
+
+        <p
+          id="sponsor-empty"
+          class="mt-6 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400"
+        >
+          Sponsor logos added in the demo admin dashboard will appear here
+          in this browser.
+        </p>
+      </div>
+    </section>
+
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200 py-10 dark:border-slate-800">
-    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-5 sm:px-8 lg:flex-row">
-      <div>
-        <p class="font-bold">
-          The LevelUp Fund<span class="text-blue-600">.</span>
-        </p>
-
-        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).
-        </p>
-      </div>
-
-      <div class="flex flex-wrap gap-5 text-sm font-medium text-slate-600 dark:text-slate-400">
-        <!-- Replace with your repository URL. -->
-        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
-          GitHub
-        </a>
-
-        <a href="https://hcb.hackclub.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600">
-          Hack Club Bank
-        </a>
-
-        <!-- Replace with your real support email. -->
-        <a href="mailto:support@example.com" class="hover:text-blue-600">
-          Contact support
-        </a>
-
-        <button id="open-admin" type="button" class="hover:text-blue-600">
-          Admin login
-        </button>
-      </div>
-    </div>
-
-    <div class="mx-auto mt-8 max-w-7xl px-5 text-xs text-slate-400 sm:px-8">
-      © <span id="year"></span> The LevelUp Fund.
-    </div>
+  <footer class="bg-slate-950 py-16 text-slate-300">
+    <div class="mx-auto max-w-7xl px-5 pb-14 sm:px-8"><p class="eyebrow text-blue-300">Your next step</p><div class="mt-5 flex flex-wrap items-end justify-between gap-8"><p class="footer-cta">What could you do next?</p><a href="#apply" class="pill pill-light">Explore the application ↗</a></div></div>
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+      <div><a href="#" class="text-xl font-bold tracking-tight text-white">The LevelUp Fund<span class="text-blue-400">.</span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">Helping students pursue technology certifications by reducing the cost of exam fees.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification names are trademarks of their respective owners.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
+      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="#apply" class="hover:text-white">Apply</a></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><a href="https://github.com/SSreeramsetty11/LevelUp-Fund" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button></div></div>
+    </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-5 pt-6 text-xs text-slate-500 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
 
   <!-- Application confirmation -->
@@ -777,6 +682,21 @@
         <div id="application-list" class="mt-5 space-y-4"></div>
       </section>
 
+      <section class="mt-12" aria-labelledby="team-heading">
+        <h3 id="team-heading" class="text-xl font-bold">Manage the team</h3>
+        <p class="mt-2 text-sm text-slate-500">Demo only: profiles and headshots are saved in this browser and are not visible to other visitors.</p>
+        <form id="team-form" class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2">
+          <input id="team-id" type="hidden">
+          <label class="text-sm font-semibold">Name<input id="team-name" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
+          <label class="text-sm font-semibold">Role<input id="team-role" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
+          <label class="text-sm font-semibold sm:col-span-2">Bio<textarea id="team-bio" maxlength="1200" required rows="4" class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></textarea></label>
+          <label class="text-sm font-semibold sm:col-span-2">Headshot (optional; JPG, PNG, WebP, max 500 KB)<input id="team-photo" type="file" accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full text-sm"></label>
+          <p id="team-error" class="text-sm text-red-600 sm:col-span-2" role="alert"></p>
+          <div><button type="submit" class="rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white">Save team member</button></div>
+        </form>
+        <div id="team-admin-list" class="mt-4 text-sm"></div>
+      </section>
+
       <!-- Sponsor management -->
       <section class="mt-12" aria-labelledby="sponsor-manager-heading">
         <h3 id="sponsor-manager-heading" class="text-xl font-bold">
@@ -945,6 +865,24 @@
       field.addEventListener("change", () => clearFieldError(field));
     });
 
+    const essayField = document.getElementById("student-info");
+    const essayCount = document.getElementById("essay-count");
+    function countEssayWords(value) {
+      const text = value.trim();
+      return text ? text.split(/\s+/).length : 0;
+    }
+    function updateEssayCount() {
+      essayCount.textContent = `${countEssayWords(essayField.value)} / 499 words`;
+    }
+    essayField.addEventListener("input", updateEssayCount);
+
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuOpener = document.getElementById("mobile-menu-open");
+    menuOpener.addEventListener("click", () => { mobileMenu.showModal(); document.body.style.overflow = "hidden"; document.getElementById("mobile-menu-close").focus(); });
+    document.getElementById("mobile-menu-close").addEventListener("click", () => mobileMenu.close());
+    mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => mobileMenu.close()));
+    mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
+
     /* Theme */
     const themeToggle = document.getElementById("theme-toggle");
 
@@ -986,6 +924,7 @@
       const examName = document.getElementById("exam-name");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
+      const amount = document.getElementById("grant-amount");
 
       let firstInvalid = null;
 
@@ -1005,9 +944,10 @@
         email.value.trim() !== "" && email.validity.valid,
         "Enter a valid email address."
       );
-      check(candidateId, candidateId.value.trim() !== "", "Enter a candidate ID.");
+      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the exam.");
       check(examName, examName.value.trim() !== "", "Enter the exam name.");
-      check(studentInfo, studentInfo.value.trim() !== "", "Tell us about your goals.");
+      check(studentInfo, countEssayWords(studentInfo.value) > 0 && countEssayWords(studentInfo.value) < 500, "Enter an essay of fewer than 500 words.");
+      check(amount, amount.value !== "" && amount.validity.valid && Number.isFinite(Number(amount.value)) && Number(amount.value) > 0, "Enter a valid amount greater than zero, with up to two decimal places.");
       check(agreement, agreement.checked, "Please agree to the grant terms.");
 
       if (firstInvalid) {
@@ -1021,9 +961,10 @@
         id: makeId(),
         name: fullName.value.trim(),
         email: email.value.trim(),
-        candidateId: candidateId.value.trim(),
+        examProvider: candidateId.value.trim(),
         exam: examName.value.trim(),
-        studentInfo: studentInfo.value.trim(),
+        essay: studentInfo.value.trim(),
+        requestedAmount: Number(amount.value),
         practiceScore: "",
         notes: "",
         status: "Pending",
@@ -1043,6 +984,7 @@
       }
 
       grantForm.reset();
+      updateEssayCount();
       successDialog.showModal();
       document.getElementById("close-success").focus();
     });
@@ -1238,10 +1180,38 @@
 
         details.append(
           detail("Email", application.email),
-          detail("Candidate ID", application.candidateId),
+          detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
-          detail("Student status and goals", application.studentInfo)
+          detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
+          detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
+
+        // Manual free-tool workflow: nothing is sent to Sapling by this site.
+        // Only the essay is copied, and only after the reviewer chooses to copy it.
+        const detector = createElement("div", "mt-5 rounded-xl bg-slate-50 p-4 dark:bg-slate-800");
+        const detectorTitle = createElement("p", "text-sm font-semibold", "Optional AI-writing check");
+        const detectorInfo = createElement("p", "mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300", "Sapling's free web tool accepts up to 2,000 characters per check. Results can be wrong and must not be used as the sole basis for a decision. Obtain appropriate permission before sharing an essay with another service.");
+        const detectorActions = createElement("div", "mt-3 flex flex-wrap items-center gap-3");
+        const copyEssay = createElement("button", "rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold dark:border-slate-600", "Copy essay");
+        copyEssay.type = "button";
+        const detectorStatus = createElement("p", "mt-2 text-xs text-slate-600 dark:text-slate-300", "");
+        detectorStatus.setAttribute("role", "status");
+        copyEssay.addEventListener("click", async () => {
+          const essay = application.essay || application.studentInfo || "";
+          if (!essay) { detectorStatus.textContent = "There is no essay to copy."; return; }
+          try {
+            await navigator.clipboard.writeText(essay);
+            detectorStatus.textContent = "Essay copied. Open Sapling and paste it there. No text has been sent automatically.";
+          } catch {
+            detectorStatus.textContent = "Could not copy automatically. Select and copy the essay above instead.";
+          }
+        });
+        const detectorLink = createElement("a", "text-xs font-semibold text-blue-700 underline dark:text-blue-400", "Open Sapling detector ↗");
+        detectorLink.href = "https://sapling.ai/ai-content-detector";
+        detectorLink.target = "_blank";
+        detectorLink.rel = "noopener noreferrer";
+        detectorActions.append(copyEssay, detectorLink);
+        detector.append(detectorTitle, detectorInfo, detectorActions, detectorStatus);
 
         const editArea = createElement(
           "div",
@@ -1429,8 +1399,60 @@
           deleteButton
         );
 
-        card.append(header, details, editArea, actions);
+        card.append(header, details, detector, editArea, actions);
         applicationList.append(card);
+      });
+    }
+
+    // Advance sponsors only when there is overflow. Pause for interaction and reduced motion.
+    let sponsorPaused = false;
+    sponsorTrack.addEventListener("mouseenter", () => sponsorPaused = true);
+    sponsorTrack.addEventListener("mouseleave", () => sponsorPaused = false);
+    sponsorTrack.addEventListener("focusin", () => sponsorPaused = true);
+    sponsorTrack.addEventListener("focusout", () => sponsorPaused = false);
+    setInterval(() => {
+      if (sponsorPaused || document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const max = sponsorTrack.scrollWidth - sponsorTrack.clientWidth;
+      if (max <= 1) return;
+      sponsorTrack.scrollTo({left: sponsorTrack.scrollLeft >= max - 2 ? 0 : Math.min(max, sponsorTrack.scrollLeft + 240), behavior: "smooth"});
+    }, 4000);
+
+    // Team profiles are a local demonstration, like the existing sponsor editor.
+    const TEAM_KEY = "levelup-team-v1";
+    const teamForm = document.getElementById("team-form");
+    const teamList = document.getElementById("team-admin-list");
+    const teamError = document.getElementById("team-error");
+    teamForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      teamError.textContent = "";
+      const name = document.getElementById("team-name").value.trim();
+      const role = document.getElementById("team-role").value.trim();
+      const bio = document.getElementById("team-bio").value.trim();
+      const file = document.getElementById("team-photo").files[0];
+      const id = document.getElementById("team-id").value;
+      if (!name || !role || !bio) { teamError.textContent = "Please fill in the name, role, and bio."; return; }
+      if (file && (!["image/png", "image/jpeg", "image/webp"].includes(file.type) || file.size > 500 * 1024)) { teamError.textContent = "Use a PNG, JPG, or WebP image under 500 KB."; return; }
+      try {
+        const team = readList(TEAM_KEY);
+        const previous = team.find(member => member.id === id);
+        const member = { id: id || makeId(), name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
+        const updated = previous ? team.map(item => item.id === id ? member : item) : [...team, member];
+        writeList(TEAM_KEY, updated); teamForm.reset(); document.getElementById("team-id").value = ""; renderTeamAdmin();
+      } catch (error) { teamError.textContent = "Could not save this profile. Browser storage may be full."; }
+    });
+    function renderTeamAdmin() {
+      teamList.replaceChildren();
+      let team; try { team = readList(TEAM_KEY); } catch { teamList.textContent = "Could not load team profiles."; return; }
+      if (!team.length) { teamList.textContent = "No team members added yet."; return; }
+      team.forEach(member => {
+        const row = document.createElement("div"); row.className = "flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-3 dark:border-slate-700";
+        const label = document.createElement("span"); label.textContent = member.name + " — " + member.role;
+        const buttons = document.createElement("div"); buttons.className = "flex gap-3";
+        const edit = document.createElement("button"); edit.type = "button"; edit.className = "text-blue-600 font-semibold"; edit.textContent = "Edit";
+        edit.addEventListener("click", () => { document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
+        const remove = document.createElement("button"); remove.type = "button"; remove.className = "text-red-600 font-semibold"; remove.textContent = "Remove";
+        remove.addEventListener("click", () => { if (!confirm("Remove this team member from this browser?")) return; try { writeList(TEAM_KEY, readList(TEAM_KEY).filter(item => item.id !== member.id)); renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
+        buttons.append(edit, remove); row.append(label, buttons); teamList.append(row);
       });
     }
 
@@ -1665,8 +1687,9 @@
     function renderDashboard() {
       renderApplications();
       renderSponsorAdmin();
+      renderTeamAdmin();
     }
-
+    
     window.addEventListener("storage", (event) => {
       if (event.key === SPONSORS_KEY) {
         renderSponsors();

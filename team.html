@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Our team | The LevelUp Fund</title>
+  <meta name="description" content="Meet the people behind the LevelUp Fund.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body{font-family:Onest,system-ui,sans-serif}</style>
+</head>
+<body class="bg-[#f7f7f5] text-slate-950 antialiased">
+  <header class="bg-[#0b2043] text-white"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-6"><a href="index.html" class="text-lg font-bold tracking-tight">The LevelUp Fund<span class="text-blue-600">.</span></a><a href="index.html#apply" class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950">Apply for a grant</a></nav></header>
+  <main class="mx-auto min-h-[65vh] max-w-7xl px-6 pb-24 pt-20 sm:pt-28">
+    <p class="text-xs font-bold uppercase tracking-[.2em] text-blue-700">The people behind the fund</p>
+    <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="max-w-xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">People invested in your next step.</h1><p class="max-w-lg text-lg leading-8 text-slate-600">Meet the people working to make technology certifications more accessible to students.</p></div>
+    <div class="mt-16 border-t border-slate-300 pt-10"><div id="team-list" class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="text-slate-500">Team profiles are coming soon.</p></div>
+  </main>
+  <footer class="bg-[#0b2043] px-6 py-12 text-slate-300"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="font-bold text-white">The LevelUp Fund<span class="text-blue-400">.</span></p><p class="mt-3 max-w-sm text-sm leading-6 text-slate-400">Helping students pursue technology certifications by reducing the cost of exam fees.</p></div><div class="flex flex-wrap gap-6 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
+  <script>
+    const list = document.getElementById('team-list');
+    const empty = document.getElementById('team-empty');
+    function renderTeam() {
+      list.replaceChildren(); let team;
+      try { team = JSON.parse(localStorage.getItem('levelup-team-v1') || '[]'); if (!Array.isArray(team)) throw Error(); }
+      catch { empty.textContent = 'Team profiles could not be loaded.'; empty.hidden = false; return; }
+      empty.hidden = team.length > 0;
+      team.forEach(member => {
+        const article = document.createElement('article');
+        const photo = document.createElement('div'); photo.className = 'aspect-[4/3] overflow-hidden bg-slate-200';
+        if (member.image) { const img = document.createElement('img'); img.src = member.image; img.alt = member.name; img.className = 'h-full w-full object-cover'; photo.append(img); }
+        else { const placeholder = document.createElement('div'); placeholder.className = 'flex h-full items-center justify-center text-5xl font-bold text-slate-400'; placeholder.setAttribute('aria-hidden','true'); placeholder.textContent = (member.name || '?').charAt(0).toUpperCase(); photo.append(placeholder); }
+        const name = document.createElement('h2'); name.className = 'mt-5 text-xl font-bold'; name.textContent = member.name;
+        const role = document.createElement('p'); role.className = 'mt-1 text-sm font-semibold text-blue-700'; role.textContent = member.role;
+        const bio = document.createElement('p'); bio.className = 'mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-600'; bio.textContent = member.bio;
+        article.append(photo, name, role, bio); list.append(article);
+      });
+    }
+    window.addEventListener('storage', event => { if (event.key === 'levelup-team-v1') renderTeam(); });
+    renderTeam();
+  </script>
+</body>
+</html>
