@@ -21,19 +21,11 @@
       }
     };
 
-    try {
-      const savedTheme = localStorage.getItem("levelup-theme");
-
-      if (
-        savedTheme === "dark" ||
-        (!savedTheme &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      }
-    } catch (error) {
-      // The page still works if theme storage is unavailable.
-    }
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    document.documentElement.classList.toggle("dark", systemTheme.matches);
+    systemTheme.addEventListener("change", (event) => {
+      document.documentElement.classList.toggle("dark", event.matches);
+    });
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,7 +80,6 @@
     :focus-visible{outline:3px solid #5790e6;outline-offset:4px}
     .site-header{background:var(--navy);border:0;color:white;position:relative}
     .site-header nav{max-width:none;padding:1.35rem clamp(1.3rem,4vw,4.5rem)} .site-header a{color:white}
-    .site-header #theme-toggle{border-color:#70809b;color:white}
     .hero{background:var(--navy);color:white;position:relative;overflow:hidden;min-height:min(760px,88vh);padding:clamp(4rem,8vw,8rem) clamp(1.3rem,5vw,5.5rem) 3rem}
     .hero:before{content:"";position:absolute;width:45rem;height:45rem;right:-12rem;top:-17rem;border:1px solid #ffffff21;border-radius:50%;box-shadow:0 0 0 5rem #ffffff08,0 0 0 10rem #ffffff06}
     .hero-top{position:relative;z-index:1}.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
@@ -153,14 +144,6 @@
           Sponsors
         </a>
 
-        <button
-          id="theme-toggle"
-          type="button"
-          class="rounded-xl border border-slate-300 px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
-          aria-label="Switch color theme"
-        >
-          ◐
-        </button>
 
         <button id="mobile-menu-open" type="button" class="rounded-full border border-white/50 px-4 py-2 text-sm md:hidden" aria-haspopup="dialog">Menu</button>
         <a
@@ -882,32 +865,6 @@
     document.getElementById("mobile-menu-close").addEventListener("click", () => mobileMenu.close());
     mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => mobileMenu.close()));
     mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
-
-    /* Theme */
-    const themeToggle = document.getElementById("theme-toggle");
-
-    function updateThemeLabel() {
-      const dark = document.documentElement.classList.contains("dark");
-
-      themeToggle.setAttribute(
-        "aria-label",
-        dark ? "Switch to light theme" : "Switch to dark theme"
-      );
-    }
-
-    updateThemeLabel();
-
-    themeToggle.addEventListener("click", () => {
-      const dark = document.documentElement.classList.toggle("dark");
-
-      try {
-        localStorage.setItem("levelup-theme", dark ? "dark" : "light");
-      } catch (error) {
-        // Theme still changes for the current page.
-      }
-
-      updateThemeLabel();
-    });
 
     /* Application submission */
     grantForm.addEventListener("submit", (event) => {
