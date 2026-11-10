@@ -424,10 +424,7 @@
 
             <div>
               <label for="candidate-id" class="mb-2 block text-sm font-semibold">
-                Candidate ID
-                <span class="font-normal text-slate-500">
-                  (Pearson VUE or other testing profile)
-                </span>
+                Who administers or provides the exam?
               </label>
 
               <input
@@ -435,7 +432,7 @@
                 type="text"
                 maxlength="100"
                 required
-                placeholder="Sample candidate ID"
+                placeholder="For example, College Board"
                 class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               />
 
@@ -461,19 +458,26 @@
 
             <div>
               <label for="student-info" class="mb-2 block text-sm font-semibold">
-                Tell us about your student status and goals
+                Why should you receive this grant? (fewer than 500 words)
               </label>
 
               <textarea
                 id="student-info"
-                rows="4"
-                maxlength="1500"
+                rows="6"
+                maxlength="10000"
                 required
-                placeholder="Share a little about what you're studying and your goals."
+                placeholder="Tell us how this grant would help you and why this exam matters to you."
                 class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
               ></textarea>
 
+              <p id="essay-count" class="mt-2 text-xs text-slate-500" aria-live="polite">0 / 499 words</p>
               <p id="student-info-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
+              <label for="grant-amount" class="mb-2 block text-sm font-semibold">How much funding do you need? (USD)</label>
+              <input id="grant-amount" type="number" min="0.01" step="0.01" required placeholder="For example, 250.00" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+              <p id="grant-amount-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div class="border-t border-slate-200 pt-5 dark:border-slate-700">
@@ -932,6 +936,17 @@
       field.addEventListener("change", () => clearFieldError(field));
     });
 
+    const essayField = document.getElementById("student-info");
+    const essayCount = document.getElementById("essay-count");
+    function countEssayWords(value) {
+      const text = value.trim();
+      return text ? text.split(/\s+/).length : 0;
+    }
+    function updateEssayCount() {
+      essayCount.textContent = `${countEssayWords(essayField.value)} / 499 words`;
+    }
+    essayField.addEventListener("input", updateEssayCount);
+
     /* Theme */
     const themeToggle = document.getElementById("theme-toggle");
 
@@ -973,6 +988,7 @@
       const examName = document.getElementById("exam-name");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
+      const amount = document.getElementById("grant-amount");
 
       let firstInvalid = null;
 
@@ -992,9 +1008,10 @@
         email.value.trim() !== "" && email.validity.valid,
         "Enter a valid email address."
       );
-      check(candidateId, candidateId.value.trim() !== "", "Enter a candidate ID.");
+      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the exam.");
       check(examName, examName.value.trim() !== "", "Enter the exam name.");
-      check(studentInfo, studentInfo.value.trim() !== "", "Tell us about your goals.");
+      check(studentInfo, countEssayWords(studentInfo.value) > 0 && countEssayWords(studentInfo.value) < 500, "Enter an essay of fewer than 500 words.");
+      check(amount, amount.value !== "" && amount.validity.valid && Number.isFinite(Number(amount.value)) && Number(amount.value) > 0, "Enter a valid amount greater than zero, with up to two decimal places.");
       check(agreement, agreement.checked, "Please agree to the grant terms.");
 
       if (firstInvalid) {
@@ -1008,9 +1025,10 @@
         id: makeId(),
         name: fullName.value.trim(),
         email: email.value.trim(),
-        candidateId: candidateId.value.trim(),
+        examProvider: candidateId.value.trim(),
         exam: examName.value.trim(),
-        studentInfo: studentInfo.value.trim(),
+        essay: studentInfo.value.trim(),
+        requestedAmount: Number(amount.value),
         practiceScore: "",
         notes: "",
         status: "Pending",
@@ -1030,6 +1048,7 @@
       }
 
       grantForm.reset();
+      updateEssayCount();
       successDialog.showModal();
       document.getElementById("close-success").focus();
     });
@@ -1225,9 +1244,10 @@
 
         details.append(
           detail("Email", application.email),
-          detail("Candidate ID", application.candidateId),
+          detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
-          detail("Student status and goals", application.studentInfo)
+          detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
+          detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
 
         const editArea = createElement(
