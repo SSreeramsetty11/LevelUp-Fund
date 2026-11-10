@@ -87,12 +87,7 @@
     html{scroll-padding-top:6rem} body{font-family:Onest,system-ui,sans-serif;background:white}
     :focus-visible{outline:3px solid #5790e6;outline-offset:4px}
     .site-header{background:var(--navy);border:0;color:white;position:relative}
-<<<<<<< HEAD
-    .site-header nav{max-width:none;padding:1.35rem clamp(1.3rem,4vw,4.5rem)} .site-header a{color:white}
-    .site-header #theme-toggle{border-color:#70809b;color:white}
-=======
     .site-header nav{max-width:none;padding:1.35rem clamp(1.3rem,4vw,4.5rem)} .site-header a{color:white} .site-header a.nav-apply{color:#0b2043}
->>>>>>> 078967a9edc756275d5a0dd7432cd71433e81695
     .hero{background:var(--navy);color:white;position:relative;overflow:hidden;min-height:min(760px,88vh);padding:clamp(4rem,8vw,8rem) clamp(1.3rem,5vw,5.5rem) 3rem}
     .hero:before{content:"";position:absolute;width:45rem;height:45rem;right:-12rem;top:-17rem;border:1px solid #ffffff21;border-radius:50%;box-shadow:0 0 0 5rem #ffffff08,0 0 0 10rem #ffffff06}
     .hero-top{position:relative;z-index:1}.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
@@ -345,11 +340,27 @@
               <p id="email-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
-          
+            <div>
+              <label for="candidate-id" class="mb-2 block text-sm font-semibold">
+                Who administers this certification?
+              </label>
+
+              <input
+                id="candidate-id"
+                type="text"
+                maxlength="100"
+                required
+                placeholder="For example, College Board"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              />
+
+              <p id="candidate-id-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
 
             <div>
               <label for="exam-name" class="mb-2 block text-sm font-semibold">
-                Which certification/credentialing are you planning to take?
+                Which certification are you planning to take?
+
               </label>
 
               <input
@@ -362,6 +373,22 @@
               />
 
               <p id="exam-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
+              <label for="certification-url" class="mb-2 block text-sm font-semibold">
+                Certification website URL
+              </label>
+
+              <input
+                id="certification-url"
+                type="url"
+                required
+                placeholder="https://example.com/certification"
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              />
+
+              <p id="certification-url-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div>
@@ -911,6 +938,7 @@
       const email = document.getElementById("email");
       const candidateId = document.getElementById("candidate-id");
       const examName = document.getElementById("exam-name");
+      const certificationUrl = document.getElementById("certification-url");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
       const amount = document.getElementById("grant-amount");
@@ -933,8 +961,19 @@
         email.value.trim() !== "" && email.validity.valid,
         "Enter a valid email address."
       );
-      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the exam.");
-      check(examName, examName.value.trim() !== "", "Enter the exam name.");
+      check(candidateId, candidateId.value.trim() !== "", "Enter the organization that administers the certification.");
+      check(examName, examName.value.trim() !== "", "Enter the certification name.");
+      const urlValue = certificationUrl.value.trim();
+      let validCertificationUrl = false;
+      try {
+        const parsedUrl = new URL(urlValue);
+        validCertificationUrl = /^https?:\/\//i.test(urlValue) &&
+          (parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:") &&
+          !!parsedUrl.hostname && certificationUrl.validity.valid;
+      } catch (error) {
+        // Missing or malformed URLs are handled by the inline message below.
+      }
+      check(certificationUrl, validCertificationUrl, "Enter a valid certification website URL starting with http:// or https://.");
       check(studentInfo, countEssayWords(studentInfo.value) > 0 && countEssayWords(studentInfo.value) < 500, "Enter an essay of fewer than 500 words.");
       check(amount, amount.value !== "" && amount.validity.valid && Number.isFinite(Number(amount.value)) && Number(amount.value) > 0, "Enter a valid amount greater than zero, with up to two decimal places.");
       check(agreement, agreement.checked, "Please agree to the grant terms.");
@@ -952,6 +991,7 @@
         email: email.value.trim(),
         examProvider: candidateId.value.trim(),
         exam: examName.value.trim(),
+        certificationUrl: urlValue,
         essay: studentInfo.value.trim(),
         requestedAmount: Number(amount.value),
         practiceScore: "",
@@ -1171,6 +1211,7 @@
           detail("Email", application.email),
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
+          detail("Certification website URL", application.certificationUrl || "Not provided"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
