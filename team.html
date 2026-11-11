@@ -1,21 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" style="color-scheme:dark">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8"><meta name="color-scheme" content="dark light">
+  <script>(function(){var t=null;try{t=localStorage.getItem("levelup-theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)})()</script><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Our team | The LevelUp Fund</title>
   <meta name="description" content="Meet the people behind the LevelUp Fund.">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/fonts/fonts.css">
-  <style>body{font-family:Inter,system-ui,sans-serif}</style>
+  <link rel="stylesheet" href="assets/fonts/current-design.css">
+  <style>
+    :root { color-scheme: dark; --page: #0B1120; --bg-2: #0F192C; --text: #F1F4F9; --muted: #A8B4C7; --gold: #F5C85C; --on-gold: #101C35; --accent: #F5C85C; --line: #2A3850; --line-2: #3A4C6B; --fill-hover: #1B2940; --header-bg: rgba(11,17,32,.8); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.1), transparent 62%); --card-bg: #131D30; --card-shadow: inset 0 1px 0 rgba(241,244,249,.04); --photo-bg: #1B2940; --dot: #F5C85C; --brand-dot: #F5C85C; --font-display: "Newsreader", Georgia, "Times New Roman", serif; --glass-bg: rgba(19,29,48,.55); --glass-bg-2: rgba(19,29,48,.4); --glass-strong: rgba(19,29,48,.74); --glass-border: rgba(255,255,255,.12); --glass-hi: rgba(255,255,255,.18); --glass-lo: rgba(0,0,0,.28); --glass-shadow: 0 22px 44px -24px rgba(0,0,0,.65); --glass-blur: blur(18px) saturate(1.7); --sheen-1: rgba(255,255,255,.1); --sheen-2: rgba(255,255,255,.03); --blob-1: rgba(245,200,92,.17); --blob-2: rgba(76,110,190,.24); --blob-3: rgba(56,140,170,.14); --gold: #F5C85C; --gold-grad: linear-gradient(180deg,#FAD876 0%,#F5C85C 55%,#E8B545 100%); }
+    html[data-theme="light"] { --glass-bg: rgba(255,255,255,.55); --glass-bg-2: rgba(255,255,255,.45); --glass-strong: rgba(255,255,255,.74); --glass-border: rgba(255,255,255,.85); --glass-hi: rgba(255,255,255,.95); --glass-lo: rgba(16,28,53,.07); --glass-shadow: 0 22px 44px -26px rgba(16,28,53,.34), 0 0 0 1px rgba(16,28,53,.05); --sheen-1: rgba(255,255,255,.75); --sheen-2: rgba(255,255,255,.2); --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(255,190,150,.32); color-scheme: light; --page: #F8F7F2; --bg-2: #F0F1EB; --text: #101C35; --muted: #596579; --accent: #7D5C0C; --line: #E2E5EA; --line-2: #C9CED6; --fill-hover: #F0F1EB; --header-bg: rgba(248,247,242,.84); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.26), transparent 62%); --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18); --photo-bg: #F0F1EB; --dot: #C9962B; --brand-dot: #8A6410; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
+    @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
+    .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .ambient i { position: absolute; border-radius: 50%; will-change: transform; animation: drift 28s ease-in-out infinite alternate; }
+    .ambient .b1 { width: min(46rem,130vw); height: min(46rem,130vw); left: -12rem; top: -10rem; background: radial-gradient(closest-side, var(--blob-1), transparent); }
+    .ambient .b2 { width: min(40rem,120vw); height: min(40rem,120vw); right: -10rem; top: 30%; background: radial-gradient(closest-side, var(--blob-2), transparent); animation-duration: 34s; animation-delay: -9s; }
+    .ambient .b3 { width: min(36rem,110vw); height: min(36rem,110vw); left: 20%; bottom: -14rem; background: radial-gradient(closest-side, var(--blob-3), transparent); animation-duration: 40s; animation-delay: -17s; }
+    @keyframes drift { from { translate: 0 0; } to { translate: 6rem 4rem; } }
+    .site-header { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; padding: .75rem 1rem 0; }
+    .site-header > nav, .member { position: relative; isolation: isolate; background: var(--glass-bg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi), inset 0 -1px 0 var(--glass-lo); }
+    .site-header > nav::before, .member::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; background: linear-gradient(125deg, var(--sheen-1) 0%, transparent 34%, transparent 66%, var(--sheen-2) 100%); }
+    .site-header > nav a:first-child { white-space: nowrap; }
+    .site-header > nav { max-width: 76rem; margin: 0 auto; padding: .5rem .5rem .5rem .9rem; gap: .5rem; border-radius: 999px; }
+    .page-hero { border-bottom: 0; }
+    .eyebrow, .theme-toggle { background: var(--glass-bg-2); -webkit-backdrop-filter: blur(12px) saturate(1.5); backdrop-filter: blur(12px) saturate(1.5); border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-hi); }
+    .eyebrow { padding: .4rem .9rem; border-radius: 999px; width: fit-content; }
+    .pill, .brand-mark { background: var(--gold-grad); box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(120,80,0,.3), 0 8px 22px -10px rgba(190,140,30,.8), 0 0 0 1px rgba(16,28,53,.08); }
+    .pill { border-radius: 999px; }
+    @media (prefers-reduced-motion: reduce) { .ambient i { animation: none; } }
+    @media (prefers-reduced-transparency: reduce) { .site-header > nav, .member, .eyebrow, .theme-toggle { background: var(--card-bg) !important; -webkit-backdrop-filter: none; backdrop-filter: none; } .ambient { display: none; } }
+    footer { --text: #F1F4F9; --muted: #A8B4C7; --line: #2A3850; --brand-dot: #F5C85C; background: #101C35 !important; }
+    .muted { color: var(--muted); } .role { color: var(--accent); }
+    .theme-toggle { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 999px; border: 1px solid var(--line-2); color: var(--text); transition: background-color .15s ease, scale .15s ease; }
+    .theme-toggle:active { scale: .94; } @media (hover: hover) and (pointer: fine) { .theme-toggle:hover { background: var(--fill-hover); } }
+    .theme-toggle .icon { stroke: currentColor; stroke-width: 2; } .theme-toggle .i-moon { display: none; } html[data-theme="light"] .theme-toggle .i-sun { display: none; } html[data-theme="light"] .theme-toggle .i-moon { display: inline; }
+    html[data-theme] .text-slate-400 { color: var(--muted); }
+    body { font-family: "Public Sans", system-ui, sans-serif; background: var(--page); color: var(--text); -webkit-font-smoothing: antialiased; }
+    h1, h2 { text-wrap: balance; } p { text-wrap: pretty; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .brand-mark .icon { stroke: var(--on-gold); } .icon { width: 1.2rem; height: 1.2rem; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .brand-mark { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: .7rem; background: var(--gold); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 6px 16px -8px rgba(190,140,30,.9); }
+    .brand-dot { color: var(--brand-dot); }
+    .site-header { position: sticky; top: 0; z-index: 40; background: var(--header-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .pill { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border-radius: .8rem; font-size: .9rem; font-weight: 600; color: var(--on-gold); background: var(--gold); box-shadow: 0 8px 22px -10px rgba(190,140,30,.8), inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(16,28,53,.08); transition: translate .2s cubic-bezier(.22,1,.36,1), scale .2s cubic-bezier(.22,1,.36,1); }
+    .pill:active { scale: .97; }
+    @media (hover: hover) and (pointer: fine) { .pill:hover { translate: 0 -2px; } }
+    .page-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--hero-bg); border-bottom: 1px solid var(--line); }
+    .page-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 60% 20%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 60% 20%, #000 10%, transparent 75%); }
+    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .eyebrow i { width: .45rem; height: .45rem; border-radius: 99px; background: var(--dot); box-shadow: 0 0 0 4px rgba(245,200,92,.2); }
+    .wordmark { font-family: var(--font-display); font-optical-sizing: auto; font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
+    h1.display { font-family: var(--font-display); font-optical-sizing: auto; font-weight: 600; letter-spacing: -.025em; }
+    .member { border-radius: 1.25rem; background: var(--card-bg); border: 1px solid var(--line); box-shadow: var(--card-shadow); padding: .75rem .75rem 1.5rem; transition: border-color .2s ease; }
+    @media (hover: hover) and (pointer: fine) { .member:hover { border-color: var(--line-2); } }
+    .member .photo { aspect-ratio: 4/3; overflow: hidden; border-radius: .6rem; background: var(--photo-bg); }
+    .member .photo img { outline: 1px solid rgba(255,255,255,.1); outline-offset: -1px; }
+    .member .info { padding: 0 .75rem; }
+    .member h2 { margin-top: 1.25rem; font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; letter-spacing: -.01em; }
+    footer { background: #06070a; border-top: 1px solid var(--line); }
+    footer a { transition: color .15s ease; } footer a:hover { color: #fff; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .rise { animation: rise .6s cubic-bezier(.22,1,.36,1) both; }
+    @media (prefers-reduced-motion: reduce) { .rise { animation: none; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
 </head>
-<body class="bg-[#101218] text-slate-100 antialiased">
-  <header class="bg-[#0b0c10] text-white"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-6"><a href="index.html" class="text-lg font-bold tracking-tight">The LevelUp Fund<span class="text-blue-600">.</span></a><a href="index.html#apply" class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950">Apply for a grant</a></nav></header>
-  <main class="mx-auto min-h-[65vh] max-w-7xl px-6 pb-24 pt-20 sm:pt-28">
-    <p class="text-xs font-bold uppercase tracking-[.2em] text-blue-400">The people behind the fund</p>
-    <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="max-w-xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">People invested in your next step.</h1><p class="max-w-lg text-lg leading-8 text-slate-300">Meet the people working to make technology certifications more accessible to students.</p></div>
-    <div class="mt-16 border-t border-slate-700 pt-10"><div id="team-list" class="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="text-slate-400">Team profiles are coming soon.</p></div>
+<body>
+  <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+  <header class="site-header"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8"><a href="index.html" class="flex items-center gap-2 text-base font-bold tracking-tight sm:gap-2.5 sm:text-lg"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><div class="flex items-center gap-2 sm:gap-3"><button type="button" class="theme-toggle" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><a href="index.html#apply" class="pill">Apply<span class="hidden sm:inline">&nbsp;for a grant</span></a></div></nav></header>
+  <div class="page-hero">
+    <div class="mx-auto max-w-7xl px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
+      <p class="eyebrow rise"><i aria-hidden="true"></i>The people behind the fund</p>
+      <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="display rise max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-6xl" style="animation-delay:.08s">People invested in your next step.</h1><p class="rise max-w-lg muted text-lg leading-8" style="animation-delay:.16s">Meet the people working to make certifications and credentials more accessible to students.</p></div>
+    </div>
+  </div>
+  <main class="mx-auto min-h-[50vh] max-w-7xl px-6 pb-24 pt-14 sm:px-8">
+    <div id="team-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="empty rounded-2xl border border-dashed p-8 text-slate-400" style="border-color:var(--line-2)">Team profiles are coming soon.</p>
   </main>
-  <footer class="bg-[#0b0c10] px-6 py-12 text-slate-300"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="font-bold text-white">The LevelUp Fund<span class="text-blue-400">.</span></p><p class="mt-3 max-w-sm text-sm leading-6 text-slate-400">Helping students pursue technology certifications by reducing the cost of exam fees.</p></div><div class="flex flex-wrap gap-6 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
+  <footer class="px-6 py-12 text-slate-300 sm:px-8"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="flex items-center gap-2.5 font-bold text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></p><p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">Helping students pursue certifications and credentials by reducing the cost of exam and program fees.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
     import { createSharedAdmin } from "./src/shared-admin.js";
@@ -29,17 +91,31 @@
       catch { empty.textContent = 'Team profiles could not be loaded.'; empty.hidden = false; return; }
       empty.hidden = team.length > 0;
       team.forEach(member => {
-        const article = document.createElement('article');
-        const photo = document.createElement('div'); photo.className = 'aspect-[4/3] overflow-hidden bg-slate-800';
+        const article = document.createElement('article'); article.className = 'member';
+        const photo = document.createElement('div'); photo.className = 'photo';
         if (member.image) { const img = document.createElement('img'); img.src = member.image; img.alt = member.name; img.className = 'h-full w-full object-cover'; photo.append(img); }
-        else { const placeholder = document.createElement('div'); placeholder.className = 'flex h-full items-center justify-center text-5xl font-bold text-slate-400'; placeholder.setAttribute('aria-hidden','true'); placeholder.textContent = (member.name || '?').charAt(0).toUpperCase(); photo.append(placeholder); }
-        const name = document.createElement('h2'); name.className = 'mt-5 text-xl font-bold'; name.textContent = member.name;
-        const role = document.createElement('p'); role.className = 'mt-1 text-sm font-semibold text-blue-400'; role.textContent = member.role;
-        const bio = document.createElement('p'); bio.className = 'mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-300'; bio.textContent = member.bio;
-        article.append(photo, name, role, bio); list.append(article);
+        else { const placeholder = document.createElement('div'); placeholder.className = 'flex h-full items-center justify-center text-5xl font-bold muted'; placeholder.style.fontFamily = 'var(--font-display)'; placeholder.setAttribute('aria-hidden','true'); placeholder.textContent = (member.name || '?').charAt(0).toUpperCase(); photo.append(placeholder); }
+        const info = document.createElement('div'); info.className = 'info';
+        const name = document.createElement('h2'); name.textContent = member.name;
+        const role = document.createElement('p'); role.className = 'role mt-1 text-sm font-semibold'; role.textContent = member.role;
+        const bio = document.createElement('p'); bio.className = 'muted mt-4 whitespace-pre-wrap text-sm leading-7'; bio.textContent = member.bio;
+        info.append(name, role, bio); article.append(photo, info); list.append(article);
       });
     }
     renderTeam();
+    const root = document.documentElement;
+    const themeBtn = document.querySelector('.theme-toggle');
+    const syncTheme = () => themeBtn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+    syncTheme();
+    themeBtn.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      const apply = () => {
+        root.dataset.theme = next;
+        try { localStorage.setItem('levelup-theme', next); } catch (e) {}
+        syncTheme();
+      };
+      if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(apply); else apply();
+    });
   </script>
 </body>
 </html>
