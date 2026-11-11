@@ -36,7 +36,7 @@
       /* Dark: page #0B1120, cards #131D30, hover #1B2940, text #F1F4F9, secondary #A8B4C7, borders #2A3850 */
       --page: #0B1120; --bg-2: #0F192C; --surface: #131D30; --surface-2: #1B2940;
       --text: #F1F4F9; --muted: #A8B4C7; --muted-strong: #C9D2E0; --faint: #8D9AB0;
-      --gold: #F5C85C; --on-gold: #1A3F22; --accent: #F5C85C; --link: #F5C85C;
+      --gold: #F5C85C; --on-gold: #101C35; --accent: #F5C85C; --link: #F5C85C;
       --line: #2A3850; --line-2: #3A4C6B;
       --fill: rgba(241,244,249,.04); --fill-hover: #1B2940;
       --header-bg: rgba(11,17,32,.78); --header-bg-2: rgba(11,17,32,.92); --nav: #A8B4C7;
@@ -53,7 +53,7 @@
       --stair-label: #F1F4F9; --stair-line: rgba(168,180,199,.5);
       --gold-stroke: #F5C85C; --dot: #F5C85C; --brand-dot: #F5C85C;
       --voucher-shadow: rgba(0,0,0,.55);
-      --footer-bg: #1A3F22;
+      --footer-bg: #101C35;
       /* Liquid glass */
       --glass-bg: rgba(19,29,48,.55); --glass-bg-2: rgba(19,29,48,.4); --glass-strong: rgba(19,29,48,.74);
       --glass-border: rgba(255,255,255,.12); --glass-hi: rgba(255,255,255,.18); --glass-lo: rgba(0,0,0,.28);
@@ -61,7 +61,7 @@
       --glass-blur: blur(18px) saturate(1.7); --glass-blur-sm: blur(12px) saturate(1.5); --glass-blur-lg: blur(28px) saturate(1.8);
       --glass-shadow-lg: 0 40px 80px -32px rgba(0,0,0,.8);
       --sheen-1: rgba(255,255,255,.1); --sheen-2: rgba(255,255,255,.03);
-      --blob-1: rgba(245,200,92,.17); --blob-2: rgba(76,110,190,.24); --blob-3: rgba(40,110,60,.3);
+      --blob-1: rgba(245,200,92,.17); --blob-2: rgba(76,110,190,.24); --blob-3: rgba(56,140,170,.14);
       --alt-bg: rgba(15,25,44,.42);
       --gold-grad: linear-gradient(180deg,#FAD876 0%,#F5C85C 55%,#E8B545 100%);
       --ease-out: cubic-bezier(.22,1,.36,1);
@@ -69,17 +69,17 @@
     }
     html[data-theme="light"] {
       color-scheme: light;
-      /* Light: page #F8F7F2, cards #FFFFFF, hover #F0F1EB, text #101C35, secondary #596579, borders #E2E5EA, links + accents deep green #1A3F22 */
+      /* Light: page #F8F7F2, cards #FFFFFF, hover #F0F1EB, text #101C35, secondary #596579, borders #E2E5EA, links #7D5C0C */
       --page: #F8F7F2; --bg-2: #F0F1EB; --surface: #FFFFFF; --surface-2: #F0F1EB;
       --text: #101C35; --muted: #596579; --muted-strong: #3E4A60; --faint: #66728A;
-      --accent: #1A3F22; --link: #1A3F22;
+      --accent: #7D5C0C; --link: #7D5C0C;
       --line: #E2E5EA; --line-2: #C9CED6;
       --fill: rgba(16,28,53,.03); --fill-hover: #F0F1EB;
       --header-bg: rgba(248,247,242,.8); --header-bg-2: rgba(248,247,242,.94); --nav: #596579;
       --hero-bg: radial-gradient(52rem 30rem at 85% -5%, rgba(245,200,92,.22), transparent 62%), radial-gradient(40rem 26rem at 0% 45%, rgba(150,170,255,.22), transparent 60%);
-      --grad: linear-gradient(100deg,#1A3F22 0%,#2F6B3A 100%);
+      --grad: linear-gradient(100deg,#7D5C0C 0%,#8A6410 100%);
       --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18);
-      --tile-bg: rgba(26,63,34,.09); --tile-ring: rgba(26,63,34,.22);
+      --tile-bg: rgba(245,200,92,.32); --tile-ring: rgba(125,92,12,.25);
       --num: rgba(16,28,53,.06);
       --apply-bg: radial-gradient(44rem 26rem at 100% 0%, rgba(245,200,92,.16), transparent 65%), rgba(240,241,235,.5);
       --form-bg: #FFFFFF;
@@ -95,7 +95,7 @@
       --glass-shadow: 0 22px 44px -26px rgba(16,28,53,.34), 0 0 0 1px rgba(16,28,53,.05);
       --glass-shadow-lg: 0 40px 80px -36px rgba(16,28,53,.42), 0 0 0 1px rgba(16,28,53,.05);
       --sheen-1: rgba(255,255,255,.75); --sheen-2: rgba(255,255,255,.2);
-      --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(110,180,125,.3);
+      --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(255,190,150,.32);
       --alt-bg: rgba(240,241,235,.5);
     }
     /* Illustration and footer keep their dark look in both themes */
@@ -166,7 +166,7 @@
     .hero-visual::before { content: ""; position: absolute; inset: 8% 4%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(245,200,92,.22), transparent); filter: blur(30px); }
     .voucher-wrap { filter: drop-shadow(0 30px 38px var(--voucher-shadow)); rotate: -2.5deg; }
     .voucher { --tear: calc(100% - 6.25rem); position: relative; border-radius: 1.25rem; overflow: hidden;
-      background: linear-gradient(155deg,#2A5C36 0%,#1A3F22 52%,#12301A 100%);
+      background: linear-gradient(155deg,#1F2E4A 0%,#162238 52%,#111B2E 100%);
       -webkit-mask: radial-gradient(circle .7rem at 0 var(--tear), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle .7rem at 100% var(--tear), transparent 98%, #000) right / 51% 100% no-repeat;
       mask: radial-gradient(circle .7rem at 0 var(--tear), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle .7rem at 100% var(--tear), transparent 98%, #000) right / 51% 100% no-repeat; }
     .voucher::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.18); background: radial-gradient(18rem 10rem at 100% 0%, rgba(245,200,92,.12), transparent 70%); }
@@ -272,7 +272,7 @@
     #sponsor-empty { border-radius: 1rem; }
 
     /* ---------- Footer ---------- */
-    footer { --line: rgba(255,255,255,.14); --line-2: rgba(255,255,255,.22); --muted: #BCCBBF; --faint: #9FB4A4; background: var(--footer-bg); border-top: 1px solid var(--line); }
+    footer { background: var(--footer-bg); border-top: 1px solid var(--line); }
     .footer-band { position: relative; overflow: hidden; isolation: isolate; border-radius: 1.75rem; padding: clamp(2rem,5vw,3.5rem); background: radial-gradient(34rem 18rem at 90% 0%, rgba(245,200,92,.16), transparent 65%), linear-gradient(135deg,#16233C,#131D30); border: 1px solid var(--line-2); box-shadow: inset 0 1px 0 rgba(255,255,255,.1); }
     footer .footer-cta { max-width: 16ch; font-size: clamp(2.1rem,4.4vw,3.6rem); font-weight: 700; line-height: 1.05; letter-spacing: -.04em; color: white; text-wrap: balance; }
     footer a, footer #open-admin { transition: color .15s ease; }
@@ -286,9 +286,9 @@
     html[data-theme="light"] .theme-toggle .i-sun { display: none; }
     html[data-theme="light"] .theme-toggle .i-moon { display: inline; }
     .stair-step { stroke: var(--step-stroke); } .stair-label text, .stair-label { fill: var(--stair-label); } .stair-line { stroke: var(--stair-line); }
-    .stair-label text[fill] { fill: #1A3F22; }
-    html[data-theme="light"] .faq summary::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A3F22' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E"); }
-    html[data-theme] .text-slate-400, footer .text-slate-300 { color: var(--muted); }
+    .stair-label text[fill] { fill: #101C35; }
+    html[data-theme="light"] .faq summary::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237D5C0C' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E"); }
+    html[data-theme] .text-slate-400 { color: var(--muted); }
     html[data-theme] :is(.text-blue-400, .text-blue-600, .text-blue-700, .dark\:text-blue-400) { color: var(--link); }
     html[data-theme] .bg-blue-600 { background: var(--gold); color: var(--on-gold); }
     html[data-theme] .bg-blue-600:hover { background: #F9D678; }
@@ -336,7 +336,7 @@
     }
     .eyebrow { padding: .4rem .9rem; border-radius: 999px; width: fit-content; justify-self: start; }
     .eg .tag { padding: .3rem .75rem; }
-    .chip { background: #12301D; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 14px 30px -8px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.18); }
+    .chip { background: #131D30; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 14px 30px -8px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.18); }
 
     /* Glossy gold "gel" buttons */
     .pill-brand, .brand-mark, .temp-theme button[aria-pressed="true"] { background: var(--gold-grad); box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(120,80,0,.3), 0 8px 22px -10px rgba(190,140,30,.8), 0 0 0 1px rgba(16,28,53,.08); }
@@ -561,20 +561,20 @@
                 <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5C85C"/><stop offset="1" stop-color="#F5C85C" stop-opacity=".55"/></linearGradient>
               </defs>
               <path d="M18 225h364" style="stroke:var(--line-2)"/>
-              <rect data-stair="step" x="22" y="170" width="84" height="55" rx="10" fill="url(#stepFill)" class="stair-step"/>
-              <rect data-stair="step" x="110" y="128" width="84" height="97" rx="10" fill="url(#stepFill)" class="stair-step"/>
-              <rect data-stair="step" x="198" y="86" width="84" height="139" rx="10" fill="url(#goldFill)" style="stroke:var(--gold-stroke)"/>
-              <rect data-stair="step" x="286" y="44" width="84" height="181" rx="10" fill="url(#stepFill)" class="stair-step"/>
+              <rect x="22" y="170" width="84" height="55" rx="10" fill="url(#stepFill)" class="stair-step"/>
+              <rect x="110" y="128" width="84" height="97" rx="10" fill="url(#stepFill)" class="stair-step"/>
+              <rect x="198" y="86" width="84" height="139" rx="10" fill="url(#goldFill)" style="stroke:var(--gold-stroke)"/>
+              <rect x="286" y="44" width="84" height="181" rx="10" fill="url(#stepFill)" class="stair-step"/>
               <g class="stair-label" font-family="Public Sans, system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
-                <text data-stair-label="0" x="64" y="205" >Study</text>
-                <text data-stair-label="1" x="152" y="205" >Practice</text>
-                <text data-stair-label="2" x="240" y="196" fill="#1A3F22">Fee</text>
-                <text data-stair-label="2" x="240" y="213" fill="#1A3F22" font-size="11" font-weight="700">covered</text>
-                <text data-stair-label="3" x="328" y="205" >Certified</text>
+                <text x="64" y="205" >Study</text>
+                <text x="152" y="205" >Practice</text>
+                <text x="240" y="196" fill="#101C35">Fee</text>
+                <text x="240" y="213" fill="#101C35" font-size="11" font-weight="700">covered</text>
+                <text x="328" y="205" >Certified</text>
               </g>
-              <g class="stair-line" fill="none" stroke-width="1.5" stroke-dasharray="3 5" stroke-linecap="round"><path data-stair-line="0" d="M64 158c20-4 36-12 52-26"/><path data-stair-line="1" d="M152 116c20-4 36-12 52-26"/><path data-stair-line="2" d="M240 74c20-4 36-12 52-26"/></g>
-              <g data-stair="goal"><circle cx="328" cy="30" r="12" fill="#F5C85C"/>
-              <path d="m322 30 4.5 4.5L335 26" fill="none" stroke="#1A3F22" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <path class="stair-line" d="M64 158c20-4 36-12 52-26M152 116c20-4 36-12 52-26M240 74c20-4 36-12 52-26" fill="none" stroke-width="1.5" stroke-dasharray="3 5" stroke-linecap="round"/>
+              <circle cx="328" cy="30" r="12" fill="#F5C85C"/>
+              <path d="m322 30 4.5 4.5L335 26" fill="none" stroke="#101C35" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </figure>
           <p class="editorial-tag">A student-driven microfund for all types of certifications to help people grow their career.</p>
@@ -1180,31 +1180,7 @@
   <script>
     // Deferred scripts run before DOMContentLoaded; register the plugin once, and do nothing if the CDN failed.
     document.addEventListener("DOMContentLoaded", function () {
-      if (!(window.gsap && window.ScrollTrigger)) return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Stair graphic: scrubbed by scroll, so it can be scrolled forward or back at any moment.
-      // Under reduced motion (or if GSAP never loads) the finished graphic is simply shown.
-      var art = document.querySelector(".mission-art");
-      if (!art) return;
-      gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", function () {
-        var steps = art.querySelectorAll("[data-stair=step]");
-        var lines = art.querySelectorAll("[data-stair-line]");
-        var goal = art.querySelector("[data-stair=goal]");
-        gsap.set([steps, goal], { transformBox: "fill-box" });
-        var tl = gsap.timeline({
-          defaults: { ease: "power2.out" },
-          scrollTrigger: { trigger: art, start: "top 82%", end: "bottom 52%", scrub: 0.6, invalidateOnRefresh: true }
-        });
-        steps.forEach(function (step, i) {
-          var at = i;
-          tl.fromTo(step, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 1 }, at)
-            .fromTo(art.querySelectorAll("[data-stair-label='" + i + "']"), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.6 }, at + 0.4);
-          if (i > 0) tl.fromTo(lines[i - 1], { opacity: 0 }, { opacity: 1, duration: 0.5 }, at + 0.1);
-        });
-        tl.fromTo(goal, { scale: 0, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(2.2)" }, steps.length - 0.3);
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-      });
+      if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
     });
   </script>
 
