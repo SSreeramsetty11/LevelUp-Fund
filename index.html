@@ -1710,9 +1710,15 @@
         if (error) throw error;
         status.textContent = "If this account can receive email, a reset link has been sent. Check your inbox and spam folder.";
       } catch (error) {
-        status.textContent = error && error.message === "request-timeout"
-          ? "The request took too long to confirm. Check your inbox and spam folder before trying again."
-          : "Could not send the reset request. Check your connection and try again later.";
+        if (error && error.message === "request-timeout") {
+          status.textContent = "The request took too long to confirm. Check your inbox and spam folder before trying again.";
+        } else if (error && (error.status === 429 || error.code === "over_email_send_rate_limit" || error.code === "over_request_rate_limit")) {
+          status.textContent = "Too many reset emails or requests have been sent. Wait a while before trying again.";
+        } else if (error && error.code === "email_address_not_authorized") {
+          status.textContent = "The project's email service cannot send to this address. Ask the Supabase project owner to check its email settings.";
+        } else {
+          status.textContent = "Could not send the reset request. Check your connection and ask the Supabase project owner to check the Auth logs.";
+        }
       } finally {
         clearTimeout(timeoutId);
         button.disabled = false;
