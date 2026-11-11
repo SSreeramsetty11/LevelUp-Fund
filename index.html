@@ -247,6 +247,13 @@
 
           <div class="mt-6 space-y-5">
             <div>
+              <div class="flex items-start gap-3">
+                <input id="age-confirmation" type="checkbox" required class="mt-1 h-4 w-4 shrink-0 accent-blue-600" />
+                <label for="age-confirmation" class="text-sm leading-6 text-slate-700 dark:text-slate-300">I confirm that I am at least 14 years old.</label>
+              </div>
+              <p id="age-confirmation-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+            <div>
               <label for="full-name" class="mb-2 block text-sm font-semibold">
                 Full legal name
               </label>
@@ -833,6 +840,7 @@
       const certificationUrl = document.getElementById("certification-url");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
+      const ageConfirmation = document.getElementById("age-confirmation");
       const amount = document.getElementById("grant-amount");
 
       let firstInvalid = null;
@@ -847,6 +855,7 @@
         }
       }
 
+      check(ageConfirmation, ageConfirmation.checked, "You must confirm that you are at least 14 years old to apply.");
       check(fullName, fullName.value.trim() !== "", "Enter a name.");
       check(
         email,
@@ -896,6 +905,7 @@
       submitButton.disabled = true;
       try {
         application.agreement = agreement.checked;
+        application.ageConfirmed = ageConfirmation.checked;
         await backend.submitApplication(application);
       } catch (error) {
         formError.textContent = "Your application could not be submitted. Please try again later.";
@@ -1101,6 +1111,7 @@
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
           detail("Certification website URL", application.certificationUrl || "Not provided"),
+          detail("Age confirmation", application.ageConfirmed === true ? "Applicant confirmed they are at least 14" : "Not recorded"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );

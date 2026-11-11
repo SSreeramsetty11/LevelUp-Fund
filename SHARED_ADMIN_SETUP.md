@@ -27,8 +27,8 @@ The site uses only a public publishable key. The database's row-level security�
 - The current demo stores old sample records in each browser. Those records are not automatically migrated into the shared database.
 - Test the public submission path, spam controls, backup and retention settings, privacy notice, admin onboarding and recovery, and error handling before accepting real applications. The current branch does not provide automated decision emails, an abuse-prevention system, or a migration tool.
 
-## Applicants under 13
+## Age eligibility
 
-The fund may accept applicants under 13. This test version does **not** implement parent verification, notice, consent, parent access, or child-data deletion workflows. Do not use real children's information in the test project. Before opening real applications, work with Hack Club Bank and appropriate privacy counsel to determine which obligations apply, how a parent will receive notice and provide verifiable consent where required, and how parent access, deletion, and retention will be handled. A self-attested checkbox by itself does not verify that the person is a parent. FTC reference: https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions
+The fund's policy is that applicants must be at least 14. The application uses a self-attestation; it does not independently verify age. The additional migration `supabase/migrations/202611110001_age_confirmation.sql` must be applied after the initial migration to require this confirmation for new submissions. Existing sample records remain reviewable and display “Not recorded.” A caller could submit a false affirmation directly, so this is not identity or age verification. Teenagers may still be minors; consult Hack Club Bank about applicable privacy and consent requirements before accepting real applications.
 
 Inter font files are served locally. Tailwind CSS, the Supabase client CDN, and Supabase still receive requests as part of operating the site; assess those services when preparing the privacy notice.

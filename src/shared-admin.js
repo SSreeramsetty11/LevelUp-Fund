@@ -31,7 +31,8 @@ export function createSharedAdmin(client) {
       certification_url: application.certificationUrl,
       essay: application.essay,
       amount: application.requestedAmount,
-      agreement: application.agreement === true
+      agreement: application.agreement === true,
+      age_confirmed: application.ageConfirmed === true
     };
     // No returning select: unauthenticated visitors must never read applications.
     await checked(client.from('levelup_applications').insert(row));
@@ -43,7 +44,7 @@ export function createSharedAdmin(client) {
       id: row.id, name: row.name, email: row.email,
       examProvider: row.exam_provider, exam: row.certification,
       certificationUrl: row.certification_url, essay: row.essay,
-      requestedAmount: row.amount, status: row.status,
+      requestedAmount: row.amount, ageConfirmed: row.age_confirmed, status: row.status,
       practiceScore: row.practice_score, notes: row.notes,
       submittedAt: row.created_at
     }));
