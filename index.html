@@ -1681,6 +1681,7 @@
     });
 
     document.getElementById("forgot-password").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
       const emailField = document.getElementById("admin-email");
       const status = document.getElementById("reset-request-status");
       loginError.classList.add("hidden");
@@ -1693,16 +1694,29 @@
         status.textContent = "Open the site through the local server or HTTPS to request a reset.";
         return;
       }
-      event.currentTarget.disabled = true;
+      button.disabled = true;
+      button.textContent = "Sending reset link…";
+      status.textContent = "Sending your reset request…";
+      let timeoutId;
       try {
         const redirectTo = new URL("reset-password.html", window.location.href).href;
-        const { error } = await client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo });
+        const timeout = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error("request-timeout")), 20000);
+        });
+        const { error } = await Promise.race([
+          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo }),
+          timeout
+        ]);
         if (error) throw error;
         status.textContent = "If this account can receive email, a reset link has been sent. Check your inbox and spam folder.";
       } catch (error) {
-        status.textContent = "Could not send the reset request. Please try again later.";
+        status.textContent = error && error.message === "request-timeout"
+          ? "The request took too long to confirm. Check your inbox and spam folder before trying again."
+          : "Could not send the reset request. Check your connection and try again later.";
       } finally {
-        event.currentTarget.disabled = false;
+        clearTimeout(timeoutId);
+        button.disabled = false;
+        button.textContent = "Forgot password?";
       }
     });
 
