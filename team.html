@@ -13,6 +13,8 @@
     html[data-theme="light"] { --glass-bg: rgba(255,255,255,.55); --glass-bg-2: rgba(255,255,255,.45); --glass-strong: rgba(255,255,255,.74); --glass-border: rgba(255,255,255,.85); --glass-hi: rgba(255,255,255,.95); --glass-lo: rgba(16,28,53,.07); --glass-shadow: 0 22px 44px -26px rgba(16,28,53,.34), 0 0 0 1px rgba(16,28,53,.05); --sheen-1: rgba(255,255,255,.75); --sheen-2: rgba(255,255,255,.2); --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(255,190,150,.32); color-scheme: light; --page: #F8F7F2; --bg-2: #F0F1EB; --text: #101C35; --muted: #596579; --accent: #7D5C0C; --line: #E2E5EA; --line-2: #C9CED6; --fill-hover: #F0F1EB; --header-bg: rgba(248,247,242,.84); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.26), transparent 62%); --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18); --photo-bg: #F0F1EB; --dot: #C9962B; --brand-dot: #8A6410; }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
     @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
+    @view-transition { navigation: auto; }
+    .site-header { view-transition-name: site-header; }
     .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
     .ambient i { position: absolute; border-radius: 50%; will-change: transform; animation: drift 28s ease-in-out infinite alternate; }
     .ambient .b1 { width: min(46rem,130vw); height: min(46rem,130vw); left: -12rem; top: -10rem; background: radial-gradient(closest-side, var(--blob-1), transparent); }

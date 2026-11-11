@@ -40,7 +40,7 @@
       --line: #2A3850; --line-2: #3A4C6B;
       --fill: rgba(241,244,249,.04); --fill-hover: #1B2940;
       --header-bg: rgba(11,17,32,.78); --header-bg-2: rgba(11,17,32,.92); --nav: #A8B4C7;
-      --hero-bg: radial-gradient(52rem 30rem at 85% -5%, rgba(245,200,92,.12), transparent 62%), radial-gradient(40rem 26rem at 0% 45%, rgba(125,92,12,.2), transparent 60%);
+      --hero-bg: radial-gradient(52rem 30rem at 85% -5%, rgba(245,200,92,.12), transparent 62%), radial-gradient(40rem 26rem at 0% 45%, rgba(125,92,12,.2), transparent 60%), radial-gradient(72rem 34rem at 12% 118%, rgba(245,200,92,.22), transparent 64%);
       --grad: linear-gradient(100deg,#F5C85C 0%,#FBE3A0 100%);
       --card-bg: #131D30; --card-shadow: inset 0 1px 0 rgba(241,244,249,.04);
       --tile-bg: rgba(245,200,92,.1); --tile-ring: rgba(245,200,92,.28);
@@ -76,7 +76,7 @@
       --line: #E2E5EA; --line-2: #C9CED6;
       --fill: rgba(16,28,53,.03); --fill-hover: #F0F1EB;
       --header-bg: rgba(248,247,242,.8); --header-bg-2: rgba(248,247,242,.94); --nav: #596579;
-      --hero-bg: radial-gradient(52rem 30rem at 85% -5%, rgba(245,200,92,.22), transparent 62%), radial-gradient(40rem 26rem at 0% 45%, rgba(150,170,255,.22), transparent 60%);
+      --hero-bg: radial-gradient(52rem 30rem at 85% -5%, rgba(245,200,92,.22), transparent 62%), radial-gradient(40rem 26rem at 0% 45%, rgba(150,170,255,.22), transparent 60%), radial-gradient(72rem 34rem at 12% 118%, rgba(245,200,92,.5), rgba(255,226,170,.2) 46%, transparent 72%);
       --grad: linear-gradient(100deg,#7D5C0C 0%,#8A6410 100%);
       --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18);
       --tile-bg: rgba(245,200,92,.32); --tile-ring: rgba(125,92,12,.25);
@@ -164,7 +164,7 @@
 
     .hero-visual { position: relative; max-width: 27rem; width: 100%; margin-inline: auto; padding: 1.5rem 1rem; }
     .hero-visual::before { content: ""; position: absolute; inset: 8% 4%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(245,200,92,.22), transparent); filter: blur(30px); }
-    .voucher-wrap { filter: drop-shadow(0 30px 38px var(--voucher-shadow)); rotate: -2.5deg; }
+    .voucher-wrap { filter: drop-shadow(0 30px 38px var(--voucher-shadow)); rotate: -2.5deg; perspective: 900px; }
     .voucher { --tear: calc(100% - 6.25rem); position: relative; border-radius: 1.25rem; overflow: hidden;
       background: linear-gradient(155deg,#1F2E4A 0%,#162238 52%,#111B2E 100%);
       -webkit-mask: radial-gradient(circle .7rem at 0 var(--tear), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle .7rem at 100% var(--tear), transparent 98%, #000) right / 51% 100% no-repeat;
@@ -343,6 +343,41 @@
     #apply button[type=submit] { background: var(--gold-grad) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(120,80,0,.3), 0 10px 24px -12px rgba(190,140,30,.9), 0 0 0 1px rgba(16,28,53,.08); }
 
     .footer-band { background: radial-gradient(34rem 18rem at 90% 0%, rgba(245,200,92,.2), transparent 65%), linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.25); }
+
+    /* ---------- GlassReady-inspired additions ---------- */
+    /* Italic emphasis word in headings + bold key phrases in body copy */
+    .em { font-style: italic; font-weight: 500; color: var(--accent); }
+    .lede strong, .process-row p strong, .rule p strong { font-weight: 600; color: var(--text); }
+    /* Centred header for the process section */
+    #how-it-works .section-head { margin-inline: auto; justify-items: center; text-align: center; }
+    #how-it-works .eyebrow { justify-self: center; }
+    #how-it-works .lede { margin-inline: auto; }
+    /* Dark pills with gradient text */
+    .badge { display: inline-flex; margin-top: 1.1rem; padding: .32rem .8rem; border-radius: 999px; background: #0E1628; border: 1px solid rgba(255,255,255,.12); box-shadow: 0 8px 18px -12px rgba(0,0,0,.6); font-size: .72rem; font-weight: 600; letter-spacing: .01em; }
+    .badge > span { background: linear-gradient(90deg,#F5C85C,#FFD9B0 50%,#C9B8FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    /* Marquee of credential types with soft fade edges */
+    .marquee { padding: 4.25rem 0 0; text-align: center; }
+    .marquee-label { margin-bottom: 1.4rem; padding-inline: 1.5rem; font-size: .75rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); }
+    .marquee-viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .marquee-track { display: flex; width: max-content; animation: marquee 48s linear infinite; }
+    .marquee-set { display: flex; flex: none; gap: 3rem; padding-right: 3rem; margin: 0; list-style: none; }
+    .marquee-item { display: inline-flex; align-items: center; gap: .6rem; white-space: nowrap; font-size: .98rem; font-weight: 600; color: var(--muted); }
+    .marquee-item .icon { width: 1.15rem; height: 1.15rem; color: var(--accent); stroke-width: 1.9; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @media (hover: hover) and (pointer: fine) { .marquee-viewport:hover .marquee-track { animation-play-state: paused; } }
+    /* Soft fade where the sponsor strip scrolls */
+    .sponsor-track { -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee-viewport { -webkit-mask-image: none; mask-image: none; } .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; } .marquee-set { flex-wrap: wrap; justify-content: center; padding: 0 1.5rem; row-gap: 1rem; } .marquee-set[aria-hidden="true"] { display: none; } }
+    @media (prefers-contrast: more) { .marquee-viewport, .sponsor-track { -webkit-mask-image: none; mask-image: none; } .badge > span { background: none; color: #F5C85C; } }
+
+    /* Voucher tilt: the card follows the pointer in 3D and catches a soft light (fine pointers only; JS sets the vars). */
+    .voucher { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); will-change: transform; }
+    .voucher::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(18rem 14rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.22), transparent 62%); transition: opacity .25s ease-out; }
+    @media (prefers-reduced-motion: reduce), (hover: none) { .voucher { transform: none; will-change: auto; } .voucher::after { display: none; } }
+
+    /* Smooth page transitions between the home and team pages (progressive enhancement). */
+    @view-transition { navigation: auto; }
+    .site-header { view-transition-name: site-header; }
 
     /* ---------- Apple-design refinements ---------- */
     /* Instant press feedback: the scale lands within 100ms, release eases back. */
@@ -544,14 +579,25 @@
       </div>
     </section>
 
+    <!-- Marquee: examples of what the fund can help cover -->
+    <section class="marquee" aria-label="Examples of what the fund can help cover">
+      <p class="marquee-label">Examples of what the fund can help cover</p>
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          <ul class="marquee-set" role="list"><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg><span>Industry exams</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg><span>Professional certificates</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg><span>Online courses</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span>Bloomberg Market Concepts</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg><span>Coursera certificates</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span>Licensing exams</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span>Skills assessments</span></li></ul>
+          <ul class="marquee-set" role="presentation" aria-hidden="true"><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg><span>Industry exams</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg><span>Professional certificates</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg><span>Online courses</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></svg><span>Bloomberg Market Concepts</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg><span>Coursera certificates</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span>Licensing exams</span></li><li class="marquee-item"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><span>Skills assessments</span></li></ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Mission -->
     <section class="section" aria-label="Our mission">
       <div class="wrap mission-grid">
         <div data-reveal>
           <p class="eyebrow">A little support goes a long way</p>
-          <h2 class="mt-5">Skills deserve a chance.</h2>
+          <h2 class="mt-5">Skills deserve <em class="em">a chance.</em></h2>
           <p class="lede mt-6">A certification can make what you know visible. The LevelUp Fund is built around a simple idea: the fee shouldn't be the thing standing in your way.</p>
-          <p class="lede mt-4">We cover certifications and credentials that would otherwise be paid for out of pocket, from industry exams to platform certificates like Bloomberg Market Concepts or Coursera.</p>
+          <p class="lede mt-4">We cover <strong>certifications and credentials</strong> that would otherwise be paid for out of pocket, from industry exams to platform certificates like <strong>Bloomberg Market Concepts</strong> or <strong>Coursera</strong>.</p>
         </div>
         <div data-reveal>
           <figure class="mission-art">
@@ -584,12 +630,12 @@
 
     <!-- How it works -->
     <section id="how-it-works" class="section section-alt scroll-mt-24"><div class="wrap">
-      <div class="section-head" data-reveal><p class="eyebrow">The path forward</p><h2>From ambition<br>to certified.</h2><p class="lede">A clear process to help prepared students take their next step.</p></div>
+      <div class="section-head" data-reveal><p class="eyebrow">The path forward</p><h2>From ambition<br>to <em class="em">certified.</em></h2><p class="lede">A clear process to help prepared students take their next step.</p></div>
       <div class="process-list">
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">01</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></span><h3><span class="sr-only">Step 1: </span>Apply &amp; verify</h3><p>Tell us about the certification or credential you want and why. We'll follow up about identity and, where relevant, testing-profile verification.</p></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">02</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3><span class="sr-only">Step 2: </span>Take a practice test</h3><p>For exam-based credentials, we'll send practice-test instructions and review your score. The benchmark is typically 70–80%, depending on the exam.</p></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">03</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg></span><h3><span class="sr-only">Step 3: </span>Get it covered</h3><p>If approved, we'll contact you to arrange payment directly, such as an exam voucher or enrollment with the provider. No cash is transferred to applicants.</p></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">04</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><h3><span class="sr-only">Step 4: </span>Report &amp; pay it forward</h3><p>Share your official score report or certificate once you finish. An alumni pledge to help future students is optional.</p></article>
+        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">01</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></span><h3><span class="sr-only">Step 1: </span>Apply &amp; verify</h3><p>Tell us about the certification or credential you want and why. We'll follow up about identity and, where relevant, testing-profile verification.</p><span class="badge"><span>Identity verification</span></span></article>
+        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">02</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3><span class="sr-only">Step 2: </span>Take a practice test</h3><p>For exam-based credentials, we'll send practice-test instructions and review your score. The benchmark is typically <strong>70–80%</strong>, depending on the exam.</p><span class="badge"><span>70–80% benchmark</span></span></article>
+        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">03</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg></span><h3><span class="sr-only">Step 3: </span>Get it covered</h3><p>If approved, we'll contact you to arrange payment directly, such as an exam voucher or enrollment with the provider. <strong>No cash</strong> is transferred to applicants.</p><span class="badge"><span>No cash transfers</span></span></article>
+        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">04</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><h3><span class="sr-only">Step 4: </span>Report &amp; pay it forward</h3><p>Share your official score report or certificate once you finish. An alumni pledge to help future students is optional.</p><span class="badge"><span>Optional pledge</span></span></article>
       </div>
     </div></section>
 
@@ -598,7 +644,7 @@
       <div class="wrap rules-grid">
         <div data-reveal>
           <p class="eyebrow">Clear expectations</p>
-          <h2 class="mt-5">Trust is part of the process.</h2>
+          <h2 class="mt-5">Trust is part of <em class="em">the process.</em></h2>
           <p class="lede mt-6">These guidelines help us support students and make each grant count.</p>
         </div>
 
@@ -610,12 +656,12 @@
 
           <article class="rule card" data-reveal>
             <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-            <div><h3>48-hour notice</h3><p>If your schedule changes, tell us at least 48 hours in advance. Your testing provider may have additional rules.</p></div>
+            <div><h3>48-hour notice</h3><p>If your schedule changes, tell us at least <strong>48 hours</strong> in advance. Your testing provider may have additional rules.</p></div>
           </article>
 
           <article class="rule card" data-reveal>
             <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8M16 13H8M16 17H8"/></svg></span>
-            <div><h3>Conditional grant agreement</h3><p>If awarded a grant, you agree to give 48-hour notice for schedule changes and provide your official score report or certificate within 14 days after your exam or completion, regardless of the result.</p></div>
+            <div><h3>Conditional grant agreement</h3><p>If awarded a grant, you agree to give 48-hour notice for schedule changes and provide your official score report or certificate within <strong>14 days</strong> after your exam or completion, regardless of the result.</p></div>
           </article>
         </div>
       </div>
@@ -631,7 +677,7 @@
           <p class="eyebrow">Ready when you are</p>
 
           <h2 class="mt-5">
-            Let's get you certified.
+            Let's get you <em class="em">certified.</em>
           </h2>
 
           <p class="lede mt-6">
@@ -825,7 +871,7 @@
     </section>
 
     <!-- Frequently asked questions -->
-    <section id="faq" class="faq section scroll-mt-24"><div class="faq-inner"><div data-reveal><p class="eyebrow">The details</p><h2 class="mt-5">Good questions.<br>Clear answers.</h2></div><div class="faq-list" data-reveal>
+    <section id="faq" class="faq section scroll-mt-24"><div class="faq-inner"><div data-reveal><p class="eyebrow">The details</p><h2 class="mt-5">Good questions.<br><em class="em">Clear answers.</em></h2></div><div class="faq-list" data-reveal>
       <details><summary>What does the fund help cover?</summary><p>The fund is intended to cover eligible certification and credentialing fees that students would otherwise pay for themselves, such as industry exams or platform certificates like Bloomberg Market Concepts and Coursera. Applications are subject to review and available funding.</p></details>
       <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently a demo and does not submit applications.</p></details>
       <details><summary>What if I need to change my exam or start date?</summary><p>Give at least 48 hours' notice and follow any additional requirements from your testing provider.</p></details>
@@ -844,7 +890,7 @@
             <p class="eyebrow">Our supporters</p>
 
             <h2 class="mt-4">
-              Made possible together.
+              Made possible <em class="em">together.</em>
             </h2>
 
             <p class="mt-3 text-slate-600 dark:text-slate-400">
@@ -1174,15 +1220,9 @@
     </div>
   </dialog>
 
-  <!-- GSAP core + ScrollTrigger: pinned version with SRI, deferred. The page works without them (same pattern as Motion). -->
+  <!-- GSAP core + ScrollTrigger: pinned version with SRI, deferred. The page works without them. -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
-  <script>
-    // Deferred scripts run before DOMContentLoaded; register the plugin once, and do nothing if the CDN failed.
-    document.addEventListener("DOMContentLoaded", function () {
-      if (window.gsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-    });
-  </script>
 
   <script type="module">
     const root = document.documentElement;
@@ -1216,39 +1256,65 @@
     syncHeader();
     addEventListener("scroll", syncHeader, { passive: true });
 
-    // Dynamic import so the page still shows if the CDN is unreachable.
-    import("https://cdn.jsdelivr.net/npm/motion@14.12.0/+esm").then(({ animate, inView, stagger, scroll }) => {
-      if (!root.classList.contains("js-motion")) return;
+    // GSAP drives every entrance and scroll animation (pinned, SRI-checked scripts above).
+    // If GSAP is unreachable, or reduced motion is on, drop the gate class so nothing stays hidden.
+    const g = window.gsap, ST = window.ScrollTrigger;
+    if (!g || !ST || !root.classList.contains("js-motion")) {
+      root.classList.remove("js-motion");
+    } else {
+      g.registerPlugin(ST);
       window.__motionReady = true;
-      // Apple-style springs: critically damped (no overshoot) by default, a touch of bounce only for the chips.
-      const spring = { type: "spring", bounce: 0, duration: 0.55 };
 
-      // Hero: staggered entrance on load, then the floating chips pop in
-      animate(
-        "[data-hero]",
-        { opacity: [0, 1], y: [20, 0] },
-        { ...spring, duration: 0.6, delay: stagger(0.08) }
-      );
-      animate(
-        ".chip",
-        { opacity: [0, 1], scale: [0.92, 1], y: [12, 0] },
-        { type: "spring", bounce: 0.2, duration: 0.55, delay: stagger(0.15, { startDelay: 0.6 }) }
-      );
+      // Hero: staggered entrance on load, then the chips pop in.
+      g.timeline({ defaults: { ease: "power3.out" } })
+        .fromTo("[data-hero]", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 })
+        .fromTo(".chip", { opacity: 0, scale: 0.92, y: 12 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "back.out(1.5)", stagger: 0.15 }, 0.6);
 
-      // Below-the-fold blocks: fade up once when scrolled into view.
-      // Siblings get a small stagger so grids cascade instead of landing together.
-      document.querySelectorAll("[data-reveal]").forEach((el) => {
-        const siblings = [...el.parentElement.children].filter((c) => c.hasAttribute("data-reveal"));
-        const delay = Math.min(siblings.indexOf(el), 3) * 0.08;
-        const stop = inView(el, () => {
-          animate(el, { opacity: [0, 1], y: [20, 0] }, { ...spring, delay });
-          stop();
-        }, { margin: "0px 0px -10% 0px" });
+      // Below-the-fold blocks: fade up once as they enter, siblings staggered so grids cascade.
+      g.set("[data-reveal]", { y: 20 });
+      ST.batch("[data-reveal]", {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) => g.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08, overwrite: true })
       });
 
-      // Reading-progress hairline
-      scroll(animate("#progress", { transform: ["scaleX(0)", "scaleX(1)"] }, { ease: "linear" }));
-    }).catch(() => root.classList.remove("js-motion"));
+      // Reading-progress hairline, scrubbed to the page scroll.
+      g.fromTo("#progress", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
+    }
+
+    // Voucher tilt + glare: pointer-driven, critically damped (no overshoot), settles back when the pointer leaves.
+    (function () {
+      const card = document.querySelector(".voucher");
+      const zone = document.querySelector(".hero-visual");
+      if (!card || !zone || !matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const MAX = 7; // degrees
+      let tx = 0, ty = 0, cx = 0, cy = 0, glare = 0, targetGlare = 0, raf = 0;
+      function frame() {
+        cx += (tx - cx) * 0.14; cy += (ty - cy) * 0.14; glare += (targetGlare - glare) * 0.14;
+        card.style.setProperty("--tilt-x", cx.toFixed(2) + "deg");
+        card.style.setProperty("--tilt-y", cy.toFixed(2) + "deg");
+        card.style.setProperty("--glare-o", glare.toFixed(3));
+        const settled = Math.abs(tx - cx) < 0.02 && Math.abs(ty - cy) < 0.02 && Math.abs(targetGlare - glare) < 0.01;
+        raf = settled ? 0 : requestAnimationFrame(frame);
+      }
+      const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+      zone.addEventListener("pointermove", (e) => {
+        if (e.pointerType !== "mouse") return;
+        const r = card.getBoundingClientRect();
+        const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+        ty = (px - 0.5) * 2 * MAX;
+        tx = (0.5 - py) * 2 * MAX;
+        card.style.setProperty("--glare-x", (px * 100).toFixed(1) + "%");
+        card.style.setProperty("--glare-y", (py * 100).toFixed(1) + "%");
+        targetGlare = 1;
+        kick();
+      }, { passive: true });
+      zone.addEventListener("pointerleave", () => { tx = 0; ty = 0; targetGlare = 0; kick(); });
+    })();
+
   </script>
 
   <script>
