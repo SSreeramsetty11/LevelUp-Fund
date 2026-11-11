@@ -8,8 +8,6 @@
   <title>The LevelUp Fund</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Three.js is only imported (lazily, after load) for the decorative glass objects. Pinned version. -->
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 
   <script>
     tailwind.config = {
@@ -420,11 +418,6 @@
     /* Confetti */
     .confetti-bit { position: absolute; width: .5rem; height: .8rem; border-radius: 2px; pointer-events: none; }
     @media (prefers-reduced-motion: reduce) { .theme-toggle.spin .icon { animation: none; } }
-
-    /* Real 3D glass objects: one fixed WebGL canvas behind the content, so the frosted cards blur it like glass. */
-    .glass3d { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1.2s ease-out; }
-    .glass3d.is-on { opacity: 1; }
-    @media (prefers-contrast: more), (prefers-reduced-motion: reduce) { .glass3d { display: none; } }
 
     /* ---------- Apple-design refinements ---------- */
     /* Instant press feedback: the scale lands within 100ms, release eases back. */
@@ -2412,153 +2405,5 @@
     renderSponsors();
   </script>
 
-  <script type="module">
-    // Decorative 3D glass objects (Three.js). They float, turn as you scroll, drift away from the cursor and spin when clicked.
-    // Skipped for reduced motion, data saver and browsers without WebGL; the page never depends on them.
-    (function () {
-      const conn = navigator.connection;
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches || (conn && conn.saveData)) return;
-      const start = () => setTimeout(boot, 500);
-      if (document.readyState === "complete") start(); else addEventListener("load", start, { once: true });
-
-      async function boot() {
-        let THREE;
-        try { THREE = await import("three"); } catch (e) { return; }
-
-        const canvas = document.createElement("canvas");
-        canvas.className = "glass3d"; canvas.setAttribute("aria-hidden", "true");
-        document.body.insertBefore(canvas, document.querySelector(".ambient").nextSibling);
-        let renderer;
-        try { renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" }); }
-        catch (e) { canvas.remove(); return; }
-        renderer.setClearColor(0x000000, 0);
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-
-        const scene = new THREE.Scene();
-        const pmrem = new THREE.PMREMGenerator(renderer);
-        // Colourful studio: a painted equirect gradient with soft boxes, so the glass reflects gold, rose, lilac and blue.
-        (function () {
-          const c = document.createElement("canvas"); c.width = 1024; c.height = 512;
-          const x = c.getContext("2d");
-          const band = x.createLinearGradient(0, 0, 1024, 0);
-          [["#ffd27a", 0], ["#ff9fcf", .2], ["#b69cff", .4], ["#7fb0ff", .6], ["#8ff0d2", .8], ["#ffd27a", 1]].forEach(([col, p]) => band.addColorStop(p, col));
-          x.fillStyle = band; x.fillRect(0, 0, 1024, 512);
-          const sky = x.createLinearGradient(0, 0, 0, 512);
-          sky.addColorStop(0, "rgba(255,255,255,.9)"); sky.addColorStop(.35, "rgba(255,255,255,0)"); sky.addColorStop(.75, "rgba(20,24,60,.45)"); sky.addColorStop(1, "rgba(10,12,30,.8)");
-          x.fillStyle = sky; x.fillRect(0, 0, 1024, 512);
-          x.fillStyle = "rgba(255,255,255,.95)";
-          [[140, 150, 120, 40], [470, 120, 150, 34], [760, 170, 110, 44], [930, 110, 90, 30]].forEach(([a, b, w, h]) => x.fillRect(a, b, w, h));
-          const tex = new THREE.CanvasTexture(c);
-          tex.mapping = THREE.EquirectangularReflectionMapping; tex.colorSpace = THREE.SRGBColorSpace;
-          scene.environment = pmrem.fromEquirectangular(tex).texture;
-          tex.dispose();
-        })();
-        const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-200, -300, 400); scene.add(key);
-        const rim = new THREE.DirectionalLight(0xffd98a, 1.1); rim.position.set(300, 200, -200); scene.add(rim);
-
-        const camera = new THREE.OrthographicCamera(0, 100, 0, 100, -2000, 2000); // pixel space, y down
-        let W = 0, H = 0;
-        function resize() {
-          W = innerWidth; H = innerHeight;
-          renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-          renderer.setSize(W, H, false);
-          camera.left = 0; camera.right = W; camera.top = 0; camera.bottom = H; camera.updateProjectionMatrix();
-        }
-        resize(); addEventListener("resize", resize);
-
-        const glass = (color, extra) => new THREE.MeshPhysicalMaterial(Object.assign({
-          color, metalness: 0, roughness: 0.06, transparent: true, opacity: 0.97, ior: 1.5,
-          iridescence: 1, iridescenceIOR: 2.0, iridescenceThicknessRange: [250, 1250],
-          clearcoat: 1, clearcoatRoughness: 0.03, envMapIntensity: 1.8, side: THREE.DoubleSide
-        }, extra || {}));
-
-        // Hollow tube profile for a Lathe: rounded rectangle cross-section
-        const tubeProfile = [[.62, -1.1], [.97, -1.1], [1, -1.07], [1, 1.07], [.97, 1.1], [.62, 1.1], [.6, 1.07], [.6, -1.07], [.62, -1.1]].map(([x, y]) => new THREE.Vector2(x, y));
-
-        const geoms = {
-          ring: new THREE.TorusGeometry(1, 0.44, 56, 120),
-          crystal: (() => { const g = new THREE.IcosahedronGeometry(1, 0); g.scale(0.82, 1.3, 0.82); return g; })(),
-          tube: new THREE.LatheGeometry(tubeProfile, 72),
-          orb: new THREE.SphereGeometry(1, 56, 40)
-        };
-
-        // size = radius in px at 1280px wide; ax/ay = anchor position inside the element's box; dx/dy px offsets
-        const defs = [
-          { kind: "ring",    sel: ".voucher",                 ax: 0.02, ay: 0.02, dx: -34, dy: -26, size: 46, color: 0xffb300, spin: [0.18, 0.34, 0.1], phase: 0,   edge: "left",  edgeX: 0.12, tilt: [0.9, 0.2, 0.3] },
-          { kind: "crystal", sel: ".voucher",                 ax: 1.0,  ay: 1.0,  dx: 26,  dy: 22,  size: 40, color: 0x5b8cff, spin: [0.1, 0.5, 0.05],  phase: 1.7, edge: "right", edgeX: 0.9,  tilt: [0.3, 0.4, 0.2] },
-          { kind: "tube",    sel: "#how-it-works .section-head", ax: 1.0, ay: 0.5, dx: 170, dy: 30, size: 34, color: 0x9a6bff, spin: [0.12, 0.28, 0.2], phase: 3.1, edge: "right", edgeX: 0.95, tilt: [0.6, 0.1, 0.8] },
-          { kind: "crystal", sel: ".mission-art",             ax: 1.0,  ay: 0.0,  dx: 16,  dy: -18, size: 30, color: 0xff8f4d, spin: [0.14, -0.4, 0.1], phase: 2.2, edge: "right", edgeX: 0.94, tilt: [0.2, 0.6, 0.1] },
-          { kind: "orb",     sel: "#rules",                   ax: 0.04, ay: 0.82, dx: 0,   dy: 0,   size: 20, color: 0xffcf6b, spin: [0.05, 0.1, 0],    phase: 0.9, edge: "left",  edgeX: 0.06, tilt: [0, 0, 0] },
-          { kind: "orb",     sel: ".faq",                     ax: 0.97, ay: 0.12, dx: 0,   dy: 0,   size: 15, color: 0x7fb0ff, spin: [0.05, 0.1, 0],    phase: 4.4, edge: "right", edgeX: 0.94, tilt: [0, 0, 0] }
-        ].map((d) => {
-          const el = document.querySelector(d.sel);
-          if (!el) return null;
-          const mesh = new THREE.Mesh(geoms[d.kind], glass(d.color, d.kind === "crystal" ? { roughness: 0.0, envMapIntensity: 2.1, clearcoat: 0 } : d.kind === "tube" ? { envMapIntensity: 2.2, iridescenceThicknessRange: [300, 1300] } : {}));
-          if (d.kind === "crystal") mesh.material.flatShading = true;
-          mesh.material.emissive = new THREE.Color(d.color); mesh.material.emissiveIntensity = 0.16;
-          mesh.rotation.set(d.tilt[0], d.tilt[1], d.tilt[2]);
-          scene.add(mesh);
-          return Object.assign(d, { el, mesh, ox: 0, oy: 0, boost: 0 });
-        }).filter(Boolean);
-
-        // Pointer + click + scroll life
-        let mx = -9999, my = -9999, lastScroll = scrollY, scrollVel = 0;
-        addEventListener("pointermove", (e) => { if (e.pointerType === "mouse") { mx = e.clientX; my = e.clientY; } }, { passive: true });
-        addEventListener("pointerleave", () => { mx = my = -9999; });
-        addEventListener("pointerdown", (e) => {
-          defs.forEach((o) => { if (o.vis && Math.hypot(e.clientX - o.x, e.clientY - o.y) < o.R * 1.4) o.boost = 9; });
-        }, { passive: true });
-
-        const setTheme = () => {
-          const light = document.documentElement.getAttribute("data-theme") === "light";
-          renderer.toneMappingExposure = light ? 1.0 : 1.12;
-          defs.forEach((o) => { const hi = o.kind === "crystal" ? 2.4 : o.kind === "tube" ? 2.4 : 1.8; o.mesh.material.envMapIntensity = hi * (light ? 0.95 : 1.1); o.mesh.material.opacity = light ? 0.97 : 0.95; o.mesh.material.emissiveIntensity = light ? 0.1 : 0.2; });
-        };
-        setTheme();
-        new MutationObserver(setTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-
-        const small = () => W < 640;
-        let last = performance.now(), anyVisible = false;
-        function tick(now) {
-          requestAnimationFrame(tick);
-          if (document.hidden) { last = now; return; }
-          const dt = Math.min(0.05, (now - last) / 1000); last = now;
-          const t = now / 1000;
-          scrollVel = scrollVel * 0.9 + (scrollY - lastScroll) * 0.1; lastScroll = scrollY;
-          const k = clamp(W / 1280, 0.62, 1);
-          anyVisible = false;
-          defs.forEach((o) => {
-            const r = o.el.getBoundingClientRect();
-            o.R = o.size * k;
-            let x = r.left + r.width * o.ax + o.dx * k, y = r.top + r.height * o.ay + o.dy * k;
-            if (small()) x = W * o.edgeX; // on phones keep objects at the screen edges, away from the copy
-            x = clamp(x, o.R * 0.5, W - o.R * 0.5);
-            o.vis = y > -o.R * 2 && y < H + o.R * 2;
-            o.mesh.visible = o.vis;
-            if (!o.vis) return;
-            anyVisible = true;
-            // drift away from the cursor, spring back
-            const dx = x - mx, dy = y - my, d = Math.hypot(dx, dy) || 1, reach = o.R * 3.2;
-            const push = d < reach ? Math.pow(1 - d / reach, 2) * o.R * 1.6 : 0;
-            o.ox += (dx / d * push - o.ox) * Math.min(1, dt * 6);
-            o.oy += (dy / d * push - o.oy) * Math.min(1, dt * 6);
-            if (push > 0.5) o.boost = Math.max(o.boost, 1.2);
-            o.boost *= Math.pow(0.12, dt); // spin impulses decay smoothly
-            o.x = x; o.y = y;
-            const bob = Math.sin(t * 0.9 + o.phase) * 10 * k;
-            o.mesh.position.set(x + o.ox, y + o.oy + bob, 0);
-            o.mesh.scale.setScalar(o.R);
-            o.mesh.rotation.x += (o.spin[0] + o.boost * 0.6) * dt + scrollVel * 0.0012;
-            o.mesh.rotation.y += (o.spin[1] + o.boost) * dt;
-            o.mesh.rotation.z += o.spin[2] * dt - scrollVel * 0.0008;
-          });
-          if (anyVisible) renderer.render(scene, camera);
-        }
-        function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
-        requestAnimationFrame(tick);
-        requestAnimationFrame(() => canvas.classList.add("is-on"));
-      }
-    })();
-  </script>
 </body>
 </html>
