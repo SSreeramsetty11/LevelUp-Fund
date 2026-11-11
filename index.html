@@ -373,11 +373,51 @@
     /* Voucher tilt: the card follows the pointer in 3D and catches a soft light (fine pointers only; JS sets the vars). */
     .voucher { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); will-change: transform; }
     .voucher::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(18rem 14rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.22), transparent 62%); transition: opacity .25s ease-out; }
-    @media (prefers-reduced-motion: reduce), (hover: none) { .voucher { transform: none; will-change: auto; } .voucher::after { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .voucher { transform: none; will-change: auto; } .voucher::after { display: none; } }
 
     /* Smooth page transitions between the home and team pages (progressive enhancement). */
     @view-transition { navigation: auto; }
     .site-header { view-transition-name: site-header; }
+
+    /* ---------- Playful, responsive interactions ---------- */
+    /* Cards lean toward the pointer (vars set by makeTilt) */
+    .tilt.is-tilting { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-s, 1)); will-change: transform; }
+    .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.2), transparent 62%); }
+    html[data-theme="light"] .tilt::after { background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.75), transparent 62%); }
+    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, rotate .25s var(--ease-out), scale .25s var(--ease-out); }
+    .process-row .num { translate: calc(var(--px, 0) * -8px) calc(var(--py, 0) * -6px); transition: translate .2s ease-out; }
+    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { rotate: -7deg; scale: 1.08; } .trust-item:hover .icon { scale: 1.18; rotate: -6deg; } .marquee-item:hover { color: var(--text); } }
+    .trust-item .icon { transition: scale .25s var(--ease-out), rotate .25s var(--ease-out); }
+    .marquee-item { transition: color .2s ease; }
+    /* Magnetic buttons */
+    .pill { translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); }
+    @media (hover: hover) and (pointer: fine) { .pill:hover { --lift: -2px; translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); } }
+    /* Nav wayfinding underline */
+    .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: .1rem; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .28s var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .nav-link:hover::after { transform: scaleX(1); } }
+    .nav-link[aria-current="true"]::after { transform: scaleX(1); }
+    .nav-link[aria-current="true"] { color: var(--text); }
+    /* Draggable marquee */
+    .marquee-track.is-driven { animation: none; will-change: transform; }
+    .marquee-viewport { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .marquee-viewport.is-dragging { cursor: grabbing; }
+    /* Theme toggle spin */
+    @keyframes toggle-spin { from { rotate: -140deg; scale: .6; } to { rotate: 0deg; scale: 1; } }
+    .theme-toggle.spin .icon { animation: toggle-spin .5s var(--ease-out); }
+    /* FAQ glides open and closed where the browser supports it */
+    :root { interpolate-size: allow-keywords; }
+    .faq details::details-content { block-size: 0; opacity: 0; overflow: hidden; transition: block-size .35s var(--ease-out), opacity .25s ease-out, content-visibility .35s allow-discrete; }
+    .faq details[open]::details-content { block-size: auto; opacity: 1; }
+    /* Form: a quiet tick on each field that checks out, and a meter that fills as the essay grows */
+    #grant-form .field[data-valid="true"]:not(textarea):not([type="number"]) { padding-right: 2.75rem; background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.1rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5C85C' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+    html[data-theme="light"] #grant-form .field[data-valid="true"]:not(textarea):not([type="number"]) { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237D5C0C' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"); }
+    .essay-meter { height: 4px; margin-top: .5rem; border-radius: 99px; background: var(--line); overflow: hidden; }
+    .essay-meter i { display: block; height: 100%; border-radius: inherit; transform-origin: 0 50%; transform: scaleX(0); background: var(--gold); transition: transform .25s var(--ease-out), background-color .2s ease; }
+    .essay-meter i[data-level="near"] { background: #E8A13A; }
+    .essay-meter i[data-level="over"] { background: #F87171; }
+    /* Confetti */
+    .confetti-bit { position: absolute; width: .5rem; height: .8rem; border-radius: 2px; pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { .theme-toggle.spin .icon { animation: none; } }
 
     /* ---------- Apple-design refinements ---------- */
     /* Instant press feedback: the scale lands within 100ms, release eases back. */
@@ -827,6 +867,7 @@
               ></textarea>
 
               <p id="essay-count" class="mt-2 text-xs text-slate-400" aria-live="polite">0 / 499 words</p>
+              <div class="essay-meter" aria-hidden="true"><i id="essay-meter-fill"></i></div>
               <p id="student-info-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
@@ -958,8 +999,8 @@
     aria-labelledby="success-title"
     class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 dark:bg-slate-900 dark:text-white"
   >
-    <div class="p-8 text-center">
-      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-600 dark:bg-emerald-950">
+    <div class="relative p-8 text-center">
+      <div id="success-tile" class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-600 dark:bg-emerald-950">
         ✓
       </div>
 
@@ -1275,7 +1316,7 @@
       ST.batch("[data-reveal]", {
         start: "top 88%",
         once: true,
-        onEnter: (batch) => g.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08, overwrite: true })
+        onEnter: (batch) => g.to(batch, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08, overwrite: true, onComplete: () => g.set(batch, { clearProps: "transform" }) })
       });
 
       // Reading-progress hairline, scrubbed to the page scroll.
@@ -1284,36 +1325,139 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
     }
 
-    // Voucher tilt + glare: pointer-driven, critically damped (no overshoot), settles back when the pointer leaves.
-    (function () {
-      const card = document.querySelector(".voucher");
-      const zone = document.querySelector(".hero-visual");
-      if (!card || !zone || !matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const MAX = 7; // degrees
-      let tx = 0, ty = 0, cx = 0, cy = 0, glare = 0, targetGlare = 0, raf = 0;
+    // ---------- Interactions: everything you touch answers right away, follows 1:1 and eases back ----------
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+    // Tilt + glare: the card leans toward the pointer, catches a soft light, presses in on pointer-down and springs back.
+    // Mouse tracks on hover; touch and pen respond while pressed. Critically damped, so nothing overshoots.
+    function makeTilt(el, { max = 6, zone = el, press = 0.985, hover = 1, parallax = false } = {}) {
+      let tx = 0, ty = 0, cx = 0, cy = 0, ts = 1, cs = 1, tg = 0, glare = 0, raf = 0, down = false;
+      const set = (k, v) => el.style.setProperty(k, v);
       function frame() {
-        cx += (tx - cx) * 0.14; cy += (ty - cy) * 0.14; glare += (targetGlare - glare) * 0.14;
-        card.style.setProperty("--tilt-x", cx.toFixed(2) + "deg");
-        card.style.setProperty("--tilt-y", cy.toFixed(2) + "deg");
-        card.style.setProperty("--glare-o", glare.toFixed(3));
-        const settled = Math.abs(tx - cx) < 0.02 && Math.abs(ty - cy) < 0.02 && Math.abs(targetGlare - glare) < 0.01;
-        raf = settled ? 0 : requestAnimationFrame(frame);
+        cx += (tx - cx) * 0.14; cy += (ty - cy) * 0.14; cs += (ts - cs) * 0.18; glare += (tg - glare) * 0.14;
+        set("--tilt-x", cx.toFixed(2) + "deg"); set("--tilt-y", cy.toFixed(2) + "deg");
+        set("--tilt-s", cs.toFixed(4)); set("--glare-o", glare.toFixed(3));
+        const done = Math.abs(tx - cx) < 0.02 && Math.abs(ty - cy) < 0.02 && Math.abs(ts - cs) < 0.0005 && Math.abs(tg - glare) < 0.01;
+        if (done) { raf = 0; if (!tx && !ty && ts === 1 && !tg) el.classList.remove("is-tilting"); }
+        else raf = requestAnimationFrame(frame);
       }
-      const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
-      zone.addEventListener("pointermove", (e) => {
-        if (e.pointerType !== "mouse") return;
-        const r = card.getBoundingClientRect();
-        const px = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-        const py = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
-        ty = (px - 0.5) * 2 * MAX;
-        tx = (0.5 - py) * 2 * MAX;
-        card.style.setProperty("--glare-x", (px * 100).toFixed(1) + "%");
-        card.style.setProperty("--glare-y", (py * 100).toFixed(1) + "%");
-        targetGlare = 1;
+      const kick = () => { el.classList.add("is-tilting"); if (!raf) raf = requestAnimationFrame(frame); };
+      function aim(e) {
+        if (el.style.transform) return; // still mid-reveal: GSAP owns the transform
+        const r = el.getBoundingClientRect();
+        const px = clamp((e.clientX - r.left) / r.width, 0, 1), py = clamp((e.clientY - r.top) / r.height, 0, 1);
+        ty = (px - 0.5) * 2 * max; tx = (0.5 - py) * 2 * max;
+        set("--glare-x", (px * 100).toFixed(1) + "%"); set("--glare-y", (py * 100).toFixed(1) + "%");
+        if (parallax) { set("--px", ((px - 0.5) * 2).toFixed(2)); set("--py", ((py - 0.5) * 2).toFixed(2)); }
+        tg = 1; ts = down ? press : hover;
         kick();
-      }, { passive: true });
-      zone.addEventListener("pointerleave", () => { tx = 0; ty = 0; targetGlare = 0; kick(); });
-    })();
+      }
+      function rest() {
+        tx = ty = 0; tg = 0; ts = 1; down = false;
+        if (parallax) { set("--px", 0); set("--py", 0); }
+        kick();
+      }
+      zone.addEventListener("pointermove", (e) => { if (e.pointerType === "mouse" || down) aim(e); }, { passive: true });
+      zone.addEventListener("pointerdown", (e) => { down = true; aim(e); }, { passive: true });
+      zone.addEventListener("pointerup", (e) => { down = false; if (e.pointerType === "mouse") { ts = hover; kick(); } else rest(); });
+      zone.addEventListener("pointercancel", rest);
+      zone.addEventListener("pointerleave", rest);
+    }
+
+    if (!reducedMotion) {
+      const voucher = document.querySelector(".voucher");
+      if (voucher) makeTilt(voucher, { max: 7, zone: document.querySelector(".hero-visual"), press: 0.985 });
+      document.querySelectorAll(".process-row, .rule").forEach((el) => { el.classList.add("tilt"); makeTilt(el, { max: 4.5, hover: 1.012, parallax: true }); });
+      const art = document.querySelector(".mission-art");
+      if (art) { art.classList.add("tilt"); makeTilt(art, { max: 3, hover: 1.008 }); }
+
+      // Magnetic buttons: they lean a few pixels toward the cursor, then ease back.
+      document.querySelectorAll(".pill, .nav-apply").forEach((btn) => {
+        btn.addEventListener("pointermove", (e) => {
+          if (e.pointerType !== "mouse") return;
+          const r = btn.getBoundingClientRect();
+          btn.style.setProperty("--mx", clamp((e.clientX - r.left - r.width / 2) * 0.14, -5, 5).toFixed(1) + "px");
+          btn.style.setProperty("--my", clamp((e.clientY - r.top - r.height / 2) * 0.2, -4, 4).toFixed(1) + "px");
+        }, { passive: true });
+        btn.addEventListener("pointerleave", () => { btn.style.setProperty("--mx", "0px"); btn.style.setProperty("--my", "0px"); });
+      });
+
+      // Draggable marquee: drifts on its own, slows under the pointer, can be flung, and surges a little as you scroll.
+      const track = document.querySelector(".marquee-track");
+      const viewport = document.querySelector(".marquee-viewport");
+      if (track && viewport && window.gsap) {
+        const setW = () => track.firstElementChild.offsetWidth;
+        const BASE = -46; // px per second
+        let x = 0, v = BASE, dragging = false, hovered = false, boost = 0, visible = true, lastX = 0, lastT = 0, lastScroll = scrollY;
+        track.classList.add("is-driven");
+        viewport.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hovered = true; });
+        viewport.addEventListener("pointerleave", () => { hovered = false; });
+        viewport.addEventListener("pointerdown", (e) => {
+          dragging = true; lastX = e.clientX; lastT = performance.now(); try { viewport.setPointerCapture(e.pointerId); } catch (err) { /* synthetic or inactive pointer */ } viewport.classList.add("is-dragging");
+        });
+        viewport.addEventListener("pointermove", (e) => {
+          if (!dragging) return;
+          const now = performance.now(), dx = e.clientX - lastX, dt = Math.max(1, now - lastT);
+          x += dx; v = v * 0.6 + (dx / dt * 1000) * 0.4; lastX = e.clientX; lastT = now;
+        });
+        const release = () => { dragging = false; viewport.classList.remove("is-dragging"); };
+        viewport.addEventListener("pointerup", release);
+        viewport.addEventListener("pointercancel", release);
+        addEventListener("scroll", () => { boost = Math.min(2.2, boost + Math.abs(scrollY - lastScroll) / 90); lastScroll = scrollY; }, { passive: true });
+        new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }).observe(viewport);
+        window.gsap.ticker.add((time, deltaMs) => {
+          if (!visible) return;
+          const dt = Math.min(0.05, deltaMs / 1000);
+          if (!dragging) {
+            const target = BASE * (hovered ? 0.3 : 1) * (1 + boost);
+            v += (target - v) * Math.min(1, dt * 2.6); // a fling decays smoothly back to the drift speed
+            x += v * dt;
+          }
+          boost *= 0.94;
+          const w = setW();
+          if (w) { x = ((x % w) - w) % w; } // wrap seamlessly in either direction
+          track.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
+        });
+      }
+
+      // Nav wayfinding: the link for the section you're in gets the gold underline.
+      const spyTargets = [["#how-it-works", "how-it-works"], ["#sponsors", "sponsors"]];
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const link = document.querySelectorAll(`.site-header .nav-link[href="#${entry.target.id}"]`);
+          link.forEach((l) => { if (entry.isIntersecting) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current"); });
+        });
+      }, { rootMargin: "-40% 0px -55% 0px" });
+      spyTargets.forEach(([sel]) => { const t = document.querySelector(sel); if (t) spy.observe(t); });
+    }
+
+    // Theme toggle gives a little spin so the change feels caused by the tap.
+    document.querySelectorAll(".theme-toggle").forEach((b) => b.addEventListener("click", () => {
+      b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin");
+    }));
+
+    // Submit celebration: the check springs in and a burst of confetti leaves it.
+    window.celebrate = celebrate;
+    function celebrate() {
+      const g2 = window.gsap;
+      if (!g2 || reducedMotion) return;
+      const host = successDialog.querySelector(".relative");
+      const tile = document.getElementById("success-tile");
+      g2.fromTo(tile, { scale: 0.4, rotate: -14 }, { scale: 1, rotate: 0, duration: 0.6, ease: "back.out(2.4)" });
+      const box = host.getBoundingClientRect(), t = tile.getBoundingClientRect();
+      const ox = t.left + t.width / 2 - box.left, oy = t.top + t.height / 2 - box.top;
+      const colors = ["#F5C85C", "#FFE7B8", "#9FB8FF", "#E7B6FF", "#FFFFFF"];
+      for (let i = 0; i < 26; i++) {
+        const bit = document.createElement("i");
+        bit.className = "confetti-bit";
+        bit.style.cssText = `left:${ox}px;top:${oy}px;background:${colors[i % colors.length]}`;
+        host.append(bit);
+        const angle = Math.random() * Math.PI * 2, dist = 60 + Math.random() * 120;
+        g2.fromTo(bit, { x: 0, y: 0, scale: 1, opacity: 1, rotate: 0 },
+          { x: Math.cos(angle) * dist, y: Math.sin(angle) * dist + 70, rotate: Math.random() * 540 - 270, scale: 0.4, opacity: 0, duration: 0.9 + Math.random() * 0.5, ease: "power2.out", onComplete: () => bit.remove() });
+      }
+    }
 
   </script>
 
@@ -1393,6 +1537,7 @@
 
       field.removeAttribute("aria-invalid");
       field.removeAttribute("aria-describedby");
+      field.removeAttribute("data-valid");
 
       error.textContent = "";
       error.classList.add("hidden");
@@ -1409,8 +1554,12 @@
       const text = value.trim();
       return text ? text.split(/\s+/).length : 0;
     }
+    const essayFill = document.getElementById("essay-meter-fill");
     function updateEssayCount() {
-      essayCount.textContent = `${countEssayWords(essayField.value)} / 499 words`;
+      const words = countEssayWords(essayField.value);
+      essayCount.textContent = `${words} / 499 words`;
+      essayFill.style.transform = `scaleX(${Math.min(1, words / 499).toFixed(3)})`;
+      essayFill.dataset.level = words >= 500 ? "over" : words >= 450 ? "near" : "ok";
     }
     essayField.addEventListener("input", updateEssayCount);
 
@@ -1449,7 +1598,7 @@
       field.addEventListener("blur", () => {
         if (!field.value.trim()) return;
         const message = fieldMessage(field);
-        if (message) showFieldError(field, message); else clearFieldError(field);
+        if (message) showFieldError(field, message); else { clearFieldError(field); field.dataset.valid = "true"; }
       });
     });
 
@@ -1527,6 +1676,7 @@
       updateEssayCount();
       successDialog.showModal();
       document.getElementById("close-success").focus();
+      if (window.celebrate) window.celebrate();
     });
 
     document.getElementById("close-success").addEventListener("click", () => {
