@@ -12,6 +12,8 @@
     html[data-theme="light"] { --glass-bg: rgba(255,255,255,.55); --glass-bg-2: rgba(255,255,255,.45); --glass-strong: rgba(255,255,255,.74); --glass-border: rgba(255,255,255,.85); --glass-hi: rgba(255,255,255,.95); --glass-lo: rgba(16,28,53,.07); --glass-shadow: 0 22px 44px -26px rgba(16,28,53,.34), 0 0 0 1px rgba(16,28,53,.05); --sheen-1: rgba(255,255,255,.75); --sheen-2: rgba(255,255,255,.2); --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(255,190,150,.32); color-scheme: light; --page: #F8F7F2; --bg-2: #F0F1EB; --text: #101C35; --muted: #596579; --accent: #7D5C0C; --line: #E2E5EA; --line-2: #C9CED6; --fill-hover: #F0F1EB; --header-bg: rgba(248,247,242,.84); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.26), transparent 62%); --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18); --photo-bg: #F0F1EB; --dot: #C9962B; --brand-dot: #8A6410; }
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
     @media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
+    @view-transition { navigation: auto; }
+    .site-header { view-transition-name: site-header; }
     .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
     .ambient i { position: absolute; border-radius: 50%; will-change: transform; animation: drift 28s ease-in-out infinite alternate; }
     .ambient .b1 { width: min(46rem,130vw); height: min(46rem,130vw); left: -12rem; top: -10rem; background: radial-gradient(closest-side, var(--blob-1), transparent); }
@@ -71,13 +73,13 @@
   <div class="page-hero">
     <div class="mx-auto max-w-7xl px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
       <p class="eyebrow rise"><i aria-hidden="true"></i>The people behind the fund</p>
-      <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="display rise max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-6xl" style="animation-delay:.08s">People invested in your next step.</h1><p class="rise max-w-lg muted text-lg leading-8" style="animation-delay:.16s">Meet the people working to make certifications and credentials more accessible to students.</p></div>
+      <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="display rise max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-6xl" style="animation-delay:.08s">Meet the team.</h1><p class="rise max-w-lg muted text-lg leading-8" style="animation-delay:.16s">The people who run the LevelUp Fund.</p></div>
     </div>
   </div>
   <main class="mx-auto min-h-[50vh] max-w-7xl px-6 pb-24 pt-14 sm:px-8">
     <div id="team-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="empty rounded-2xl border border-dashed p-8 text-slate-400" style="border-color:var(--line-2)">Team profiles are coming soon.</p>
   </main>
-  <footer class="px-6 py-12 text-slate-300 sm:px-8"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="flex items-center gap-2.5 font-bold text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></p><p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">Helping students pursue certifications and credentials by reducing the cost of exam and program fees.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
+  <footer class="px-6 py-12 text-slate-300 sm:px-8"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="flex items-center gap-2.5 font-bold text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></p><p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
     import { createSharedAdmin } from "./src/shared-admin.js";
