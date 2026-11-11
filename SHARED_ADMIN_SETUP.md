@@ -26,3 +26,9 @@ The site uses only a public publishable key. The database's row-level securityâ€
 - Confirm logout and a reload prevent access until the admin signs in again, and check failures are shown rather than silently reported as successful.
 - The current demo stores old sample records in each browser. Those records are not automatically migrated into the shared database.
 - Test the public submission path, spam controls, backup and retention settings, privacy notice, admin onboarding and recovery, and error handling before accepting real applications. The current branch does not provide automated decision emails, an abuse-prevention system, or a migration tool.
+
+## Applicants under 13
+
+The fund may accept applicants under 13. This test version does **not** implement parent verification, notice, consent, parent access, or child-data deletion workflows. Do not use real children's information in the test project. Before opening real applications, work with Hack Club Bank and appropriate privacy counsel to determine which obligations apply, how a parent will receive notice and provide verifiable consent where required, and how parent access, deletion, and retention will be handled. A self-attested checkbox by itself does not verify that the person is a parent. FTC reference: https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions
+
+Inter font files are served locally. Tailwind CSS, the Supabase client CDN, and Supabase still receive requests as part of operating the site; assess those services when preparing the privacy notice.
