@@ -162,39 +162,23 @@
     .eg .tag { padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: var(--fill); color: var(--muted); }
     .demo-note { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.25rem; padding: .35rem .8rem; border: 1px solid var(--line); border-radius: 999px; font-size: .75rem; color: var(--faint); background: var(--fill); }
 
-    .hero-visual { position: relative; max-width: 27rem; width: 100%; margin-inline: auto; padding: 1.5rem 1rem; }
+    .hero-visual { position: relative; max-width: 31rem; width: 100%; margin-inline: auto; padding: 1.5rem 1rem; }
     .hero-visual::before { content: ""; position: absolute; inset: 8% 4%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(245,200,92,.22), transparent); filter: blur(30px); }
     .voucher-wrap { filter: drop-shadow(0 30px 38px var(--voucher-shadow)); rotate: -2.5deg; perspective: 900px; }
-    .voucher { --tear: calc(100% - 6.25rem); position: relative; border-radius: 1.25rem; overflow: hidden;
-      background: linear-gradient(155deg,#1F2E4A 0%,#162238 52%,#111B2E 100%);
-      -webkit-mask: radial-gradient(circle .7rem at 0 var(--tear), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle .7rem at 100% var(--tear), transparent 98%, #000) right / 51% 100% no-repeat;
-      mask: radial-gradient(circle .7rem at 0 var(--tear), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle .7rem at 100% var(--tear), transparent 98%, #000) right / 51% 100% no-repeat; }
-    .voucher::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), inset 0 1px 0 rgba(255,255,255,.18); background: radial-gradient(18rem 10rem at 100% 0%, rgba(245,200,92,.12), transparent 70%); }
-    .v-top { display: flex; align-items: center; gap: .75rem; padding: 1.25rem 1.35rem 0; }
-    .v-kicker { white-space: nowrap; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-    .v-title { white-space: nowrap; font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; }
-    .v-badge { margin-left: auto; padding: .3rem .65rem; border-radius: 999px; font-size: .7rem; font-weight: 700; color: var(--on-gold); background: var(--gold); white-space: nowrap; }
-    .v-body { padding: 1.6rem 1.35rem 1.5rem; }
-    .v-label { font-size: .66rem; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); font-weight: 600; }
-    .v-exam { margin-top: .3rem; font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-    .v-grid { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 1rem; margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px dashed rgba(255,255,255,.16); }
-    .v-val { margin-top: .25rem; font-size: .88rem; font-weight: 600; }
-    .v-val.gold { color: var(--gold); }
-    .v-stub { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 6.25rem; padding: 0 1.35rem; border-top: 2px dashed rgba(255,255,255,.18); }
-    .v-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .7rem; letter-spacing: .12em; color: var(--muted); }
-    .v-stub svg { height: 2.6rem; width: auto; max-width: 62%; fill: #e9ecff; opacity: .9; }
+    .certificate { position: relative; border-radius: .75rem; overflow: hidden; background: #FBF7EC; box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
+    .certificate svg { display: block; width: 100%; height: auto; }
     .chip { position: absolute; display: flex; align-items: center; gap: .65rem; padding: .6rem .9rem .6rem .65rem; border-radius: 1rem; background: rgba(19,29,48,.92); border: 1px solid var(--line-2); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 14px 30px -8px rgba(0,0,0,.65); font-size: .78rem; line-height: 1.25; animation: float 6s ease-in-out infinite; }
     .chip strong { display: block; font-size: .82rem; }
     .chip span.sub { color: var(--muted); font-size: .72rem; }
     .chip-a { top: -2.1rem; right: -.5rem; }
-    .chip-b { bottom: 2.25rem; left: -.5rem; animation-delay: -3s; min-width: 11.5rem; }
+    .chip-b { bottom: -1.1rem; left: -1.6rem; animation-delay: -3s; min-width: 11.5rem; }
     .chip .icon-tile { width: 2rem; height: 2rem; border-radius: .6rem; }
     .chip .icon-tile .icon { width: 1.05rem; height: 1.05rem; }
     .chip-ok .icon-tile { background: rgba(245,200,92,.12); color: var(--gold); box-shadow: inset 0 0 0 1px rgba(245,200,92,.3); }
     .seg { display: flex; gap: .25rem; margin-top: .4rem; }
     .seg i { height: .28rem; flex: 1; border-radius: 99px; background: rgba(255,255,255,.14); }
     .seg i.on { background: var(--gold); }
-    @media (max-width: 639px) { .chip-b { bottom: -.5rem; left: .25rem; } .chip-a { right: 0; } .v-exam { font-size: 1.5rem; } .v-top .brand-mark { display: none; } }
+    @media (max-width: 639px) { .chip-b { bottom: -1.3rem; left: .25rem; } .chip-a { right: 0; } }
     @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -7px; } }
 
     /* ---------- Trust strip ---------- */
@@ -371,9 +355,9 @@
     @media (prefers-contrast: more) { .marquee-viewport, .sponsor-track { -webkit-mask-image: none; mask-image: none; } .badge > span { background: none; color: #F5C85C; } }
 
     /* Voucher tilt: the card follows the pointer in 3D and catches a soft light (fine pointers only; JS sets the vars). */
-    .voucher { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); will-change: transform; }
-    .voucher::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(18rem 14rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.22), transparent 62%); transition: opacity .25s ease-out; }
-    @media (prefers-reduced-motion: reduce) { .voucher { transform: none; will-change: auto; } .voucher::after { display: none; } }
+    .certificate { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); will-change: transform; }
+    .certificate::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(18rem 14rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.22), transparent 62%); transition: opacity .25s ease-out; }
+    @media (prefers-reduced-motion: reduce) { .certificate { transform: none; will-change: auto; } .certificate::after { display: none; } }
 
     /* Smooth page transitions between the home and team pages (progressive enhancement). */
     @view-transition { navigation: auto; }
@@ -459,15 +443,13 @@
     .temp-theme button[aria-pressed="true"] { background: var(--gold); color: var(--on-gold); }
 
     /* ---------- Typography: Newsreader (display) + Public Sans (body) ---------- */
-    .display, .section h2, .hero h1, footer .footer-cta, #apply h2, #sponsors h2, .process-row h3, .v-exam, .v-title, .mobile-menu a, .process-row .num { font-family: var(--font-display); font-optical-sizing: auto; }
+    .display, .section h2, .hero h1, footer .footer-cta, #apply h2, #sponsors h2, .process-row h3, .mobile-menu a, .process-row .num { font-family: var(--font-display); font-optical-sizing: auto; }
     .hero h1 { max-width: 14ch; font-size: clamp(3rem,6.8vw,6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.02; }
     .hero h1 .grad { font-style: italic; padding-right: .06em; }
     .section h2, #apply h2, #sponsors h2 { font-size: clamp(2.3rem,4.8vw,3.9rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.08; }
     footer .footer-cta { font-weight: 500; letter-spacing: -.02em; }
     .process-row h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
     .process-row .num { font-weight: 600; letter-spacing: -.02em; }
-    .v-exam { font-weight: 600; letter-spacing: -.02em; }
-    .v-title { font-weight: 600; letter-spacing: 0; }
     .mobile-menu a { font-weight: 500; letter-spacing: -.02em; }
     .wordmark { font-family: var(--font-display); font-optical-sizing: auto; font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
     .rule h3, #grant-form h3 { font-family: var(--font-display); font-optical-sizing: auto; font-weight: 600; letter-spacing: -.01em; }
@@ -572,28 +554,66 @@
           <p class="demo-note" data-hero>Demo website · No applications are submitted.</p>
         </div>
 
-        <!-- Decorative exam-voucher illustration -->
+        <!-- Decorative sample certificate illustration -->
         <div class="hero-visual" data-hero aria-hidden="true">
           <div class="voucher-wrap">
-            <div class="voucher">
-              <div class="v-top">
-                <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span>
-                <div><p class="v-kicker">The LevelUp Fund</p><p class="v-title">Credential voucher</p></div>
-                <span class="v-badge">Fee covered</span>
-              </div>
-              <div class="v-body">
-                <p class="v-label">Certification or credential</p>
-                <p class="v-exam">Your next credential</p>
-                <div class="v-grid">
-                  <div><p class="v-label">Candidate</p><p class="v-val">You</p></div>
-                  <div><p class="v-label">Program fee</p><p class="v-val gold">Covered</p></div>
-                  <div><p class="v-label">Paid by</p><p class="v-val">The fund</p></div>
-                </div>
-              </div>
-              <div class="v-stub">
-                <svg viewBox="0 0 120 40" preserveAspectRatio="xMinYMid meet"><path d="M0 0h3v40H0zM6 0h1.5v40H6zM11 0h4v40h-4zM18 0h1.5v40H18zM23 0h3v40h-3zM29 0h1.5v40H29zM34 0h5v40h-5zM42 0h1.5v40H42zM47 0h3v40h-3zM54 0h1.5v40H54zM59 0h4v40h-4zM66 0h1.5v40H66zM71 0h3v40h-3zM78 0h1.5v40H78zM83 0h5v40h-5zM91 0h1.5v40H91zM96 0h3v40h-3zM102 0h1.5v40H102zM107 0h4v40h-4zM114 0h3v40h-3z"/></svg>
-                <span class="v-code">DEMO · 0001</span>
-              </div>
+            <div class="certificate">
+            <svg viewBox="0 0 640 480" role="img" aria-label="Sample certificate of certification from The LevelUp Fund">
+              <defs>
+                <linearGradient id="cert-paper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFDF6"/><stop offset="1" stop-color="#F4EDDA"/></linearGradient>
+                <pattern id="cert-waves" width="40" height="14" patternUnits="userSpaceOnUse"><path d="M0 7Q10 0 20 7T40 7" fill="none" stroke="#26335C" stroke-opacity=".11" stroke-width=".7"/><path d="M0 7Q10 14 20 7T40 7" fill="none" stroke="#26335C" stroke-opacity=".07" stroke-width=".7"/></pattern>
+                <radialGradient id="cert-gold" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#E2B04A"/><stop offset="1" stop-color="#B07E1C"/></radialGradient>
+                <linearGradient id="cert-ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3A6B"/><stop offset="1" stop-color="#14203F"/></linearGradient>
+                <linearGradient id="cert-goldtext" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7D880"/><stop offset=".5" stop-color="#FFEFC2"/><stop offset="1" stop-color="#F0C45A"/></linearGradient>
+                <g id="cert-rose"><circle r="19" fill="#F3F4FA" stroke="#26335C" stroke-opacity=".55" stroke-width=".9"/><circle r="15" fill="none" stroke="#26335C" stroke-opacity="0.5" stroke-width=".8"/><circle r="11.5" fill="none" stroke="#26335C" stroke-opacity="0.45" stroke-width=".8"/><circle r="8" fill="none" stroke="#26335C" stroke-opacity="0.4" stroke-width=".8"/><path d="M8.50 0.00L14.50 0.00M7.85 3.25L13.40 5.55M6.01 6.01L10.25 10.25M3.25 7.85L5.55 13.40M0.00 8.50L0.00 14.50M-3.25 7.85L-5.55 13.40M-6.01 6.01L-10.25 10.25M-7.85 3.25L-13.40 5.55M-8.50 0.00L-14.50 0.00M-7.85 -3.25L-13.40 -5.55M-6.01 -6.01L-10.25 -10.25M-3.25 -7.85L-5.55 -13.40M-0.00 -8.50L-0.00 -14.50M3.25 -7.85L5.55 -13.40M6.01 -6.01L10.25 -10.25M7.85 -3.25L13.40 -5.55" stroke="#26335C" stroke-opacity=".4" stroke-width=".6" fill="none"/><circle r="2.6" fill="#26335C" fill-opacity=".55"/></g>
+                <path id="cert-ribbon-arc" d="M214 75Q320 57 426 75"/>
+                <path id="cert-seal-ring" d="M320 384m-26 0a26 26 0 1 1 52 0a26 26 0 1 1 -52 0"/>
+              </defs>
+              <path fill="#E8EAF2" fill-rule="evenodd" d="M14 0H626a14 14 0 0 1 14 14V466a14 14 0 0 1-14 14H14A14 14 0 0 1 0 466V14A14 14 0 0 1 14 0ZM46 42H594V438H46Z"/>
+              <path fill="url(#cert-waves)" fill-rule="evenodd" d="M14 0H626a14 14 0 0 1 14 14V466a14 14 0 0 1-14 14H14A14 14 0 0 1 0 466V14A14 14 0 0 1 14 0ZM46 42H594V438H46Z"/>
+              <use href="#cert-rose" x="21.0" y="21"/><use href="#cert-rose" x="21.0" y="459"/><use href="#cert-rose" x="63.7" y="21"/><use href="#cert-rose" x="63.7" y="459"/><use href="#cert-rose" x="106.4" y="21"/><use href="#cert-rose" x="106.4" y="459"/><use href="#cert-rose" x="149.1" y="21"/><use href="#cert-rose" x="149.1" y="459"/><use href="#cert-rose" x="191.9" y="21"/><use href="#cert-rose" x="191.9" y="459"/><use href="#cert-rose" x="234.6" y="21"/><use href="#cert-rose" x="234.6" y="459"/><use href="#cert-rose" x="277.3" y="21"/><use href="#cert-rose" x="277.3" y="459"/><use href="#cert-rose" x="320.0" y="21"/><use href="#cert-rose" x="320.0" y="459"/><use href="#cert-rose" x="362.7" y="21"/><use href="#cert-rose" x="362.7" y="459"/><use href="#cert-rose" x="405.4" y="21"/><use href="#cert-rose" x="405.4" y="459"/><use href="#cert-rose" x="448.1" y="21"/><use href="#cert-rose" x="448.1" y="459"/><use href="#cert-rose" x="490.9" y="21"/><use href="#cert-rose" x="490.9" y="459"/><use href="#cert-rose" x="533.6" y="21"/><use href="#cert-rose" x="533.6" y="459"/><use href="#cert-rose" x="576.3" y="21"/><use href="#cert-rose" x="576.3" y="459"/><use href="#cert-rose" x="619.0" y="21"/><use href="#cert-rose" x="619.0" y="459"/><use href="#cert-rose" x="21" y="64.8"/><use href="#cert-rose" x="619" y="64.8"/><use href="#cert-rose" x="21" y="108.6"/><use href="#cert-rose" x="619" y="108.6"/><use href="#cert-rose" x="21" y="152.4"/><use href="#cert-rose" x="619" y="152.4"/><use href="#cert-rose" x="21" y="196.2"/><use href="#cert-rose" x="619" y="196.2"/><use href="#cert-rose" x="21" y="240.0"/><use href="#cert-rose" x="619" y="240.0"/><use href="#cert-rose" x="21" y="283.8"/><use href="#cert-rose" x="619" y="283.8"/><use href="#cert-rose" x="21" y="327.6"/><use href="#cert-rose" x="619" y="327.6"/><use href="#cert-rose" x="21" y="371.4"/><use href="#cert-rose" x="619" y="371.4"/><use href="#cert-rose" x="21" y="415.2"/><use href="#cert-rose" x="619" y="415.2"/>
+              <rect x="42" y="42" width="556" height="396" fill="url(#cert-paper)"/>
+              <rect x="42" y="42" width="556" height="396" fill="url(#cert-waves)"/>
+              <rect x="52" y="52" width="536" height="376" fill="none" stroke="#26335C" stroke-width="1.6"/>
+              <rect x="58" y="58" width="524" height="364" fill="none" stroke="#26335C" stroke-opacity=".55" stroke-width=".8"/>
+              <g fill="#26335C"><rect x="48" y="48" width="14" height="14"/><rect x="578" y="48" width="14" height="14"/><rect x="48" y="418" width="14" height="14"/><rect x="578" y="418" width="14" height="14"/></g>
+              <g fill="none" stroke="#F4EDDA" stroke-width="1.2"><path d="M52 55H58M55 52V58"/><path d="M582 55H588M585 52V58"/><path d="M52 425H58M55 422V428"/><path d="M582 425H588M585 422V428"/></g>
+
+              <path d="M200 56Q320 38 440 56L440 92Q320 74 200 92Z" fill="url(#cert-ribbon)"/>
+              <path d="M200 60L158 68L176 84L158 100L200 94Z" fill="#0E1730"/>
+              <path d="M440 60L482 68L464 84L482 100L440 94Z" fill="#0E1730"/>
+              <path d="M200 92L214 99L200 99Z M440 92L426 99L440 99Z" fill="#070D1E"/>
+              <text font-family="Newsreader, Georgia, serif" font-size="17" font-weight="600" letter-spacing="3.2" fill="url(#cert-goldtext)" text-anchor="middle"><textPath href="#cert-ribbon-arc" startOffset="50%">LEVELUP FUND</textPath></text>
+
+              <path d="M294 114C302 106 310 122 320 114C330 106 338 122 346 114" fill="none" stroke="#B98A1F" stroke-width="1.3" stroke-linecap="round"/>
+              <path d="M320 109l4 5-4 5-4-5z" fill="#B98A1F"/>
+              <g font-family="Newsreader, Georgia, serif" fill="#14203F" text-anchor="middle">
+                <text x="320" y="152" font-size="25" letter-spacing="1.2">CERTIFICATE OF CERTIFICATION</text>
+                <text x="320" y="176" font-size="12.5" font-style="italic">The LevelUp Fund recognizes the following student for earning a</text>
+                <text x="320" y="192" font-size="12.5" font-style="italic">certification, with the fee covered by the fund.</text>
+                <text x="320" y="252" font-size="40" letter-spacing="1.5">YOUR NAME HERE</text>
+                <text x="320" y="302" font-size="12.5" font-style="italic">This student's fee was covered by the fund, so cost was never the</text>
+                <text x="320" y="318" font-size="12.5" font-style="italic">barrier to earning this credential. Skills deserve a chance, and this</text>
+                <text x="320" y="334" font-size="12.5" font-style="italic">certificate marks the next step.</text>
+              </g>
+              <g stroke="#14203F" stroke-width="1.2"><path d="M212 270H306"/><path d="M334 270H428"/></g>
+              <path d="M320 265l5 5-5 5-5-5z" fill="#14203F"/>
+
+              <polygon points="362.00,384.00 356.84,387.41 361.28,391.72 355.59,394.13 359.16,399.17 353.12,400.49 355.71,406.11 349.53,406.30 351.04,412.30 344.93,411.34 345.31,417.52 339.48,415.46 338.72,421.60 333.37,418.50 331.49,424.40 326.80,420.37 323.88,425.82 320.00,421.00 316.12,425.82 313.20,420.37 308.51,424.40 306.63,418.50 301.28,421.60 300.52,415.46 294.69,417.52 295.07,411.34 288.96,412.30 290.47,406.30 284.29,406.11 286.88,400.49 280.84,399.17 284.41,394.13 278.72,391.72 283.16,387.41 278.00,384.00 283.16,380.59 278.72,376.28 284.41,373.87 280.84,368.83 286.88,367.51 284.29,361.89 290.47,361.70 288.96,355.70 295.07,356.66 294.69,350.48 300.52,352.54 301.28,346.40 306.63,349.50 308.51,343.60 313.20,347.63 316.12,342.18 320.00,347.00 323.88,342.18 326.80,347.63 331.49,343.60 333.37,349.50 338.72,346.40 339.48,352.54 345.31,350.48 344.93,356.66 351.04,355.70 349.53,361.70 355.71,361.89 353.12,367.51 359.16,368.83 355.59,373.87 361.28,376.28 356.84,380.59" fill="url(#cert-gold)" stroke="#A67C12" stroke-width=".8"/>
+              <circle cx="320" cy="384" r="31.5" fill="none" stroke="#9A6F10" stroke-opacity=".7" stroke-width="1"/>
+              <circle cx="320" cy="384" r="19" fill="none" stroke="#9A6F10" stroke-opacity=".5" stroke-width=".8"/>
+              <text font-family="Newsreader, Georgia, serif" font-size="6.4" font-weight="700" letter-spacing="1.1" fill="#7A560C"><textPath href="#cert-seal-ring">LEVELUP FUND · FEE COVERED · LEVELUP FUND · FEE COVERED ·</textPath></text>
+              <path d="M320 373l3.3 7 7.7 1-5.6 5.3 1.4 7.6-6.8-3.7-6.8 3.7 1.4-7.6-5.6-5.3 7.7-1z" fill="#8A6210"/>
+
+              <g font-family="Newsreader, Georgia, serif" fill="#14203F">
+                <text x="92" y="394" font-size="12" letter-spacing="1.2">DEMO CERTIFICATE</text>
+                <path d="M92 400H206" stroke="#14203F" stroke-width=".9"/>
+                <text x="92" y="414" font-size="9" letter-spacing="1.3" fill-opacity=".75">SAMPLE ONLY</text>
+                <text x="492" y="392" font-size="23" font-style="italic" text-anchor="middle">LevelUp Fund</text>
+                <path d="M426 400H558" stroke="#14203F" stroke-width=".9"/>
+                <text x="492" y="414" font-size="9" letter-spacing="1.3" text-anchor="middle" fill-opacity=".75">AUTHORIZED SIGNATURE</text>
+              </g>
+            </svg>
             </div>
           </div>
 
@@ -1366,7 +1386,7 @@
     }
 
     if (!reducedMotion) {
-      const voucher = document.querySelector(".voucher");
+      const voucher = document.querySelector(".certificate");
       if (voucher) makeTilt(voucher, { max: 7, zone: document.querySelector(".hero-visual"), press: 0.985 });
       document.querySelectorAll(".process-row, .rule").forEach((el) => { el.classList.add("tilt"); makeTilt(el, { max: 4.5, hover: 1.012, parallax: true }); });
       const art = document.querySelector(".mission-art");
