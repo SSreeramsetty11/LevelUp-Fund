@@ -197,7 +197,7 @@
     .process-list { display: grid; grid-template-columns: repeat(1,minmax(0,1fr)); gap: 1rem; margin-top: 3.25rem; counter-reset: step; }
     @media (min-width: 640px) { .process-list { grid-template-columns: repeat(2,minmax(0,1fr)); } }
     @media (min-width: 1024px) { .process-list { grid-template-columns: repeat(4,minmax(0,1fr)); } }
-    .process-row { position: relative; padding: 1.5rem; overflow: hidden; }
+    .process-row { position: relative; padding: 1.5rem; overflow: visible; }
     .process-row .num { position: absolute; top: 1rem; right: 1.25rem; font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--num); font-variant-numeric: tabular-nums; }
     .process-row h3 { margin-top: 1.5rem; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: -.015em; }
     .process-row p { color: var(--muted); line-height: 1.7; margin-top: .65rem; font-size: .92rem; }
@@ -234,8 +234,8 @@
     .faq details { border-bottom: 1px solid var(--line); }
     .faq summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; padding: 1.1rem 0; cursor: pointer; font-weight: 600; font-size: 1.02rem; transition: color .15s ease; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after { content: ""; flex: none; width: 1.75rem; height: 1.75rem; border-radius: 999px; border: 1px solid var(--line-2); background: no-repeat center / .8rem url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5C85C' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E"); transition: rotate .25s var(--ease-out), background-color .2s ease; }
-    .faq details[open] summary::after { rotate: 45deg; background-color: var(--tile-bg); }
+    .faq summary::after { content: ""; flex: none; width: 1.75rem; height: 1.75rem; background: no-repeat center / 1.2rem url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5C85C' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); transition: rotate .25s var(--ease-out), background-color .2s ease; }
+    .faq details[open] summary::after { rotate: 180deg; }
     @media (hover: hover) and (pointer: fine) { .faq summary:hover { color: var(--accent); } }
     .faq details p { padding-bottom: 1.25rem; max-width: 40rem; color: var(--muted); line-height: 1.75; }
 
@@ -264,7 +264,7 @@
     html[data-theme="light"] .theme-toggle .i-moon { display: inline; }
     .stair-step { stroke: var(--step-stroke); } .stair-label text, .stair-label { fill: var(--stair-label); } .stair-line { stroke: var(--stair-line); }
     .stair-label text[fill] { fill: #101C35; }
-    html[data-theme="light"] .faq summary::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237D5C0C' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E"); }
+    html[data-theme="light"] .faq summary::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237D5C0C' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); }
     html[data-theme] .text-slate-400 { color: var(--muted); }
     html[data-theme] :is(.text-blue-400, .text-blue-600, .text-blue-700, .dark\:text-blue-400) { color: var(--link); }
     html[data-theme] .bg-blue-600 { background: var(--gold); color: var(--on-gold); }
@@ -305,6 +305,7 @@
     .site-header > nav { max-width: 76rem; margin: 0 auto; padding: .5rem .55rem .5rem 1.1rem; border-radius: 999px; transition: background-color .25s ease; }
     .site-header.is-scrolled > nav { background: var(--glass-strong); }
     .nav-apply { border-radius: 999px; }
+    .site-header .wordmark, .nav-link, .nav-apply, .menu-btn { white-space: nowrap; }
 
     /* Frosted pills, chips and round buttons */
     .eyebrow, .eg .tag, .demo-note, .pill-line, .menu-btn, .theme-toggle, #sponsors-prev, #sponsors-next, .temp-theme {
@@ -361,9 +362,8 @@
     .tilt.is-tilting { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-s, 1)); will-change: transform; }
     .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.2), transparent 62%); }
     html[data-theme="light"] .tilt::after { background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.75), transparent 62%); }
-    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, scale .3s cubic-bezier(.34, 1.56, .64, 1); }
-    .process-row .num { translate: calc(var(--px, 0) * -8px) calc(var(--py, 0) * -6px); transition: translate .2s ease-out; }
-    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { scale: 1.12; } .trust-item:hover .icon { scale: 1.25; } .marquee-item:hover { color: var(--text); } }
+    .card .icon-tile { transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); transform-origin: center; backface-visibility: hidden; }
+        @media (hover: hover) and (pointer: fine) { .card .icon-tile:hover { scale: 1.12; } .trust-item:hover .icon { scale: 1.25; } .marquee-item:hover { color: var(--text); } }
     .trust-item .icon { transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
     .marquee-item { transition: color .2s ease; }
     /* Nav wayfinding underline */
@@ -409,6 +409,25 @@
     dialog::backdrop { opacity: 0; transition: opacity .18s ease-out, overlay .18s allow-discrete, display .18s allow-discrete; }
     dialog[open]::backdrop { opacity: 1; transition-duration: .3s; }
     @starting-style { dialog[open]::backdrop { opacity: 0; } }
+    /* Flat layout: steps, rules and FAQ sit directly on the page (no tiles); hairlines separate the FAQ. */
+    .process-row.card, .rule.card, .faq details {
+      background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0;
+    }
+    .process-row.card::before, .rule.card::before, .faq details::before { display: none; }
+    .process-row.card { padding: 1.5rem 0; }
+    .process-list { gap: 1.25rem 3rem; }
+    .rule.card { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+    .rule.card:first-child { border-top: 0; padding-top: .5rem; }
+    .faq-list { gap: 0; }
+    .faq details { padding-inline: 0; border-bottom: 1px solid var(--line); }
+    .faq details:first-child { border-top: 1px solid var(--line); }
+    .mission-art, .footer-band { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; }
+    .mission-art::before, .footer-band::before { display: none; }
+    .mission-art { padding: 0; }
+    .footer-band { padding-inline: 0; }
+    /* Eyebrow labels and step badges are plain text: no capsule behind them. */
+    .eyebrow, .badge { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; padding: 0; }
+    .eyebrow::before, .badge::before { display: none; }
     /* Theme switch: one soft cross-fade of the whole page. */
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
     @media (prefers-reduced-motion: reduce) { dialog { scale: 1; filter: none; } ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
@@ -513,9 +532,9 @@
       <div class="flex items-center gap-3 sm:gap-6">
         <a href="#how-it-works" class="nav-link hidden text-sm font-medium md:inline">How it works</a>
 
-        <a href="team.html" class="nav-link hidden text-sm font-medium sm:inline">Our team</a>
+        <a href="team.html" class="nav-link hidden text-sm font-medium md:inline">Our team</a>
 
-        <a href="#sponsors" class="nav-link hidden text-sm font-medium sm:inline">Sponsors</a>
+        <a href="#sponsors" class="nav-link hidden text-sm font-medium md:inline">Sponsors</a>
 
         <button id="mobile-menu-open" type="button" class="menu-btn md:hidden" aria-haspopup="dialog">Menu</button>
         <a href="apply.html" class="nav-apply pill pill-brand hidden !min-h-0 !px-4 !py-2.5 !text-sm sm:inline-flex">Apply now</a>
@@ -523,7 +542,7 @@
     </nav>
     <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title">
       <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><div class="flex items-center gap-2"><button type="button" class="theme-toggle grid h-11 w-11 place-items-center rounded-full" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div></div>
-      <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="apply.html">Apply ↗</a></nav>
+      <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#sponsors">Sponsors ↗</a><a href="apply.html">Apply ↗</a></nav>
     </dialog>
   </header>
 
@@ -681,10 +700,10 @@
     <section id="how-it-works" class="section section-alt scroll-mt-24"><div class="wrap">
       <div class="section-head" data-reveal><p class="eyebrow">The path forward</p><h2>From ambition<br>to <em class="em">certified.</em></h2><p class="lede">How a grant works, from application to score report.</p></div>
       <div class="process-list">
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">01</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></span><h3><span class="sr-only">Step 1: </span>Apply &amp; verify</h3><p>Tell us about the certification or credential you want and why. We'll follow up about identity and, where relevant, testing-profile verification.</p><span class="badge"><span>Identity verification</span></span></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">02</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3><span class="sr-only">Step 2: </span>Take a practice test</h3><p>For exam-based credentials, we'll send practice-test instructions and review your score. The benchmark is typically <strong>70 to 80%</strong>, depending on the exam.</p><span class="badge"><span>70 to 80% benchmark</span></span></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">03</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg></span><h3><span class="sr-only">Step 3: </span>Get it covered</h3><p>If approved, we'll contact you to arrange payment directly, such as an exam voucher or enrollment with the provider. <strong>No cash</strong> is transferred to applicants.</p><span class="badge"><span>No cash transfers</span></span></article>
-        <article class="process-row card" data-reveal><span class="num" aria-hidden="true">04</span><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><h3><span class="sr-only">Step 4: </span>Report &amp; pay it forward</h3><p>Share your official score report or certificate once you finish. An alumni pledge to help future students is optional.</p><span class="badge"><span>Optional pledge</span></span></article>
+        <article class="process-row card" data-reveal><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></span><h3><span class="sr-only">Step 1: </span>Apply &amp; verify</h3><p>Tell us about the certification or credential you want and why. We'll follow up about identity and, where relevant, testing-profile verification.</p><span class="badge"><span>Identity verification</span></span></article>
+        <article class="process-row card" data-reveal><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><h3><span class="sr-only">Step 2: </span>Take a practice test</h3><p>For exam-based credentials, we'll send practice-test instructions and review your score. The benchmark is typically <strong>70 to 80%</strong>, depending on the exam.</p><span class="badge"><span>70 to 80% benchmark</span></span></article>
+        <article class="process-row card" data-reveal><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></svg></span><h3><span class="sr-only">Step 3: </span>Get it covered</h3><p>If approved, we'll contact you to arrange payment directly, such as an exam voucher or enrollment with the provider. <strong>No cash</strong> is transferred to applicants.</p><span class="badge"><span>No cash transfers</span></span></article>
+        <article class="process-row card" data-reveal><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><h3><span class="sr-only">Step 4: </span>Report &amp; pay it forward</h3><p>Share your official score report or certificate once you finish. An alumni pledge to help future students is optional.</p><span class="badge"><span>Optional pledge</span></span></article>
       </div>
     </div></section>
 
@@ -793,7 +812,7 @@
     <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
       <div><a href="#" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
       <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
-      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button><p id="admin-load-status" role="status" hidden class="max-w-xs leading-6 text-slate-300"></p></div></div>
     </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-5 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
 
@@ -1039,6 +1058,21 @@
     </div>
   </dialog>
 
+  <!-- Explain startup problems even when the admin module cannot load. -->
+  <script>
+    (() => {
+      const button = document.getElementById("open-admin");
+      const status = document.getElementById("admin-load-status");
+      button.addEventListener("click", () => {
+        if (button.dataset.adminReady === "true") return;
+        status.textContent = window.location.protocol === "file:"
+          ? "Admin login needs a local server. In VS Code, right-click index.html and choose Open with Live Server, then try again."
+          : "Admin login has not loaded. Check your internet connection, then refresh this page and try again.";
+        status.hidden = false;
+      });
+    })();
+  </script>
+
   <!-- GSAP core + ScrollTrigger: pinned version with SRI, deferred. The page works without them. -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
@@ -1237,7 +1271,9 @@
     mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
 
     /* Admin login */
-    document.getElementById("open-admin").addEventListener("click", () => {
+    const adminButton = document.getElementById("open-admin");
+    adminButton.addEventListener("click", () => {
+      if (adminButton.dataset.adminReady !== "true") return;
       loginForm.reset();
       loginError.classList.add("hidden");
       loginError.textContent = "";
@@ -1965,6 +2001,8 @@
     }
 
     renderSponsors();
+    adminButton.dataset.adminReady = "true";
+    document.getElementById("admin-load-status").hidden = true;
   </script>
 
 </body>
