@@ -57,6 +57,10 @@ const application = readFileSync('src/application.js', 'utf8');
 if (!application.includes(`@supabase/supabase-js@${supabase}/+esm`)) {
   console.error('src/application.js: Supabase CDN version does not match package.json.'); failed = true;
 }
+const publicConfig = readFileSync('src/supabase-config.js', 'utf8');
+if (!/TURNSTILE_SITE_KEY\s*=\s*['"]0x[A-Za-z0-9_-]+['"]/.test(publicConfig)) {
+  console.error('src/supabase-config.js: a public Cloudflare Turnstile site key is required.'); failed = true;
+}
 for (const [path, detectSession] of [['index.html', false], ['team.html', false], ['src/application.js', false], ['reset-password.html', true]]) {
   const source = readFileSync(path, 'utf8');
   const authSettings = new RegExp(`persistSession:\\s*false[\\s\\S]{0,120}autoRefreshToken:\\s*false[\\s\\S]{0,120}detectSessionInUrl:\\s*${detectSession}`);
