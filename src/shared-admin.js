@@ -31,6 +31,7 @@ export function createSharedAdmin(client) {
       certification_url: application.certificationUrl,
       essay: application.essay,
       amount: application.requestedAmount,
+      household_income: application.householdIncome,
       agreement: application.agreement === true,
       age_confirmed: application.ageConfirmed === true
     };
@@ -44,7 +45,7 @@ export function createSharedAdmin(client) {
       id: row.id, name: row.name, email: row.email,
       examProvider: row.exam_provider, exam: row.certification,
       certificationUrl: row.certification_url, essay: row.essay,
-      requestedAmount: row.amount, ageConfirmed: row.age_confirmed, status: row.status,
+      requestedAmount: row.amount, householdIncome: row.household_income, ageConfirmed: row.age_confirmed, status: row.status,
       practiceScore: row.practice_score, notes: row.notes,
       submittedAt: row.created_at
     }));
