@@ -47,9 +47,9 @@
     .site-header { position: sticky; top: 0; z-index: 40; background: var(--header-bg); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
     .pill { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .6rem 1.2rem; border-radius: .8rem; font-size: .9rem; font-weight: 600; color: var(--on-gold); background: var(--gold); box-shadow: 0 8px 22px -10px rgba(190,140,30,.8), inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(16,28,53,.08); transition: translate .2s cubic-bezier(.22,1,.36,1), scale .2s cubic-bezier(.22,1,.36,1); }
     .pill:active { scale: .97; }
-    @media (hover: hover) and (pointer: fine) { .pill:hover { translate: 0 -2px; } }
+    @media (hover: hover) and (pointer: fine) { .pill:hover { scale: 1.06; transition: scale .28s cubic-bezier(.34, 1.56, .64, 1), background-color .18s, filter .18s; } .pill:hover:active { scale: .97; } }
+    @media (hover: hover) and (pointer: fine) { .pill:hover { filter: brightness(1.05); } }
     .page-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--hero-bg); border-bottom: 1px solid var(--line); }
-    .page-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 60% 20%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 60% 20%, #000 10%, transparent 75%); }
     .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
     .eyebrow i { width: .45rem; height: .45rem; border-radius: 99px; background: var(--dot); box-shadow: 0 0 0 4px rgba(245,200,92,.2); }
     .wordmark { font-family: var(--font-display); font-optical-sizing: auto; font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
@@ -69,7 +69,7 @@
 </head>
 <body>
   <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-  <header class="site-header"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8"><a href="index.html" class="flex items-center gap-2 text-base font-bold tracking-tight sm:gap-2.5 sm:text-lg"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><div class="flex items-center gap-2 sm:gap-3"><button type="button" class="theme-toggle" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><a href="index.html#apply" class="pill">Apply<span class="hidden sm:inline">&nbsp;for a grant</span></a></div></nav></header>
+  <header class="site-header"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8"><a href="index.html" class="flex items-center gap-2 text-base font-bold tracking-tight sm:gap-2.5 sm:text-lg"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><div class="flex items-center gap-2 sm:gap-3"><a href="index.html#apply" class="pill">Apply<span class="hidden sm:inline">&nbsp;for a grant</span></a></div></nav></header>
   <div class="page-hero">
     <div class="mx-auto max-w-7xl px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
       <p class="eyebrow rise"><i aria-hidden="true"></i>The people behind the fund</p>
@@ -106,18 +106,6 @@
     }
     renderTeam();
     const root = document.documentElement;
-    const themeBtn = document.querySelector('.theme-toggle');
-    const syncTheme = () => themeBtn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
-    syncTheme();
-    themeBtn.addEventListener('click', () => {
-      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-      const apply = () => {
-        root.dataset.theme = next;
-        try { localStorage.setItem('levelup-theme', next); } catch (e) {}
-        syncTheme();
-      };
-      if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(apply); else apply();
-    });
   </script>
 </body>
 </html>
