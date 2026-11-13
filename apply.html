@@ -119,9 +119,8 @@
     @media (hover: hover) and (pointer: fine) { .card:hover { border-color: var(--line-2); } }
 
     /* Buttons */
-    .pill { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .55rem; border-radius: .8rem; padding: .8rem 1.35rem; font-size: .92rem; font-weight: 600; transition-property: translate, scale, background-color, border-color, box-shadow; transition-duration: .2s; transition-timing-function: var(--ease-out); }
+    .pill { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .55rem; border-radius: .8rem; padding: .8rem 1.35rem; font-size: .92rem; font-weight: 600; transition-property: scale, background-color, border-color, box-shadow, filter; transition-duration: .18s; transition-timing-function: var(--ease-out); }
     .pill:active { scale: .97; }
-    @media (hover: hover) and (pointer: fine) { .pill:hover { translate: 0 -2px; } }
     .pill-brand { color: var(--on-gold); background: var(--gold); box-shadow: 0 8px 22px -10px rgba(190,140,30,.8), inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(16,28,53,.08); }
     .pill-light { background: #fff; color: #111; }
     .pill-line { border: 1px solid var(--line-2); color: var(--text); background: var(--fill); }
@@ -146,7 +145,6 @@
     /* ---------- Hero ---------- */
     .hero { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3rem,6vw,5.5rem) 1.5rem clamp(4rem,7vw,6.5rem);
       background: var(--hero-bg); }
-    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 30%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 70% at 60% 30%, #000 10%, transparent 75%); }
     .hero-grid { max-width: 76rem; margin-inline: auto; display: grid; grid-template-columns: minmax(0,1fr); gap: 3.5rem; align-items: center; }
     @media (min-width: 1024px) { .hero-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 4rem; } }
     .hero h1 { margin-top: 1.25rem; max-width: 13ch; font-size: clamp(2.9rem,6.4vw,5.6rem); font-weight: 800; letter-spacing: -.045em; line-height: 1.02; }
@@ -325,7 +323,7 @@
 
     /* ---------- GlassReady-inspired additions ---------- */
     /* Italic emphasis word in headings + bold key phrases in body copy */
-    .em { font-style: italic; font-weight: 500; color: var(--accent); }
+    .em { font-style: normal; font-weight: inherit; color: var(--accent); }
     .lede strong, .process-row p strong, .rule p strong { font-weight: 600; color: var(--text); }
     /* Centred header for the process section */
     #how-it-works .section-head { margin-inline: auto; justify-items: center; text-align: center; }
@@ -363,14 +361,11 @@
     .tilt.is-tilting { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-s, 1)); will-change: transform; }
     .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.2), transparent 62%); }
     html[data-theme="light"] .tilt::after { background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.75), transparent 62%); }
-    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, rotate .25s var(--ease-out), scale .25s var(--ease-out); }
+    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, scale .3s cubic-bezier(.34, 1.56, .64, 1); }
     .process-row .num { translate: calc(var(--px, 0) * -8px) calc(var(--py, 0) * -6px); transition: translate .2s ease-out; }
-    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { rotate: -7deg; scale: 1.08; } .trust-item:hover .icon { scale: 1.18; rotate: -6deg; } .marquee-item:hover { color: var(--text); } }
-    .trust-item .icon { transition: scale .25s var(--ease-out), rotate .25s var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { scale: 1.12; } .trust-item:hover .icon { scale: 1.25; } .marquee-item:hover { color: var(--text); } }
+    .trust-item .icon { transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
     .marquee-item { transition: color .2s ease; }
-    /* Magnetic buttons */
-    .pill { translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); }
-    @media (hover: hover) and (pointer: fine) { .pill:hover { --lift: -2px; translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); } }
     /* Nav wayfinding underline */
     .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: .1rem; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .28s var(--ease-out); }
     @media (hover: hover) and (pointer: fine) { .nav-link:hover::after { transform: scaleX(1); } }
@@ -401,6 +396,8 @@
     /* ---------- Apple-design refinements ---------- */
     /* Instant press feedback: the scale lands within 100ms, release eases back. */
     .pill:active { scale: .97; transition-duration: .1s; }
+    /* Hover pop: a quick springy scale-up, no travel. */
+    @media (hover: hover) and (pointer: fine) { .pill:hover { scale: 1.06; transition-timing-function: cubic-bezier(.34, 1.56, .64, 1); transition-duration: .28s; } .pill:hover:active { scale: .97; transition-duration: .1s; } }
     /* Bigger surfaces read thicker: stronger blur and a deeper shadow than small cards. */
     #grant-form, .mission-art { -webkit-backdrop-filter: var(--glass-blur-lg); backdrop-filter: var(--glass-blur-lg); box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-hi), inset 0 -1px 0 var(--glass-lo); }
     /* Vibrancy: body copy over glass gets more contrast than flat gray. */
@@ -440,7 +437,6 @@
     /* ---------- Typography: Newsreader (display) + Public Sans (body) ---------- */
     .display, .section h2, .hero h1, footer .footer-cta, #apply h2, #sponsors h2, .process-row h3, .mobile-menu a, .process-row .num { font-family: var(--font-display); font-optical-sizing: auto; }
     .hero h1 { max-width: 14ch; font-size: clamp(3rem,6.8vw,6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.02; }
-    .hero h1 .grad { font-style: italic; padding-right: .06em; }
     .section h2, #apply h2, #sponsors h2 { font-size: clamp(2.3rem,4.8vw,3.9rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.08; }
     footer .footer-cta { font-weight: 500; letter-spacing: -.02em; }
     .process-row h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }

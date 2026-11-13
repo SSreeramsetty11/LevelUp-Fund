@@ -119,9 +119,8 @@
     @media (hover: hover) and (pointer: fine) { .card:hover { border-color: var(--line-2); } }
 
     /* Buttons */
-    .pill { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .55rem; border-radius: .8rem; padding: .8rem 1.35rem; font-size: .92rem; font-weight: 600; transition-property: translate, scale, background-color, border-color, box-shadow; transition-duration: .2s; transition-timing-function: var(--ease-out); }
+    .pill { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .55rem; border-radius: .8rem; padding: .8rem 1.35rem; font-size: .92rem; font-weight: 600; transition-property: scale, background-color, border-color, box-shadow, filter; transition-duration: .18s; transition-timing-function: var(--ease-out); }
     .pill:active { scale: .97; }
-    @media (hover: hover) and (pointer: fine) { .pill:hover { translate: 0 -2px; } }
     .pill-brand { color: var(--on-gold); background: var(--gold); box-shadow: 0 8px 22px -10px rgba(190,140,30,.8), inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 1px rgba(16,28,53,.08); }
     .pill-light { background: #fff; color: #111; }
     .pill-line { border: 1px solid var(--line-2); color: var(--text); background: var(--fill); }
@@ -146,7 +145,6 @@
     /* ---------- Hero ---------- */
     .hero { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3rem,6vw,5.5rem) 1.5rem clamp(4rem,7vw,6.5rem);
       background: var(--hero-bg); }
-    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 30%, #000 10%, transparent 75%); mask-image: radial-gradient(ellipse 70% 70% at 60% 30%, #000 10%, transparent 75%); }
     .hero-grid { max-width: 76rem; margin-inline: auto; display: grid; grid-template-columns: minmax(0,1fr); gap: 3.5rem; align-items: center; }
     @media (min-width: 1024px) { .hero-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 4rem; } }
     .hero h1 { margin-top: 1.25rem; max-width: 13ch; font-size: clamp(2.9rem,6.4vw,5.6rem); font-weight: 800; letter-spacing: -.045em; line-height: 1.02; }
@@ -325,7 +323,7 @@
 
     /* ---------- GlassReady-inspired additions ---------- */
     /* Italic emphasis word in headings + bold key phrases in body copy */
-    .em { font-style: italic; font-weight: 500; color: var(--accent); }
+    .em { font-style: normal; font-weight: inherit; color: var(--accent); }
     .lede strong, .process-row p strong, .rule p strong { font-weight: 600; color: var(--text); }
     /* Centred header for the process section */
     #how-it-works .section-head { margin-inline: auto; justify-items: center; text-align: center; }
@@ -363,14 +361,11 @@
     .tilt.is-tilting { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-s, 1)); will-change: transform; }
     .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: var(--glare-o, 0); background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.2), transparent 62%); }
     html[data-theme="light"] .tilt::after { background: radial-gradient(14rem 11rem at var(--glare-x, 50%) var(--glare-y, 0%), rgba(255,255,255,.75), transparent 62%); }
-    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, rotate .25s var(--ease-out), scale .25s var(--ease-out); }
+    .process-row .icon-tile { translate: calc(var(--px, 0) * 4px) calc(var(--py, 0) * 4px); transition: translate .2s ease-out, scale .3s cubic-bezier(.34, 1.56, .64, 1); }
     .process-row .num { translate: calc(var(--px, 0) * -8px) calc(var(--py, 0) * -6px); transition: translate .2s ease-out; }
-    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { rotate: -7deg; scale: 1.08; } .trust-item:hover .icon { scale: 1.18; rotate: -6deg; } .marquee-item:hover { color: var(--text); } }
-    .trust-item .icon { transition: scale .25s var(--ease-out), rotate .25s var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .card:hover .icon-tile { scale: 1.12; } .trust-item:hover .icon { scale: 1.25; } .marquee-item:hover { color: var(--text); } }
+    .trust-item .icon { transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
     .marquee-item { transition: color .2s ease; }
-    /* Magnetic buttons */
-    .pill { translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); }
-    @media (hover: hover) and (pointer: fine) { .pill:hover { --lift: -2px; translate: var(--mx, 0px) calc(var(--my, 0px) + var(--lift, 0px)); } }
     /* Nav wayfinding underline */
     .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: .1rem; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .28s var(--ease-out); }
     @media (hover: hover) and (pointer: fine) { .nav-link:hover::after { transform: scaleX(1); } }
@@ -401,6 +396,8 @@
     /* ---------- Apple-design refinements ---------- */
     /* Instant press feedback: the scale lands within 100ms, release eases back. */
     .pill:active { scale: .97; transition-duration: .1s; }
+    /* Hover pop: a quick springy scale-up, no travel. */
+    @media (hover: hover) and (pointer: fine) { .pill:hover { scale: 1.06; transition-timing-function: cubic-bezier(.34, 1.56, .64, 1); transition-duration: .28s; } .pill:hover:active { scale: .97; transition-duration: .1s; } }
     /* Bigger surfaces read thicker: stronger blur and a deeper shadow than small cards. */
     #grant-form, .mission-art { -webkit-backdrop-filter: var(--glass-blur-lg); backdrop-filter: var(--glass-blur-lg); box-shadow: var(--glass-shadow-lg), inset 0 1px 0 var(--glass-hi), inset 0 -1px 0 var(--glass-lo); }
     /* Vibrancy: body copy over glass gets more contrast than flat gray. */
@@ -440,7 +437,6 @@
     /* ---------- Typography: Newsreader (display) + Public Sans (body) ---------- */
     .display, .section h2, .hero h1, footer .footer-cta, #apply h2, #sponsors h2, .process-row h3, .mobile-menu a, .process-row .num { font-family: var(--font-display); font-optical-sizing: auto; }
     .hero h1 { max-width: 14ch; font-size: clamp(3rem,6.8vw,6rem); font-weight: 600; letter-spacing: -.025em; line-height: 1.02; }
-    .hero h1 .grad { font-style: italic; padding-right: .06em; }
     .section h2, #apply h2, #sponsors h2 { font-size: clamp(2.3rem,4.8vw,3.9rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.08; }
     footer .footer-cta { font-weight: 500; letter-spacing: -.02em; }
     .process-row h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
@@ -521,7 +517,6 @@
 
         <a href="#sponsors" class="nav-link hidden text-sm font-medium sm:inline">Sponsors</a>
 
-        <button type="button" class="theme-toggle hidden h-11 w-11 place-items-center rounded-full sm:grid" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
         <button id="mobile-menu-open" type="button" class="menu-btn md:hidden" aria-haspopup="dialog">Menu</button>
         <a href="apply.html" class="nav-apply pill pill-brand hidden !min-h-0 !px-4 !py-2.5 !text-sm sm:inline-flex">Apply now</a>
       </div>
@@ -538,7 +533,6 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid">
         <div>
-          <p class="eyebrow" data-hero><span class="eyebrow-dot" aria-hidden="true"></span>For the skills you're building / The LevelUp Fund</p>
           <h1 id="hero-title" data-hero>Your next step <span class="grad">starts here.</span></h1>
           <p class="hero-copy" data-hero>Many certifications and credentials cost money. We cover the fees for eligible programs so students can take the next step without paying out of pocket.</p>
           <div class="hero-actions" data-hero>
@@ -742,7 +736,7 @@
             <p class="eyebrow">Our supporters</p>
 
             <h2 class="mt-4">
-              Thanks to our <em class="em">sponsors.</em>
+              Thanks to our <span class="em">sponsors.</span>
             </h2>
 
             <p class="mt-3 text-slate-600 dark:text-slate-400">
@@ -799,7 +793,7 @@
     <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
       <div><a href="#" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
       <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
-      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><a href="https://github.com/SSreeramsetty11/LevelUp-Fund" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button></div></div>
     </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-5 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
 
@@ -1152,20 +1146,6 @@
     if (!reducedMotion) {
       const voucher = document.querySelector(".certificate");
       if (voucher) makeTilt(voucher, { max: 7, zone: document.querySelector(".hero-visual"), press: 0.985 });
-      document.querySelectorAll(".process-row, .rule").forEach((el) => { el.classList.add("tilt"); makeTilt(el, { max: 4.5, hover: 1.012, parallax: true }); });
-      const art = document.querySelector(".mission-art");
-      if (art) { art.classList.add("tilt"); makeTilt(art, { max: 3, hover: 1.008 }); }
-
-      // Magnetic buttons: they lean a few pixels toward the cursor, then ease back.
-      document.querySelectorAll(".pill, .nav-apply").forEach((btn) => {
-        btn.addEventListener("pointermove", (e) => {
-          if (e.pointerType !== "mouse") return;
-          const r = btn.getBoundingClientRect();
-          btn.style.setProperty("--mx", clamp((e.clientX - r.left - r.width / 2) * 0.14, -5, 5).toFixed(1) + "px");
-          btn.style.setProperty("--my", clamp((e.clientY - r.top - r.height / 2) * 0.2, -4, 4).toFixed(1) + "px");
-        }, { passive: true });
-        btn.addEventListener("pointerleave", () => { btn.style.setProperty("--mx", "0px"); btn.style.setProperty("--my", "0px"); });
-      });
 
       // Draggable marquee: drifts on its own, slows under the pointer, can be flung, and surges a little as you scroll.
       const track = document.querySelector(".marquee-track");
