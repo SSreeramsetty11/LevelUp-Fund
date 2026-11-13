@@ -2,12 +2,15 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-ARy29ojL2T1hIRal4ihKsyOcZMICmTdytVGwijHr2RA=' 'sha256-UCjczjyb/MiXfcnKeQwN45x9ogVxY+yELHiz3hytVC8='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
 
   <title>The LevelUp Fund</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
   <script>
     tailwind.config = {
@@ -551,12 +554,12 @@
         <a href="#sponsors" class="nav-link hidden text-sm font-medium md:inline">Sponsors</a>
 
         <button id="mobile-menu-open" type="button" class="menu-btn md:hidden" aria-haspopup="dialog">Menu</button>
-        <a href="#apply" class="nav-apply pill pill-brand hidden !min-h-0 !px-4 !py-2.5 !text-sm sm:inline-flex">Apply now</a>
+        <a href="apply.html" class="nav-apply pill pill-brand hidden !min-h-0 !px-4 !py-2.5 !text-sm sm:inline-flex">Apply now</a>
       </div>
     </nav>
     <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title">
       <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><div class="flex items-center gap-2"><button type="button" class="theme-toggle grid h-11 w-11 place-items-center rounded-full" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div></div>
-      <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#sponsors">Sponsors ↗</a><a href="#apply">Apply ↗</a></nav>
+      <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#sponsors">Sponsors ↗</a><a href="apply.html">Apply ↗</a></nav>
     </dialog>
   </header>
 
@@ -569,7 +572,7 @@
           <h1 id="hero-title" data-hero>Your next step <span class="grad">starts here.</span></h1>
           <p class="hero-copy" data-hero>Many certifications and credentials cost money. We cover the fees for eligible programs so students can take the next step without paying out of pocket.</p>
           <div class="hero-actions" data-hero>
-            <a class="pill pill-brand" href="#apply">Apply for a grant <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            <a class="pill pill-brand" href="apply.html">Apply for a grant <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
             <a class="pill pill-line" href="#how-it-works">How it works <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m7-7-7 7-7-7"/></svg></a>
           </div>
           <p class="eg" data-hero><span>Could include:</span><span class="tag">Bloomberg Market Concepts</span><span class="tag">Coursera certificates</span><span class="tag">Industry exams</span></p>
@@ -753,215 +756,6 @@
       </div>
     </section>
 
-    <!-- Application -->
-    <section
-      id="apply"
-      class="section scroll-mt-24"
-    >
-      <div class="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <div>
-          <p class="eyebrow">Apply</p>
-
-          <h2 class="mt-5">
-            Apply for a <em class="em">grant.</em>
-          </h2>
-
-          <p class="lede mt-6">
-            Tell us about yourself and the certification or credential you want.
-            We'll follow up with next steps, including practice-test instructions when they apply.
-          </p>
-
-          <p class="mt-6 text-sm text-slate-400 dark:text-slate-400">
-            Questions?
-
-            <!-- Replace with your real support email. -->
-            <a
-              href="mailto:support@example.com"
-              class="contact-link font-semibold underline underline-offset-4"
-            >
-              Get in touch.
-            </a>
-          </p>
-        </div>
-
-        <form
-          id="grant-form"
-          class="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/30 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none sm:p-8"
-          novalidate
-        >
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <h3 class="text-xl font-bold">Grant application</h3>
-              <p class="mt-1 text-sm text-slate-400">All fields are required.</p>
-            </div>
-
-            <span class="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 dark:bg-amber-950 dark:text-amber-300">
-              Demo only
-            </span>
-          </div>
-
-          <div class="mt-5 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
-            Test mode: use made-up information only. Submissions are sent to the shared database for testing.
-          </div>
-
-          <div
-            id="form-error"
-            role="alert"
-            class="mt-5 hidden rounded-xl bg-red-50 p-4 text-sm text-red-700 dark:bg-red-950 dark:text-red-300"
-          ></div>
-
-          <div class="mt-6 space-y-5">
-            <div>
-              <div class="flex items-start gap-3">
-                <input id="age-confirmation" type="checkbox" required class="mt-1 h-4 w-4 shrink-0 accent-blue-600" />
-                <label for="age-confirmation" class="text-sm leading-6 text-slate-700 dark:text-slate-300">I confirm that I am at least 14 years old.</label>
-              </div>
-              <p id="age-confirmation-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-            <div>
-              <label for="full-name" class="mb-2 block text-sm font-semibold">
-                Full legal name
-              </label>
-
-              <input
-                id="full-name"
-                type="text"
-                maxlength="120"
-                required
-                placeholder="Sample name"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              />
-
-              <p id="full-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="email" class="mb-2 block text-sm font-semibold">
-                Email address
-              </label>
-
-              <input
-                id="email"
-                type="email"
-                maxlength="254"
-                required
-                placeholder="sample@example.com"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              />
-
-              <p id="email-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="candidate-id" class="mb-2 block text-sm font-semibold">
-                Who provides this certification or credential?
-              </label>
-
-              <input
-                id="candidate-id"
-                type="text"
-                maxlength="100"
-                required
-                placeholder="For example, Bloomberg, Coursera, or CompTIA"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              />
-
-              <p id="candidate-id-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="exam-name" class="mb-2 block text-sm font-semibold">
-                Which certification or credential are you planning to pursue?
-
-              </label>
-
-              <input
-                id="exam-name"
-                type="text"
-                maxlength="160"
-                required
-                placeholder="For example, Bloomberg Market Concepts"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              />
-
-              <p id="exam-name-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="certification-url" class="mb-2 block text-sm font-semibold">
-                Certification website URL
-              </label>
-
-              <input
-                id="certification-url"
-                type="url"
-                required
-                placeholder="https://example.com/certification"
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              />
-
-              <p id="certification-url-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="student-info" class="mb-2 block text-sm font-semibold">
-                Why should you receive this grant? (fewer than 500 words)
-              </label>
-
-              <textarea
-                id="student-info"
-                rows="6"
-                maxlength="10000"
-                required
-                placeholder="Tell us how this grant would help you and why this credential matters to you."
-                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              ></textarea>
-
-              <p id="essay-count" class="mt-2 text-xs text-slate-400" aria-live="polite">0 / 499 words</p>
-              <div class="essay-meter" aria-hidden="true"><i id="essay-meter-fill"></i></div>
-              <p id="student-info-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div>
-              <label for="grant-amount" class="mb-2 block text-sm font-semibold">How much funding do you need? (USD)</label>
-              <input id="grant-amount" type="number" min="0.01" step="0.01" required placeholder="For example, 250.00" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
-              <p id="grant-amount-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-
-            <div class="border-t border-slate-200 pt-5 dark:border-slate-700">
-              <div class="flex items-start gap-3">
-                <input
-                  id="agreement"
-                  type="checkbox"
-                  required
-                  class="mt-1 h-4 w-4 shrink-0 accent-blue-600"
-                />
-
-                <label for="agreement" class="text-sm leading-6 text-slate-700 dark:text-slate-300">
-                  I agree to the Conditional Grant Agreement: I must give
-                  48-hour notice for schedule changes and submit my official
-                  score report or certificate within 14 days after my exam or completion.
-                </label>
-              </div>
-
-              <p id="agreement-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            class="mt-6 w-full rounded-xl px-5 py-4 text-base font-bold text-white"
-          >
-            Submit test application →
-          </button>
-
-          <p class="mt-3 text-center text-xs leading-5 text-slate-500">
-            Test submissions are stored in the shared database.
-          </p>
-        </form>
-      </div>
-    </section>
-
     <!-- Frequently asked questions -->
     <section id="faq" class="faq section scroll-mt-24"><div class="faq-inner"><div data-reveal><p class="eyebrow">The details</p><h2 class="mt-5">Frequently asked<br><em class="em">questions.</em></h2></div><div class="faq-list" data-reveal>
       <details><summary>What does the fund help cover?</summary><p>The fund is intended to cover eligible certification and credentialing fees that students would otherwise pay for themselves, such as industry exams or platform certificates like Bloomberg Market Concepts and Coursera. Applications are subject to review and available funding.</p></details>
@@ -1033,44 +827,15 @@
     <div class="mx-auto max-w-7xl px-5 pb-16 sm:px-8">
       <div class="footer-band">
         <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Apply</p>
-        <div class="mt-5 flex flex-wrap items-end justify-between gap-8"><p class="footer-cta">Ready to apply?</p><a href="#apply" class="pill pill-brand">Apply for a grant <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+        <div class="mt-5 flex flex-wrap items-end justify-between gap-8"><p class="footer-cta">Ready to apply?</p><a href="apply.html" class="pill pill-brand">Apply for a grant <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
       </div>
     </div>
     <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
       <div><a href="#" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
-      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="#apply" class="hover:text-white">Apply</a></div></div>
-      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button></div></div>
+      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button><p id="admin-load-status" role="status" hidden class="max-w-xs leading-6 text-slate-300"></p></div></div>
     </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-5 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
-
-  <!-- Application confirmation -->
-  <dialog
-    id="success-dialog"
-    aria-labelledby="success-title"
-    class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-white p-0 text-slate-900 dark:bg-slate-900 dark:text-white"
-  >
-    <div class="relative p-8 text-center">
-      <div id="success-tile" class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-2xl text-emerald-600 dark:bg-emerald-950">
-        ✓
-      </div>
-
-      <h2 id="success-title" class="mt-5 text-2xl font-bold">
-        Test application submitted
-      </h2>
-
-      <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        The sample entry was submitted to the shared database.
-      </p>
-
-      <button
-        id="close-success"
-        type="button"
-        class="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white hover:bg-blue-700"
-      >
-        Got it
-      </button>
-    </div>
-  </dialog>
 
   <!-- Admin login -->
   <dialog
@@ -1117,6 +882,9 @@
         autocomplete="current-password"
         class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950"
       />
+
+      <div id="admin-captcha" class="mt-4" hidden></div>
+      <p id="admin-captcha-status" class="mt-2 text-sm text-slate-400" role="status" aria-live="polite"></p>
 
       <p
         id="login-error"
@@ -1314,6 +1082,21 @@
     </div>
   </dialog>
 
+  <!-- Explain startup problems even when the admin module cannot load. -->
+  <script>
+    (() => {
+      const button = document.getElementById("open-admin");
+      const status = document.getElementById("admin-load-status");
+      button.addEventListener("click", () => {
+        if (button.dataset.adminReady === "true") return;
+        status.textContent = window.location.protocol === "file:"
+          ? "Admin login needs a local server. In VS Code, right-click index.html and choose Open with Live Server, then try again."
+          : "Admin login has not loaded. Check your internet connection, then refresh this page and try again.";
+        status.hidden = false;
+      });
+    })();
+  </script>
+
   <!-- GSAP core + ScrollTrigger: pinned version with SRI, deferred. The page works without them. -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
@@ -1476,46 +1259,29 @@
       b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin");
     }));
 
-    // Submit celebration: the check springs in and a burst of confetti leaves it.
-    window.celebrate = celebrate;
-    function celebrate() {
-      const g2 = window.gsap;
-      if (!g2 || reducedMotion) return;
-      const host = successDialog.querySelector(".relative");
-      const tile = document.getElementById("success-tile");
-      g2.fromTo(tile, { scale: 0.4, rotate: -14 }, { scale: 1, rotate: 0, duration: 0.6, ease: "back.out(2.4)" });
-      const box = host.getBoundingClientRect(), t = tile.getBoundingClientRect();
-      const ox = t.left + t.width / 2 - box.left, oy = t.top + t.height / 2 - box.top;
-      const colors = ["#F5C85C", "#FFE7B8", "#9FB8FF", "#E7B6FF", "#FFFFFF"];
-      for (let i = 0; i < 26; i++) {
-        const bit = document.createElement("i");
-        bit.className = "confetti-bit";
-        bit.style.cssText = `left:${ox}px;top:${oy}px;background:${colors[i % colors.length]}`;
-        host.append(bit);
-        const angle = Math.random() * Math.PI * 2, dist = 60 + Math.random() * 120;
-        g2.fromTo(bit, { x: 0, y: 0, scale: 1, opacity: 1, rotate: 0 },
-          { x: Math.cos(angle) * dist, y: Math.sin(angle) * dist + 70, rotate: Math.random() * 540 - 270, scale: 0.4, opacity: 0, duration: 0.9 + Math.random() * 0.5, ease: "power2.out", onComplete: () => bit.remove() });
-      }
-    }
-
   </script>
 
   <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/+esm";
     import { createSharedAdmin } from "./src/shared-admin.js";
-    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
-    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    import { evaluateIncomeEligibility, incomeClassFor } from "./src/eligibility.js";
+    import { createAuthCaptcha } from "./src/auth-captcha.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TURNSTILE_SITE_KEY } from "./src/supabase-config.js";
+    // Clear the previous version's persisted session for this project only.
+    try { window.localStorage.removeItem(`sb-${new URL(SUPABASE_URL).hostname.split('.')[0]}-auth-token`); } catch (error) { /* Storage may be unavailable. */ }
+    // Keep admin sessions in memory only; a reload or closing this tab signs out locally.
+    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
     const backend = createSharedAdmin(client);
     const MAX_LOGO_SIZE = 500 * 1024;
 
-    const grantForm = document.getElementById("grant-form");
-    const formError = document.getElementById("form-error");
-    const successDialog = document.getElementById("success-dialog");
 
     const loginDialog = document.getElementById("admin-login-dialog");
     const loginForm = document.getElementById("admin-login-form");
     const loginError = document.getElementById("login-error");
     const adminPassword = document.getElementById("admin-password");
+    const captcha = createAuthCaptcha({ siteKey: TURNSTILE_SITE_KEY, container: document.getElementById("admin-captcha"), status: document.getElementById("admin-captcha-status") });
 
     const dashboard = document.getElementById("admin-dashboard");
     const applicationList = document.getElementById("application-list");
@@ -1528,57 +1294,6 @@
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    function makeId() {
-      if (window.crypto && crypto.randomUUID) {
-        return crypto.randomUUID();
-      }
-
-      return Date.now() + "-" + Math.random().toString(36).slice(2);
-    }
-
-    function showFieldError(field, message) {
-      const error = document.getElementById(field.id + "-error");
-
-      field.setAttribute("aria-invalid", "true");
-      field.setAttribute("aria-describedby", error.id);
-
-      error.textContent = message;
-      error.classList.remove("hidden");
-    }
-
-    function clearFieldError(field) {
-      const error = document.getElementById(field.id + "-error");
-
-      if (!error) return;
-
-      field.removeAttribute("aria-invalid");
-      field.removeAttribute("aria-describedby");
-      field.removeAttribute("data-valid");
-
-      error.textContent = "";
-      error.classList.add("hidden");
-    }
-
-    grantForm.querySelectorAll("input, textarea").forEach((field) => {
-      field.addEventListener("input", () => clearFieldError(field));
-      field.addEventListener("change", () => clearFieldError(field));
-    });
-
-    const essayField = document.getElementById("student-info");
-    const essayCount = document.getElementById("essay-count");
-    function countEssayWords(value) {
-      const text = value.trim();
-      return text ? text.split(/\s+/).length : 0;
-    }
-    const essayFill = document.getElementById("essay-meter-fill");
-    function updateEssayCount() {
-      const words = countEssayWords(essayField.value);
-      essayCount.textContent = `${words} / 499 words`;
-      essayFill.style.transform = `scaleX(${Math.min(1, words / 499).toFixed(3)})`;
-      essayFill.dataset.level = words >= 500 ? "over" : words >= 450 ? "near" : "ok";
-    }
-    essayField.addEventListener("input", updateEssayCount);
-
     const mobileMenu = document.getElementById("mobile-menu");
     const menuOpener = document.getElementById("mobile-menu-open");
     menuOpener.addEventListener("click", () => { mobileMenu.showModal(); document.body.style.overflow = "hidden"; document.getElementById("mobile-menu-close").focus(); });
@@ -1586,130 +1301,16 @@
     mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => mobileMenu.close()));
     mobileMenu.addEventListener("close", () => { document.body.style.overflow = ""; menuOpener.focus(); });
 
-    // One source of truth for field rules: used on blur (inline) and on submit.
-    function fieldMessage(field) {
-      const v = field.value ? field.value.trim() : "";
-      switch (field.id) {
-        case "full-name": return v ? "" : "Enter a name.";
-        case "email": return v && field.validity.valid ? "" : "Enter a valid email address.";
-        case "candidate-id": return v ? "" : "Enter the organization that administers the certification.";
-        case "exam-name": return v ? "" : "Enter the certification name.";
-        case "certification-url": {
-          let ok = false;
-          try {
-            const parsed = new URL(v);
-            ok = /^https?:\/\//i.test(v) && (parsed.protocol === "http:" || parsed.protocol === "https:") && !!parsed.hostname && field.validity.valid;
-          } catch (error) { /* malformed URLs fall through to the message */ }
-          return ok ? "" : "Enter a valid certification website URL starting with http:// or https://.";
-        }
-        case "student-info": { const words = countEssayWords(field.value); return words > 0 && words < 500 ? "" : "Enter an essay of fewer than 500 words."; }
-        case "grant-amount": return field.value !== "" && field.validity.valid && Number.isFinite(Number(field.value)) && Number(field.value) > 0 ? "" : "Enter a valid amount greater than zero, with up to two decimal places.";
-        case "agreement": return field.checked ? "" : "Please agree to the grant terms.";
-      }
-      return "";
-    }
-
-    // Validate inline as people leave a field (empties wait for submit so tabbing past isn't scolded).
-    grantForm.querySelectorAll("input[type=text], input[type=email], input[type=url], input[type=number], textarea").forEach((field) => {
-      field.addEventListener("blur", () => {
-        if (!field.value.trim()) return;
-        const message = fieldMessage(field);
-        if (message) showFieldError(field, message); else { clearFieldError(field); field.dataset.valid = "true"; }
-      });
-    });
-
-    /* Application submission */
-    grantForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      formError.classList.add("hidden");
-      formError.textContent = "";
-
-      grantForm.querySelectorAll("input, textarea").forEach(clearFieldError);
-
-      const fullName = document.getElementById("full-name");
-      const email = document.getElementById("email");
-      const candidateId = document.getElementById("candidate-id");
-      const examName = document.getElementById("exam-name");
-      const certificationUrl = document.getElementById("certification-url");
-      const studentInfo = document.getElementById("student-info");
-      const agreement = document.getElementById("agreement");
-      const ageConfirmation = document.getElementById("age-confirmation");
-      const amount = document.getElementById("grant-amount");
-
-      let firstInvalid = null;
-
-      function check(field, valid, message) {
-        if (!valid) {
-          showFieldError(field, message);
-
-          if (!firstInvalid) {
-            firstInvalid = field;
-          }
-        }
-      }
-
-      check(ageConfirmation, ageConfirmation.checked, "You must confirm that you are at least 14 years old to apply.");
-      const urlValue = certificationUrl.value.trim();
-      [fullName, email, candidateId, examName, certificationUrl, studentInfo, amount, agreement].forEach((field) => {
-        const message = fieldMessage(field);
-        check(field, !message, message);
-      });
-
-      if (firstInvalid) {
-        formError.textContent = "Please check the highlighted fields.";
-        formError.classList.remove("hidden");
-        firstInvalid.focus();
-        return;
-      }
-
-      const application = {
-        id: makeId(),
-        name: fullName.value.trim(),
-        email: email.value.trim(),
-        examProvider: candidateId.value.trim(),
-        exam: examName.value.trim(),
-        certificationUrl: urlValue,
-        essay: studentInfo.value.trim(),
-        requestedAmount: Number(amount.value),
-        practiceScore: "",
-        notes: "",
-        status: "Pending",
-        submittedAt: new Date().toISOString()
-      };
-
-      const submitButton = grantForm.querySelector('button[type="submit"]');
-      submitButton.disabled = true;
-      try {
-        application.agreement = agreement.checked;
-        application.ageConfirmed = ageConfirmation.checked;
-        await backend.submitApplication(application);
-      } catch (error) {
-        formError.textContent = "Your application could not be submitted. Please try again later.";
-        formError.classList.remove("hidden");
-        return;
-      } finally {
-        submitButton.disabled = false;
-      }
-
-      grantForm.reset();
-      updateEssayCount();
-      successDialog.showModal();
-      document.getElementById("close-success").focus();
-      if (window.celebrate) window.celebrate();
-    });
-
-    document.getElementById("close-success").addEventListener("click", () => {
-      successDialog.close();
-    });
-
     /* Admin login */
-    document.getElementById("open-admin").addEventListener("click", () => {
+    const adminButton = document.getElementById("open-admin");
+    adminButton.addEventListener("click", () => {
+      if (adminButton.dataset.adminReady !== "true") return;
       loginForm.reset();
       loginError.classList.add("hidden");
       loginError.textContent = "";
       document.getElementById("reset-request-status").textContent = "";
       loginDialog.showModal();
+      captcha.prepare();
       document.getElementById("admin-email").focus();
     });
 
@@ -1731,6 +1332,8 @@
         status.textContent = "Open the site through the local server or HTTPS to request a reset.";
         return;
       }
+      const challenge = captcha.consume();
+      if (!challenge.ok) return;
       button.disabled = true;
       button.textContent = "Sending reset link…";
       status.textContent = "Sending your reset request…";
@@ -1741,7 +1344,7 @@
           timeoutId = setTimeout(() => reject(new Error("request-timeout")), 20000);
         });
         const { error } = await Promise.race([
-          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo }),
+          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo, ...(challenge.token ? { captchaToken: challenge.token } : {}) }),
           timeout
         ]);
         if (error) throw error;
@@ -1758,6 +1361,7 @@
         }
       } finally {
         clearTimeout(timeoutId);
+        captcha.reset();
         button.disabled = false;
         button.textContent = "Forgot password?";
       }
@@ -1766,10 +1370,12 @@
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       loginError.classList.add("hidden");
+      const challenge = captcha.consume();
+      if (!challenge.ok) return;
       const submitButton = loginForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
       try {
-        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value);
+        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value, challenge.token);
         loginForm.reset();
         loginDialog.close();
         dashboard.showModal();
@@ -1778,7 +1384,7 @@
       } catch (error) {
         loginError.textContent = "Unable to sign in. Check your details and contact an administrator if needed.";
         loginError.classList.remove("hidden");
-      } finally { submitButton.disabled = false; }
+      } finally { captcha.reset(); submitButton.disabled = false; }
     });
 
     async function closeAdminSession() {
@@ -1938,7 +1544,10 @@
           detail("Certification website URL", application.certificationUrl || "Not provided"),
           detail("Age confirmation", application.ageConfirmed === true ? "Applicant confirmed they are at least 14" : "Not recorded"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
-          detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
+          detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided"),
+          detail("Annual household income", application.householdIncome != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.householdIncome) : "Not provided"),
+          detail("Household income class (calculated)", application.householdIncome != null ? (incomeClassFor(Number(application.householdIncome))?.label || "Not available") : "Not provided"),
+          detail("Income eligibility", application.householdIncome == null || application.requestedAmount == null ? "Not recorded; review required" : ({ over_income_limit: "Reported income exceeds $90,000", request_not_high_enough: "Requested amount does not exceed 0.75% of income", eligible: "Income rules met; review still required", invalid: "Invalid information; review required" })[evaluateIncomeEligibility(Number(application.householdIncome), Number(application.requestedAmount))])
         );
 
         // Manual free-tool workflow: nothing is sent to Sapling by this site.
@@ -2073,6 +1682,19 @@
             return;
           }
 
+          if (application.householdIncome != null && Number(application.householdIncome) > 90000 && statusSelect.value !== "Rejected") {
+            window.alert("Applications with reported annual household income over $90,000 must remain rejected.");
+            return;
+          }
+          // Previously approved records without income remain editable; new approvals require the rule.
+          if (statusSelect.value === "Approved" && application.status !== "Approved") {
+            const income = application.householdIncome;
+            const amount = application.requestedAmount;
+            if (income == null || amount == null || evaluateIncomeEligibility(Number(income), Number(amount)) !== "eligible") {
+              window.alert("Cannot approve: annual household income must be at most $90,000, and the requested amount must exceed 0.75% of that income. Older applications without income cannot be newly approved.");
+              return;
+            }
+          }
           try {
             await backend.updateReview(application.id, {
               status: statusSelect.value,
@@ -2416,6 +2038,8 @@
     }
 
     renderSponsors();
+    adminButton.dataset.adminReady = "true";
+    document.getElementById("admin-load-status").hidden = true;
   </script>
 
 </body>
