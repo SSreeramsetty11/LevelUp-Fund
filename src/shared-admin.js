@@ -7,8 +7,10 @@ export function createSharedAdmin(client) {
     return data;
   }
 
-  async function signIn(email, password) {
-    await checked(client.auth.signInWithPassword({ email, password }));
+  async function signIn(email, password, captchaToken) {
+    const credentials = { email, password };
+    if (captchaToken) credentials.options = { captchaToken };
+    await checked(client.auth.signInWithPassword(credentials));
     try {
       const allowed = await checked(client.rpc('levelup_is_admin'));
       if (allowed !== true) throw new Error('This account is not authorized as an administrator.');
@@ -40,7 +42,7 @@ export function createSharedAdmin(client) {
   }
 
   async function listApplications() {
-    const rows = await checked(client.from('levelup_applications').select('*').order('created_at', { ascending: false }));
+    const rows = await checked(client.from('levelup_applications').select('id,created_at,name,email,exam_provider,certification,certification_url,essay,amount,household_income,age_confirmed,status,practice_score,notes').order('created_at', { ascending: false }));
     return rows.map(row => ({
       id: row.id, name: row.name, email: row.email,
       examProvider: row.exam_provider, exam: row.certification,
@@ -64,7 +66,7 @@ export function createSharedAdmin(client) {
   }
 
   async function listSponsors() {
-    const rows = await checked(client.from('levelup_sponsors').select('*').order('created_at'));
+    const rows = await checked(client.from('levelup_sponsors').select('id,name,website_url,image,created_at').order('created_at'));
     return rows.map(row => ({ id: row.id, name: row.name, url: row.website_url, image: row.image }));
   }
 
@@ -79,7 +81,7 @@ export function createSharedAdmin(client) {
   }
 
   async function listTeam() {
-    const rows = await checked(client.from('levelup_team').select('*').order('created_at'));
+    const rows = await checked(client.from('levelup_team').select('id,name,role,bio,image,created_at').order('created_at'));
     return rows.map(row => ({ id: row.id, name: row.name, role: row.role, bio: row.bio, image: row.image }));
   }
 

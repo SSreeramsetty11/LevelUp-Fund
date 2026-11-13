@@ -2,12 +2,15 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-ARy29ojL2T1hIRal4ihKsyOcZMICmTdytVGwijHr2RA=' 'sha256-GjjO3pzs/Qmy7E8fEQdSblTygDqP52RBpjMxhsRHukA='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
 
   <title>The LevelUp Fund</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
   <script>
     tailwind.config = {
@@ -862,6 +865,9 @@
         class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950"
       />
 
+      <div id="admin-captcha" class="mt-4" hidden></div>
+      <p id="admin-captcha-status" class="mt-2 text-sm text-slate-400" role="status" aria-live="polite"></p>
+
       <p
         id="login-error"
         role="alert"
@@ -1238,11 +1244,15 @@
   </script>
 
   <script type="module">
-    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/+esm";
     import { createSharedAdmin } from "./src/shared-admin.js";
     import { evaluateIncomeEligibility, incomeClassFor } from "./src/eligibility.js";
-    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
-    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    import { createAuthCaptcha } from "./src/auth-captcha.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TURNSTILE_SITE_KEY } from "./src/supabase-config.js";
+    // Clear the previous version's persisted session for this project only.
+    try { window.localStorage.removeItem(`sb-${new URL(SUPABASE_URL).hostname.split('.')[0]}-auth-token`); } catch (error) { /* Storage may be unavailable. */ }
+    // Keep admin sessions in memory only; a reload or closing this tab signs out locally.
+    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false } });
     const backend = createSharedAdmin(client);
     const MAX_LOGO_SIZE = 500 * 1024;
 
@@ -1251,6 +1261,7 @@
     const loginForm = document.getElementById("admin-login-form");
     const loginError = document.getElementById("login-error");
     const adminPassword = document.getElementById("admin-password");
+    const captcha = createAuthCaptcha({ siteKey: TURNSTILE_SITE_KEY, container: document.getElementById("admin-captcha"), status: document.getElementById("admin-captcha-status") });
 
     const dashboard = document.getElementById("admin-dashboard");
     const applicationList = document.getElementById("application-list");
@@ -1279,6 +1290,7 @@
       loginError.textContent = "";
       document.getElementById("reset-request-status").textContent = "";
       loginDialog.showModal();
+      captcha.prepare();
       document.getElementById("admin-email").focus();
     });
 
@@ -1300,6 +1312,8 @@
         status.textContent = "Open the site through the local server or HTTPS to request a reset.";
         return;
       }
+      const challenge = captcha.consume();
+      if (!challenge.ok) return;
       button.disabled = true;
       button.textContent = "Sending reset link…";
       status.textContent = "Sending your reset request…";
@@ -1310,7 +1324,7 @@
           timeoutId = setTimeout(() => reject(new Error("request-timeout")), 20000);
         });
         const { error } = await Promise.race([
-          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo }),
+          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo, ...(challenge.token ? { captchaToken: challenge.token } : {}) }),
           timeout
         ]);
         if (error) throw error;
@@ -1327,6 +1341,7 @@
         }
       } finally {
         clearTimeout(timeoutId);
+        captcha.reset();
         button.disabled = false;
         button.textContent = "Forgot password?";
       }
@@ -1335,10 +1350,12 @@
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       loginError.classList.add("hidden");
+      const challenge = captcha.consume();
+      if (!challenge.ok) return;
       const submitButton = loginForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
       try {
-        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value);
+        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value, challenge.token);
         loginForm.reset();
         loginDialog.close();
         dashboard.showModal();
@@ -1347,7 +1364,7 @@
       } catch (error) {
         loginError.textContent = "Unable to sign in. Check your details and contact an administrator if needed.";
         loginError.classList.remove("hidden");
-      } finally { submitButton.disabled = false; }
+      } finally { captcha.reset(); submitButton.disabled = false; }
     });
 
     async function closeAdminSession() {

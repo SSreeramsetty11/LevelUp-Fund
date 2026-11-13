@@ -1,5 +1,5 @@
 import { evaluateIncomeEligibility, incomeClasses, incomeClassFor } from "./eligibility.js";
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/+esm";
 import { createSharedAdmin } from "./shared-admin.js";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
 const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
@@ -71,9 +71,9 @@ const householdIncome = document.getElementById("household-income");
           let ok = false;
           try {
             const parsed = new URL(v);
-            ok = /^https?:\/\//i.test(v) && (parsed.protocol === "http:" || parsed.protocol === "https:") && !!parsed.hostname && field.validity.valid;
+            ok = /^https?:\/\//i.test(v) && (parsed.protocol === "http:" || parsed.protocol === "https:") && !!parsed.hostname && !parsed.username && !parsed.password && field.validity.valid;
           } catch (error) { /* malformed URLs fall through to the message */ }
-          return ok ? "" : "Enter a valid certification website URL starting with http:// or https://.";
+          return ok ? "" : "Enter a valid certification website URL starting with http:// or https://, without a username or password.";
         }
         case "student-info": { const words = countEssayWords(field.value); return words > 0 && words < 500 ? "" : "Enter an essay of fewer than 500 words."; }
         case "household-income-class": return incomeClasses.some((range) => range.value === v) ? "" : "Select an annual household income range.";
