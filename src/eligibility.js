@@ -1,3 +1,22 @@
+// These ranges are labels used by the application form, not official income classes.
+// Each upper limit is exclusive, so the ranges also cover amounts with cents.
+export const incomeClasses = [
+  { value: 'lower-lower', label: 'Lower-lower', upperLimit: 20000 },
+  { value: 'lower-middle', label: 'Lower-middle', upperLimit: 40000 },
+  { value: 'lower-upper', label: 'Lower-upper', upperLimit: 60000 },
+  { value: 'middle-lower', label: 'Middle-lower', upperLimit: 75000 },
+  { value: 'middle-middle', label: 'Middle-middle', upperLimit: 90000 },
+  { value: 'middle-upper', label: 'Middle-upper', upperLimit: 120000 },
+  { value: 'upper-lower', label: 'Upper-lower', upperLimit: 150000 },
+  { value: 'upper-middle', label: 'Upper-middle', upperLimit: 200000 },
+  { value: 'upper-upper', label: 'Upper-upper', upperLimit: Infinity }
+];
+
+export function incomeClassFor(income) {
+  if (!Number.isFinite(income) || income < 0) return null;
+  return incomeClasses.find((range) => income < range.upperLimit) || null;
+}
+
 // The requested amount must be strictly greater than 0.75% of annual household income.
 // Dollar amounts are limited to two decimal places and converted to integer cents.
 export function evaluateIncomeEligibility(income, amount) {

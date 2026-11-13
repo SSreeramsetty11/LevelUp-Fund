@@ -1,4 +1,4 @@
-import { evaluateIncomeEligibility } from "./eligibility.js";
+import { evaluateIncomeEligibility, incomeClasses, incomeClassFor } from "./eligibility.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
 import { createSharedAdmin } from "./shared-admin.js";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
@@ -6,6 +6,8 @@ const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABL
 const grantForm = document.getElementById("grant-form");
 const formError = document.getElementById("form-error");
 const successDialog = document.getElementById("success-dialog");
+const householdIncomeClass = document.getElementById("household-income-class");
+const householdIncome = document.getElementById("household-income");
     function makeId() {
       if (window.crypto && crypto.randomUUID) {
         return crypto.randomUUID();
@@ -37,7 +39,7 @@ const successDialog = document.getElementById("success-dialog");
       error.classList.add("hidden");
     }
 
-    grantForm.querySelectorAll("input, textarea").forEach((field) => {
+    grantForm.querySelectorAll("input, textarea, select").forEach((field) => {
       field.addEventListener("input", () => clearFieldError(field));
       field.addEventListener("change", () => clearFieldError(field));
     });
@@ -74,12 +76,28 @@ const successDialog = document.getElementById("success-dialog");
           return ok ? "" : "Enter a valid certification website URL starting with http:// or https://.";
         }
         case "student-info": { const words = countEssayWords(field.value); return words > 0 && words < 500 ? "" : "Enter an essay of fewer than 500 words."; }
-        case "household-income": return field.value !== "" && field.validity.valid && Number.isFinite(Number(field.value)) && Number(field.value) >= 0 && Number(field.value) <= 9999999999.99 ? "" : "Enter a valid annual household income of zero or more, with up to two decimal places.";
+        case "household-income-class": return incomeClasses.some((range) => range.value === v) ? "" : "Select an annual household income range.";
+        case "household-income": {
+          const income = Number(field.value);
+          if (field.value === "" || !field.validity.valid || !Number.isFinite(income) || income < 0 || income > 9999999999.99) {
+            return "Enter a valid annual household income of zero or more, with up to two decimal places.";
+          }
+          if (incomeClasses.some((range) => range.value === householdIncomeClass.value) && incomeClassFor(income)?.value !== householdIncomeClass.value) {
+            return "The annual household income must match the selected income range.";
+          }
+          return "";
+        }
         case "grant-amount": return field.value !== "" && field.validity.valid && Number.isFinite(Number(field.value)) && Number(field.value) > 0 && Number(field.value) <= 9999999999.99 ? "" : "Enter a valid amount greater than zero, with up to two decimal places.";
         case "agreement": return field.checked ? "" : "Please agree to the grant terms.";
       }
       return "";
     }
+
+    householdIncomeClass.addEventListener("change", () => {
+      if (!householdIncome.value.trim()) return;
+      const message = fieldMessage(householdIncome);
+      if (message) showFieldError(householdIncome, message); else clearFieldError(householdIncome);
+    });
 
     // Validate inline as people leave a field (empties wait for submit so tabbing past isn't scolded).
     grantForm.querySelectorAll("input[type=text], input[type=email], input[type=url], input[type=number], textarea").forEach((field) => {
@@ -97,7 +115,7 @@ const successDialog = document.getElementById("success-dialog");
       formError.classList.add("hidden");
       formError.textContent = "";
 
-      grantForm.querySelectorAll("input, textarea").forEach(clearFieldError);
+      grantForm.querySelectorAll("input, textarea, select").forEach(clearFieldError);
 
       const fullName = document.getElementById("full-name");
       const email = document.getElementById("email");
@@ -108,7 +126,6 @@ const successDialog = document.getElementById("success-dialog");
       const agreement = document.getElementById("agreement");
       const ageConfirmation = document.getElementById("age-confirmation");
       const amount = document.getElementById("grant-amount");
-      const householdIncome = document.getElementById("household-income");
 
       let firstInvalid = null;
 
@@ -124,7 +141,7 @@ const successDialog = document.getElementById("success-dialog");
 
       check(ageConfirmation, ageConfirmation.checked, "You must confirm that you are at least 14 years old to apply.");
       const urlValue = certificationUrl.value.trim();
-      [fullName, email, candidateId, examName, certificationUrl, studentInfo, householdIncome, amount, agreement].forEach((field) => {
+      [fullName, email, candidateId, examName, certificationUrl, studentInfo, householdIncomeClass, householdIncome, amount, agreement].forEach((field) => {
         const message = fieldMessage(field);
         check(field, !message, message);
       });

@@ -648,9 +648,27 @@
             </div>
 
             <div>
+              <label for="household-income-class" class="mb-2 block text-sm font-semibold">Which range includes your annual household income?</label>
+              <select id="household-income-class" required class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950">
+                <option value="">Select an income range</option>
+                <option value="lower-lower">Lower-lower — under $20,000</option>
+                <option value="lower-middle">Lower-middle — $20,000 to under $40,000</option>
+                <option value="lower-upper">Lower-upper — $40,000 to under $60,000</option>
+                <option value="middle-lower">Middle-lower — $60,000 to under $75,000</option>
+                <option value="middle-middle">Middle-middle — $75,000 to under $90,000</option>
+                <option value="middle-upper">Middle-upper — $90,000 to under $120,000</option>
+                <option value="upper-lower">Upper-lower — $120,000 to under $150,000</option>
+                <option value="upper-middle">Upper-middle — $150,000 to under $200,000</option>
+                <option value="upper-upper">Upper-upper — $200,000 or more</option>
+              </select>
+              <p class="mt-2 text-xs text-slate-400">These categories are used for this form and describe your whole household's income for one year.</p>
+              <p id="household-income-class-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
               <label for="household-income" class="mb-2 block text-sm font-semibold">Annual household income (USD)</label>
               <input id="household-income" type="number" min="0" step="0.01" required placeholder="For example, 45000" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
-              <p class="mt-2 text-xs text-slate-400">Enter the total income for your household in one year. Authorized admins can review this information.</p>
+              <p class="mt-2 text-xs text-slate-400">Enter the total annual household income. We need this amount to apply the 0.75% rule; authorized admins can review it.</p>
               <p id="household-income-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 

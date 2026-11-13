@@ -1206,7 +1206,7 @@
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
     import { createSharedAdmin } from "./src/shared-admin.js";
-    import { evaluateIncomeEligibility } from "./src/eligibility.js";
+    import { evaluateIncomeEligibility, incomeClassFor } from "./src/eligibility.js";
     import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
     const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
     const backend = createSharedAdmin(client);
@@ -1473,6 +1473,7 @@
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided"),
           detail("Annual household income", application.householdIncome != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.householdIncome) : "Not provided"),
+          detail("Household income class (calculated)", application.householdIncome != null ? (incomeClassFor(Number(application.householdIncome))?.label || "Not available") : "Not provided"),
           detail("Income eligibility", application.householdIncome == null || application.requestedAmount == null ? "Not recorded; review required" : ({ over_income_limit: "Reported income exceeds $90,000", request_not_high_enough: "Requested amount does not exceed 0.75% of income", eligible: "Income rules met; review still required", invalid: "Invalid information; review required" })[evaluateIncomeEligibility(Number(application.householdIncome), Number(application.requestedAmount))])
         );
 
