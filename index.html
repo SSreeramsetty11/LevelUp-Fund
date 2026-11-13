@@ -210,7 +210,9 @@
     .rule p { margin-top: .5rem; color: var(--muted); font-size: .94rem; line-height: 1.7; }
 
     /* ---------- Apply ---------- */
-    #apply { background: var(--apply-bg); border-top: 1px solid var(--line); }
+    /* The apply tint fades in and out so it has no hard top or bottom edge. */
+    #apply { position: relative; isolation: isolate; background: none; border-top: 0; }
+    #apply::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--apply-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 10rem), transparent); mask-image: linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 10rem), transparent); }
     #apply h2 { font-family: var(--font-display); letter-spacing: -.035em; }
     #apply > div > div:first-child { align-self: start; }
     @media (min-width: 1024px) { #apply > div > div:first-child { position: sticky; top: 7rem; } }
@@ -428,6 +430,18 @@
     /* Eyebrow labels and step badges are plain text: no capsule behind them. */
     .eyebrow, .badge { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; padding: 0; }
     .eyebrow::before, .badge::before { display: none; }
+    /* Real-photo slots: sit in the layout only when the image file exists. */
+    .photo-slot { margin: 0; overflow: hidden; border-radius: 1.5rem; background: var(--tile-bg, rgba(245,200,92,.1)); border: 1px solid var(--line-2); box-shadow: 0 30px 50px -28px rgba(0,0,0,.7); }
+    .photo-slot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo { position: absolute; z-index: 0; top: -.5rem; right: -.25rem; width: 58%; aspect-ratio: 4 / 5; rotate: 4deg; }
+    .hero-visual .voucher-wrap { position: relative; z-index: 1; }
+    .mission-photo { aspect-ratio: 16 / 10; margin-bottom: 1.75rem; }
+    /* Soft section edges: tints fade in and out, and hairlines fade at their ends, so no section has a hard line. */
+    .section-alt { position: relative; isolation: isolate; background: none; border-block: 0; }
+    .section-alt::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--alt-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7rem, #000 calc(100% - 7rem), transparent); mask-image: linear-gradient(to bottom, transparent, #000 7rem, #000 calc(100% - 7rem), transparent); }
+    #sponsors { border-top: 0; background: linear-gradient(90deg, transparent, var(--line-2) 20%, var(--line-2) 80%, transparent) top / 100% 1px no-repeat; }
+    footer { position: relative; isolation: isolate; background: none; border-top: 0; }
+    footer::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--footer-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
     /* Theme switch: one soft cross-fade of the whole page. */
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
     @media (prefers-reduced-motion: reduce) { dialog { scale: 1; filter: none; } ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
@@ -564,6 +578,8 @@
 
         <!-- Decorative sample certificate illustration -->
         <div class="hero-visual" data-hero aria-hidden="true">
+          <!-- Optional photo: drop assets/images/hero-student.jpg in place. If the file is missing, this slot removes itself. -->
+          <figure class="photo-slot hero-photo"><img src="assets/images/hero-student.jpg" alt="" width="900" height="1125" decoding="async" fetchpriority="high" onerror="this.closest('.photo-slot').remove()"></figure>
           <div class="voucher-wrap">
             <div class="certificate">
             <svg viewBox="0 0 640 480" role="img" aria-label="Sample certificate of certification from The LevelUp Fund">
@@ -668,6 +684,8 @@
           <p class="lede mt-4">We cover certifications and credentials students would otherwise pay for themselves, from industry exams to platform certificates like Bloomberg Market Concepts or Coursera.</p>
         </div>
         <div data-reveal>
+          <!-- Optional photo: drop assets/images/mission-students.jpg in place and edit the alt text. If the file is missing, this slot removes itself. -->
+          <figure class="photo-slot mission-photo"><img src="assets/images/mission-students.jpg" alt="Students studying together" width="1600" height="1000" loading="lazy" decoding="async" onerror="this.closest('.photo-slot').remove()"></figure>
           <figure class="mission-art">
             <svg viewBox="0 0 400 250" role="img" aria-label="Four rising steps from Study to Certified, with the fee step highlighted in gold as covered by the fund.">
               <defs>
