@@ -57,5 +57,12 @@ const application = readFileSync('src/application.js', 'utf8');
 if (!application.includes(`@supabase/supabase-js@${supabase}/+esm`)) {
   console.error('src/application.js: Supabase CDN version does not match package.json.'); failed = true;
 }
+for (const [path, detectSession] of [['index.html', false], ['team.html', false], ['src/application.js', false], ['reset-password.html', true]]) {
+  const source = readFileSync(path, 'utf8');
+  const authSettings = new RegExp(`persistSession:\\s*false[\\s\\S]{0,120}autoRefreshToken:\\s*false[\\s\\S]{0,120}detectSessionInUrl:\\s*${detectSession}`);
+  if (!authSettings.test(source)) {
+    console.error(`${path}: Supabase client must use the expected non-persistent auth settings.`); failed = true;
+  }
+}
 if (failed) process.exitCode = 1;
 else console.log('Content security policies and tracked CDN versions match.');

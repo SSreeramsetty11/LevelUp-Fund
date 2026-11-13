@@ -17,6 +17,23 @@ export function incomeClassFor(income) {
   return incomeClasses.find((range) => income < range.upperLimit) || null;
 }
 
+export function isValidCertificationUrl(value) {
+  try {
+    const parsed = new URL(value);
+    const labels = parsed.hostname.split('.');
+    const publicHostname = labels.length >= 2
+      && labels.every((label) => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label))
+      && /[a-z]/i.test(labels.at(-1));
+    return /^https?:\/\//i.test(value)
+      && (parsed.protocol === 'http:' || parsed.protocol === 'https:')
+      && publicHostname
+      && !parsed.username
+      && !parsed.password;
+  } catch (error) {
+    return false;
+  }
+}
+
 // The requested amount must be strictly greater than 0.75% of annual household income.
 // Dollar amounts are limited to two decimal places and converted to integer cents.
 export function evaluateIncomeEligibility(income, amount) {

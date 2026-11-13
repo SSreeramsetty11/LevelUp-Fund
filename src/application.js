@@ -1,8 +1,10 @@
-import { evaluateIncomeEligibility, incomeClasses, incomeClassFor } from "./eligibility.js";
+import { evaluateIncomeEligibility, incomeClasses, incomeClassFor, isValidCertificationUrl } from "./eligibility.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/+esm";
 import { createSharedAdmin } from "./shared-admin.js";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
-const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
+const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+}));
 const grantForm = document.getElementById("grant-form");
 const formError = document.getElementById("form-error");
 const successDialog = document.getElementById("success-dialog");
@@ -68,11 +70,7 @@ const householdIncome = document.getElementById("household-income");
         case "candidate-id": return v ? "" : "Enter the organization that administers the certification.";
         case "exam-name": return v ? "" : "Enter the certification name.";
         case "certification-url": {
-          let ok = false;
-          try {
-            const parsed = new URL(v);
-            ok = /^https?:\/\//i.test(v) && (parsed.protocol === "http:" || parsed.protocol === "https:") && !!parsed.hostname && !parsed.username && !parsed.password && field.validity.valid;
-          } catch (error) { /* malformed URLs fall through to the message */ }
+          const ok = isValidCertificationUrl(v) && field.validity.valid;
           return ok ? "" : "Enter a valid certification website URL starting with http:// or https://, without a username or password.";
         }
         case "student-info": { const words = countEssayWords(field.value); return words > 0 && words < 500 ? "" : "Enter an essay of fewer than 500 words."; }

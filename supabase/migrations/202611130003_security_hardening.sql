@@ -48,7 +48,7 @@ begin
   if new.email !~ '^[^[:space:]@]+@[^[:space:]@]+$' then
     raise exception 'Enter a valid email address.';
   end if;
-  if new.certification_url !~* '^https?://(\[[0-9a-f:.]+\]|[^:/?#@[:space:]]+)(:[0-9]{1,5})?([/?#][^[:space:]]*)?$' then
+  if new.certification_url !~* '^https?://([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?[.])+[a-z]([a-z0-9-]{0,61}[a-z0-9])?(:([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?([/?#][^[:space:]]*)?$' then
     raise exception 'Enter a valid HTTP or HTTPS certification URL without credentials.';
   end if;
   essay_text := regexp_replace(new.essay, '^[[:space:]]+|[[:space:]]+$', '', 'g');

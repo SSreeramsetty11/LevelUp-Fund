@@ -2,7 +2,7 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-ARy29ojL2T1hIRal4ihKsyOcZMICmTdytVGwijHr2RA=' 'sha256-GjjO3pzs/Qmy7E8fEQdSblTygDqP52RBpjMxhsRHukA='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-ARy29ojL2T1hIRal4ihKsyOcZMICmTdytVGwijHr2RA=' 'sha256-UCjczjyb/MiXfcnKeQwN45x9ogVxY+yELHiz3hytVC8='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1252,7 +1252,9 @@
     // Clear the previous version's persisted session for this project only.
     try { window.localStorage.removeItem(`sb-${new URL(SUPABASE_URL).hostname.split('.')[0]}-auth-token`); } catch (error) { /* Storage may be unavailable. */ }
     // Keep admin sessions in memory only; a reload or closing this tab signs out locally.
-    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false } });
+    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
     const backend = createSharedAdmin(client);
     const MAX_LOGO_SIZE = 500 * 1024;
 

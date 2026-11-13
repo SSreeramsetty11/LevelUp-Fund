@@ -22,6 +22,8 @@ const fs=require('fs'), assert=require('node:assert/strict');
  await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({url:'javascript:alert(1)'})});`,/URL/i);
  await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({url:'https://user:secret@example.com'})});`,/URL/i);
  await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({url:'https://example.com/has space'})});`,/URL/i);
+ await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({url:'https://.'})});`,/URL/i);
+ await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({url:'https://example.com:99999'})});`,/URL/i);
  await denied(`${anon} insert into public.levelup_applications(${cols}) values (${vals({essay:'word '.repeat(500)})});`,/500 words/i);
  await db.exec(`${anon} insert into public.levelup_applications(${cols}) values (${vals({essay:'word '.repeat(499),url:'https://example.com/test?x=1#section'})}); reset role;`);
  await denied(`${anon} insert into public.levelup_applications(${cols},status) values (${vals()},'Approved');`,/permission denied/i);
