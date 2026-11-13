@@ -6,8 +6,7 @@
   <title>Our team | The LevelUp Fund</title>
   <meta name="description" content="Meet the people behind the LevelUp Fund.">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/fonts/current-design.css">
   <style>
     :root { color-scheme: dark; --page: #0B1120; --bg-2: #0F192C; --text: #F1F4F9; --muted: #A8B4C7; --gold: #F5C85C; --on-gold: #101C35; --accent: #F5C85C; --line: #2A3850; --line-2: #3A4C6B; --fill-hover: #1B2940; --header-bg: rgba(11,17,32,.8); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.1), transparent 62%); --card-bg: #131D30; --card-shadow: inset 0 1px 0 rgba(241,244,249,.04); --photo-bg: #1B2940; --dot: #F5C85C; --brand-dot: #F5C85C; --font-display: "Newsreader", Georgia, "Times New Roman", serif; --glass-bg: rgba(19,29,48,.55); --glass-bg-2: rgba(19,29,48,.4); --glass-strong: rgba(19,29,48,.74); --glass-border: rgba(255,255,255,.12); --glass-hi: rgba(255,255,255,.18); --glass-lo: rgba(0,0,0,.28); --glass-shadow: 0 22px 44px -24px rgba(0,0,0,.65); --glass-blur: blur(18px) saturate(1.7); --sheen-1: rgba(255,255,255,.1); --sheen-2: rgba(255,255,255,.03); --blob-1: rgba(245,200,92,.17); --blob-2: rgba(76,110,190,.24); --blob-3: rgba(56,140,170,.14); --gold: #F5C85C; --gold-grad: linear-gradient(180deg,#FAD876 0%,#F5C85C 55%,#E8B545 100%); }
     html[data-theme="light"] { --glass-bg: rgba(255,255,255,.55); --glass-bg-2: rgba(255,255,255,.45); --glass-strong: rgba(255,255,255,.74); --glass-border: rgba(255,255,255,.85); --glass-hi: rgba(255,255,255,.95); --glass-lo: rgba(16,28,53,.07); --glass-shadow: 0 22px 44px -26px rgba(16,28,53,.34), 0 0 0 1px rgba(16,28,53,.05); --sheen-1: rgba(255,255,255,.75); --sheen-2: rgba(255,255,255,.2); --blob-1: rgba(245,200,92,.42); --blob-2: rgba(150,170,255,.42); --blob-3: rgba(255,190,150,.32); color-scheme: light; --page: #F8F7F2; --bg-2: #F0F1EB; --text: #101C35; --muted: #596579; --accent: #7D5C0C; --line: #E2E5EA; --line-2: #C9CED6; --fill-hover: #F0F1EB; --header-bg: rgba(248,247,242,.84); --hero-bg: radial-gradient(48rem 24rem at 90% -10%, rgba(245,200,92,.26), transparent 62%); --card-bg: #FFFFFF; --card-shadow: 0 1px 2px rgba(16,28,53,.05), 0 12px 28px -18px rgba(16,28,53,.18); --photo-bg: #F0F1EB; --dot: #C9962B; --brand-dot: #8A6410; }
@@ -81,12 +80,16 @@
     <div id="team-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="empty rounded-2xl border border-dashed p-8 text-slate-400" style="border-color:var(--line-2)">Team profiles are coming soon.</p>
   </main>
   <footer class="px-6 py-12 text-slate-300 sm:px-8"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="flex items-center gap-2.5 font-bold text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></p><p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="index.html#how-it-works">How it works</a><a href="index.html#apply">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>
-  <script>
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createSharedAdmin } from "./src/shared-admin.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
+    const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
     const list = document.getElementById('team-list');
     const empty = document.getElementById('team-empty');
-    function renderTeam() {
+    async function renderTeam() {
       list.replaceChildren(); let team;
-      try { team = JSON.parse(localStorage.getItem('levelup-team-v1') || '[]'); if (!Array.isArray(team)) throw Error(); }
+      try { team = await backend.listTeam(); }
       catch { empty.textContent = 'Team profiles could not be loaded.'; empty.hidden = false; return; }
       empty.hidden = team.length > 0;
       team.forEach(member => {
@@ -101,7 +104,6 @@
         info.append(name, role, bio); article.append(photo, info); list.append(article);
       });
     }
-    window.addEventListener('storage', event => { if (event.key === 'levelup-team-v1') renderTeam(); });
     renderTeam();
     const root = document.documentElement;
     const themeBtn = document.querySelector('.theme-toggle');

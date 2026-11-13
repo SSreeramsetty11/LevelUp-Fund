@@ -23,12 +23,7 @@
 
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Public+Sans:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="assets/fonts/current-design.css" />
 
   <style>
     :root {
@@ -551,7 +546,7 @@
             <a class="pill pill-line" href="#how-it-works">How it works <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m7-7-7 7-7-7"/></svg></a>
           </div>
           <p class="eg" data-hero><span>Could include:</span><span class="tag">Bloomberg Market Concepts</span><span class="tag">Coursera certificates</span><span class="tag">Industry exams</span></p>
-          <p class="demo-note" data-hero>Demo website · No applications are submitted.</p>
+          <p class="demo-note" data-hero>Test mode · Submit sample information only.</p>
         </div>
 
         <!-- Decorative sample certificate illustration -->
@@ -775,9 +770,7 @@
           </div>
 
           <div class="mt-5 rounded-xl bg-amber-50 p-4 text-sm leading-6 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
-            Use made-up information only. This demo stores entries in this
-            browser and does not send them to the fund. The admin login is
-            not secure.
+            Test mode: use made-up information only. Submissions are sent to the shared database for testing.
           </div>
 
           <div
@@ -787,6 +780,13 @@
           ></div>
 
           <div class="mt-6 space-y-5">
+            <div>
+              <div class="flex items-start gap-3">
+                <input id="age-confirmation" type="checkbox" required class="mt-1 h-4 w-4 shrink-0 accent-blue-600" />
+                <label for="age-confirmation" class="text-sm leading-6 text-slate-700 dark:text-slate-300">I confirm that I am at least 14 years old.</label>
+              </div>
+              <p id="age-confirmation-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
             <div>
               <label for="full-name" class="mb-2 block text-sm font-semibold">
                 Full legal name
@@ -921,11 +921,11 @@
             type="submit"
             class="mt-6 w-full rounded-xl px-5 py-4 text-base font-bold text-white"
           >
-            Submit demo application →
+            Submit test application →
           </button>
 
-          <p class="mt-3 text-center text-xs leading-5 text-slate-400">
-            No application is sent to the fund in this demo.
+          <p class="mt-3 text-center text-xs leading-5 text-slate-500">
+            Test submissions are stored in the shared database.
           </p>
         </form>
       </div>
@@ -934,10 +934,10 @@
     <!-- Frequently asked questions -->
     <section id="faq" class="faq section scroll-mt-24"><div class="faq-inner"><div data-reveal><p class="eyebrow">The details</p><h2 class="mt-5">Frequently asked<br><em class="em">questions.</em></h2></div><div class="faq-list" data-reveal>
       <details><summary>What does the fund help cover?</summary><p>The fund is intended to cover eligible certification and credentialing fees that students would otherwise pay for themselves, such as industry exams or platform certificates like Bloomberg Market Concepts and Coursera. Applications are subject to review and available funding.</p></details>
-      <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently a demo and does not submit applications.</p></details>
+      <details><summary>What happens after I apply?</summary><p>The intended process includes a follow-up about verification and a practice test. This website is currently in test mode; use sample information only.</p></details>
       <details><summary>What if I need to change my exam or start date?</summary><p>Give at least 48 hours' notice and follow any additional requirements from your testing provider.</p></details>
       <details><summary>Do I need to pass to report my results?</summary><p>No. The grant agreement asks for your official score report or certificate within 14 days, whatever the result.</p></details>
-      <details><summary>Is the website accepting real applications?</summary><p>No. The application and admin dashboard are demonstrations stored in your browser. Please use sample information only.</p></details>
+      <details><summary>Is the website accepting real applications?</summary><p>No. The application and admin dashboard are in test mode. Sample submissions are stored in the shared database.</p></details>
     </div></div></section>
 
     <!-- Sponsors -->
@@ -990,8 +990,7 @@
           id="sponsor-empty"
           class="mt-6 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-400 dark:border-slate-700 dark:text-slate-400"
         >
-          Sponsor logos added in the demo admin dashboard will appear here
-          in this browser.
+          Sponsors will appear here when they are added.
         </p>
       </div>
     </section>
@@ -1025,11 +1024,11 @@
       </div>
 
       <h2 id="success-title" class="mt-5 text-2xl font-bold">
-        Demo application saved
+        Test application submitted
       </h2>
 
       <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        The sample entry is stored in this browser. It was not sent to the fund.
+        The sample entry was submitted to the shared database.
       </p>
 
       <button
@@ -1056,7 +1055,7 @@
           </p>
 
           <h2 id="admin-login-title" class="mt-2 text-2xl font-bold">
-            Demo admin login
+            Admin login
           </h2>
         </div>
 
@@ -1071,9 +1070,11 @@
       </div>
 
       <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        Demo only. This password does not protect real data.
+        Sign in using your individual administrator account.
       </p>
 
+      <label for="admin-email" class="mb-2 mt-5 block text-sm font-semibold">Email address</label>
+      <input id="admin-email" type="email" autocomplete="username" required class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950" />
       <label for="admin-password" class="mb-2 mt-5 block text-sm font-semibold">
         Password
       </label>
@@ -1082,7 +1083,7 @@
         id="admin-password"
         type="password"
         required
-        autocomplete="off"
+        autocomplete="current-password"
         class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950"
       />
 
@@ -1098,6 +1099,8 @@
       >
         Open dashboard
       </button>
+      <button id="forgot-password" type="button" class="mt-4 w-full text-center text-sm font-semibold text-blue-400 underline underline-offset-4">Forgot password?</button>
+      <p id="reset-request-status" class="mt-3 text-sm text-slate-700 dark:text-slate-300" role="status" aria-live="polite"></p>
     </form>
   </dialog>
 
@@ -1111,7 +1114,7 @@
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-            Demo admin area
+            Admin area
           </p>
 
           <h2 id="dashboard-title" class="mt-2 text-3xl font-bold">
@@ -1119,8 +1122,7 @@
           </h2>
 
           <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Applications and sponsors are stored only in this browser.
-            Decision emails must be sent manually.
+            Applications and site content are shared across authorized administrators. Decision emails must be sent manually.
           </p>
         </div>
 
@@ -1159,8 +1161,8 @@
               Applications
             </h3>
 
-            <p class="mt-1 text-sm text-slate-400 dark:text-slate-400">
-              Review entries, including past approved and rejected applications saved in this browser. You can also save a practice score and prepare an email.
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Review entries, including past approved and rejected applications. You can also save a practice score and prepare an email.
             </p>
           </div>
 
@@ -1186,7 +1188,7 @@
 
       <section class="mt-12" aria-labelledby="team-heading">
         <h3 id="team-heading" class="text-xl font-bold">Manage the team</h3>
-        <p class="mt-2 text-sm text-slate-400">Demo only: profiles and headshots are saved in this browser and are not visible to other visitors.</p>
+        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors.</p>
         <form id="team-form" class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2">
           <input id="team-id" type="hidden">
           <label class="text-sm font-semibold">Name<input id="team-name" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
@@ -1205,8 +1207,8 @@
           Manage sponsors
         </h3>
 
-        <p class="mt-1 text-sm leading-6 text-slate-400 dark:text-slate-400">
-          Add a sponsor name and logo. Changes appear only in this browser.
+        <p class="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Add a sponsor name and logo. Changes appear for all visitors.
         </p>
 
         <form
@@ -1481,17 +1483,12 @@
 
   </script>
 
-  <script>
-    /*
-      DEMO ONLY:
-      This password is visible in the page source. It is not secure.
-      A real admin login must be handled by a secure backend.
-    */
-    const DEMO_PASSWORD = "levelup-demo";
-
-    // A new key is used because this application form has changed.
-    const APPLICATIONS_KEY = "levelup-applications-v2";
-    const SPONSORS_KEY = "levelup-sponsors-v1";
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/+esm";
+    import { createSharedAdmin } from "./src/shared-admin.js";
+    import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./src/supabase-config.js";
+    const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    const backend = createSharedAdmin(client);
     const MAX_LOGO_SIZE = 500 * 1024;
 
     const grantForm = document.getElementById("grant-form");
@@ -1520,24 +1517,6 @@
       }
 
       return Date.now() + "-" + Math.random().toString(36).slice(2);
-    }
-
-    function readList(key) {
-      const raw = localStorage.getItem(key);
-
-      if (!raw) return [];
-
-      const data = JSON.parse(raw);
-
-      if (!Array.isArray(data)) {
-        throw new Error("Invalid saved data.");
-      }
-
-      return data;
-    }
-
-    function writeList(key, data) {
-      localStorage.setItem(key, JSON.stringify(data));
     }
 
     function showFieldError(field, message) {
@@ -1623,7 +1602,7 @@
     });
 
     /* Application submission */
-    grantForm.addEventListener("submit", (event) => {
+    grantForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       formError.classList.add("hidden");
@@ -1638,6 +1617,7 @@
       const certificationUrl = document.getElementById("certification-url");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
+      const ageConfirmation = document.getElementById("age-confirmation");
       const amount = document.getElementById("grant-amount");
 
       let firstInvalid = null;
@@ -1652,6 +1632,7 @@
         }
       }
 
+      check(ageConfirmation, ageConfirmation.checked, "You must confirm that you are at least 14 years old to apply.");
       const urlValue = certificationUrl.value.trim();
       [fullName, email, candidateId, examName, certificationUrl, studentInfo, amount, agreement].forEach((field) => {
         const message = fieldMessage(field);
@@ -1680,16 +1661,18 @@
         submittedAt: new Date().toISOString()
       };
 
+      const submitButton = grantForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
       try {
-        const applications = readList(APPLICATIONS_KEY);
-        applications.unshift(application);
-        writeList(APPLICATIONS_KEY, applications);
+        application.agreement = agreement.checked;
+        application.ageConfirmed = ageConfirmation.checked;
+        await backend.submitApplication(application);
       } catch (error) {
-        formError.textContent =
-          "Could not save this demo entry. Browser storage may be unavailable.";
-
+        formError.textContent = "Your application could not be submitted. Please try again later.";
         formError.classList.remove("hidden");
         return;
+      } finally {
+        submitButton.disabled = false;
       }
 
       grantForm.reset();
@@ -1708,35 +1691,88 @@
       loginForm.reset();
       loginError.classList.add("hidden");
       loginError.textContent = "";
+      document.getElementById("reset-request-status").textContent = "";
       loginDialog.showModal();
-      adminPassword.focus();
+      document.getElementById("admin-email").focus();
     });
 
     document.getElementById("close-login").addEventListener("click", () => {
       loginDialog.close();
     });
 
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      if (adminPassword.value !== DEMO_PASSWORD) {
-        loginError.textContent = "Incorrect demo password.";
-        loginError.classList.remove("hidden");
-        adminPassword.focus();
+    document.getElementById("forgot-password").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const emailField = document.getElementById("admin-email");
+      const status = document.getElementById("reset-request-status");
+      loginError.classList.add("hidden");
+      if (!emailField.value.trim() || !emailField.validity.valid) {
+        status.textContent = "Enter your admin email address above first.";
+        emailField.focus();
         return;
       }
-
-      loginForm.reset();
-      loginDialog.close();
-
-      renderDashboard();
-      dashboard.showModal();
-      document.getElementById("admin-logout").focus();
+      if (!/^https?:$/.test(window.location.protocol)) {
+        status.textContent = "Open the site through the local server or HTTPS to request a reset.";
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Sending reset link…";
+      status.textContent = "Sending your reset request…";
+      let timeoutId;
+      try {
+        const redirectTo = new URL("reset-password.html", window.location.href).href;
+        const timeout = new Promise((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error("request-timeout")), 20000);
+        });
+        const { error } = await Promise.race([
+          client.auth.resetPasswordForEmail(emailField.value.trim(), { redirectTo }),
+          timeout
+        ]);
+        if (error) throw error;
+        status.textContent = "If this account can receive email, a reset link has been sent. Check your inbox and spam folder.";
+      } catch (error) {
+        if (error && error.message === "request-timeout") {
+          status.textContent = "The request took too long to confirm. Check your inbox and spam folder before trying again.";
+        } else if (error && (error.status === 429 || error.code === "over_email_send_rate_limit" || error.code === "over_request_rate_limit")) {
+          status.textContent = "Too many reset emails or requests have been sent. Wait a while before trying again.";
+        } else if (error && error.code === "email_address_not_authorized") {
+          status.textContent = "The project's email service cannot send to this address. Ask the Supabase project owner to check its email settings.";
+        } else {
+          status.textContent = "Could not send the reset request. Check your connection and ask the Supabase project owner to check the Auth logs.";
+        }
+      } finally {
+        clearTimeout(timeoutId);
+        button.disabled = false;
+        button.textContent = "Forgot password?";
+      }
     });
 
-    document.getElementById("admin-logout").addEventListener("click", () => {
-      dashboard.close();
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      loginError.classList.add("hidden");
+      const submitButton = loginForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      try {
+        await backend.signIn(document.getElementById("admin-email").value.trim(), adminPassword.value);
+        loginForm.reset();
+        loginDialog.close();
+        dashboard.showModal();
+        await renderDashboard();
+        document.getElementById("admin-logout").focus();
+      } catch (error) {
+        loginError.textContent = "Unable to sign in. Check your details and contact an administrator if needed.";
+        loginError.classList.remove("hidden");
+      } finally { submitButton.disabled = false; }
     });
+
+    async function closeAdminSession() {
+      // Remove private application data from the DOM even if sign-out fails.
+      applicationList.replaceChildren();
+      document.getElementById("total-count").textContent = "0";
+      document.getElementById("pending-count").textContent = "0";
+      try { await backend.signOut(); } catch (error) { console.error("Sign out failed", error); }
+    }
+    document.getElementById("admin-logout").addEventListener("click", () => dashboard.close());
+    dashboard.addEventListener("close", closeAdminSession);
 
     statusFilter.addEventListener("change", renderApplications);
 
@@ -1767,18 +1803,6 @@
 
       wrapper.append(heading, content);
       return wrapper;
-    }
-
-    function updateApplication(id, updates) {
-      const applications = readList(APPLICATIONS_KEY);
-      const application = applications.find((item) => item.id === id);
-
-      if (!application) {
-        throw new Error("Application not found.");
-      }
-
-      Object.assign(application, updates);
-      writeList(APPLICATIONS_KEY, applications);
     }
 
     function emailLink(application, type) {
@@ -1818,13 +1842,13 @@
       );
     }
 
-    function renderApplications() {
+    async function renderApplications() {
       applicationList.replaceChildren();
 
       let applications;
 
       try {
-        applications = readList(APPLICATIONS_KEY);
+        applications = await backend.listApplications();
       } catch (error) {
         applicationList.append(
           createElement("p", "text-sm text-red-600", "Could not load applications.")
@@ -1832,8 +1856,8 @@
         return;
       }
 
+      if (!dashboard.open) return;
       document.getElementById("total-count").textContent = applications.length;
-
       document.getElementById("pending-count").textContent =
         applications.filter((item) => item.status === "Pending").length;
 
@@ -1895,6 +1919,7 @@
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
           detail("Certification website URL", application.certificationUrl || "Not provided"),
+          detail("Age confirmation", application.ageConfirmed === true ? "Applicant confirmed they are at least 14" : "Not recorded"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided")
         );
@@ -2015,7 +2040,7 @@
 
         saveButton.type = "button";
 
-        saveButton.addEventListener("click", () => {
+        saveButton.addEventListener("click", async () => {
           const scoreValue = scoreInput.value.trim();
 
           if (
@@ -2032,13 +2057,13 @@
           }
 
           try {
-            updateApplication(application.id, {
+            await backend.updateReview(application.id, {
               status: statusSelect.value,
               practiceScore: scoreValue,
               notes: notesInput.value.trim()
             });
 
-            renderApplications();
+            await renderApplications();
           } catch (error) {
             window.alert("Could not save this review.");
           }
@@ -2081,21 +2106,10 @@
 
         deleteButton.type = "button";
 
-        deleteButton.addEventListener("click", () => {
-          if (!window.confirm("Delete this demo application?")) return;
-
-          try {
-            const current = readList(APPLICATIONS_KEY);
-
-            writeList(
-              APPLICATIONS_KEY,
-              current.filter((item) => item.id !== application.id)
-            );
-
-            renderApplications();
-          } catch (error) {
-            window.alert("Could not delete this application.");
-          }
+        deleteButton.addEventListener("click", async () => {
+          if (!window.confirm("Delete this application?")) return;
+          try { await backend.deleteApplication(application.id); await renderApplications(); }
+          catch (error) { window.alert("Could not delete this application."); }
         });
 
         editArea.append(
@@ -2135,8 +2149,7 @@
       sponsorTrack.scrollTo({left: sponsorTrack.scrollLeft >= max - 2 ? 0 : Math.min(max, sponsorTrack.scrollLeft + 240), behavior: "smooth"});
     }, 4000);
 
-    // Team profiles are a local demonstration, like the existing sponsor editor.
-    const TEAM_KEY = "levelup-team-v1";
+    // Shared team profiles.
     const teamForm = document.getElementById("team-form");
     const teamList = document.getElementById("team-admin-list");
     const teamError = document.getElementById("team-error");
@@ -2151,16 +2164,16 @@
       if (!name || !role || !bio) { teamError.textContent = "Please fill in the name, role, and bio."; return; }
       if (file && (!["image/png", "image/jpeg", "image/webp"].includes(file.type) || file.size > 500 * 1024)) { teamError.textContent = "Use a PNG, JPG, or WebP image under 500 KB."; return; }
       try {
-        const team = readList(TEAM_KEY);
+        const team = await backend.listTeam();
         const previous = team.find(member => member.id === id);
-        const member = { id: id || makeId(), name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
-        const updated = previous ? team.map(item => item.id === id ? member : item) : [...team, member];
-        writeList(TEAM_KEY, updated); teamForm.reset(); document.getElementById("team-id").value = ""; renderTeamAdmin();
-      } catch (error) { teamError.textContent = "Could not save this profile. Browser storage may be full."; }
+        const member = { id: id || undefined, name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
+        await backend.saveTeamMember(member);
+        teamForm.reset(); document.getElementById("team-id").value = ""; await renderTeamAdmin();
+      } catch (error) { teamError.textContent = "Could not save this profile."; }
     });
-    function renderTeamAdmin() {
+    async function renderTeamAdmin() {
       teamList.replaceChildren();
-      let team; try { team = readList(TEAM_KEY); } catch { teamList.textContent = "Could not load team profiles."; return; }
+      let team; try { team = await backend.listTeam(); } catch { teamList.textContent = "Could not load team profiles."; return; }
       if (!team.length) { teamList.textContent = "No team members added yet."; return; }
       team.forEach(member => {
         const row = document.createElement("div"); row.className = "flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-3 dark:border-slate-700";
@@ -2169,7 +2182,7 @@
         const edit = document.createElement("button"); edit.type = "button"; edit.className = "text-blue-600 font-semibold"; edit.textContent = "Edit";
         edit.addEventListener("click", () => { document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
         const remove = document.createElement("button"); remove.type = "button"; remove.className = "text-red-600 font-semibold"; remove.textContent = "Remove";
-        remove.addEventListener("click", () => { if (!confirm("Remove this team member from this browser?")) return; try { writeList(TEAM_KEY, readList(TEAM_KEY).filter(item => item.id !== member.id)); renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
+        remove.addEventListener("click", async () => { if (!confirm("Remove this team member?")) return; try { await backend.deleteTeamMember(member.id); await renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
         buttons.append(edit, remove); row.append(label, buttons); teamList.append(row);
       });
     }
@@ -2242,16 +2255,7 @@
 
       try {
         const image = await readFileAsDataUrl(file);
-        const sponsors = readList(SPONSORS_KEY);
-
-        sponsors.push({
-          id: makeId(),
-          name,
-          url,
-          image
-        });
-
-        writeList(SPONSORS_KEY, sponsors);
+        await backend.saveSponsor({ name, url, image });
 
         sponsorForm.reset();
         renderSponsors();
@@ -2264,13 +2268,13 @@
       }
     });
 
-    function renderSponsors() {
+    async function renderSponsors() {
       sponsorTrack.replaceChildren();
 
       let sponsors;
 
       try {
-        sponsors = readList(SPONSORS_KEY);
+        sponsors = await backend.listSponsors();
       } catch (error) {
         sponsorEmpty.textContent = "Sponsor information could not be loaded.";
         sponsorEmpty.classList.remove("hidden");
@@ -2314,13 +2318,13 @@
       });
     }
 
-    function renderSponsorAdmin() {
+    async function renderSponsorAdmin() {
       sponsorAdminList.replaceChildren();
 
       let sponsors;
 
       try {
-        sponsors = readList(SPONSORS_KEY);
+        sponsors = await backend.listSponsors();
       } catch (error) {
         sponsorAdminList.append(
           createElement("p", "text-sm text-red-600", "Could not load sponsors.")
@@ -2371,22 +2375,10 @@
 
         remove.type = "button";
 
-        remove.addEventListener("click", () => {
-          if (!window.confirm("Remove this sponsor from the demo?")) return;
-
-          try {
-            const current = readList(SPONSORS_KEY);
-
-            writeList(
-              SPONSORS_KEY,
-              current.filter((item) => item.id !== sponsor.id)
-            );
-
-            renderSponsors();
-            renderSponsorAdmin();
-          } catch (error) {
-            window.alert("Could not remove this sponsor.");
-          }
+        remove.addEventListener("click", async () => {
+          if (!window.confirm("Remove this sponsor?")) return;
+          try { await backend.deleteSponsor(sponsor.id); await Promise.all([renderSponsors(), renderSponsorAdmin()]); }
+          catch (error) { window.alert("Could not remove this sponsor."); }
         });
 
         row.append(left, remove);
@@ -2402,25 +2394,9 @@
       sponsorTrack.scrollBy({ left: 260, behavior: "smooth" });
     });
 
-    function renderDashboard() {
-      renderApplications();
-      renderSponsorAdmin();
-      renderTeamAdmin();
+    async function renderDashboard() {
+      await Promise.all([renderApplications(), renderSponsorAdmin(), renderTeamAdmin()]);
     }
-    
-    window.addEventListener("storage", (event) => {
-      if (event.key === SPONSORS_KEY) {
-        renderSponsors();
-
-        if (dashboard.open) {
-          renderSponsorAdmin();
-        }
-      }
-
-      if (event.key === APPLICATIONS_KEY && dashboard.open) {
-        renderApplications();
-      }
-    });
 
     renderSponsors();
   </script>

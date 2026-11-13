@@ -1,0 +1,8 @@
+/* Inter Variable is distributed under the SIL Open Font License; see OFL.txt. */
+@font-face {
+  font-family: 'Inter';
+  src: url('./InterVariable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
