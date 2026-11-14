@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="dark" />
 
   <title>Apply for a grant | The LevelUp Fund</title>
 
@@ -464,14 +464,6 @@
   <script>
     // Hide animated blocks before first paint so Motion can fade them in without a flash.
     // If the CDN is slow or blocked, drop the class so nothing stays hidden.
-    (function () {
-      var saved = null;
-      try { saved = localStorage.getItem("levelup-theme"); } catch (e) {}
-      var theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      var root = document.documentElement;
-      root.setAttribute("data-theme", theme);
-      root.classList.toggle("dark", theme === "dark");
-    })();
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.documentElement.classList.add("js-motion");
       setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove("js-motion"); }, 4000);
@@ -632,6 +624,21 @@
             </div>
 
             <div>
+              <label for="test-date" class="mb-2 block text-sm font-semibold">
+                When are you planning to take the test?
+              </label>
+
+              <input
+                id="test-date"
+                type="date"
+                required
+                class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950"
+              />
+
+              <p id="test-date-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
+            </div>
+
+            <div>
               <label for="student-info" class="mb-2 block text-sm font-semibold">
                 Why should you receive this grant? (fewer than 500 words)
               </label>
@@ -681,6 +688,11 @@
               <p id="grant-amount-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
+            <div aria-hidden="true" class="absolute -left-[10000px] h-px w-px overflow-hidden">
+              <label for="company-website">Leave this field empty</label>
+              <input id="company-website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
             <div class="border-t border-slate-200 pt-5 dark:border-slate-700">
               <div class="flex items-start gap-3">
                 <input
@@ -699,6 +711,9 @@
 
               <p id="agreement-error" class="mt-2 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
+
+            <div id="application-turnstile" hidden></div>
+            <p id="application-turnstile-status" class="text-sm text-slate-500" role="status" aria-live="polite"></p>
           </div>
 
           <button

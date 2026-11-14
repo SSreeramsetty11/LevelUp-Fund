@@ -1,0 +1,4 @@
+[functions.submit-application]
+# Applicants are not signed in. This function authenticates each request with
+# Turnstile, strict validation, and server-side rate limits instead of a user JWT.
+verify_jwt = false

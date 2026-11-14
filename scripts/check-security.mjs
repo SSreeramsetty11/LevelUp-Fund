@@ -61,6 +61,28 @@ const publicConfig = readFileSync('src/supabase-config.js', 'utf8');
 if (!/TURNSTILE_SITE_KEY\s*=\s*['"]0x[A-Za-z0-9_-]+['"]/.test(publicConfig)) {
   console.error('src/supabase-config.js: a public Cloudflare Turnstile site key is required.'); failed = true;
 }
+if (!/PROTECTED_SUBMISSION_ENABLED\s*=\s*(?:true|false)\s*;/.test(publicConfig)) {
+  console.error('src/supabase-config.js: protected submission staging flag must be an explicit boolean.'); failed = true;
+}
+if (/SUPABASE_(?:SERVICE_ROLE|SECRET)_KEY\s*=|TURNSTILE_SECRET_KEY\s*=|RATE_LIMIT_SECRET\s*=/.test(publicConfig)) {
+  console.error('src/supabase-config.js: private server secrets must never be placed in browser configuration.'); failed = true;
+}
+const submissionFunction = readFileSync('supabase/functions/submit-application/index.ts', 'utf8');
+for (const requiredBoundary of [
+  'https://ssreeramsetty11.github.io',
+  'ssreeramsetty11.github.io',
+  'application_submit',
+  'levelup_take_submission_slot',
+  'resolution=ignore-duplicates,return=minimal'
+]) {
+  if (!submissionFunction.includes(requiredBoundary)) {
+    console.error(`submit-application Edge Function: missing required boundary ${requiredBoundary}.`); failed = true;
+  }
+}
+const functionConfig = readFileSync('supabase/config.toml', 'utf8');
+if (!/\[functions\.submit-application\][\s\S]*?verify_jwt\s*=\s*false/.test(functionConfig)) {
+  console.error('supabase/config.toml: the public submission function must use its own Turnstile verification.'); failed = true;
+}
 for (const [path, detectSession] of [['index.html', false], ['team.html', false], ['src/application.js', false], ['reset-password.html', true]]) {
   const source = readFileSync(path, 'utf8');
   const authSettings = new RegExp(`persistSession:\\s*false[\\s\\S]{0,120}autoRefreshToken:\\s*false[\\s\\S]{0,120}detectSessionInUrl:\\s*${detectSession}`);

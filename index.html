@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-ARy29ojL2T1hIRal4ihKsyOcZMICmTdytVGwijHr2RA=' 'sha256-UCjczjyb/MiXfcnKeQwN45x9ogVxY+yELHiz3hytVC8='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-p5enlQXuO7JZPW1ew3F0/D2LA4Y1lMVnDi6CUdmzCv0=' 'sha256-OgSoy45BHRvV3y08bxx9PQsRRBHKDfiFuOTPDUnQM/4='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="dark" />
 
   <title>The LevelUp Fund</title>
 
@@ -497,14 +497,6 @@
   <script>
     // Hide animated blocks before first paint so Motion can fade them in without a flash.
     // If the CDN is slow or blocked, drop the class so nothing stays hidden.
-    (function () {
-      var saved = null;
-      try { saved = localStorage.getItem("levelup-theme"); } catch (e) {}
-      var theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      var root = document.documentElement;
-      root.setAttribute("data-theme", theme);
-      root.classList.toggle("dark", theme === "dark");
-    })();
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.documentElement.classList.add("js-motion");
       setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove("js-motion"); }, 4000);
@@ -516,12 +508,6 @@
 
   <div id="progress" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-
-  <!-- TEMP-THEME-TOGGLE: floating Dark / Light switch for design review. Delete this block, the .temp-theme CSS and the data-set-theme lines in the script to remove it. -->
-  <div class="temp-theme" role="group" aria-label="Preview color theme (temporary)">
-    <button type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-    <button type="button" data-set-theme="light" aria-pressed="false">Light</button>
-  </div>
 
   <a
     href="#main"
@@ -558,7 +544,7 @@
       </div>
     </nav>
     <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title">
-      <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><div class="flex items-center gap-2"><button type="button" class="theme-toggle grid h-11 w-11 place-items-center rounded-full" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div></div>
+      <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div>
       <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#sponsors">Sponsors ↗</a><a href="apply.html">Apply ↗</a></nav>
     </dialog>
   </header>
@@ -808,7 +794,6 @@
         <div
           id="sponsor-track"
           class="sponsor-track mt-8 flex gap-4 overflow-x-auto pb-4"
-          aria-label="Sponsors"
         ></div>
 
         <p
@@ -1104,29 +1089,6 @@
   <script type="module">
     const root = document.documentElement;
 
-    // Light / dark toggle. The initial theme is set in <head> before first paint.
-    const themeButtons = document.querySelectorAll(".theme-toggle");
-    const tempButtons = document.querySelectorAll("[data-set-theme]"); // TEMP-THEME-TOGGLE
-    const syncThemeButtons = () => {
-      const light = root.getAttribute("data-theme") === "light";
-      themeButtons.forEach((b) => b.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"));
-      tempButtons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.setTheme === (light ? "light" : "dark")))); // TEMP-THEME-TOGGLE
-    };
-    const setTheme = (next) => {
-      const apply = () => {
-        root.setAttribute("data-theme", next);
-        root.classList.toggle("dark", next === "dark");
-        try { localStorage.setItem("levelup-theme", next); } catch (e) {}
-        syncThemeButtons();
-      };
-      // Ease dark <-> light as one cross-fade instead of a hard brightness jump.
-      if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(apply);
-      else apply();
-    };
-    syncThemeButtons();
-    themeButtons.forEach((b) => b.addEventListener("click", () => setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light")));
-    tempButtons.forEach((b) => b.addEventListener("click", () => setTheme(b.dataset.setTheme))); // TEMP-THEME-TOGGLE
-
     // Header gains a hairline once the page scrolls (works without the CDN).
     const header = document.querySelector(".site-header");
     const syncHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
@@ -1253,11 +1215,6 @@
       }, { rootMargin: "-40% 0px -55% 0px" });
       spyTargets.forEach(([sel]) => { const t = document.querySelector(sel); if (t) spy.observe(t); });
     }
-
-    // Theme toggle gives a little spin so the change feels caused by the tap.
-    document.querySelectorAll(".theme-toggle").forEach((b) => b.addEventListener("click", () => {
-      b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin");
-    }));
 
   </script>
 
@@ -1542,6 +1499,7 @@
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
           detail("Certification website URL", application.certificationUrl || "Not provided"),
+          detail("Planned test date", application.testDate ? new Date(`${application.testDate}T00:00:00Z`).toLocaleDateString("en-US", { dateStyle: "long", timeZone: "UTC" }) : "Not provided"),
           detail("Age confirmation", application.ageConfirmed === true ? "Applicant confirmed they are at least 14" : "Not recorded"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided"),

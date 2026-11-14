@@ -8,8 +8,9 @@ await captcha.prepare();assert.equal(container.hidden,true);assert.deepEqual(cap
 let options,resets=0;
 const win={turnstile:{render(_element,opts){options=opts;return 'widget';},reset(id){assert.equal(id,'widget');resets++;}}};
 container={hidden:true};status={textContent:''};
-captcha=createAuthCaptcha({siteKey:'public-site-key',container,status,doc:{},win});
+captcha=createAuthCaptcha({siteKey:'public-site-key',container,status,action:'application_submit',doc:{},win});
 await captcha.prepare();assert.equal(container.hidden,false);assert.equal(options.sitekey,'public-site-key');
+assert.equal(options.action,'application_submit');
 assert.equal(captcha.consume().ok,false);assert.match(status.textContent,/Complete/);
 options.callback('one-use-token');assert.equal(captcha.consume().token,'one-use-token');assert.equal(captcha.consume().ok,false);
 options.callback('another-token');options['expired-callback']();assert.equal(captcha.consume().ok,false);

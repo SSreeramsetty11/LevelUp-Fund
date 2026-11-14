@@ -31,6 +31,7 @@ export function createSharedAdmin(client) {
       exam_provider: application.examProvider,
       certification: application.exam,
       certification_url: application.certificationUrl,
+      test_date: application.testDate,
       essay: application.essay,
       amount: application.requestedAmount,
       household_income: application.householdIncome,
@@ -42,11 +43,11 @@ export function createSharedAdmin(client) {
   }
 
   async function listApplications() {
-    const rows = await checked(client.from('levelup_applications').select('id,created_at,name,email,exam_provider,certification,certification_url,essay,amount,household_income,age_confirmed,status,practice_score,notes').order('created_at', { ascending: false }));
+    const rows = await checked(client.from('levelup_applications').select('id,created_at,name,email,exam_provider,certification,certification_url,test_date,essay,amount,household_income,age_confirmed,status,practice_score,notes').order('created_at', { ascending: false }));
     return rows.map(row => ({
       id: row.id, name: row.name, email: row.email,
       examProvider: row.exam_provider, exam: row.certification,
-      certificationUrl: row.certification_url, essay: row.essay,
+      certificationUrl: row.certification_url, testDate: row.test_date, essay: row.essay,
       requestedAmount: row.amount, householdIncome: row.household_income, ageConfirmed: row.age_confirmed, status: row.status,
       practiceScore: row.practice_score, notes: row.notes,
       submittedAt: row.created_at
