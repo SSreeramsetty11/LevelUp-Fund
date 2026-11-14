@@ -10,7 +10,7 @@
     "test:security": "node tests/security-hardening.cjs && node tests/auth-captcha.mjs && node tests/supabase-sdk.cjs && node tests/admin-startup.cjs && node tests/reset-request.cjs && node tests/income-eligibility.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.50.0",
+    "@supabase/supabase-js": "2.119.0",
     "gsap": "3.15.1",
     "tailwindcss": "4.3.5"
   },
