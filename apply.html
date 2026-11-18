@@ -2,13 +2,16 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-0jl5hCsIVFvYErjPaLIthiqKS7PJuCe1Olf1qCdP/+g='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-fSAOPR9rGK2SHh/k+HLD3GyPzObGDihtCpuy+62TjuE='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
 
-  <title>Apply for a grant | The LevelUp Fund</title>
+  <title>Apply for a Grant | The LevelUp Fund</title>
+  <meta name="description" content="Apply for a LevelUp Fund grant that covers certification and credential fees for eligible students.">
+  <meta name="theme-color" content="#0B1120">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F5C85C'/%3E%3Cpath d='m10 17 6-6 6 6M10 23l6-6 6 6' fill='none' stroke='%23101C35' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
@@ -460,6 +463,22 @@
       .chip { animation: none; }
       .sponsor-track { scroll-behavior: auto !important; }
     }
+    /* ---- Matches the home page: flat labels, soft edges, accessibility and touch ---- */
+    .eyebrow { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; padding: 0; }
+    .eyebrow::before { display: none; }
+    #apply { position: relative; isolation: isolate; background: none; border-top: 0; }
+    #apply::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--apply-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6rem, #000 calc(100% - 8rem), transparent); mask-image: linear-gradient(to bottom, transparent, #000 6rem, #000 calc(100% - 8rem), transparent); }
+    footer { position: relative; isolation: isolate; background: none; border-top: 0; }
+    footer::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--footer-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
+    html[data-theme="light"] footer::before { -webkit-mask-image: none; mask-image: none; border-radius: 2rem 2rem 0 0; }
+    html { scroll-padding-top: 6.5rem; -webkit-tap-highlight-color: rgba(245,200,92,.18); }
+    a, button, summary, label, input, select, textarea { touch-action: manipulation; }
+    dialog { overscroll-behavior: contain; }
+    main:focus { outline: none; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .7rem 1rem; border-radius: .75rem; background: var(--gold); color: var(--on-gold); font-weight: 600; font-size: .9rem; translate: 0 -300%; transition: translate .15s ease-out; }
+    .skip-link:focus-visible { translate: 0 0; }
+    .site-header .wordmark, .nav-link, .menu-btn { white-space: nowrap; }
+    @media (max-width: 359px) { .site-header { padding-inline: .5rem; } .site-header > nav { gap: .5rem; padding-inline: .75rem; } .site-header .wordmark { font-size: 1rem; } }
   </style>
   <script>
     // Hide animated blocks before first paint so Motion can fade them in without a flash.
@@ -471,6 +490,8 @@
       var root = document.documentElement;
       root.setAttribute("data-theme", theme);
       root.classList.toggle("dark", theme === "dark");
+      var tc = document.querySelector('meta[name="theme-color"]');
+      if (tc) tc.setAttribute("content", theme === "light" ? "#F8F7F2" : "#0B1120");
     })();
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.documentElement.classList.add("js-motion");
@@ -479,8 +500,20 @@
   </script>
 </head>
 <body class="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
-  <header class="site-header"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8"><a href="index.html" class="text-lg font-bold">The LevelUp Fund<span class="text-blue-400">.</span></a><a href="index.html" class="pill pill-line">Back to home</a></nav></header>
-  <main id="main">
+  <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header z-40">
+    <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold tracking-tight">
+        <span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span>
+        <span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span>
+      </a>
+      <a href="index.html" class="pill pill-line !min-h-0 !px-4 !py-2.5 !text-sm">Back to home</a>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">
     <!-- Application -->
     <section
       id="apply"
@@ -553,6 +586,7 @@
 
               <input
                 id="full-name"
+                name="name" autocomplete="name"
                 type="text"
                 maxlength="120"
                 required
@@ -570,6 +604,7 @@
 
               <input
                 id="email"
+                name="email" autocomplete="email" spellcheck="false"
                 type="email"
                 maxlength="254"
                 required
@@ -587,6 +622,7 @@
 
               <input
                 id="candidate-id"
+                name="provider" autocomplete="off"
                 type="text"
                 maxlength="100"
                 required
@@ -605,6 +641,7 @@
 
               <input
                 id="exam-name"
+                name="credential" autocomplete="off"
                 type="text"
                 maxlength="160"
                 required
@@ -622,6 +659,7 @@
 
               <input
                 id="certification-url"
+                name="credential-url" autocomplete="off" spellcheck="false"
                 type="url"
                 required
                 placeholder="https://example.com/certification"
@@ -638,6 +676,7 @@
 
               <textarea
                 id="student-info"
+                name="statement"
                 rows="6"
                 maxlength="10000"
                 required
@@ -652,7 +691,7 @@
 
             <div>
               <label for="household-income-class" class="mb-2 block text-sm font-semibold">Which range includes your annual household income?</label>
-              <select id="household-income-class" required class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950">
+              <select id="household-income-class" name="household-income-class" autocomplete="off" required class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950">
                 <option value="">Select an income range</option>
                 <option value="lower-lower">Lower-lower — under $20,000</option>
                 <option value="lower-middle">Lower-middle — $20,000 to under $40,000</option>
@@ -670,14 +709,14 @@
 
             <div>
               <label for="household-income" class="mb-2 block text-sm font-semibold">Annual household income (USD)</label>
-              <input id="household-income" type="number" min="0" step="0.01" required placeholder="For example, 45000" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+              <input id="household-income" name="household-income" inputmode="decimal" autocomplete="off" type="number" min="0" step="0.01" required placeholder="For example, 45000" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
               <p class="mt-2 text-xs text-slate-400">Enter the total annual household income. We need this amount to apply the 0.75% rule; authorized admins can review it.</p>
               <p id="household-income-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
             <div>
               <label for="grant-amount" class="mb-2 block text-sm font-semibold">How much funding do you need? (USD)</label>
-              <input id="grant-amount" type="number" min="0.01" max="9999999999.99" step="0.01" required placeholder="For example, 250.00" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+              <input id="grant-amount" name="amount" inputmode="decimal" autocomplete="off" type="number" min="0.01" max="9999999999.99" step="0.01" required placeholder="For example, 250.00" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
               <p id="grant-amount-error" class="mt-1 hidden text-sm text-red-600 dark:text-red-400"></p>
             </div>
 
@@ -716,6 +755,16 @@
     </section>
 
   </main>
+
+  <footer class="py-16 text-slate-300">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+      <div><a href="index.html" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
+      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="index.html#how-it-works" class="hover:text-white">How it works</a><a href="index.html#rules" class="hover:text-white">Grant guidelines</a><a href="index.html#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a></div></div>
+    </div>
+    <div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-6 pt-6 text-xs text-slate-400 sm:px-8">&copy; 2026 The LevelUp Fund.</div>
+  </footer>
+
   <!-- Application confirmation -->
   <dialog
     id="success-dialog"
