@@ -1,6 +1,8 @@
 # Site photos
 
-Drop real photos here. Each slot hides itself if its file is missing, so the page looks the same until you add them.
+Drop real photos here. Each slot is switched off until you turn it on, so the page looks the same (and makes no extra requests) until you add them.
+
+To turn a slot on: add the file, then in `index.html` find the matching `photo-slot` and change `data-photo="off"` to `data-photo="on"`.
 
 | File | Where it shows | Suggested size | Notes |
 | --- | --- | --- | --- |
