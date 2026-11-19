@@ -2,13 +2,19 @@
 <html lang="en" class="dark scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-p5enlQXuO7JZPW1ew3F0/D2LA4Y1lMVnDi6CUdmzCv0=' 'sha256-OgSoy45BHRvV3y08bxx9PQsRRBHKDfiFuOTPDUnQM/4='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-CIHkZlU3LGQ+o37JWybhzdB4j9JNWYNMum7IJVepiNI=' 'sha256-OgSoy45BHRvV3y08bxx9PQsRRBHKDfiFuOTPDUnQM/4='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
 
-  <title>The LevelUp Fund</title>
+  <title>The LevelUp Fund | Certification Grants for Students</title>
+  <meta name="description" content="The LevelUp Fund covers certification and credential fees for eligible students, from industry exams to platform certificates. See how grants work and apply." />
+  <meta name="theme-color" content="#0B1120" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The LevelUp Fund" />
+  <meta property="og:description" content="The LevelUp Fund covers certification and credential fees for eligible students, from industry exams to platform certificates. See how grants work and apply." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F5C85C'/%3E%3Cpath d='m10 17 6-6 6 6M10 23l6-6 6 6' fill='none' stroke='%23101C35' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 
@@ -434,7 +440,8 @@
     .eyebrow, .badge { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; padding: 0; }
     .eyebrow::before, .badge::before { display: none; }
     /* Real-photo slots: sit in the layout only when the image file exists. */
-    .photo-slot { margin: 0; overflow: hidden; border-radius: 1.5rem; background: var(--tile-bg, rgba(245,200,92,.1)); border: 1px solid var(--line-2); box-shadow: 0 30px 50px -28px rgba(0,0,0,.7); }
+    .photo-slot { display: none; margin: 0; overflow: hidden; border-radius: 1.5rem; background: var(--tile-bg, rgba(245,200,92,.1)); border: 1px solid var(--line-2); box-shadow: 0 30px 50px -28px rgba(0,0,0,.7); }
+    .photo-slot.is-loaded { display: block; }
     .photo-slot img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .hero-photo { position: absolute; z-index: 0; top: -.5rem; right: -.25rem; width: 58%; aspect-ratio: 4 / 5; rotate: 4deg; }
     .hero-visual .voucher-wrap { position: relative; z-index: 1; }
@@ -445,6 +452,29 @@
     #sponsors { border-top: 0; background: linear-gradient(90deg, transparent, var(--line-2) 20%, var(--line-2) 80%, transparent) top / 100% 1px no-repeat; }
     footer { position: relative; isolation: isolate; background: none; border-top: 0; }
     footer::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--footer-bg); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); mask-image: linear-gradient(to bottom, transparent, #000 3.5rem); }
+    /* ---- Refinement pass: accessibility, touch, small-screen and consistency fixes ---- */
+    html { scroll-padding-top: 6.5rem; -webkit-tap-highlight-color: rgba(245,200,92,.18); }
+    a, button, summary, label, input, select, textarea { touch-action: manipulation; }
+    dialog { overscroll-behavior: contain; }
+    main:focus { outline: none; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .7rem 1rem; border-radius: .75rem; background: var(--gold); color: var(--on-gold); font-weight: 600; font-size: .9rem; translate: 0 -300%; transition: translate .15s ease-out; }
+    .skip-link:focus-visible { translate: 0 0; }
+    /* The step chip sits in front of the certificate, not behind it. */
+    .hero-visual .chip { z-index: 2; }
+    /* Step badges: one solid accent colour, readable in both themes. */
+    .badge > span { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--accent); }
+    .badge { font-size: .78rem; }
+    /* Sponsors empty state: no carousel arrows or empty track until there is something to scroll. */
+    #sponsors:has(#sponsor-empty:not(.hidden)) :is(#sponsors-prev, #sponsors-next, #sponsor-track) { display: none; }
+    /* Light theme: the navy footer starts on a clean rounded edge instead of a grey fade. */
+    html[data-theme="light"] footer::before { -webkit-mask-image: none; mask-image: none; border-radius: 2rem 2rem 0 0; }
+    /* Very narrow screens: the header stays on one row without overflowing. */
+    @media (max-width: 359px) {
+      .site-header { padding-inline: .5rem; }
+      .site-header > nav { gap: .5rem; padding-inline: .75rem; }
+      .site-header .wordmark { font-size: 1rem; }
+      .menu-btn { padding-inline: .8rem; }
+    }
     /* Theme switch: one soft cross-fade of the whole page. */
     ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .4s; animation-timing-function: ease; }
     @media (prefers-reduced-motion: reduce) { dialog { scale: 1; filter: none; } ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; } }
@@ -505,16 +535,10 @@
 </head>
 
 <body class="antialiased">
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <div id="progress" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-
-  <a
-    href="#main"
-    class="sr-only fixed left-4 top-4 z-50 rounded-lg bg-blue-600 px-4 py-2 text-white focus:not-sr-only"
-  >
-    Skip to content
-  </a>
 
   <!-- Navigation -->
   <header class="site-header z-40">
@@ -549,7 +573,7 @@
     </dialog>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-title">
@@ -567,8 +591,8 @@
 
         <!-- Decorative sample certificate illustration -->
         <div class="hero-visual" data-hero aria-hidden="true">
-          <!-- Optional photo: drop assets/images/hero-student.jpg in place. If the file is missing, this slot removes itself. -->
-          <figure class="photo-slot hero-photo"><img src="assets/images/hero-student.jpg" alt="" width="900" height="1125" decoding="async" fetchpriority="high" onerror="this.closest('.photo-slot').remove()"></figure>
+          <!-- Optional photo: add assets/images/hero-student.jpg, then change data-photo="off" to "on". -->
+          <figure class="photo-slot hero-photo" data-photo="off"><img data-src="assets/images/hero-student.jpg" alt="" width="900" height="1125" decoding="async"></figure>
           <div class="voucher-wrap">
             <div class="certificate">
             <svg viewBox="0 0 640 480" role="img" aria-label="Sample certificate of certification from The LevelUp Fund">
@@ -673,8 +697,8 @@
           <p class="lede mt-4">We cover certifications and credentials students would otherwise pay for themselves, from industry exams to platform certificates like Bloomberg Market Concepts or Coursera.</p>
         </div>
         <div data-reveal>
-          <!-- Optional photo: drop assets/images/mission-students.jpg in place and edit the alt text. If the file is missing, this slot removes itself. -->
-          <figure class="photo-slot mission-photo"><img src="assets/images/mission-students.jpg" alt="Students studying together" width="1600" height="1000" loading="lazy" decoding="async" onerror="this.closest('.photo-slot').remove()"></figure>
+          <!-- Optional photo: add assets/images/mission-students.jpg, change data-photo="off" to "on", and edit the alt text. -->
+          <figure class="photo-slot mission-photo" data-photo="off"><img data-src="assets/images/mission-students.jpg" alt="Students studying together" width="1600" height="1000" decoding="async"></figure>
           <figure class="mission-art">
             <svg viewBox="0 0 400 250" role="img" aria-label="Four rising steps from Study to Certified, with the fee step highlighted in gold as covered by the fund.">
               <defs>
@@ -809,17 +833,17 @@
 
   <!-- Footer -->
   <footer class="py-16 text-slate-300">
-    <div class="mx-auto max-w-7xl px-5 pb-16 sm:px-8">
+    <div class="mx-auto max-w-7xl px-6 pb-16 sm:px-8">
       <div class="footer-band">
-        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Apply</p>
+        <p class="eyebrow">Apply</p>
         <div class="mt-5 flex flex-wrap items-end justify-between gap-8"><p class="footer-cta">Ready to apply?</p><a href="apply.html" class="pill pill-brand">Apply for a grant <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
       </div>
     </div>
-    <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
       <div><a href="#" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
       <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
       <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button><p id="admin-load-status" role="status" hidden class="max-w-xs leading-6 text-slate-300"></p></div></div>
-    </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-5 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
+    </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-6 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
 
   <!-- Admin login -->
@@ -1094,6 +1118,13 @@
     const syncHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
     syncHeader();
     addEventListener("scroll", syncHeader, { passive: true });
+
+    // Photo slots load only when switched on (data-photo="on"), so a missing file never causes a 404.
+    document.querySelectorAll('.photo-slot[data-photo="on"] img[data-src]').forEach((img) => {
+      img.addEventListener("load", () => img.closest(".photo-slot").classList.add("is-loaded"));
+      img.addEventListener("error", () => img.closest(".photo-slot").remove());
+      img.src = img.dataset.src;
+    });
 
     // GSAP drives every entrance and scroll animation (pinned, SRI-checked scripts above).
     // If GSAP is unreachable, or reduced motion is on, drop the gate class so nothing stays hidden.

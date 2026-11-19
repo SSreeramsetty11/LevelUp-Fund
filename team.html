@@ -7,6 +7,9 @@
   <meta name="color-scheme" content="dark">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Our team | The LevelUp Fund</title>
+  <meta name="theme-color" content="#0B1120">
+  <meta property="og:type" content="website"><meta property="og:title" content="Our team | The LevelUp Fund"><meta property="og:description" content="Meet the people behind the LevelUp Fund.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F5C85C'/%3E%3Cpath d='m10 17 6-6 6 6M10 23l6-6 6 6' fill='none' stroke='%23101C35' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <meta name="description" content="Meet the people behind the LevelUp Fund.">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="stylesheet" href="assets/fonts/current-design.css">
@@ -44,6 +47,11 @@
     body { font-family: "Public Sans", system-ui, sans-serif; background: var(--page); color: var(--text); -webkit-font-smoothing: antialiased; }
     h1, h2 { text-wrap: balance; } p { text-wrap: pretty; }
     :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    html { scroll-padding-top: 6.5rem; -webkit-tap-highlight-color: rgba(245,200,92,.18); }
+    a, button { touch-action: manipulation; }
+    main:focus { outline: none; }
+    .skip-link { position: fixed; top: .75rem; left: .75rem; z-index: 100; padding: .7rem 1rem; border-radius: .75rem; background: var(--gold); color: var(--on-gold); font-weight: 600; font-size: .9rem; translate: 0 -300%; transition: translate .15s ease-out; }
+    .skip-link:focus-visible { translate: 0 0; }
     .brand-mark .icon { stroke: var(--on-gold); } .icon { width: 1.2rem; height: 1.2rem; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
     .brand-mark { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: .7rem; background: var(--gold); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 6px 16px -8px rgba(190,140,30,.9); }
     .brand-dot { color: var(--brand-dot); }
@@ -54,6 +62,7 @@
     @media (hover: hover) and (pointer: fine) { .pill:hover { filter: brightness(1.05); } }
     .page-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--hero-bg); border-bottom: 1px solid var(--line); }
     .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .eyebrow { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; border-radius: 0; }
     .eyebrow i { width: .45rem; height: .45rem; border-radius: 99px; background: var(--dot); box-shadow: 0 0 0 4px rgba(245,200,92,.2); }
     .wordmark { font-family: var(--font-display); font-optical-sizing: auto; font-size: 1.22em; font-weight: 600; letter-spacing: -.01em; line-height: 1; }
     h1.display { font-family: var(--font-display); font-optical-sizing: auto; font-weight: 600; letter-spacing: -.025em; }
@@ -71,15 +80,16 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
   <header class="site-header"><nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8"><a href="index.html" class="flex items-center gap-2 text-base font-bold tracking-tight sm:gap-2.5 sm:text-lg"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><div class="flex items-center gap-2 sm:gap-3"><a href="apply.html" class="pill">Apply<span class="hidden sm:inline">&nbsp;for a grant</span></a></div></nav></header>
   <div class="page-hero">
     <div class="mx-auto max-w-7xl px-6 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
-      <p class="eyebrow rise"><i aria-hidden="true"></i>The people behind the fund</p>
+      <p class="eyebrow rise">The people behind the fund</p>
       <div class="mt-5 grid items-end gap-6 md:grid-cols-2"><h1 class="display rise max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-6xl" style="animation-delay:.08s">Meet the team.</h1><p class="rise max-w-lg muted text-lg leading-8" style="animation-delay:.16s">The people who run the LevelUp Fund.</p></div>
     </div>
   </div>
-  <main class="mx-auto min-h-[50vh] max-w-7xl px-6 pb-24 pt-14 sm:px-8">
+  <main id="main" tabindex="-1" class="mx-auto min-h-[50vh] max-w-7xl px-6 pb-24 pt-14 sm:px-8">
     <div id="team-list" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div><p id="team-empty" class="empty rounded-2xl border border-dashed p-8 text-slate-400" style="border-color:var(--line-2)">Team profiles are coming soon.</p>
   </main>
   <footer class="px-6 py-12 text-slate-300 sm:px-8"><div class="mx-auto flex max-w-7xl flex-wrap justify-between gap-8"><div><p class="flex items-center gap-2.5 font-bold text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></p><p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p></div><div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="index.html#how-it-works">How it works</a><a href="apply.html">Apply</a><a href="mailto:support@example.com">Contact</a></div></div></footer>

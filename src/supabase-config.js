@@ -8,4 +8,4 @@ export const TURNSTILE_SITE_KEY = '0x4AAAAAAF_MmFhbWQ4Tpg9i';
 // Leave this off until the submit-application Edge Function has been deployed
 // and tested. Turning it on routes the public form through the protected server
 // endpoint instead of allowing a direct browser-to-database insert.
-export const PROTECTED_SUBMISSION_ENABLED = false;
+export const PROTECTED_SUBMISSION_ENABLED = true;
