@@ -18,19 +18,21 @@ class Element {
   replaceChildren(...children) { this.children=children; } append(...children) { this.children.push(...children); }
   setAttribute() {} removeAttribute() {} scrollBy() {}
 }
-function setup(protocol='http:', allowed=true, challenge={ok:true}) {
+function setup(protocol='http:', allowed=true, challenge={ok:true}, initialTeam=[]) {
   const elements=Object.fromEntries(ids.map(id=>[id,new Element(id)]));
   const document={getElementById:id=>elements[id] || null,createElement:tag=>new Element(tag),body:{style:{}},hidden:false};
-  let signedIn, resets=0;
+  let signedIn, resets=0, confirmMessage='';
+  const team=[...initialTeam];
   const backend={
     async signIn(email,password,token){ signedIn={email,password,token}; if (!allowed) throw Error('denied'); },
-    async signOut(){}, async listApplications(){return []}, async listSupportRequests(){return []}, async listTeam(){return []}, async listSponsors(){return []}
+    async signOut(){}, async listApplications(){return []}, async listSupportRequests(){return []}, async listTeam(){return team}, async listSponsors(){return []},
+    async deleteTeamMember(id){ const index=team.findIndex(member=>member.id===id); if(index!==-1) team.splice(index,1); }
   };
-  const ctx={document,window:{location:{protocol,href:'http://localhost:5500/index.html'},matchMedia:()=>({matches:false})},
+  const ctx={document,window:{location:{protocol,href:'http://localhost:5500/index.html'},matchMedia:()=>({matches:false}),confirm(message){confirmMessage=message;return true}},
     createClient:()=>({auth:{}}),createSharedAdmin:()=>backend,SUPABASE_URL:'x',SUPABASE_PUBLISHABLE_KEY:'x',TURNSTILE_SITE_KEY:'',createAuthCaptcha:()=>({prepare(){},consume(){return challenge},reset(){resets++}}),
     setInterval(){},clearTimeout(){},setTimeout(){},Date,Number,URL,console,Intl};
   vm.runInNewContext(bootstrap,ctx);
-  return {elements,ctx,getSignedIn:()=>signedIn,getResets:()=>resets};
+  return {elements,ctx,getSignedIn:()=>signedIn,getResets:()=>resets,getTeam:()=>team,getConfirmMessage:()=>confirmMessage};
 }
 (async()=>{
   let s=setup('file:');
@@ -72,6 +74,19 @@ function setup(protocol='http:', allowed=true, challenge={ok:true}) {
   await s.elements['admin-login-form'].dispatch('submit');
   assert.equal(s.getSignedIn().token,'challenge-token');
   assert.equal(s.getResets(),1);
+  const member={id:'member-1',name:'Sample Member',role:'Director',bio:'Sample bio',image:''};
+  s=setup('http:',true,{ok:true,token:'challenge-token'},[member]);
+  vm.runInNewContext(adminModule,s.ctx);
+  await s.elements['open-admin'].dispatch('click');
+  s.elements['admin-email'].value='admin@example.com';
+  await s.elements['admin-login-form'].dispatch('submit');
+  const teamRow=s.elements['team-admin-list'].children[0];
+  const removeButton=teamRow.children[1].children[1];
+  assert.equal(removeButton.textContent,'Remove team member');
+  await removeButton.dispatch('click');
+  assert.match(s.getConfirmMessage(),/Remove Sample Member.*cannot be undone/i);
+  assert.equal(s.getTeam().length,0);
+  assert.match(s.elements['team-status'].textContent,/Sample Member was removed/);
   s=setup('http:');
   delete s.elements['sponsor-track'];
   assert.throws(()=>vm.runInNewContext(adminModule,s.ctx));
