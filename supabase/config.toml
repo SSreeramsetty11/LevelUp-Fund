@@ -2,3 +2,8 @@
 # Applicants are not signed in. This function authenticates each request with
 # Turnstile, strict validation, and server-side rate limits instead of a user JWT.
 verify_jwt = false
+
+[functions.submit-support-request]
+# Public visitors are not signed in. This endpoint verifies Turnstile, exact
+# origin, server-side validation, idempotency and rate limits itself.
+verify_jwt = false

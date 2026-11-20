@@ -40,6 +40,20 @@ export function createEmailDraft(application, type) {
   return { to, subject, body };
 }
 
+export function createSupportReplyDraft(request) {
+  const name = text(request.name) || "there";
+  const subject = text(request.subject) || "your support question";
+  return {
+    to: text(request.email),
+    subject: `Re: ${subject}`,
+    body:
+      `Hi ${name},\n\n` +
+      "Thank you for contacting The LevelUp Fund.\n\n" +
+      "[Write your response here]\n\n" +
+      "Best,\nThe LevelUp Fund"
+  };
+}
+
 export function createMailtoLink(draft) {
   return (
     "mailto:" + encodeURIComponent(draft.to) +
