@@ -2,7 +2,7 @@
 <html lang="en" class="dark scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-CIHkZlU3LGQ+o37JWybhzdB4j9JNWYNMum7IJVepiNI=' 'sha256-71FIqnmfkwUiAF8aWmY9YuEhLGet5D0NpaA7KtW2OJM='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-CIHkZlU3LGQ+o37JWybhzdB4j9JNWYNMum7IJVepiNI=' 'sha256-ZgFSwFvNncQELAfp5YLPaug8vjwH4ThR8b6XzcStKaM='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1010,7 +1010,7 @@
 
       <section class="mt-12" aria-labelledby="team-heading">
         <h3 id="team-heading" class="text-xl font-bold">Manage the team</h3>
-        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors.</p>
+        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors. Use the controls below to edit or remove an existing team member.</p>
         <form id="team-form" class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2">
           <input id="team-id" type="hidden">
           <label class="text-sm font-semibold">Name<input id="team-name" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
@@ -1018,6 +1018,7 @@
           <label class="text-sm font-semibold sm:col-span-2">Bio<textarea id="team-bio" maxlength="1200" required rows="4" class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></textarea></label>
           <label class="text-sm font-semibold sm:col-span-2">Headshot (optional; JPG, PNG, WebP, max 500 KB)<input id="team-photo" type="file" accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full text-sm"></label>
           <p id="team-error" class="text-sm text-red-600 sm:col-span-2" role="alert"></p>
+          <p id="team-status" class="text-sm text-emerald-600 dark:text-emerald-400 sm:col-span-2" role="status" aria-live="polite"></p>
           <div><button type="submit" class="rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white">Save team member</button></div>
         </form>
         <div id="team-admin-list" class="mt-4 text-sm"></div>
@@ -1945,9 +1946,11 @@
     const teamForm = document.getElementById("team-form");
     const teamList = document.getElementById("team-admin-list");
     const teamError = document.getElementById("team-error");
+    const teamStatus = document.getElementById("team-status");
     teamForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       teamError.textContent = "";
+      teamStatus.textContent = "";
       const name = document.getElementById("team-name").value.trim();
       const role = document.getElementById("team-role").value.trim();
       const bio = document.getElementById("team-bio").value.trim();
@@ -1961,6 +1964,7 @@
         const member = { id: id || undefined, name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
         await backend.saveTeamMember(member);
         teamForm.reset(); document.getElementById("team-id").value = ""; await renderTeamAdmin();
+        teamStatus.textContent = id ? `${name}'s profile was updated.` : `${name} was added to the team.`;
       } catch (error) { teamError.textContent = "Could not save this profile."; }
     });
     async function renderTeamAdmin() {
@@ -1970,11 +1974,32 @@
       team.forEach(member => {
         const row = document.createElement("div"); row.className = "flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-3 dark:border-slate-700";
         const label = document.createElement("span"); label.textContent = member.name + " — " + member.role;
-        const buttons = document.createElement("div"); buttons.className = "flex gap-3";
-        const edit = document.createElement("button"); edit.type = "button"; edit.className = "text-blue-600 font-semibold"; edit.textContent = "Edit";
-        edit.addEventListener("click", () => { document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
-        const remove = document.createElement("button"); remove.type = "button"; remove.className = "text-red-600 font-semibold"; remove.textContent = "Remove";
-        remove.addEventListener("click", async () => { if (!confirm("Remove this team member?")) return; try { await backend.deleteTeamMember(member.id); await renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
+        const buttons = document.createElement("div"); buttons.className = "flex flex-wrap gap-2";
+        const edit = document.createElement("button"); edit.type = "button"; edit.className = "rounded-lg border border-blue-300 px-3 py-2 font-semibold text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950"; edit.textContent = "Edit profile";
+        edit.addEventListener("click", () => { teamError.textContent = ""; teamStatus.textContent = ""; document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
+        const remove = document.createElement("button"); remove.type = "button"; remove.className = "rounded-lg border border-red-300 px-3 py-2 font-semibold text-red-700 hover:bg-red-50 disabled:cursor-wait disabled:opacity-60 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950"; remove.textContent = "Remove team member";
+        remove.setAttribute("aria-label", `Remove ${member.name} from the team`);
+        remove.addEventListener("click", async () => {
+          const confirmed = window.confirm(`Remove ${member.name} from the team? Their public profile will be deleted. This cannot be undone.`);
+          if (!confirmed) return;
+          teamError.textContent = "";
+          teamStatus.textContent = "";
+          remove.disabled = true;
+          remove.textContent = "Removing…";
+          try {
+            await backend.deleteTeamMember(member.id);
+            if (document.getElementById("team-id").value === member.id) {
+              teamForm.reset();
+              document.getElementById("team-id").value = "";
+            }
+            await renderTeamAdmin();
+            teamStatus.textContent = `${member.name} was removed from the team.`;
+          } catch {
+            teamError.textContent = `Could not remove ${member.name}. Please try again.`;
+            remove.disabled = false;
+            remove.textContent = "Remove team member";
+          }
+        });
         buttons.append(edit, remove); row.append(label, buttons); teamList.append(row);
       });
     }
