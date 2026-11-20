@@ -24,7 +24,7 @@ function setup(protocol='http:', allowed=true, challenge={ok:true}) {
   let signedIn, resets=0;
   const backend={
     async signIn(email,password,token){ signedIn={email,password,token}; if (!allowed) throw Error('denied'); },
-    async signOut(){}, async listApplications(){return []}, async listTeam(){return []}, async listSponsors(){return []}
+    async signOut(){}, async listApplications(){return []}, async listSupportRequests(){return []}, async listTeam(){return []}, async listSponsors(){return []}
   };
   const ctx={document,window:{location:{protocol,href:'http://localhost:5500/index.html'},matchMedia:()=>({matches:false})},
     createClient:()=>({auth:{}}),createSharedAdmin:()=>backend,SUPABASE_URL:'x',SUPABASE_PUBLISHABLE_KEY:'x',TURNSTILE_SITE_KEY:'',createAuthCaptcha:()=>({prepare(){},consume(){return challenge},reset(){resets++}}),

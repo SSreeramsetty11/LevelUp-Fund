@@ -8,7 +8,7 @@
     "check:security": "node scripts/check-security.mjs",
     "update:csp": "node scripts/check-security.mjs --update",
     "audit:dependencies": "npm audit",
-    "test:security": "node tests/security-hardening.cjs && node tests/submission-gateway.cjs && node tests/submit-application-function.mjs && node tests/application-api.mjs && node tests/auth-captcha.mjs && node tests/supabase-sdk.cjs && node tests/admin-startup.cjs && node tests/reset-request.cjs && node tests/income-eligibility.mjs && node tests/email-draft.mjs"
+    "test:security": "node tests/security-hardening.cjs && node tests/submission-gateway.cjs && node tests/support-gateway.cjs && node tests/submit-application-function.mjs && node tests/submit-support-function.mjs && node tests/application-api.mjs && node tests/support-api.mjs && node tests/auth-captcha.mjs && node tests/supabase-sdk.cjs && node tests/admin-startup.cjs && node tests/reset-request.cjs && node tests/income-eligibility.mjs && node tests/email-draft.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.50.0",

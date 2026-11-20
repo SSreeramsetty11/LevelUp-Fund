@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 // GitHub Pages cannot add custom HTTP headers. Its CSP is therefore delivered
 // by a meta tag; only inline scripts whose hashes appear here may execute.
-const pages = ['index.html', 'apply.html', 'team.html', 'reset-password.html'];
+const pages = ['index.html', 'apply.html', 'team.html', 'support.html', 'privacy.html', 'data-policy.html', 'reset-password.html'];
 const write = process.argv.includes('--update');
 const config = JSON.parse(readFileSync('package.json', 'utf8'));
 const supabase = config.dependencies['@supabase/supabase-js'];
@@ -64,6 +64,9 @@ if (!/TURNSTILE_SITE_KEY\s*=\s*['"]0x[A-Za-z0-9_-]+['"]/.test(publicConfig)) {
 if (!/PROTECTED_SUBMISSION_ENABLED\s*=\s*(?:true|false)\s*;/.test(publicConfig)) {
   console.error('src/supabase-config.js: protected submission staging flag must be an explicit boolean.'); failed = true;
 }
+if (!/SUPPORT_REQUESTS_ENABLED\s*=\s*(?:true|false)\s*;/.test(publicConfig)) {
+  console.error('src/supabase-config.js: support-request staging flag must be an explicit boolean.'); failed = true;
+}
 if (/SUPABASE_(?:SERVICE_ROLE|SECRET)_KEY\s*=|TURNSTILE_SECRET_KEY\s*=|RATE_LIMIT_SECRET\s*=/.test(publicConfig)) {
   console.error('src/supabase-config.js: private server secrets must never be placed in browser configuration.'); failed = true;
 }
@@ -79,9 +82,26 @@ for (const requiredBoundary of [
     console.error(`submit-application Edge Function: missing required boundary ${requiredBoundary}.`); failed = true;
   }
 }
+const supportFunction = readFileSync('supabase/functions/submit-support-request/index.ts', 'utf8');
+for (const requiredBoundary of [
+  'https://ssreeramsetty11.github.io',
+  'ssreeramsetty11.github.io',
+  'support_submit',
+  'support_ip',
+  'support_email',
+  'levelup_take_submission_slot',
+  'resolution=ignore-duplicates,return=minimal'
+]) {
+  if (!supportFunction.includes(requiredBoundary)) {
+    console.error(`submit-support-request Edge Function: missing required boundary ${requiredBoundary}.`); failed = true;
+  }
+}
 const functionConfig = readFileSync('supabase/config.toml', 'utf8');
 if (!/\[functions\.submit-application\][\s\S]*?verify_jwt\s*=\s*false/.test(functionConfig)) {
   console.error('supabase/config.toml: the public submission function must use its own Turnstile verification.'); failed = true;
+}
+if (!/\[functions\.submit-support-request\][\s\S]*?verify_jwt\s*=\s*false/.test(functionConfig)) {
+  console.error('supabase/config.toml: the public support function must use its own Turnstile verification.'); failed = true;
 }
 for (const [path, detectSession] of [['index.html', false], ['team.html', false], ['src/application.js', false], ['reset-password.html', true]]) {
   const source = readFileSync(path, 'utf8');

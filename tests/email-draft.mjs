@@ -3,6 +3,7 @@ import {
   createEmailDraft,
   createGmailComposeLink,
   createMailtoLink,
+  createSupportReplyDraft,
   formatEmailDraft
 } from "../src/email-draft.js";
 
@@ -27,4 +28,8 @@ for (const type of ["practice", "approved", "rejected"]) {
 }
 
 assert.throws(() => createEmailDraft(application, "unknown"), /Unknown email draft type/);
+const reply = createSupportReplyDraft({ name: "Sample Student", email: "student@example.com", subject: "Application question" });
+assert.equal(reply.to, "student@example.com");
+assert.equal(reply.subject, "Re: Application question");
+assert.match(reply.body, /Sample Student/);
 console.log("Email draft checks passed: preview, copy text, Gmail and default-app links.");

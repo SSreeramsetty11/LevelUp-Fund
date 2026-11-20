@@ -9,3 +9,7 @@ export const TURNSTILE_SITE_KEY = '0x4AAAAAAF_MmFhbWQ4Tpg9i';
 // and tested. Turning it on routes the public form through the protected server
 // endpoint instead of allowing a direct browser-to-database insert.
 export const PROTECTED_SUBMISSION_ENABLED = true;
+
+// Turn on only after the support migration and Edge Function pass their staged
+// deployment checks. There is intentionally no direct database fallback.
+export const SUPPORT_REQUESTS_ENABLED = false;
