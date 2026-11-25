@@ -1,22 +1,42 @@
 import { evaluateIncomeEligibility, incomeClasses, incomeClassFor, isValidCertificationUrl } from "./eligibility.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0/+esm";
 import { createSharedAdmin } from "./shared-admin.js";
-import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./supabase-config.js";
+import { createAuthCaptcha } from "./auth-captcha.js";
+import { createApplicationApi, submissionErrorMessage } from "./application-api.js";
+import { PROTECTED_SUBMISSION_ENABLED, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TURNSTILE_SITE_KEY } from "./supabase-config.js";
 const backend = createSharedAdmin(createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
 }));
+const applicationApi = createApplicationApi({
+  supabaseUrl: SUPABASE_URL,
+  publishableKey: SUPABASE_PUBLISHABLE_KEY
+});
 const grantForm = document.getElementById("grant-form");
 const formError = document.getElementById("form-error");
 const successDialog = document.getElementById("success-dialog");
 const householdIncomeClass = document.getElementById("household-income-class");
 const householdIncome = document.getElementById("household-income");
+const submissionCaptcha = createAuthCaptcha({
+  siteKey: PROTECTED_SUBMISSION_ENABLED ? TURNSTILE_SITE_KEY : "",
+  container: document.getElementById("application-turnstile"),
+  status: document.getElementById("application-turnstile-status"),
+  action: "application_submit"
+});
     function makeId() {
       if (window.crypto && crypto.randomUUID) {
         return crypto.randomUUID();
       }
-
-      return Date.now() + "-" + Math.random().toString(36).slice(2);
+      const bytes = new Uint8Array(16);
+      if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(bytes);
+      else for (let index = 0; index < bytes.length; index += 1) bytes[index] = Math.floor(Math.random() * 256);
+      bytes[6] = (bytes[6] & 15) | 64;
+      bytes[8] = (bytes[8] & 63) | 128;
+      const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, "0")).join("");
+      return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
     }
+    let submissionId = makeId();
+
+    if (PROTECTED_SUBMISSION_ENABLED) submissionCaptcha.prepare();
 
     function showFieldError(field, message) {
       const error = document.getElementById(field.id + "-error");
@@ -73,6 +93,7 @@ const householdIncome = document.getElementById("household-income");
           const ok = isValidCertificationUrl(v) && field.validity.valid;
           return ok ? "" : "Enter a valid certification website URL starting with http:// or https://, without a username or password.";
         }
+        case "test-date": return /^\d{4}-\d{2}-\d{2}$/.test(v) && field.validity.valid ? "" : "Select a valid planned test date.";
         case "student-info": { const words = countEssayWords(field.value); return words > 0 && words < 500 ? "" : "Enter an essay of fewer than 500 words."; }
         case "household-income-class": return incomeClasses.some((range) => range.value === v) ? "" : "Select an annual household income range.";
         case "household-income": {
@@ -120,6 +141,7 @@ const householdIncome = document.getElementById("household-income");
       const candidateId = document.getElementById("candidate-id");
       const examName = document.getElementById("exam-name");
       const certificationUrl = document.getElementById("certification-url");
+      const testDate = document.getElementById("test-date");
       const studentInfo = document.getElementById("student-info");
       const agreement = document.getElementById("agreement");
       const ageConfirmation = document.getElementById("age-confirmation");
@@ -139,7 +161,7 @@ const householdIncome = document.getElementById("household-income");
 
       check(ageConfirmation, ageConfirmation.checked, "You must confirm that you are at least 14 years old to apply.");
       const urlValue = certificationUrl.value.trim();
-      [fullName, email, candidateId, examName, certificationUrl, studentInfo, householdIncomeClass, householdIncome, amount, agreement].forEach((field) => {
+      [fullName, email, candidateId, examName, certificationUrl, testDate, studentInfo, householdIncomeClass, householdIncome, amount, agreement].forEach((field) => {
         const message = fieldMessage(field);
         check(field, !message, message);
       });
@@ -152,12 +174,13 @@ const householdIncome = document.getElementById("household-income");
       }
 
       const application = {
-        id: makeId(),
+        id: submissionId,
         name: fullName.value.trim(),
         email: email.value.trim(),
         examProvider: candidateId.value.trim(),
         exam: examName.value.trim(),
         certificationUrl: urlValue,
+        testDate: testDate.value,
         essay: studentInfo.value.trim(),
         requestedAmount: Number(amount.value),
         householdIncome: Number(householdIncome.value),
@@ -167,17 +190,39 @@ const householdIncome = document.getElementById("household-income");
         submittedAt: new Date().toISOString()
       };
 
+      let captchaToken;
+      if (PROTECTED_SUBMISSION_ENABLED) {
+        const captchaResult = submissionCaptcha.consume();
+        if (!captchaResult.ok) {
+          formError.textContent = "Complete the security check before submitting.";
+          formError.classList.remove("hidden");
+          return;
+        }
+        captchaToken = captchaResult.token;
+      }
+
       const submitButton = grantForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
       try {
         application.agreement = agreement.checked;
         application.ageConfirmed = ageConfirmation.checked;
-        await backend.submitApplication(application);
+        if (PROTECTED_SUBMISSION_ENABLED) {
+          await applicationApi.submitApplication(
+            application,
+            captchaToken,
+            document.getElementById("company-website").value
+          );
+        } else {
+          await backend.submitApplication(application);
+        }
       } catch (error) {
-        formError.textContent = "Your application could not be submitted. Please try again later.";
+        formError.textContent = PROTECTED_SUBMISSION_ENABLED
+          ? submissionErrorMessage(error)
+          : "Your application could not be submitted. Please try again later.";
         formError.classList.remove("hidden");
         return;
       } finally {
+        if (PROTECTED_SUBMISSION_ENABLED) submissionCaptcha.reset();
         submitButton.disabled = false;
       }
 
@@ -196,6 +241,7 @@ const householdIncome = document.getElementById("household-income");
         message.textContent = "The sample application was submitted for review. Meeting the income rules does not guarantee a grant.";
       }
       grantForm.reset();
+      submissionId = makeId();
       updateEssayCount();
       successDialog.showModal();
       document.getElementById("close-success").focus();

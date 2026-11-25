@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-fSAOPR9rGK2SHh/k+HLD3GyPzObGDihtCpuy+62TjuE=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-xa2imHRTNJ1BzHJTPu+zr8Psmd2gX7SwQenxejCQmiQ=' 'sha256-UCjczjyb/MiXfcnKeQwN45x9ogVxY+yELHiz3hytVC8='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-PGYmwI/JasHH3L2zhBNJhVmuUk4qVIBI4y3n14P3arc=' 'sha256-WvdB5ywXRXwvKrSWak+XapVV2OS+Vkwh9PF5cU4rNI0=' 'sha256-40B1WVu0u/MZd5e3TcTK4OqtrWEmkfSHp+2IaQSf9Eg=' 'sha256-CIHkZlU3LGQ+o37JWybhzdB4j9JNWYNMum7IJVepiNI=' 'sha256-ZgFSwFvNncQELAfp5YLPaug8vjwH4ThR8b6XzcStKaM='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="dark" />
 
   <title>The LevelUp Fund | Certification Grants for Students</title>
   <meta name="description" content="The LevelUp Fund covers certification and credential fees for eligible students, from industry exams to platform certificates. See how grants work and apply." />
@@ -527,16 +527,6 @@
   <script>
     // Hide animated blocks before first paint so Motion can fade them in without a flash.
     // If the CDN is slow or blocked, drop the class so nothing stays hidden.
-    (function () {
-      var saved = null;
-      try { saved = localStorage.getItem("levelup-theme"); } catch (e) {}
-      var theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      var root = document.documentElement;
-      root.setAttribute("data-theme", theme);
-      root.classList.toggle("dark", theme === "dark");
-      var tc = document.querySelector('meta[name="theme-color"]');
-      if (tc) tc.setAttribute("content", theme === "light" ? "#F8F7F2" : "#0B1120");
-    })();
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.documentElement.classList.add("js-motion");
       setTimeout(function () { if (!window.__motionReady) document.documentElement.classList.remove("js-motion"); }, 4000);
@@ -549,12 +539,6 @@
 
   <div id="progress" aria-hidden="true"></div>
   <div class="ambient" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
-
-  <!-- TEMP-THEME-TOGGLE: floating Dark / Light switch for design review. Delete this block, the .temp-theme CSS and the data-set-theme lines in the script to remove it. -->
-  <div class="temp-theme" role="group" aria-label="Preview color theme (temporary)">
-    <button type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
-    <button type="button" data-set-theme="light" aria-pressed="false">Light</button>
-  </div>
 
   <!-- Navigation -->
   <header class="site-header z-40">
@@ -584,7 +568,7 @@
       </div>
     </nav>
     <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="mobile-menu-title">
-      <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><div class="flex items-center gap-2"><button type="button" class="theme-toggle grid h-11 w-11 place-items-center rounded-full" aria-label="Switch to light mode"><svg class="icon i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg><svg class="icon i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div></div>
+      <div class="flex items-center justify-between"><p id="mobile-menu-title" class="eyebrow">The LevelUp Fund</p><button id="mobile-menu-close" type="button" class="menu-btn">Close</button></div>
       <nav aria-label="Mobile navigation"><a href="#how-it-works">How it works ↗</a><a href="#rules">Grant details ↗</a><a href="team.html">Our team ↗</a><a href="#faq">FAQ ↗</a><a href="#sponsors">Sponsors ↗</a><a href="apply.html">Apply ↗</a></nav>
     </dialog>
   </header>
@@ -834,7 +818,6 @@
         <div
           id="sponsor-track"
           class="sponsor-track mt-8 flex gap-4 overflow-x-auto pb-4"
-          aria-label="Sponsors"
         ></div>
 
         <p
@@ -858,8 +841,8 @@
     </div>
     <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
       <div><a href="#" class="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="wordmark">The LevelUp Fund<span class="brand-dot">.</span></span></a><p class="mt-5 max-w-md text-sm leading-7 text-slate-400">We cover exam and program fees so eligible students can earn certifications and credentials.</p><p class="mt-4 max-w-md text-sm leading-7 text-slate-400">Grant support is subject to review and available funding. Certification and program names are trademarks of their respective owners; examples are illustrative and imply no affiliation or endorsement.</p><p class="mt-4 text-sm text-slate-400">Fiscally sponsored by Hack Club Bank (501(c)(3) non-profit).</p></div>
-      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a></div></div>
-      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="mailto:support@example.com" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button><p id="admin-load-status" role="status" hidden class="max-w-xs leading-6 text-slate-300"></p></div></div>
+      <div><h2 class="text-sm font-bold text-white">Explore</h2><div class="mt-5 grid gap-3 text-sm"><a href="#how-it-works" class="hover:text-white">How it works</a><a href="#rules" class="hover:text-white">Grant guidelines</a><a href="#faq" class="hover:text-white">FAQ</a><a href="team.html" class="hover:text-white">Our team</a><a href="apply.html" class="hover:text-white">Apply</a><a href="privacy.html" class="hover:text-white">Privacy</a><a href="data-policy.html" class="hover:text-white">Data policy</a></div></div>
+      <div><h2 class="text-sm font-bold text-white">Connect</h2><div class="mt-5 grid gap-3 text-sm"><a href="support.html" class="hover:text-white">Contact support</a><a href="https://hackclub.com/fiscal-sponsorship?utm_source=hcb&amp;utm_medium=web&amp;utm_campaign=learnmore" target="_blank" rel="noopener noreferrer" class="hover:text-white">Hack Club Bank</a><button id="open-admin" type="button" class="w-fit hover:text-white">Admin login</button><p id="admin-load-status" role="status" hidden class="max-w-xs leading-6 text-slate-300"></p></div></div>
     </div><div class="mx-auto mt-12 max-w-7xl border-t border-slate-800 px-6 pt-6 text-xs text-slate-400 sm:px-8">© <span id="year"></span> The LevelUp Fund.</div>
   </footer>
 
@@ -961,7 +944,7 @@
       </div>
 
       <!-- Dashboard counts -->
-      <div class="mt-7 grid gap-3 sm:grid-cols-3">
+      <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
           <p class="text-sm text-slate-400">Applications</p>
           <p id="total-count" class="mt-2 text-3xl font-bold">0</p>
@@ -975,6 +958,11 @@
         <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
           <p class="text-sm text-slate-400">Sponsors</p>
           <p id="sponsor-count" class="mt-2 text-3xl font-bold">0</p>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+          <p class="text-sm text-slate-400">Open support</p>
+          <p id="support-count" class="mt-2 text-3xl font-bold">0</p>
         </div>
       </div>
 
@@ -1011,9 +999,18 @@
         <div id="application-list" class="mt-5 space-y-4"></div>
       </section>
 
+      <!-- Support inbox -->
+      <section class="mt-12" aria-labelledby="support-inbox-heading">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div><h3 id="support-inbox-heading" class="text-xl font-bold">Support inbox</h3><p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Questions submitted through the protected public support form.</p></div>
+          <label class="text-sm font-semibold">Filter:<select id="support-status-filter" class="ml-2 rounded-lg border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900"><option value="All">All requests</option><option value="Open">Open</option><option value="In progress">In progress</option><option value="Resolved">Resolved</option></select></label>
+        </div>
+        <div id="support-request-list" class="mt-5 space-y-4"></div>
+      </section>
+
       <section class="mt-12" aria-labelledby="team-heading">
         <h3 id="team-heading" class="text-xl font-bold">Manage the team</h3>
-        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors.</p>
+        <p class="mt-2 text-sm text-slate-500">Profiles and headshots are shared with visitors. Use the controls below to edit or remove an existing team member.</p>
         <form id="team-form" class="mt-5 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 sm:grid-cols-2">
           <input id="team-id" type="hidden">
           <label class="text-sm font-semibold">Name<input id="team-name" maxlength="100" required class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></label>
@@ -1021,6 +1018,7 @@
           <label class="text-sm font-semibold sm:col-span-2">Bio<textarea id="team-bio" maxlength="1200" required rows="4" class="mt-2 w-full rounded-xl border border-slate-300 bg-transparent px-4 py-3 dark:border-slate-700"></textarea></label>
           <label class="text-sm font-semibold sm:col-span-2">Headshot (optional; JPG, PNG, WebP, max 500 KB)<input id="team-photo" type="file" accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full text-sm"></label>
           <p id="team-error" class="text-sm text-red-600 sm:col-span-2" role="alert"></p>
+          <p id="team-status" class="text-sm text-emerald-600 dark:text-emerald-400 sm:col-span-2" role="status" aria-live="polite"></p>
           <div><button type="submit" class="rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white">Save team member</button></div>
         </form>
         <div id="team-admin-list" class="mt-4 text-sm"></div>
@@ -1108,6 +1106,37 @@
     </div>
   </dialog>
 
+  <!-- Email drafts stay on-screen so they work even when the browser has no mail app configured. -->
+  <dialog
+    id="email-draft-dialog"
+    aria-labelledby="email-draft-title"
+    class="m-auto max-h-[92vh] w-[calc(100%-1.5rem)] max-w-2xl overflow-y-auto rounded-3xl bg-white p-0 text-slate-900 dark:bg-slate-900 dark:text-white"
+  >
+    <form method="dialog" class="p-5 sm:p-8">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Email draft</p>
+          <h2 id="email-draft-title" class="mt-2 text-2xl font-bold">Review before sending</h2>
+        </div>
+        <button type="submit" aria-label="Close email draft" class="rounded-lg px-2 text-2xl text-slate-400">×</button>
+      </div>
+      <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Nothing is sent automatically. Review and edit the draft in your email service before sending it.</p>
+      <label for="email-draft-to" class="mb-2 mt-5 block text-sm font-semibold">To</label>
+      <input id="email-draft-to" readonly class="field w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+      <label for="email-draft-subject" class="mb-2 mt-4 block text-sm font-semibold">Subject</label>
+      <input id="email-draft-subject" readonly class="field w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm dark:border-slate-700 dark:bg-slate-950" />
+      <label for="email-draft-body" class="mb-2 mt-4 block text-sm font-semibold">Message</label>
+      <textarea id="email-draft-body" rows="12" class="field w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm leading-6 dark:border-slate-700 dark:bg-slate-950"></textarea>
+      <p id="email-draft-status" class="mt-3 min-h-6 text-sm text-slate-600 dark:text-slate-300" role="status" aria-live="polite"></p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <button id="copy-email-draft" type="button" class="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">Copy draft</button>
+        <a id="open-gmail-draft" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">Open Gmail</a>
+        <a id="open-email-app-draft" class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800">Open email app</a>
+        <button type="submit" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Close</button>
+      </div>
+    </form>
+  </dialog>
+
   <!-- Explain startup problems even when the admin module cannot load. -->
   <script>
     (() => {
@@ -1129,31 +1158,6 @@
 
   <script type="module">
     const root = document.documentElement;
-
-    // Light / dark toggle. The initial theme is set in <head> before first paint.
-    const themeButtons = document.querySelectorAll(".theme-toggle");
-    const tempButtons = document.querySelectorAll("[data-set-theme]"); // TEMP-THEME-TOGGLE
-    const syncThemeButtons = () => {
-      const light = root.getAttribute("data-theme") === "light";
-      themeButtons.forEach((b) => b.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode"));
-      tempButtons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.setTheme === (light ? "light" : "dark")))); // TEMP-THEME-TOGGLE
-    };
-    const setTheme = (next) => {
-      const apply = () => {
-        root.setAttribute("data-theme", next);
-        root.classList.toggle("dark", next === "dark");
-        const tc = document.querySelector('meta[name="theme-color"]');
-        if (tc) tc.setAttribute("content", next === "light" ? "#F8F7F2" : "#0B1120");
-        try { localStorage.setItem("levelup-theme", next); } catch (e) {}
-        syncThemeButtons();
-      };
-      // Ease dark <-> light as one cross-fade instead of a hard brightness jump.
-      if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(apply);
-      else apply();
-    };
-    syncThemeButtons();
-    themeButtons.forEach((b) => b.addEventListener("click", () => setTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light")));
-    tempButtons.forEach((b) => b.addEventListener("click", () => setTheme(b.dataset.setTheme))); // TEMP-THEME-TOGGLE
 
     // Header gains a hairline once the page scrolls (works without the CDN).
     const header = document.querySelector(".site-header");
@@ -1289,11 +1293,6 @@
       spyTargets.forEach(([sel]) => { const t = document.querySelector(sel); if (t) spy.observe(t); });
     }
 
-    // Theme toggle gives a little spin so the change feels caused by the tap.
-    document.querySelectorAll(".theme-toggle").forEach((b) => b.addEventListener("click", () => {
-      b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin");
-    }));
-
   </script>
 
   <script type="module">
@@ -1301,6 +1300,7 @@
     import { createSharedAdmin } from "./src/shared-admin.js";
     import { evaluateIncomeEligibility, incomeClassFor } from "./src/eligibility.js";
     import { createAuthCaptcha } from "./src/auth-captcha.js";
+    import { createEmailDraft, createGmailComposeLink, createMailtoLink, createSupportReplyDraft, formatEmailDraft } from "./src/email-draft.js";
     import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TURNSTILE_SITE_KEY } from "./src/supabase-config.js";
     // Clear the previous version's persisted session for this project only.
     try { window.localStorage.removeItem(`sb-${new URL(SUPABASE_URL).hostname.split('.')[0]}-auth-token`); } catch (error) { /* Storage may be unavailable. */ }
@@ -1321,6 +1321,16 @@
     const dashboard = document.getElementById("admin-dashboard");
     const applicationList = document.getElementById("application-list");
     const statusFilter = document.getElementById("status-filter");
+    const supportRequestList = document.getElementById("support-request-list");
+    const supportStatusFilter = document.getElementById("support-status-filter");
+    const emailDraftDialog = document.getElementById("email-draft-dialog");
+    const emailDraftTo = document.getElementById("email-draft-to");
+    const emailDraftSubject = document.getElementById("email-draft-subject");
+    const emailDraftBody = document.getElementById("email-draft-body");
+    const emailDraftStatus = document.getElementById("email-draft-status");
+    const copyEmailDraft = document.getElementById("copy-email-draft");
+    const openGmailDraft = document.getElementById("open-gmail-draft");
+    const openEmailAppDraft = document.getElementById("open-email-app-draft");
 
     const sponsorForm = document.getElementById("sponsor-form");
     const sponsorTrack = document.getElementById("sponsor-track");
@@ -1425,14 +1435,17 @@
     async function closeAdminSession() {
       // Remove private application data from the DOM even if sign-out fails.
       applicationList.replaceChildren();
+      supportRequestList.replaceChildren();
       document.getElementById("total-count").textContent = "0";
       document.getElementById("pending-count").textContent = "0";
+      document.getElementById("support-count").textContent = "0";
       try { await backend.signOut(); } catch (error) { console.error("Sign out failed", error); }
     }
     document.getElementById("admin-logout").addEventListener("click", () => dashboard.close());
     dashboard.addEventListener("close", closeAdminSession);
 
     statusFilter.addEventListener("change", renderApplications);
+    supportStatusFilter.addEventListener("change", renderSupportRequests);
 
     /* Helpers for safe display of text entered by a user */
     function createElement(tag, className, text) {
@@ -1463,42 +1476,75 @@
       return wrapper;
     }
 
-    function emailLink(application, type) {
-      let subject = "";
-      let body = "";
-
-      if (type === "practice") {
-        subject = "Your LevelUp Fund practice test";
-        body =
-          `Hi ${application.name},\n\n` +
-          `Thank you for applying to The LevelUp Fund for ${application.exam}.\n\n` +
-          "Here are the next steps for your practice test:\n\n" +
-          "[Add practice-test instructions or link here]\n\n" +
-          "Please reply with your results when complete.\n\n" +
-          "Best,\nThe LevelUp Fund";
-      } else if (type === "approved") {
-        subject = "Your LevelUp Fund application";
-        body =
-          `Hi ${application.name},\n\n` +
-          `We're pleased to let you know that your application for ${application.exam} has been approved.\n\n` +
-          "We'll follow up with the next steps for arranging your exam.\n\n" +
-          "Best,\nThe LevelUp Fund";
-      } else {
-        subject = "Your LevelUp Fund application";
-        body =
-          `Hi ${application.name},\n\n` +
-          "Thank you for applying to The LevelUp Fund. " +
-          "After reviewing your application, we're unable to offer a grant at this time.\n\n" +
-          "We appreciate your interest and wish you the best with your certification goals.\n\n" +
-          "Best,\nThe LevelUp Fund";
-      }
-
-      return (
-        "mailto:" + encodeURIComponent(application.email) +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body)
-      );
+    function showEmailDraft(draft) {
+      emailDraftTo.value = draft.to;
+      emailDraftSubject.value = draft.subject;
+      emailDraftBody.value = draft.body;
+      openGmailDraft.href = createGmailComposeLink(draft);
+      openEmailAppDraft.href = createMailtoLink(draft);
+      emailDraftStatus.textContent = "Choose Copy draft, Open Gmail, or Open email app.";
+      emailDraftDialog.showModal();
+      emailDraftBody.focus();
     }
+
+    function openEmailDraft(application, type) {
+      showEmailDraft(createEmailDraft(application, type));
+    }
+
+    function draftWithEdits() {
+      return {
+        to: emailDraftTo.value.trim(),
+        subject: emailDraftSubject.value,
+        body: emailDraftBody.value
+      };
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const temporary = document.createElement("textarea");
+      temporary.value = text;
+      temporary.setAttribute("readonly", "");
+      temporary.style.position = "fixed";
+      temporary.style.opacity = "0";
+      document.body.append(temporary);
+      temporary.select();
+      const copied = document.execCommand("copy");
+      temporary.remove();
+      if (!copied) throw new Error("Copy was blocked.");
+    }
+
+    copyEmailDraft.addEventListener("click", async () => {
+      try {
+        const draft = draftWithEdits();
+        await copyText(formatEmailDraft(draft));
+        emailDraftStatus.textContent = "Draft copied. Paste it into any email service and review it before sending.";
+      } catch (error) {
+        emailDraftStatus.textContent = "Copy was blocked. Select the draft text and copy it manually.";
+        emailDraftBody.focus();
+        emailDraftBody.select();
+      }
+    });
+
+    function refreshDraftLinks() {
+      const draft = draftWithEdits();
+      openGmailDraft.href = createGmailComposeLink(draft);
+      openEmailAppDraft.href = createMailtoLink(draft);
+    }
+    emailDraftBody.addEventListener("input", refreshDraftLinks);
+    openGmailDraft.addEventListener("click", () => {
+      refreshDraftLinks();
+      emailDraftStatus.textContent = "Gmail opened in a new tab. Review the draft there before sending.";
+    });
+    openEmailAppDraft.addEventListener("click", () => {
+      refreshDraftLinks();
+      emailDraftStatus.textContent = "If no app opens, use Copy draft or Open Gmail instead.";
+    });
+    emailDraftDialog.addEventListener("close", () => {
+      emailDraftStatus.textContent = "";
+    });
 
     async function renderApplications() {
       applicationList.replaceChildren();
@@ -1577,6 +1623,7 @@
           detail(application.examProvider ? "Exam provider" : "Candidate ID (older entry)", application.examProvider || application.candidateId),
           detail("Exam", application.exam),
           detail("Certification website URL", application.certificationUrl || "Not provided"),
+          detail("Planned test date", application.testDate ? new Date(`${application.testDate}T00:00:00Z`).toLocaleDateString("en-US", { dateStyle: "long", timeZone: "UTC" }) : "Not provided"),
           detail("Age confirmation", application.ageConfirmed === true ? "Applicant confirmed they are at least 14" : "Not recorded"),
           detail(application.essay ? "Grant essay" : "Student status and goals (older entry)", application.essay || application.studentInfo),
           detail("Amount requested", application.requestedAmount != null ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(application.requestedAmount) : "Not provided"),
@@ -1749,28 +1796,28 @@
         );
 
         const practiceEmail = createElement(
-          "a",
+          "button",
           "rounded-xl border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800",
           "Prepare practice-test email"
         );
-
-        practiceEmail.href = emailLink(application, "practice");
+        practiceEmail.type = "button";
+        practiceEmail.addEventListener("click", () => openEmailDraft(application, "practice"));
 
         const approvedEmail = createElement(
-          "a",
+          "button",
           "rounded-xl border border-emerald-300 px-3 py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950",
           "Prepare approval email"
         );
-
-        approvedEmail.href = emailLink(application, "approved");
+        approvedEmail.type = "button";
+        approvedEmail.addEventListener("click", () => openEmailDraft(application, "approved"));
 
         const rejectedEmail = createElement(
-          "a",
+          "button",
           "rounded-xl border border-amber-300 px-3 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-50 dark:border-amber-800 dark:text-amber-400 dark:hover:bg-amber-950",
           "Prepare rejection email"
         );
-
-        rejectedEmail.href = emailLink(application, "rejected");
+        rejectedEmail.type = "button";
+        rejectedEmail.addEventListener("click", () => openEmailDraft(application, "rejected"));
 
         const deleteButton = createElement(
           "button",
@@ -1805,6 +1852,78 @@
       });
     }
 
+    async function renderSupportRequests() {
+      supportRequestList.replaceChildren();
+      let requests;
+      try { requests = await backend.listSupportRequests(); }
+      catch (error) {
+        supportRequestList.append(createElement("p", "text-sm text-red-600", "Could not load support requests. The support database migration may still need to be installed."));
+        return;
+      }
+      if (!dashboard.open) return;
+      document.getElementById("support-count").textContent = requests.filter((request) => request.status !== "Resolved").length;
+      const visible = supportStatusFilter.value === "All" ? requests : requests.filter((request) => request.status === supportStatusFilter.value);
+      if (!visible.length) {
+        supportRequestList.append(createElement("p", "rounded-2xl border border-dashed border-slate-300 p-6 text-sm text-slate-400 dark:border-slate-700", "No support requests match this view."));
+        return;
+      }
+      visible.forEach((request) => {
+        const card = createElement("article", "rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900");
+        const header = createElement("div", "flex flex-wrap items-start justify-between gap-3");
+        const title = createElement("h4", "break-words text-lg font-bold", request.subject);
+        const submitted = new Date(request.submittedAt);
+        const date = createElement("p", "text-xs text-slate-400", Number.isNaN(submitted.getTime()) ? "Date unavailable" : "Submitted " + submitted.toLocaleString());
+        header.append(title, date);
+        const details = createElement("dl", "mt-5 grid gap-4 sm:grid-cols-2");
+        details.append(detail("Name", request.name), detail("Email", request.email), detail("Category", request.category), detail("Message", request.message));
+
+        const editArea = createElement("div", "mt-5 grid gap-4 border-t border-slate-200 pt-5 dark:border-slate-800 sm:grid-cols-2");
+        const statusWrapper = createElement("div");
+        const statusLabel = createElement("label", "mb-2 block text-sm font-semibold", "Status");
+        const statusSelect = createElement("select", "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950");
+        const statusId = "support-status-" + request.id;
+        statusLabel.htmlFor = statusId;
+        statusSelect.id = statusId;
+        ["Open", "In progress", "Resolved"].forEach((status) => { const option = createElement("option", "", status); option.value = status; statusSelect.append(option); });
+        statusSelect.value = request.status || "Open";
+        statusWrapper.append(statusLabel, statusSelect);
+
+        const notesWrapper = createElement("div", "sm:col-span-2");
+        const notesLabel = createElement("label", "mb-2 block text-sm font-semibold", "Admin notes");
+        const notes = createElement("textarea", "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950");
+        const notesId = "support-notes-" + request.id;
+        notesLabel.htmlFor = notesId;
+        notes.id = notesId;
+        notes.rows = 3;
+        notes.maxLength = 2000;
+        notes.value = request.notes || "";
+        notesWrapper.append(notesLabel, notes);
+
+        const save = createElement("button", "rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900", "Save support review");
+        save.type = "button";
+        save.addEventListener("click", async () => {
+          try { await backend.updateSupportRequest(request.id, { status: statusSelect.value, notes: notes.value.trim() }); await renderSupportRequests(); }
+          catch { window.alert("Could not save this support review."); }
+        });
+        editArea.append(statusWrapper, notesWrapper, save);
+
+        const actions = createElement("div", "mt-5 flex flex-wrap gap-2 border-t border-slate-200 pt-5 dark:border-slate-800");
+        const reply = createElement("button", "rounded-xl border border-blue-300 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950", "Prepare reply");
+        reply.type = "button";
+        reply.addEventListener("click", () => showEmailDraft(createSupportReplyDraft(request)));
+        const remove = createElement("button", "rounded-xl px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950", "Delete");
+        remove.type = "button";
+        remove.addEventListener("click", async () => {
+          if (!window.confirm("Delete this support request?")) return;
+          try { await backend.deleteSupportRequest(request.id); await renderSupportRequests(); }
+          catch { window.alert("Could not delete this support request."); }
+        });
+        actions.append(reply, remove);
+        card.append(header, details, editArea, actions);
+        supportRequestList.append(card);
+      });
+    }
+
     // Advance sponsors only when there is overflow. Pause for interaction and reduced motion.
     let sponsorPaused = false;
     sponsorTrack.addEventListener("mouseenter", () => sponsorPaused = true);
@@ -1827,9 +1946,11 @@
     const teamForm = document.getElementById("team-form");
     const teamList = document.getElementById("team-admin-list");
     const teamError = document.getElementById("team-error");
+    const teamStatus = document.getElementById("team-status");
     teamForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       teamError.textContent = "";
+      teamStatus.textContent = "";
       const name = document.getElementById("team-name").value.trim();
       const role = document.getElementById("team-role").value.trim();
       const bio = document.getElementById("team-bio").value.trim();
@@ -1843,6 +1964,7 @@
         const member = { id: id || undefined, name, role, bio, image: file ? await readFileAsDataUrl(file) : (previous?.image || "") };
         await backend.saveTeamMember(member);
         teamForm.reset(); document.getElementById("team-id").value = ""; await renderTeamAdmin();
+        teamStatus.textContent = id ? `${name}'s profile was updated.` : `${name} was added to the team.`;
       } catch (error) { teamError.textContent = "Could not save this profile."; }
     });
     async function renderTeamAdmin() {
@@ -1852,11 +1974,32 @@
       team.forEach(member => {
         const row = document.createElement("div"); row.className = "flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-3 dark:border-slate-700";
         const label = document.createElement("span"); label.textContent = member.name + " — " + member.role;
-        const buttons = document.createElement("div"); buttons.className = "flex gap-3";
-        const edit = document.createElement("button"); edit.type = "button"; edit.className = "text-blue-600 font-semibold"; edit.textContent = "Edit";
-        edit.addEventListener("click", () => { document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
-        const remove = document.createElement("button"); remove.type = "button"; remove.className = "text-red-600 font-semibold"; remove.textContent = "Remove";
-        remove.addEventListener("click", async () => { if (!confirm("Remove this team member?")) return; try { await backend.deleteTeamMember(member.id); await renderTeamAdmin(); } catch { teamError.textContent = "Could not remove the profile."; } });
+        const buttons = document.createElement("div"); buttons.className = "flex flex-wrap gap-2";
+        const edit = document.createElement("button"); edit.type = "button"; edit.className = "rounded-lg border border-blue-300 px-3 py-2 font-semibold text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950"; edit.textContent = "Edit profile";
+        edit.addEventListener("click", () => { teamError.textContent = ""; teamStatus.textContent = ""; document.getElementById("team-id").value = member.id; document.getElementById("team-name").value = member.name; document.getElementById("team-role").value = member.role; document.getElementById("team-bio").value = member.bio; document.getElementById("team-photo").value = ""; document.getElementById("team-name").focus(); });
+        const remove = document.createElement("button"); remove.type = "button"; remove.className = "rounded-lg border border-red-300 px-3 py-2 font-semibold text-red-700 hover:bg-red-50 disabled:cursor-wait disabled:opacity-60 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950"; remove.textContent = "Remove team member";
+        remove.setAttribute("aria-label", `Remove ${member.name} from the team`);
+        remove.addEventListener("click", async () => {
+          const confirmed = window.confirm(`Remove ${member.name} from the team? Their public profile will be deleted. This cannot be undone.`);
+          if (!confirmed) return;
+          teamError.textContent = "";
+          teamStatus.textContent = "";
+          remove.disabled = true;
+          remove.textContent = "Removing…";
+          try {
+            await backend.deleteTeamMember(member.id);
+            if (document.getElementById("team-id").value === member.id) {
+              teamForm.reset();
+              document.getElementById("team-id").value = "";
+            }
+            await renderTeamAdmin();
+            teamStatus.textContent = `${member.name} was removed from the team.`;
+          } catch {
+            teamError.textContent = `Could not remove ${member.name}. Please try again.`;
+            remove.disabled = false;
+            remove.textContent = "Remove team member";
+          }
+        });
         buttons.append(edit, remove); row.append(label, buttons); teamList.append(row);
       });
     }
@@ -2069,7 +2212,7 @@
     });
 
     async function renderDashboard() {
-      await Promise.all([renderApplications(), renderSponsorAdmin(), renderTeamAdmin()]);
+      await Promise.all([renderApplications(), renderSupportRequests(), renderSponsorAdmin(), renderTeamAdmin()]);
     }
 
     renderSponsors();

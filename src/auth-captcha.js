@@ -1,6 +1,6 @@
-// Optional Cloudflare Turnstile support for Supabase Auth. The site key is
-// public; server-side verification is performed by Supabase once configured.
-export function createAuthCaptcha({ siteKey, container, status, doc = document, win = window }) {
+// Reusable Cloudflare Turnstile widget support. The site key is public; the
+// resulting token must always be verified by the server that handles the action.
+export function createAuthCaptcha({ siteKey, container, status, action, doc = document, win = window }) {
   let token = '';
   let widgetId = null;
   let loading = null;
@@ -31,12 +31,14 @@ export function createAuthCaptcha({ siteKey, container, status, doc = document, 
         });
       }
       status.textContent = 'Complete the security check to continue.';
-      widgetId = win.turnstile.render(container, {
+      const options = {
         sitekey: siteKey,
         callback(value) { token = value; status.textContent = ''; },
         'expired-callback'() { token = ''; status.textContent = 'The security check expired. Please complete it again.'; },
         'error-callback'() { token = ''; status.textContent = 'The security check could not load. Refresh and try again.'; }
-      });
+      };
+      if (action) options.action = action;
+      widgetId = win.turnstile.render(container, options);
     })().catch(() => {
       status.textContent = 'The security check could not load. Check your connection and try again.';
     }).finally(() => { loading = null; });

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://challenges.cloudflare.com 'sha256-/p2fj4uvR/UT9EDAscniSbwtqPl4imWaDLTyQfTcyA4='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://waxwxtsgkarisigrfncp.supabase.co wss://waxwxtsgkarisigrfncp.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <title>Contact support | The LevelUp Fund</title>
+  <meta name="description" content="Send a support question to The LevelUp Fund administration team.">
+  <meta name="theme-color" content="#0B1120">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F5C85C'/%3E%3Cpath d='m10 17 6-6 6 6M10 23l6-6 6 6' fill='none' stroke='%23101C35' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>tailwind.config={darkMode:"class",theme:{extend:{fontFamily:{sans:["Public Sans","system-ui","sans-serif"]}}}};</script>
+  <link rel="stylesheet" href="assets/fonts/current-design.css">
+  <style>
+    :root{color-scheme:dark;--page:#0B1120;--surface:#131D30;--surface-2:#1B2940;--text:#F1F4F9;--muted:#A8B4C7;--gold:#F5C85C;--line:#2A3850;--on-gold:#101C35}
+    *{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--text);font-family:"Public Sans",system-ui,sans-serif}.field{background:#0F192C;border-color:var(--line);color:var(--text)}.field:focus{outline:3px solid rgba(245,200,92,.35);outline-offset:2px}.brand{font-family:"Newsreader",Georgia,serif}.brand-mark{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:.7rem;background:var(--gold);color:var(--on-gold)}.icon{width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.skip{position:fixed;top:.75rem;left:.75rem;z-index:50;translate:0 -200%;border-radius:.75rem;background:var(--gold);color:var(--on-gold);padding:.65rem 1rem;font-weight:700}.skip:focus{translate:0 0}dialog::backdrop{background:rgba(2,6,23,.78)}button:disabled{cursor:not-allowed;opacity:.6}
+  </style>
+</head>
+<body class="antialiased">
+  <a href="#main" class="skip">Skip to content</a>
+  <header class="border-b border-slate-800"><nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8" aria-label="Main navigation"><a href="index.html" class="flex items-center gap-2.5 font-bold"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m6 13 6-6 6 6"/><path d="m6 19 6-6 6 6"/></svg></span><span class="brand text-xl">The LevelUp Fund<span class="text-amber-300">.</span></span></a><a href="index.html" class="rounded-full border border-slate-600 px-4 py-2 text-sm font-semibold hover:bg-slate-800">Home</a></nav></header>
+  <main id="main" class="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20" tabindex="-1">
+    <p class="text-xs font-bold uppercase tracking-[.18em] text-amber-300">Support</p>
+    <h1 class="brand mt-4 text-4xl font-semibold leading-tight sm:text-6xl">How can we help?</h1>
+    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">Send a question to the LevelUp Fund administrators. Do not include passwords, government identification numbers, financial account details, or other information the form does not request.</p>
+    <p class="mt-4 inline-flex rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-300">Test mode · Use sample information only.</p>
+
+    <p id="support-setup-notice" hidden class="mt-8 rounded-2xl border border-amber-700/60 bg-amber-950/30 p-4 text-sm leading-6 text-amber-100">The support inbox is being set up and is not accepting requests yet.</p>
+    <form id="support-form" class="mt-10 space-y-6 rounded-3xl border border-slate-700 bg-slate-900 p-5 shadow-2xl sm:p-8" novalidate>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div><label for="support-name" class="mb-2 block text-sm font-semibold">Your name</label><input id="support-name" name="name" autocomplete="name" maxlength="120" required class="field w-full rounded-xl border px-4 py-3"></div>
+        <div><label for="support-email" class="mb-2 block text-sm font-semibold">Email address</label><input id="support-email" name="email" type="email" autocomplete="email" maxlength="254" required class="field w-full rounded-xl border px-4 py-3"></div>
+      </div>
+      <div><label for="support-category" class="mb-2 block text-sm font-semibold">What do you need help with?</label><select id="support-category" name="category" required class="field w-full rounded-xl border px-4 py-3"><option value="">Select a category</option><option>Application question</option><option>Eligibility</option><option>Technical problem</option><option>Privacy or data request</option><option>Other</option></select></div>
+      <div><label for="support-subject" class="mb-2 block text-sm font-semibold">Subject</label><input id="support-subject" name="subject" maxlength="160" required class="field w-full rounded-xl border px-4 py-3"></div>
+      <div><label for="support-message" class="mb-2 block text-sm font-semibold">Message</label><textarea id="support-message" name="message" rows="8" minlength="10" maxlength="4000" required class="field w-full rounded-xl border px-4 py-3 leading-6"></textarea><p id="support-message-count" class="mt-2 text-xs text-slate-400">0 / 4000 characters</p></div>
+      <div class="absolute -left-[10000px]" aria-hidden="true"><label for="support-company-website">Company website</label><input id="support-company-website" type="text" tabindex="-1" autocomplete="off"></div>
+      <label class="flex items-start gap-3 text-sm leading-6 text-slate-300"><input id="support-contact-eligibility" type="checkbox" required class="mt-1 h-4 w-4 rounded border-slate-600">I confirm that I am at least 14 years old, or I am a parent or guardian contacting the fund.</label>
+      <label class="flex items-start gap-3 text-sm leading-6 text-slate-300"><input id="support-privacy" type="checkbox" required class="mt-1 h-4 w-4 rounded border-slate-600"><span>I have read and agree to the <a href="privacy.html" class="font-semibold text-amber-300 underline">Privacy Policy</a> and <a href="data-policy.html" class="font-semibold text-amber-300 underline">Data Policy</a>.</span></label>
+      <div id="support-turnstile" hidden></div><p id="support-turnstile-status" role="status" aria-live="polite" class="text-sm text-slate-300"></p>
+      <p id="support-error" class="hidden rounded-xl bg-red-950/40 p-3 text-sm text-red-200" role="alert"></p>
+      <button type="submit" class="rounded-full bg-amber-300 px-6 py-3 font-bold text-slate-950 hover:bg-amber-200">Send support request</button>
+    </form>
+  </main>
+  <footer class="border-t border-slate-800 px-5 py-10 text-sm text-slate-400"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-5 sm:px-3"><p>Fiscally sponsored by Hack Club Bank.</p><div class="flex flex-wrap gap-5"><a href="privacy.html" class="hover:text-white">Privacy</a><a href="data-policy.html" class="hover:text-white">Data policy</a><a href="team.html" class="hover:text-white">Our team</a></div></div></footer>
+  <dialog id="support-success-dialog" aria-labelledby="support-success-title" class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl bg-slate-900 p-0 text-white"><div class="p-8"><p class="text-xs font-bold uppercase tracking-widest text-amber-300">Received</p><h2 id="support-success-title" class="mt-2 text-2xl font-bold">Support request submitted</h2><p class="mt-3 leading-7 text-slate-300">Your request is now visible to authorized LevelUp Fund administrators.</p><button id="close-support-success" type="button" class="mt-6 rounded-full bg-amber-300 px-5 py-3 font-bold text-slate-950">Done</button></div></dialog>
+  <script type="module" src="src/support.js"></script>
+</body>
+</html>

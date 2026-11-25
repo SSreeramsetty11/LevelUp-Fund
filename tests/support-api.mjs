@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import { createSupportApi, SupportSubmissionError, supportErrorMessage } from '../src/support-api.js';
+const request = { id:'11111111-1111-4111-8111-111111111111',name:'Sample',email:'sample@example.com',category:'Other',subject:'Question',message:'A sample support message.',privacyAcknowledged:true,contactEligibilityConfirmed:true };
+let captured;
+const api = createSupportApi({ supabaseUrl:'https://project.supabase.co/',publishableKey:'public-key',fetchImpl:async(url,init)=>{captured={url,init};return Response.json({ok:true});} });
+await api.submitSupportRequest(request,'captcha-token','');
+assert.equal(captured.url,'https://project.supabase.co/functions/v1/submit-support-request');
+assert.equal(captured.init.headers.apikey,'public-key');
+const body=JSON.parse(captured.init.body);assert.equal(body.submissionKey,request.id);assert.equal(body.contactEligibilityConfirmed,true);assert.equal(body.status,undefined);
+const failing=createSupportApi({supabaseUrl:'https://project.supabase.co',publishableKey:'public',fetchImpl:async()=>Response.json({ok:false,error:'rate_limited'},{status:429})});
+await assert.rejects(()=>failing.submitSupportRequest(request,'token'),(error)=>error instanceof SupportSubmissionError&&error.status===429);
+assert.match(supportErrorMessage(new SupportSubmissionError('rate_limited',429)),/Too many/);
+console.log('Support API checks passed: allowlisted payload, endpoint, safe errors and public-key header.');

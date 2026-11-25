@@ -31,6 +31,7 @@ export function createSharedAdmin(client) {
       exam_provider: application.examProvider,
       certification: application.exam,
       certification_url: application.certificationUrl,
+      test_date: application.testDate,
       essay: application.essay,
       amount: application.requestedAmount,
       household_income: application.householdIncome,
@@ -42,11 +43,11 @@ export function createSharedAdmin(client) {
   }
 
   async function listApplications() {
-    const rows = await checked(client.from('levelup_applications').select('id,created_at,name,email,exam_provider,certification,certification_url,essay,amount,household_income,age_confirmed,status,practice_score,notes').order('created_at', { ascending: false }));
+    const rows = await checked(client.from('levelup_applications').select('id,created_at,name,email,exam_provider,certification,certification_url,test_date,essay,amount,household_income,age_confirmed,status,practice_score,notes').order('created_at', { ascending: false }));
     return rows.map(row => ({
       id: row.id, name: row.name, email: row.email,
       examProvider: row.exam_provider, exam: row.certification,
-      certificationUrl: row.certification_url, essay: row.essay,
+      certificationUrl: row.certification_url, testDate: row.test_date, essay: row.essay,
       requestedAmount: row.amount, householdIncome: row.household_income, ageConfirmed: row.age_confirmed, status: row.status,
       practiceScore: row.practice_score, notes: row.notes,
       submittedAt: row.created_at
@@ -63,6 +64,27 @@ export function createSharedAdmin(client) {
 
   async function deleteApplication(id) {
     await checked(client.from('levelup_applications').delete().eq('id', id).select('id').single());
+  }
+
+  async function listSupportRequests() {
+    const rows = await checked(client.from('levelup_support_requests').select('id,created_at,updated_at,resolved_at,name,email,category,subject,message,status,admin_notes').order('created_at', { ascending: false }));
+    return rows.map(row => ({
+      id: row.id, submittedAt: row.created_at, updatedAt: row.updated_at,
+      resolvedAt: row.resolved_at, name: row.name, email: row.email,
+      category: row.category, subject: row.subject, message: row.message,
+      status: row.status, notes: row.admin_notes
+    }));
+  }
+
+  async function updateSupportRequest(id, review) {
+    await checked(client.from('levelup_support_requests').update({
+      status: review.status,
+      admin_notes: review.notes
+    }).eq('id', id).select('id').single());
+  }
+
+  async function deleteSupportRequest(id) {
+    await checked(client.from('levelup_support_requests').delete().eq('id', id).select('id').single());
   }
 
   async function listSponsors() {
@@ -95,5 +117,5 @@ export function createSharedAdmin(client) {
     await checked(client.from('levelup_team').delete().eq('id', id).select('id').single());
   }
 
-  return { signIn, signOut, submitApplication, listApplications, updateReview, deleteApplication, listSponsors, saveSponsor, deleteSponsor, listTeam, saveTeamMember, deleteTeamMember };
+  return { signIn, signOut, submitApplication, listApplications, updateReview, deleteApplication, listSupportRequests, updateSupportRequest, deleteSupportRequest, listSponsors, saveSponsor, deleteSponsor, listTeam, saveTeamMember, deleteTeamMember };
 }
