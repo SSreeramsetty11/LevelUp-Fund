@@ -5,7 +5,8 @@ const migrations = [
   '202611100001_shared_admin.sql', '202611110001_age_confirmation.sql',
   '202611130001_household_income.sql', '202611130003_security_hardening.sql',
   '202611130002_require_household_income.sql', '202611130004_submission_gateway.sql',
-  '202611130005_lock_direct_submissions.sql', '202611200001_support_requests.sql'
+  '202611130005_lock_direct_submissions.sql', '202611200001_support_requests.sql',
+  '202611280001_support_idempotency_privilege.sql'
 ];
 const read = (name) => fs.readFileSync('supabase/migrations/' + name, 'utf8');
 async function denied(db, sql, pattern = /permission denied|row-level security/i) {
@@ -24,6 +25,7 @@ async function denied(db, sql, pattern = /permission denied|row-level security/i
     grant usage on schema public to anon,authenticated,service_role;`);
   for (const migration of migrations) await db.exec(read(migration));
   await db.exec(read('202611200001_support_requests.sql'));
+  await db.exec(read('202611280001_support_idempotency_privilege.sql'));
   const admin = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
   const other = 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb';
   await db.exec(`insert into auth.users(id) values ('${admin}'),('${other}'); insert into public.levelup_admins(user_id) values ('${admin}');`);
@@ -31,7 +33,11 @@ async function denied(db, sql, pattern = /permission denied|row-level security/i
   const values = "'11111111-1111-4111-8111-111111111111','Sample','sample@example.com','Application question','Help','This is a sample support message.',true,true";
   await denied(db, `set role anon; insert into public.levelup_support_requests(${columns}) values (${values});`);
   await denied(db, `set role anon; select * from public.levelup_support_requests;`);
-  await db.exec(`set role service_role; insert into public.levelup_support_requests(${columns}) values (${values}); reset role;`);
+  await db.exec(`set role service_role;
+    insert into public.levelup_support_requests(${columns}) values (${values}) on conflict (submission_key) do nothing;
+    insert into public.levelup_support_requests(${columns}) values (${values}) on conflict (submission_key) do nothing;
+    reset role;`);
+  await denied(db, `set role service_role; select name from public.levelup_support_requests;`);
   await denied(db, `set role service_role; insert into public.levelup_support_requests(${columns},status) values ('22222222-2222-4222-8222-222222222222','Bad','bad@example.com','Other','Bad','This message should be blocked.',true,true,'Resolved');`);
   await denied(db, `set role service_role; insert into public.levelup_support_requests(${columns}) values ('33333333-3333-4333-8333-333333333333','Bad','invalid','Other','Bad','This message has an invalid email.',true,true);`, /email/i);
   await db.exec(`set role authenticated; select set_config('request.jwt.claim.sub','${other}',false);`);
