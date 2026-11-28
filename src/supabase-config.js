@@ -12,4 +12,4 @@ export const PROTECTED_SUBMISSION_ENABLED = true;
 
 // Turn on only after the support migration and Edge Function pass their staged
 // deployment checks. There is intentionally no direct database fallback.
-export const SUPPORT_REQUESTS_ENABLED = false;
+export const SUPPORT_REQUESTS_ENABLED = true;
