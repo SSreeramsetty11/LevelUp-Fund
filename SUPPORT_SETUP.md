@@ -11,6 +11,7 @@ Keep the website in **test mode** and use made-up information throughout setup.
 3. Open the LevelUp Fund Supabase project → **SQL Editor → New query**.
 4. Paste the file and click **Run** once.
 5. Confirm **Success. No rows returned**.
+6. Repeat those steps with `supabase/migrations/202611280001_support_idempotency_privilege.sql`. This grants the protected function read access to only its retry key. Do not replace it with a broad table-level `GRANT SELECT` command.
 
 The migration creates a locked support table, admin-only read/update/delete policies, and separate expiring support rate limits. It does not reopen public application or support-table inserts.
 
